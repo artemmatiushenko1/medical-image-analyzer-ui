@@ -1,5 +1,12 @@
+import { Button, Typography } from '@mui/material';
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <Typography>Home</Typography>
+      <Button variant="contained">Hello</Button>
+    </div>
+  );
 };
 
 export { Home };
