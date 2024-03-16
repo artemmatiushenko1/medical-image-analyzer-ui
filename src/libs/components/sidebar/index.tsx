@@ -1,5 +1,6 @@
 import {
   Box,
+  Divider,
   List,
   ListItemButton,
   ListItemIcon,
@@ -7,10 +8,12 @@ import {
   ListSubheader,
   Stack,
   Theme,
+  Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import DashboardIcon from '@mui/icons-material/GridViewRounded';
 import DescriptionIcon from '@mui/icons-material/DescriptionRounded';
+import DocumentScannerRoundedIcon from '@mui/icons-material/DocumentScannerRounded';
 
 const Sidebar = () => {
   const [selectedIndex, setSelectedIndex] = useState('');
@@ -35,6 +38,11 @@ const Sidebar = () => {
         borderRight: ({ palette }) => `1px solid ${palette.neutral.light}`,
       }}
     >
+      <Stack direction="row" gap={1} sx={{ padding: '17.5px 25px' }}>
+        <DocumentScannerRoundedIcon color="error" />
+        <Typography>MediScan</Typography>
+      </Stack>
+      <Divider />
       <Box>
         <List component="nav">
           <ListSubheader sx={{ lineHeight: '38px' }}>Main</ListSubheader>
