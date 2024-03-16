@@ -1,8 +1,10 @@
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { useMemo } from 'react';
 import { GlobalStyles } from './global-styles';
 import { typography } from './typography';
 import { palette } from './palette';
+import { ThemeOptions, createTheme } from '@mui/material/styles';
+import { components } from './components';
 
 type ThemeConfigProps = {
   children: React.ReactNode;
@@ -10,10 +12,12 @@ type ThemeConfigProps = {
 
 const ThemeConfig = ({ children }: ThemeConfigProps) => {
   const themeOptions = useMemo(
-    () => ({
-      typography,
-      palette,
-    }),
+    () =>
+      ({
+        typography,
+        palette,
+        components,
+      } satisfies ThemeOptions),
     [],
   );
 
