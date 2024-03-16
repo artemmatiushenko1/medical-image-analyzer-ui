@@ -1,11 +1,14 @@
 import { Box, Stack } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { Header } from '../header';
+import { Sidebar } from '../sidebar';
 
 const PrimaryLayout = () => {
   return (
     <Stack sx={{ height: '100vh', width: '100%' }} direction="row">
-      <Box sx={{ width: '235px' }}>Sidebar</Box>
+      <Box sx={{ width: '235px' }}>
+        <Sidebar />
+      </Box>
       <Stack sx={{ flex: 1, overflow: 'hidden' }}>
         <Box sx={{ height: '60px', flexShrink: 0 }}>
           <Header />

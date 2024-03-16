@@ -17,6 +17,9 @@ const ThemeConfig = ({ children }: ThemeConfigProps) => {
         typography,
         palette,
         components,
+        shape: {
+          borderRadius: 3,
+        },
       } satisfies ThemeOptions),
     [],
   );
