@@ -1,11 +1,13 @@
 import { AppRoute } from '@/libs/enums';
 import { Home, Viewer } from '@/pages';
 import { RouteObject } from 'react-router-dom';
+import { PrimaryLayout } from '../layouts';
 
 const routes: RouteObject[] = [
   {
     path: AppRoute.HOME,
-    element: <Home />,
+    element: <PrimaryLayout />,
+    children: [{ element: <Home />, index: true }],
   },
   {
     path: AppRoute.VIEWER,
