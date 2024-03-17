@@ -8,25 +8,30 @@ import {
   Stack,
   Theme,
 } from '@mui/material';
-import { useState } from 'react';
 import DashboardIcon from '@mui/icons-material/GridViewRounded';
 import DescriptionIcon from '@mui/icons-material/DescriptionRounded';
 import { styles } from './styles';
 import { Logo } from '../logo';
+import { matchPath, useLocation, useNavigate } from 'react-router-dom';
+import { AppRoute } from '@/libs/enums';
 
 const Sidebar = () => {
-  const [selectedIndex, setSelectedIndex] = useState('');
-
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    key: string,
-  ) => {
-    setSelectedIndex(key);
-  };
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
-    { key: 'overview', icon: DashboardIcon, title: 'Overview' },
-    { key: 'reports', icon: DescriptionIcon, title: 'Reports' },
+    {
+      key: 'overview',
+      path: AppRoute.HOME,
+      icon: DashboardIcon,
+      title: 'Overview',
+    },
+    {
+      key: 'reports',
+      path: AppRoute.REPORTS,
+      icon: DescriptionIcon,
+      title: 'Reports',
+    },
   ];
 
   return (
@@ -35,17 +40,18 @@ const Sidebar = () => {
       <Divider />
       <List component="nav">
         <ListSubheader sx={styles.navItemSubHeader}>Main</ListSubheader>
-        {navItems.map(({ key, icon: Icon, title }) => {
-          const selected = selectedIndex === key;
+        {navItems.map(({ key, icon: Icon, title, path }) => {
+          const selected = Boolean(matchPath(path, location.pathname));
           const color = ({ palette }: Theme) =>
             selected ? palette.primary.main : palette.neutral.main;
 
           return (
             <ListItemButton
+              key={key}
               disableRipple
               selected={selected}
               sx={[styles.navItem, selected && styles.navItemSelected]}
-              onClick={(event) => handleListItemClick(event, key)}
+              onClick={() => navigate(path)}
             >
               <ListItemIcon sx={styles.navItemIcon}>
                 <Icon sx={{ fill: color }} />
