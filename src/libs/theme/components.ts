@@ -12,6 +12,15 @@ const components = {
       },
     },
   },
+  MuiPaper: {
+    defaultProps: {
+      elevation: 0,
+      variant: 'outlined',
+      sx: {
+        border: ({ palette }) => `1px solid ${palette.neutral.light}`,
+      },
+    },
+  },
 } satisfies Components<Omit<Theme, 'components'>>;
 
 export { components };

@@ -1,5 +1,5 @@
 import createPalette from '@mui/material/styles/createPalette';
-import { brandBlue, chicago, cinnabar } from './colors';
+import { brandBlue, chicago, cinnabar, emerald } from './colors';
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -24,8 +24,14 @@ const palette = createPalette({
     dark: chicago[500],
   },
   text: {
-    secondary: chicago[300],
-    primary: chicago[600],
+    primary: '#000000',
+    secondary: '#afb3bb',
+    disabled: '#afb3bb',
+  },
+  success: {
+    light: emerald[100],
+    main: emerald[600],
+    dark: emerald[700],
   },
 });
 

@@ -39,4 +39,17 @@ const chicago = {
   '900': '#3d3d3d',
 } satisfies PaletteColorOptions;
 
-export { brandBlue, cinnabar, chicago };
+const emerald = {
+  '50': '#f2fbf3',
+  '100': '#e1f7e4',
+  '200': '#c4eecb',
+  '300': '#95e0a2',
+  '400': '#54c568',
+  '500': '#39ae4e',
+  '600': '#2a8f3c',
+  '700': '#247133',
+  '800': '#215a2c',
+  '900': '#1d4a27',
+} satisfies PaletteColorOptions;
+
+export { brandBlue, cinnabar, chicago, emerald };

@@ -24,6 +24,7 @@ const PrimaryLayout = () => {
             overflowY: 'auto',
             background: '#f7f9ff',
             padding: '10px',
+            position: 'relative',
           }}
         >
           <Outlet />

@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 
-interface ProfileState {
+interface UiState {
   sidebarCollapsed: boolean;
 
   toggleSidebarCollapsed: () => void;
 }
 
-const useUiStore = create<ProfileState>()((set, get) => ({
+const useUiStore = create<UiState>()((set, get) => ({
   sidebarCollapsed: false,
 
   toggleSidebarCollapsed: () => {

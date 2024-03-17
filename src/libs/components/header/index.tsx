@@ -17,8 +17,11 @@ import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsRounded';
 import { styles } from './styles';
 import { useUiStore } from '@/stores/ui.store';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '@/libs/enums';
 
 const Header = () => {
+  const navigate = useNavigate();
   const toggleSidebarCollapsed = useUiStore(
     (state) => state.toggleSidebarCollapsed,
   );
@@ -50,7 +53,11 @@ const Header = () => {
           )}
         </IconButton>
         <Stack direction="row" gap={2} alignItems="center">
-          <Button startIcon={<AddOutlinedIcon />} variant="contained">
+          <Button
+            startIcon={<AddOutlinedIcon />}
+            variant="contained"
+            onClick={() => navigate(AppRoute.NEW_IMAGE)}
+          >
             New Image
           </Button>
           <Divider orientation="vertical" flexItem />
