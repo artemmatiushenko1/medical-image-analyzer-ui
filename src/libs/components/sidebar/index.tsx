@@ -1,5 +1,4 @@
 import {
-  Box,
   Divider,
   List,
   ListItemButton,
@@ -8,12 +7,12 @@ import {
   ListSubheader,
   Stack,
   Theme,
-  Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import DashboardIcon from '@mui/icons-material/GridViewRounded';
 import DescriptionIcon from '@mui/icons-material/DescriptionRounded';
-import DocumentScannerRoundedIcon from '@mui/icons-material/DocumentScannerRounded';
+import { styles } from './styles';
+import { Logo } from '../logo';
 
 const Sidebar = () => {
   const [selectedIndex, setSelectedIndex] = useState('');
@@ -31,53 +30,38 @@ const Sidebar = () => {
   ];
 
   return (
-    <Stack
-      sx={{
-        height: '100%',
-        borderRight: ({ palette }) => `1px solid ${palette.neutral.light}`,
-      }}
-    >
-      <Stack direction="row" gap={1} sx={{ padding: '17.5px 25px' }}>
-        <DocumentScannerRoundedIcon color="error" />
-        <Typography>MediScan</Typography>
-      </Stack>
+    <Stack sx={styles.wrapper}>
+      <Logo />
       <Divider />
-      <Box>
-        <List component="nav">
-          <ListSubheader sx={{ lineHeight: '38px' }}>Main</ListSubheader>
-          {navItems.map(({ key, icon: Icon, title }) => {
-            const selected = selectedIndex === key;
-            const color = ({ palette }: Theme) =>
-              selected ? palette.primary.main : palette.neutral.main;
+      <List component="nav">
+        <ListSubheader sx={styles.navItemSubHeader}>Main</ListSubheader>
+        {navItems.map(({ key, icon: Icon, title }) => {
+          const selected = selectedIndex === key;
+          const color = ({ palette }: Theme) =>
+            selected ? palette.primary.main : palette.neutral.main;
 
-            return (
-              <ListItemButton
-                disableRipple
-                selected={selected}
-                sx={{
-                  padding: '8px 25px',
-                  borderRight: selected
-                    ? ({ palette }) => `3px solid ${palette.primary.main}`
-                    : null,
+          return (
+            <ListItemButton
+              disableRipple
+              selected={selected}
+              sx={[styles.navItem, selected && styles.navItemSelected]}
+              onClick={(event) => handleListItemClick(event, key)}
+            >
+              <ListItemIcon sx={styles.navItemIcon}>
+                <Icon sx={{ fill: color }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={title}
+                primaryTypographyProps={{
+                  color,
+                  variant: 'body2',
+                  sx: styles.navItemText,
                 }}
-                onClick={(event) => handleListItemClick(event, key)}
-              >
-                <ListItemIcon sx={{ minWidth: '40px' }}>
-                  <Icon sx={{ fill: color }} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={title}
-                  primaryTypographyProps={{
-                    variant: 'body2',
-                    fontWeight: 500,
-                    color,
-                  }}
-                />
-              </ListItemButton>
-            );
-          })}
-        </List>
-      </Box>
+              />
+            </ListItemButton>
+          );
+        })}
+      </List>
     </Stack>
   );
 };

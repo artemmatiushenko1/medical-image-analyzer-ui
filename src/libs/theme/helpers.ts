@@ -1,5 +1,6 @@
-import { SxProps, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
+import { SystemStyleObject } from '@mui/system';
 
 export const createStyleSheet = <T extends string>(
-  rules: Record<T, SxProps<Theme>>,
+  rules: Record<T, SystemStyleObject<Theme>>,
 ) => rules;

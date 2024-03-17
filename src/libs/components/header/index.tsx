@@ -42,7 +42,7 @@ const Header = () => {
             <Stack direction="row" gap={1} alignItems="center">
               <Avatar
                 alt="Artem Matiushenko"
-                src="/static/images/avatar/2.jpg"
+                src="https://avatars.githubusercontent.com/u/71723893?s=400&u=bc39da803e24ca2b1b228eb5943ab67abefe59c9&v=4"
               />
               <Stack>
                 <Typography variant="body2" fontWeight={500}>
