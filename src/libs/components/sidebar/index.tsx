@@ -34,7 +34,6 @@ const Sidebar = () => {
     <Stack
       sx={{
         height: '100%',
-        boxShadow: ({ shadows }) => shadows[2],
         borderRight: ({ palette }) => `1px solid ${palette.neutral.light}`,
       }}
     >
