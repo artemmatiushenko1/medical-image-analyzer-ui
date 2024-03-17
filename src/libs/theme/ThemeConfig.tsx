@@ -35,4 +35,4 @@ const ThemeConfig = ({ children }: ThemeConfigProps) => {
   );
 };
 
-export default ThemeConfig;
+export { ThemeConfig };

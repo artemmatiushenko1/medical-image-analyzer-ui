@@ -14,6 +14,7 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import ViewSidebarOutlinedIcon from '@mui/icons-material/ViewSidebarOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsRounded';
+import { styles } from './styles';
 
 const Header = () => {
   return (
@@ -21,28 +22,11 @@ const Header = () => {
       elevation={0}
       position="static"
       color="transparent"
-      sx={{
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        borderBottom: ({ palette }) => `1px solid ${palette.neutral.light}`,
-      }}
+      sx={styles.appBar}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: '0 0 0 10px',
-          alignItems: 'center',
-        }}
-      >
+      <Box sx={styles.innerContainer}>
         <IconButton>
-          <ViewSidebarOutlinedIcon
-            sx={{
-              transform: 'scaleX(-1)',
-              fill: ({ palette }) => palette.grey[400],
-            }}
-          />
+          <ViewSidebarOutlinedIcon sx={styles.collapseSidebarIcon} />
         </IconButton>
         <Stack direction="row" gap={2} alignItems="center">
           <Button startIcon={<AddOutlinedIcon />} variant="contained">
@@ -51,9 +35,7 @@ const Header = () => {
           <Divider orientation="vertical" flexItem />
           <IconButton>
             <Badge badgeContent={4} color="error">
-              <NotificationsOutlinedIcon
-                sx={{ fill: ({ palette }) => palette.grey[400] }}
-              />
+              <NotificationsOutlinedIcon sx={styles.notificationIcon} />
             </Badge>
           </IconButton>
           <ListItemButton disableRipple>

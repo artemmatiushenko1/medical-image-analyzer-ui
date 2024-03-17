@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { routes } from './routes';
-import ThemeConfig from '@/libs/theme';
+import { ThemeConfig } from '@/libs/theme';
 
 const router = createBrowserRouter(routes);
 
