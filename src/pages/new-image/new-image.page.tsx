@@ -7,72 +7,90 @@ import {
   StepLabel,
   Stepper,
   Typography,
+  alpha,
 } from '@mui/material';
 import { useState } from 'react';
 import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import PhotoRoundedIcon from '@mui/icons-material/PhotoRounded';
 
 const steps = ['Upload an image', 'Choose diagnostics', 'Finish'];
 
 const NewImage = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set<number>());
-
-  const isStepSkipped = (step: number) => {
-    return skipped.has(step);
-  };
+  const isOnFinalStep = activeStep === steps.length - 1;
 
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
+    if (isOnFinalStep) {
+      return;
     }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const isOnFinalStep = activeStep === steps.length - 1;
-
   return (
     <>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        sx={{ padding: '20px' }}
+      <Stack
+        sx={{
+          justifyContent: 'center',
+          height: 'calc(100% - 67px)',
+          gap: 4,
+          padding: '10px 50px',
+        }}
       >
-        <Stack sx={{ flex: '50%' }}>
-          <Typography variant="h6" fontWeight={600}>
-            New image analysis
-          </Typography>
-          <Typography variant="caption">
-            Follow the following steps to submit an image for analysis
-          </Typography>
-        </Stack>
-        <Stepper sx={{ flex: '50%' }} activeStep={activeStep}>
-          {steps.map((label, index) => {
-            const stepProps: { completed?: boolean } = {};
-            const labelProps: {
-              optional?: React.ReactNode;
-            } = {};
-
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
-
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
+        <Box display="flex" justifyContent="space-between">
+          <Stack sx={{ flex: '50%' }}>
+            <Typography variant="h6" fontWeight={600}>
+              New image analysis
+            </Typography>
+            <Typography variant="caption">
+              Follow the following steps to submit an image for analysis
+            </Typography>
+          </Stack>
+          <Stepper sx={{ flex: '50%' }} activeStep={activeStep}>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
               </Step>
-            );
-          })}
-        </Stepper>
-      </Box>
+            ))}
+          </Stepper>
+        </Box>
+        <Box display="flex" sx={{ flex: 1 }}>
+          <Stack gap={1}>
+            <Stack
+              sx={{
+                gap: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '500px',
+                height: '500px',
+                border: ({ palette }) => `2px dashed ${palette.primary.main}`,
+                background: ({ palette }) =>
+                  alpha(palette.primary.main, palette.action.hoverOpacity),
+                borderRadius: ({ shape }) => shape.borderRadius,
+              }}
+            >
+              <PhotoRoundedIcon color="primary" sx={{ fontSize: '52px' }} />
+              <Typography variant="body2">
+                Drag & Drop file here or{' '}
+                <b>
+                  <u>Choose a file</u>
+                </b>
+              </Typography>
+            </Stack>
+            <Box display="flex" justifyContent="space-between">
+              <Typography variant="caption">
+                Supported formats: jpeg, png
+              </Typography>
+              <Typography variant="caption">Maximum size: 25MB</Typography>
+            </Box>
+          </Stack>
+        </Box>
+      </Stack>
       <Paper
         sx={{
           padding: '14px',
@@ -80,6 +98,7 @@ const NewImage = () => {
           width: '100%',
           left: 0,
           bottom: 0,
+          borderLeft: 'none',
         }}
       >
         <Stack direction="row" justifyContent="space-between">

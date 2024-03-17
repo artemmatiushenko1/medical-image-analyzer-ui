@@ -5,7 +5,7 @@ const styles = createStyleSheet({
     height: '100%',
     display: 'flex',
     justifyContent: 'center',
-    borderBottom: ({ palette }) => `1px solid ${palette.neutral.light}`,
+    borderLeft: 'none',
   },
   innerContainer: {
     display: 'flex',

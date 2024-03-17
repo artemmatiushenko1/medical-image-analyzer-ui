@@ -23,7 +23,7 @@ const PrimaryLayout = () => {
             flex: '1',
             overflowY: 'auto',
             background: '#f7f9ff',
-            padding: '10px',
+            padding: '20px',
             position: 'relative',
           }}
         >
