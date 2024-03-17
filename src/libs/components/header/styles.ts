@@ -15,7 +15,12 @@ const styles = createStyleSheet({
   },
   collapseSidebarIcon: {
     transform: 'scaleX(-1)',
+  },
+  collapseSidebarIconInactive: {
     fill: ({ palette }) => palette.grey[400],
+  },
+  collapseSidebarIconActive: {
+    fill: ({ palette }) => palette.primary.main,
   },
   notificationIcon: {
     fill: ({ palette }) => palette.grey[400],

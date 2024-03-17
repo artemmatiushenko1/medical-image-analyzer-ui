@@ -12,11 +12,18 @@ import {
 } from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import ViewSidebarOutlinedIcon from '@mui/icons-material/ViewSidebarOutlined';
+import ViewSidebarFilledIcon from '@mui/icons-material/ViewSidebar';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsRounded';
 import { styles } from './styles';
+import { useUiStore } from '@/stores/ui.store';
 
 const Header = () => {
+  const toggleSidebarCollapsed = useUiStore(
+    (state) => state.toggleSidebarCollapsed,
+  );
+  const sidebarCollapsed = useUiStore((state) => state.sidebarCollapsed);
+
   return (
     <AppBar
       elevation={0}
@@ -25,8 +32,22 @@ const Header = () => {
       sx={styles.appBar}
     >
       <Box sx={styles.innerContainer}>
-        <IconButton>
-          <ViewSidebarOutlinedIcon sx={styles.collapseSidebarIcon} />
+        <IconButton onClick={toggleSidebarCollapsed}>
+          {sidebarCollapsed ? (
+            <ViewSidebarFilledIcon
+              sx={[
+                styles.collapseSidebarIcon,
+                styles.collapseSidebarIconActive,
+              ]}
+            />
+          ) : (
+            <ViewSidebarOutlinedIcon
+              sx={[
+                styles.collapseSidebarIcon,
+                styles.collapseSidebarIconInactive,
+              ]}
+            />
+          )}
         </IconButton>
         <Stack direction="row" gap={2} alignItems="center">
           <Button startIcon={<AddOutlinedIcon />} variant="contained">
