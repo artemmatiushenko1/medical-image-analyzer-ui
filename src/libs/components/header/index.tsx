@@ -1,7 +1,6 @@
 import {
   AppBar,
   Avatar,
-  Badge,
   Box,
   Button,
   Divider,
@@ -14,16 +13,15 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import ViewSidebarOutlinedIcon from '@mui/icons-material/ViewSidebarOutlined';
 import ViewSidebarFilledIcon from '@mui/icons-material/ViewSidebar';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
-import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsRounded';
 import { styles } from './styles';
 import { useUiStore } from '@/stores/ui.store';
-import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '@/libs/enums';
 
 const Header = () => {
-  const navigate = useNavigate();
   const toggleSidebarCollapsed = useUiStore(
     (state) => state.toggleSidebarCollapsed,
+  );
+  const toggleNewImageDialogOpen = useUiStore(
+    (state) => state.toggleNewImageDialogOpen,
   );
   const sidebarCollapsed = useUiStore((state) => state.sidebarCollapsed);
 
@@ -56,16 +54,11 @@ const Header = () => {
           <Button
             startIcon={<AddOutlinedIcon />}
             variant="contained"
-            onClick={() => navigate(AppRoute.NEW_IMAGE)}
+            onClick={() => toggleNewImageDialogOpen()}
           >
             New Image
           </Button>
           <Divider orientation="vertical" flexItem />
-          <IconButton>
-            <Badge badgeContent={4} color="error">
-              <NotificationsOutlinedIcon sx={styles.notificationIcon} />
-            </Badge>
-          </IconButton>
           <ListItemButton disableRipple>
             <Stack direction="row" gap={1} alignItems="center">
               <Avatar

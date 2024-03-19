@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <Stack direction="row" gap={1} sx={{ padding: '17.5px 25px' }}>
       <DocumentScannerRounded color="error" />
-      <Typography>MediScan</Typography>
+      <Typography>Any Logo Here</Typography>
     </Stack>
   );
 };

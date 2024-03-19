@@ -21,6 +21,16 @@ const components = {
       },
     },
   },
+  MuiInputBase: {
+    styleOverrides: {
+      root: {
+        borderRadius: '7px !important',
+        '::before, ::after': {
+          display: 'none',
+        },
+      },
+    },
+  },
 } satisfies Components<Omit<Theme, 'components'>>;
 
 export { components };
