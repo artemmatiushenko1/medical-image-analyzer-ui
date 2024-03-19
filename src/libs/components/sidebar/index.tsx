@@ -14,8 +14,10 @@ import { styles } from './styles';
 import { Logo } from '../logo';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/libs/enums';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -24,13 +26,13 @@ const Sidebar = () => {
       key: 'overview',
       path: AppRoute.HOME,
       icon: DashboardIcon,
-      title: 'Overview',
+      title: t('Sidebar.Overview'),
     },
     {
       key: 'reports',
       path: AppRoute.REPORTS,
       icon: DescriptionIcon,
-      title: 'Reports',
+      title: t('Sidebar.Reports'),
     },
   ];
 
