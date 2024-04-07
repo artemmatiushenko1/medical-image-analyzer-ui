@@ -5,6 +5,7 @@ import { typography } from './typography';
 import { palette } from './palette';
 import { ThemeOptions, createTheme } from '@mui/material/styles';
 import { components } from './components';
+import { shape } from './shape';
 
 type ThemeConfigProps = {
   children: React.ReactNode;
@@ -17,9 +18,7 @@ const ThemeConfig = ({ children }: ThemeConfigProps) => {
         typography,
         palette,
         components,
-        shape: {
-          borderRadius: 3,
-        },
+        shape,
       } satisfies ThemeOptions),
     [],
   );

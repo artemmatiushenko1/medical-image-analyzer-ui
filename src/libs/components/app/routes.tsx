@@ -9,6 +9,7 @@ const routes: RouteObject[] = [
     element: <PrimaryLayout />,
     children: [
       { element: <Home />, index: true },
+      { element: <div>Reports</div>, path: AppRoute.REPORTS },
       {
         path: AppRoute.VIEWER,
         element: <Viewer />,

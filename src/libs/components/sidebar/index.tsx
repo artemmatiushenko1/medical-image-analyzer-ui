@@ -39,13 +39,13 @@ const Sidebar = () => {
   return (
     <Stack sx={styles.wrapper}>
       <Logo />
-      <Divider />
+      <Divider sx={{ mx: '16px' }} />
       <List component="nav">
         <ListSubheader sx={styles.navItemSubHeader}>Main</ListSubheader>
         {navItems.map(({ key, icon: Icon, title, path }) => {
           const selected = Boolean(matchPath(path, location.pathname));
           const color = ({ palette }: Theme) =>
-            selected ? palette.primary.main : palette.neutral.main;
+            selected ? palette.primary.main : undefined;
 
           return (
             <ListItemButton
@@ -56,12 +56,13 @@ const Sidebar = () => {
               onClick={() => navigate(path)}
             >
               <ListItemIcon sx={styles.navItemIcon}>
-                <Icon sx={{ fill: color }} />
+                <Icon sx={{ color }} />
               </ListItemIcon>
               <ListItemText
                 primary={title}
                 primaryTypographyProps={{
-                  color,
+                  color: ({ palette }) =>
+                    selected ? palette.primary.main : '#777b83',
                   variant: 'body2',
                   sx: styles.navItemText,
                 }}

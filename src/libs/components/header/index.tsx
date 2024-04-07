@@ -6,7 +6,11 @@ import {
   Divider,
   IconButton,
   ListItemButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
   Stack,
+  Switch,
   Typography,
 } from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
@@ -15,6 +19,12 @@ import ViewSidebarFilledIcon from '@mui/icons-material/ViewSidebar';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import { styles } from './styles';
 import { useUiStore } from '@/stores/ui.store';
+import { useState } from 'react';
+import {
+  LanguageRounded,
+  LogoutRounded,
+  DarkModeRounded,
+} from '@mui/icons-material';
 
 const Header = () => {
   const toggleSidebarCollapsed = useUiStore(
@@ -24,6 +34,15 @@ const Header = () => {
     (state) => state.toggleNewImageDialogOpen,
   );
   const sidebarCollapsed = useUiStore((state) => state.sidebarCollapsed);
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar
@@ -59,7 +78,7 @@ const Header = () => {
             New Image
           </Button>
           <Divider orientation="vertical" flexItem />
-          <ListItemButton disableRipple>
+          <ListItemButton disableRipple onClick={handleClick}>
             <Stack direction="row" gap={1} alignItems="center">
               <Avatar
                 alt="Artem Matiushenko"
@@ -76,6 +95,45 @@ const Header = () => {
               <ExpandMoreOutlinedIcon color="primary" />
             </Stack>
           </ListItemButton>
+          <Menu
+            anchorEl={anchorEl}
+            id="account-menu"
+            open={open}
+            onClose={handleClose}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                mt: 1.5,
+                borderRadius: 3,
+                width: '220px',
+              },
+            }}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          >
+            <MenuItem sx={{ justifyContent: 'space-between' }}>
+              <Box display="flex">
+                <ListItemIcon>
+                  <DarkModeRounded fontSize="small" />
+                </ListItemIcon>
+                <Typography variant="body2">Dark theme</Typography>
+              </Box>
+              <Switch size="small" />
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <LanguageRounded fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="body2">Language</Typography>
+            </MenuItem>
+            <Divider />
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <LogoutRounded fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="body2">Log out</Typography>
+            </MenuItem>
+          </Menu>
         </Stack>
       </Box>
     </AppBar>
