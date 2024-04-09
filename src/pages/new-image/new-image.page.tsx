@@ -11,12 +11,13 @@ import { useState } from 'react';
 import { NewImageSubmissionStep } from './libs/enums/new-image-submission-step.enum';
 import { styles } from './styles';
 import i18n from '@/libs/i18n';
+import { ImageUpload } from './libs/components/image-upload';
 
 const steps = [
   {
     key: NewImageSubmissionStep.UPLOAD_IMAGE,
     title: i18n.t('NewImage:SubmissionSteps.UploadImage'),
-    component: <div>Upload image</div>,
+    component: <ImageUpload />,
   },
   {
     key: NewImageSubmissionStep.CHOOSE_DIAGNOSTICS,
