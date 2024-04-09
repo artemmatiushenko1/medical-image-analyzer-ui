@@ -1,5 +1,5 @@
 import { AppRoute } from '@/libs/enums';
-import { Home, Viewer } from '@/pages';
+import { Home, Viewer, NewImage } from '@/pages';
 import { RouteObject } from 'react-router-dom';
 import { PrimaryLayout } from '../layouts';
 
@@ -14,6 +14,7 @@ const routes: RouteObject[] = [
         path: AppRoute.VIEWER,
         element: <Viewer />,
       },
+      { path: AppRoute.NEW_IMAGE, element: <NewImage /> },
     ],
   },
 ] as const;

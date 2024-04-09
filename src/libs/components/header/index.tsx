@@ -7,6 +7,8 @@ import {
   IconButton,
   ListItemButton,
   Stack,
+  SxProps,
+  Theme,
 } from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import ViewSidebarOutlinedIcon from '@mui/icons-material/ViewSidebarOutlined';
@@ -48,17 +50,21 @@ const Header = () => {
         <IconButton onClick={toggleSidebarCollapsed}>
           {sidebarCollapsed ? (
             <ViewSidebarFilledIcon
-              sx={[
-                styles.collapseSidebarIcon,
-                styles.collapseSidebarIconActive,
-              ]}
+              sx={
+                [
+                  styles.collapseSidebarIcon,
+                  styles.collapseSidebarIconActive,
+                ] as SxProps<Theme>
+              }
             />
           ) : (
             <ViewSidebarOutlinedIcon
-              sx={[
-                styles.collapseSidebarIcon,
-                styles.collapseSidebarIconInactive,
-              ]}
+              sx={
+                [
+                  styles.collapseSidebarIcon,
+                  styles.collapseSidebarIconInactive,
+                ] as SxProps<Theme>
+              }
             />
           )}
         </IconButton>

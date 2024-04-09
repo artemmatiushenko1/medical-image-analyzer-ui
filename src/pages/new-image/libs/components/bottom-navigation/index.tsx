@@ -2,26 +2,25 @@ import {
   CheckCircleRounded,
   KeyboardBackspaceRounded,
 } from '@mui/icons-material';
-import { Box, Button, Stack } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { styles } from './styles';
 
 type BottomNavigationProps = {
   activeStep: number;
-  stepsCount: number;
+  isFinalStep: boolean;
 
   onPreviousStep: () => void;
   onNextStep: () => void;
 };
 
 const BottomNavigation = (props: BottomNavigationProps) => {
-  const { onPreviousStep, onNextStep, activeStep, stepsCount } = props;
+  const { onPreviousStep, onNextStep, activeStep, isFinalStep } = props;
 
-  const { t } = useTranslation('common');
-
-  const isFinalStep = stepsCount === activeStep;
+  const { t } = useTranslation('Common');
 
   return (
-    <Stack direction="row" width="100%" justifyContent="space-between">
+    <Box sx={styles.root}>
       <Box gap={1} display="flex" alignItems="center">
         <Button
           variant="text"
@@ -44,7 +43,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
       >
         {isFinalStep ? t('Finish') : t('Next')}
       </Button>
-    </Stack>
+    </Box>
   );
 };
 
