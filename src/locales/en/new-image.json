@@ -3,5 +3,10 @@
     "UploadImage": "Upload an image",
     "ChooseDiagnostics": "Choose diagnostics",
     "Confirm": "Confirm"
+  },
+  "ImageUpload": {
+    "Title": "Drag & Drop file here or <bold><underlined>Choose a file</underlined></bold>",
+    "SupportedFormats": "Supported formats",
+    "MaximunSizeMB": "Maximum size: {{value}}MB"
   }
 }

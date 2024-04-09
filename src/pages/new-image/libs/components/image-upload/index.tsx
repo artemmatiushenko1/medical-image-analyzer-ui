@@ -3,8 +3,11 @@ import { Box, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useState } from 'react';
 import { readFileAsBase64 } from '@/libs/helpers';
+import { Trans, useTranslation } from 'react-i18next';
 
 const ImageUpload = () => {
+  const { t } = useTranslation('NewImage');
+
   const [previewImg, setPreviewImg] = useState<string | null>(null);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,10 +29,11 @@ const ImageUpload = () => {
           <>
             <PhotoRounded color="primary" sx={styles.imageIcon} />
             <Typography variant="body2" color="text.secondary">
-              Drag & Drop file here or{' '}
-              <b>
-                <u>Choose a file</u>
-              </b>
+              <Trans
+                t={t}
+                i18nKey="ImageUpload.Title"
+                components={{ bold: <b />, underlined: <u /> }}
+              />
             </Typography>
             <Box
               component="input"
@@ -54,9 +58,15 @@ const ImageUpload = () => {
       {!previewImg && (
         <Box sx={styles.hints}>
           <Typography variant="caption">
-            Supported formats: jpeg, png
+            {t('ImageUpload.SupportedFormats')}: jpeg, png
           </Typography>
-          <Typography variant="caption">Maximum size: 25MB</Typography>
+          <Typography variant="caption">
+            <Trans
+              t={t}
+              i18nKey="ImageUpload.MaximunSizeMB"
+              values={{ value: 25 }}
+            />
+          </Typography>
         </Box>
       )}
     </Stack>
