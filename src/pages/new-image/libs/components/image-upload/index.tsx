@@ -27,6 +27,10 @@ const ImageUpload = () => {
     }, FAKE_IMAGE_UPLOADING_DURATION_MS);
   };
 
+  const handleDeleteButtonClick = () => {
+    setPreviewImg(null);
+  };
+
   return (
     <Stack sx={styles.root}>
       {isImageUploading ? (
@@ -59,8 +63,9 @@ const ImageUpload = () => {
           </Button>
           <Button
             color="error"
-            startIcon={<DeleteOutlineRounded />}
             variant="text"
+            startIcon={<DeleteOutlineRounded />}
+            onClick={handleDeleteButtonClick}
           >
             Delete image
           </Button>
