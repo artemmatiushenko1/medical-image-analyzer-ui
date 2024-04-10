@@ -3,6 +3,7 @@ import { PhotoRounded } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { styles } from './styles';
+import { useState } from 'react';
 
 type DropAreaProps = {
   previewImageSrc: string | null;
@@ -12,6 +13,8 @@ type DropAreaProps = {
 
 const DropArea = (props: DropAreaProps) => {
   const { previewImageSrc, onUpload } = props;
+
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
 
   const { t } = useTranslation('NewImage', { keyPrefix: 'ImageUpload' });
 
@@ -24,7 +27,13 @@ const DropArea = (props: DropAreaProps) => {
   };
 
   return (
-    <Stack sx={mergeSx(styles.root, !previewImageSrc && styles.noImage)}>
+    <Stack
+      sx={mergeSx(
+        styles.root,
+        !previewImageSrc && styles.noImage,
+        isDraggingOver && styles.draggedOver,
+      )}
+    >
       {!previewImageSrc && (
         <>
           <PhotoRounded color="primary" sx={styles.imageIcon} />
@@ -41,6 +50,9 @@ const DropArea = (props: DropAreaProps) => {
             sx={styles.input}
             onChange={handleFileInputChange}
             accept="image/png, image/jpeg"
+            onDragOver={() => setIsDraggingOver(true)}
+            onDragLeave={() => setIsDraggingOver(false)}
+            onDrop={() => setIsDraggingOver(false)}
           />
         </>
       )}

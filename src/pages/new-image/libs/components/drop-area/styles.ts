@@ -13,6 +13,7 @@ const styles = createStyleSheet({
     borderRadius: shape.borderRadius,
     position: 'relative',
     overflow: 'hidden',
+    transition: 'transform 0.2s ease',
   }),
   noImage: {
     borderColor: ({ palette }) => palette.primary.main,
@@ -25,6 +26,11 @@ const styles = createStyleSheet({
     position: 'absolute',
     inset: 0,
     cursor: 'pointer',
+  },
+  draggedOver: {
+    transform: 'scale(0.95)',
+    backgroundColor: ({ palette }) =>
+      alpha(palette.primary.light, palette.action.selectedOpacity),
   },
 });
 
