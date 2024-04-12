@@ -77,6 +77,21 @@ const components = {
       },
     },
   },
+  MuiSlider: {
+    styleOverrides: {
+      root: {
+        height: '6px',
+      },
+      thumb: {
+        height: '12px',
+        width: '12px',
+        backgroundColor: '#fff',
+        '&.Mui-active': {
+          boxShadow: '0px 0px 0px 10px rgba(60, 121, 254, 0.16)',
+        },
+      },
+    },
+  },
 } satisfies Components<Omit<Theme, 'components'>>;
 
 export { components };
