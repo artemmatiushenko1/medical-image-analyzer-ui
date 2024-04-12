@@ -16,7 +16,16 @@ import { styles } from './styles';
 import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
-const ImageCropDialog = () => {
+type ImageCropDialogProps = {
+  open: boolean;
+  imgSrc: string;
+
+  onClose: () => void;
+};
+
+const ImageCropDialog = (props: ImageCropDialogProps) => {
+  const { open, onClose, imgSrc } = props;
+
   const imageRef = useRef<HTMLImageElement | null>(null);
   const hiddenAnchorRef = useRef<HTMLAnchorElement>(null);
   const blobUrlRef = useRef('');
@@ -81,8 +90,16 @@ const ImageCropDialog = () => {
     }
   };
 
+  const handleCancelButtonClick = () => {
+    onClose();
+  };
+
   return (
-    <Dialog open PaperProps={{ sx: { borderRadius: 3, maxWidth: '900px' } }}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      PaperProps={{ sx: { borderRadius: 3, maxWidth: '900px' } }}
+    >
       <DialogTitle>
         <Typography variant="body1" fontWeight={600}>
           Crop image
@@ -100,7 +117,7 @@ const ImageCropDialog = () => {
               overflow: 'hidden',
             }}
           >
-            <img src="https://media.post.rvohealth.io/wp-content/uploads/2020/08/pelvis-x-ray_thumb-1-732x549.jpg" />
+            <img src={imgSrc} />
           </ReactCrop>
           <Stack gap={2}>
             <Stack gap={1}>
@@ -108,12 +125,12 @@ const ImageCropDialog = () => {
               <img
                 width="300px"
                 height="200px"
+                src={imgSrc}
                 style={{
                   objectFit: 'contain',
                   backgroundColor: '#000',
                   borderRadius: 9,
                 }}
-                src="https://media.post.rvohealth.io/wp-content/uploads/2020/08/pelvis-x-ray_thumb-1-732x549.jpg"
               />
             </Stack>
             <Box>
@@ -135,7 +152,9 @@ const ImageCropDialog = () => {
               <Typography variant="caption">Preserve aspect ratio</Typography>
             </Box>
             <DialogActions>
-              <Button color="error">Cancel</Button>
+              <Button color="error" onClick={handleCancelButtonClick}>
+                Cancel
+              </Button>
               <Button variant="contained">Save</Button>
             </DialogActions>
           </Stack>

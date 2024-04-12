@@ -12,7 +12,6 @@ import { NewImageSubmissionStep } from './libs/enums/new-image-submission-step.e
 import { styles } from './styles';
 import i18n from '@/libs/i18n';
 import { ImageUpload } from './libs/components/image-upload';
-import { ImageCropDialog } from './libs/components/image-crop-dialog';
 
 const steps = [
   {
@@ -36,8 +35,6 @@ const NewImage = () => {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   const isOnFinalStep = activeStepIndex === steps.length - 1;
-
-  console.log({ isOnFinalStep, activeStepIndex });
 
   const handleNextStep = () => {
     if (isOnFinalStep) {
@@ -71,16 +68,13 @@ const NewImage = () => {
           ))}
         </Stepper>
       </Box>
-
       <Box sx={styles.stepBody}>{steps.at(activeStepIndex)?.component}</Box>
-
       <BottomNavigation
         activeStep={activeStepIndex}
         isFinalStep={isOnFinalStep}
         onNextStep={handleNextStep}
         onPreviousStep={handlePreviousStep}
       />
-      <ImageCropDialog />
     </Stack>
   );
 };

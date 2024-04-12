@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { readFileAsBase64 } from '@/libs/helpers';
 import { Trans, useTranslation } from 'react-i18next';
 import { DropArea } from '../drop-area';
+import { ImageCropDialog } from '../image-crop-dialog';
 
 const FAKE_IMAGE_UPLOADING_DURATION_MS = 1000;
 
@@ -13,6 +14,7 @@ const ImageUpload = () => {
 
   const [previewImg, setPreviewImg] = useState<string | null>(null);
   const [isImageUploading, setIsImageUploading] = useState(false);
+  const [imageCropDialogOpen, setImageCropDialogOpen] = useState(false);
 
   const handleFileUpload = async (file: File) => {
     setIsImageUploading(true);
@@ -29,6 +31,14 @@ const ImageUpload = () => {
 
   const handleDeleteButtonClick = () => {
     setPreviewImg(null);
+  };
+
+  const handleCropButtonClick = () => {
+    setImageCropDialogOpen(true);
+  };
+
+  const handleImageCropDialogClose = () => {
+    setImageCropDialogOpen(false);
   };
 
   return (
@@ -58,7 +68,11 @@ const ImageUpload = () => {
 
       {previewImg && (
         <Box display="flex" justifyContent="space-between">
-          <Button startIcon={<CropRounded />} variant="outlined">
+          <Button
+            startIcon={<CropRounded />}
+            variant="outlined"
+            onClick={handleCropButtonClick}
+          >
             Crop
           </Button>
           <Button
@@ -70,6 +84,13 @@ const ImageUpload = () => {
             Delete image
           </Button>
         </Box>
+      )}
+      {previewImg && (
+        <ImageCropDialog
+          imgSrc={previewImg}
+          open={imageCropDialogOpen}
+          onClose={handleImageCropDialogClose}
+        />
       )}
     </Stack>
   );
