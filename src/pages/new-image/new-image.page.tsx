@@ -12,6 +12,7 @@ import { NewImageSubmissionStep } from './libs/enums/new-image-submission-step.e
 import { styles } from './styles';
 import i18n from '@/libs/i18n';
 import { ImageUpload } from './libs/components/image-upload';
+import { ImageCropDialog } from './libs/components/image-crop-dialog';
 
 const steps = [
   {
@@ -79,6 +80,7 @@ const NewImage = () => {
         onNextStep={handleNextStep}
         onPreviousStep={handlePreviousStep}
       />
+      <ImageCropDialog />
     </Stack>
   );
 };
