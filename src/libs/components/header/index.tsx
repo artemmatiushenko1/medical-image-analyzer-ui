@@ -18,25 +18,34 @@ import { styles } from './styles';
 import { useUiStore } from '@/stores/ui.store';
 import { useState } from 'react';
 import { ProfileMenu } from '../profile-menu';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '@/libs/enums';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const [profileMenuAnchor, setprofileMenuAnchor] =
     useState<null | HTMLElement>(null);
+
   const profileMenuOpen = Boolean(profileMenuAnchor);
 
   const toggleSidebarCollapsed = useUiStore(
     (state) => state.toggleSidebarCollapsed,
   );
-  const toggleNewImageDialogOpen = useUiStore(
-    (state) => state.toggleNewImageDialogOpen,
-  );
+
   const sidebarCollapsed = useUiStore((state) => state.sidebarCollapsed);
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
     setprofileMenuAnchor(event.currentTarget);
   };
+
   const handleProfileMenuClose = () => {
     setprofileMenuAnchor(null);
+  };
+
+  const handleNewImageClick = () => {
+    navigate(AppRoute.NEW_IMAGE);
+    toggleSidebarCollapsed();
   };
 
   return (
@@ -70,9 +79,9 @@ const Header = () => {
         </IconButton>
         <Stack direction="row" gap={2} alignItems="center">
           <Button
-            startIcon={<AddOutlinedIcon />}
             variant="contained"
-            onClick={() => toggleNewImageDialogOpen()}
+            startIcon={<AddOutlinedIcon />}
+            onClick={handleNewImageClick}
           >
             New Image
           </Button>
