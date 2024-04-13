@@ -11,9 +11,9 @@ import {
   Typography,
 } from '@mui/material';
 import { useRef, useState } from 'react';
-import { styles } from './styles';
+import { StyledReactCrop, styles } from './styles';
 
-import ReactCrop, { Crop } from 'react-image-crop';
+import { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
 type ImageCropDialogProps = {
@@ -22,6 +22,8 @@ type ImageCropDialogProps = {
 
   onClose: () => void;
 };
+
+console.log({ styles });
 
 const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc } = props;
@@ -95,11 +97,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      PaperProps={{ sx: { borderRadius: 3, maxWidth: '900px' } }}
-    >
+    <Dialog open={open} onClose={onClose} PaperProps={{ sx: styles.rootPaper }}>
       <DialogTitle>
         <Typography variant="body1" fontWeight={600}>
           Crop image
@@ -107,50 +105,47 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
       </DialogTitle>
       <DialogContent>
         <Box sx={styles.dialogContentWrapper}>
-          <ReactCrop
+          <StyledReactCrop
             crop={crop}
             onChange={handleCropChange}
             onComplete={handleCropComplete}
-            style={{
-              alignSelf: 'self-start',
-              borderRadius: 9,
-              overflow: 'hidden',
-            }}
           >
             <img src={imgSrc} />
-          </ReactCrop>
-          <Stack gap={2}>
-            <Stack gap={1}>
-              <Typography variant="caption">Preview</Typography>
-              <img
-                width="300px"
-                height="200px"
-                src={imgSrc}
-                style={{
-                  objectFit: 'contain',
-                  backgroundColor: '#000',
-                  borderRadius: 9,
-                }}
-              />
+          </StyledReactCrop>
+          <Stack sx={styles.rightPanelRoot}>
+            <Stack sx={styles.rightPanel}>
+              <Stack sx={styles.previewRoot}>
+                <Typography variant="subtitle2">Preview</Typography>
+                <Box component="img" src={imgSrc} sx={styles.previewImg} />
+              </Stack>
+              <Stack sx={styles.settingsRoot}>
+                <Typography variant="subtitle2">Settings</Typography>
+                <Box>
+                  <Box
+                    sx={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
+                    <Typography variant="caption">Rotate</Typography>
+                    <Typography variant="caption">90&deg;</Typography>
+                  </Box>
+                  <Slider />
+                </Box>
+                <Box>
+                  <Box
+                    sx={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
+                    <Typography variant="caption">Scale</Typography>
+                    <Typography variant="caption">90%</Typography>
+                  </Box>
+                  <Slider />
+                </Box>
+                <Box>
+                  <Checkbox />
+                  <Typography variant="caption">
+                    Preserve aspect ratio
+                  </Typography>
+                </Box>
+              </Stack>
             </Stack>
-            <Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="caption">Rotate</Typography>
-                <Typography variant="caption">90&deg;</Typography>
-              </Box>
-              <Slider />
-            </Box>
-            <Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="caption">Scale</Typography>
-                <Typography variant="caption">90%</Typography>
-              </Box>
-              <Slider />
-            </Box>
-            <Box>
-              <Checkbox />
-              <Typography variant="caption">Preserve aspect ratio</Typography>
-            </Box>
             <DialogActions>
               <Button color="error" onClick={handleCancelButtonClick}>
                 Cancel
