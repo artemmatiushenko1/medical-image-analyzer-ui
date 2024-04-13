@@ -2,12 +2,15 @@ import { CropRounded, DeleteOutlineRounded } from '@mui/icons-material';
 import { Box, Button, Skeleton, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useState } from 'react';
-import { readFileAsBase64 } from '@/libs/helpers';
+import { bytesToMb, readFileAsBase64 } from '@/libs/helpers';
 import { Trans, useTranslation } from 'react-i18next';
 import { DropArea } from '../drop-area';
 import { ImageCropDialog } from '../image-crop-dialog';
 import { toast } from 'react-toastify';
-import { MIN_IMAGE_DIMENSIONS_PX } from '@/pages/new-image/libs/constants';
+import {
+  MAX_IMAGE_SIZE_MB,
+  MIN_IMAGE_DIMENSIONS_PX,
+} from '../../../libs/constants';
 import { validateImageDimensions } from './helpers';
 import { FAKE_IMAGE_UPLOADING_DURATION_MS } from './constants';
 
@@ -20,6 +23,13 @@ const ImageUpload = () => {
 
   const handleFileUpload = async (file: File) => {
     setIsImageUploading(true);
+    if (bytesToMb(file.size) > MAX_IMAGE_SIZE_MB) {
+      setIsImageUploading(false);
+
+      return toast.error(
+        `File is too large. Maximum file size is ${MAX_IMAGE_SIZE_MB}MB.`,
+      );
+    }
 
     const imageSrc = await readFileAsBase64(file);
     if (!imageSrc) return;
@@ -28,11 +38,10 @@ const ImageUpload = () => {
 
     if (!areImageDimensionsValid) {
       setIsImageUploading(false);
-      toast.error(
-        `An image size should be at least ${MIN_IMAGE_DIMENSIONS_PX}px x ${MIN_IMAGE_DIMENSIONS_PX}px, please choose another one.`,
-      );
 
-      return;
+      return toast.error(
+        `An image size should be at least ${MIN_IMAGE_DIMENSIONS_PX}px x ${MIN_IMAGE_DIMENSIONS_PX}px.`,
+      );
     }
 
     setTimeout(() => {
@@ -72,7 +81,7 @@ const ImageUpload = () => {
             <Trans
               t={t}
               i18nKey="ImageUpload.MaximunSizeMB"
-              values={{ value: 25 }}
+              values={{ value: MAX_IMAGE_SIZE_MB }}
             />
           </Typography>
         </Box>
