@@ -15,6 +15,7 @@ import { Logo } from '../logo';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/libs/enums';
 import { useTranslation } from 'react-i18next';
+import { mergeSx } from '@/libs/theme';
 
 const Sidebar = () => {
   const { t } = useTranslation();
@@ -52,7 +53,7 @@ const Sidebar = () => {
               key={key}
               disableRipple
               selected={selected}
-              sx={[styles.navItem, selected && styles.navItemSelected]}
+              sx={mergeSx(styles.navItem, selected && styles.navItemSelected)}
               onClick={() => navigate(path)}
             >
               <ListItemIcon sx={styles.navItemIcon}>

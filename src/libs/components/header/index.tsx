@@ -1,6 +1,7 @@
 import {
   AppBar,
   Avatar,
+  Badge,
   Box,
   Button,
   Divider,
@@ -13,13 +14,13 @@ import {
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import ViewSidebarOutlinedIcon from '@mui/icons-material/ViewSidebarOutlined';
 import ViewSidebarFilledIcon from '@mui/icons-material/ViewSidebar';
-import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import { styles } from './styles';
 import { useUiStore } from '@/stores/ui.store';
 import { useState } from 'react';
 import { ProfileMenu } from '../profile-menu';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/libs/enums';
+import { ExpandMoreRounded, NotificationsRounded } from '@mui/icons-material';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -86,13 +87,18 @@ const Header = () => {
             New Image
           </Button>
           <Divider orientation="vertical" flexItem />
+          <IconButton>
+            <Badge badgeContent={12} color="error">
+              <NotificationsRounded />
+            </Badge>
+          </IconButton>
           <ListItemButton disableRipple onClick={handleProfileClick}>
             <Stack direction="row" gap={1} alignItems="center">
               <Avatar
                 alt="Artem Matiushenko"
                 src="https://avatars.githubusercontent.com/u/71723893?s=400&u=bc39da803e24ca2b1b228eb5943ab67abefe59c9&v=4"
               />
-              <ExpandMoreOutlinedIcon color="primary" />
+              <ExpandMoreRounded color="primary" />
             </Stack>
           </ListItemButton>
           <ProfileMenu
