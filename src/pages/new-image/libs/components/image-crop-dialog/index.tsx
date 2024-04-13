@@ -8,15 +8,26 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useCallback, useRef, useState } from 'react';
+import { SyntheticEvent, useCallback, useState } from 'react';
 import { StyledReactCrop, styles } from './styles';
 
-import { Crop } from 'react-image-crop';
+import {
+  Crop,
+  PercentCrop,
+  PixelCrop,
+  centerCrop,
+  makeAspectCrop,
+} from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { CropSettingsForm } from './CropSettingsForm';
 import { CropSettingsSection } from './CropSettingsSection';
 import { CropSettings } from './types';
-import { DEFAULT_CROP_SETTINGS } from './constants';
+import {
+  DEFAULT_ASPECT_RATIO,
+  DEFAULT_CROP_SETTINGS,
+  INITIAL_CROP_WIDTH_PERCENTAGE,
+  MIN_CROP_WIDTH_PX,
+} from './constants';
 
 type ImageCropDialogProps = {
   open: boolean;
@@ -28,10 +39,6 @@ type ImageCropDialogProps = {
 const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc } = props;
 
-  const imageRef = useRef<HTMLImageElement | null>(null);
-  const hiddenAnchorRef = useRef<HTMLAnchorElement>(null);
-  const blobUrlRef = useRef('');
-
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<Crop>();
 
@@ -39,61 +46,12 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
     DEFAULT_CROP_SETTINGS,
   );
 
-  const handleCropChange = (crop: Crop) => {
-    setCrop(crop);
+  const handleCropChange = (_: PixelCrop, percentCrop: PercentCrop) => {
+    setCrop(percentCrop);
   };
 
   const handleCropComplete = (crop: Crop) => {
     setCompletedCrop(crop);
-  };
-
-  const handleCropSave = async () => {
-    if (!imageRef.current || !crop) return;
-
-    const canvasElement = document.createElement('canvas');
-
-    const image = imageRef.current;
-    // This will size relative to the uploaded image
-    // size. If you want to size according to what they
-    // are looking at on screen, remove scaleX + scaleY
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
-
-    const offscreen = new OffscreenCanvas(
-      crop.width * scaleX,
-      crop.height * scaleY,
-    );
-    const ctx = offscreen.getContext('2d');
-    if (!ctx) {
-      throw new Error('No 2d context');
-    }
-
-    ctx.drawImage(
-      canvasElement,
-      0,
-      0,
-      canvasElement.width,
-      canvasElement.height,
-      0,
-      0,
-      offscreen.width,
-      offscreen.height,
-    );
-    // You might want { type: "image/jpeg", quality: <0 to 1> } to
-    // reduce image size
-    const blob = await offscreen.convertToBlob({
-      type: 'image/png',
-    });
-
-    if (blobUrlRef.current) {
-      URL.revokeObjectURL(blobUrlRef.current);
-    }
-    blobUrlRef.current = URL.createObjectURL(blob);
-
-    if (hiddenAnchorRef.current) {
-      hiddenAnchorRef.current.href = blobUrlRef.current;
-      hiddenAnchorRef.current.click();
-    }
   };
 
   const handleCancelButtonClick = () => {
@@ -103,6 +61,27 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
   const handleCropSettingsChange = useCallback((value: CropSettings) => {
     setCropSettings(value);
   }, []);
+
+  const handleImageLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    const { width, height } = e.currentTarget;
+
+    // sets the initial crop area to min crop
+    // width if it's width is <= the min crop width, otherwise to 90% of the image's width
+    const cropWidthPercentage = Math.max(
+      Math.min((MIN_CROP_WIDTH_PX / width) * 100, 100),
+      INITIAL_CROP_WIDTH_PERCENTAGE,
+    );
+
+    const crop = makeAspectCrop(
+      { unit: '%', width: cropWidthPercentage },
+      DEFAULT_ASPECT_RATIO,
+      width,
+      height,
+    );
+
+    const centeredCrop = centerCrop(crop, width, height);
+    setCrop(centeredCrop);
+  };
 
   return (
     <Dialog open={open} onClose={onClose} PaperProps={{ sx: styles.rootPaper }}>
@@ -115,11 +94,15 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
         <Box sx={styles.dialogContentWrapper}>
           <StyledReactCrop
             crop={crop}
+            minWidth={MIN_CROP_WIDTH_PX}
+            aspect={DEFAULT_ASPECT_RATIO}
+            keepSelection
             onChange={handleCropChange}
             onComplete={handleCropComplete}
           >
             <img
               src={imgSrc}
+              onLoad={handleImageLoad}
               style={{ transform: `scale(${cropSettings.scale})` }}
             />
           </StyledReactCrop>
@@ -150,18 +133,6 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
           </Stack>
         </Box>
       </DialogContent>
-      <a
-        href="#hidden"
-        ref={hiddenAnchorRef}
-        download
-        style={{
-          position: 'absolute',
-          top: '-200vh',
-          visibility: 'hidden',
-        }}
-      >
-        Hidden download
-      </a>
     </Dialog>
   );
 };
