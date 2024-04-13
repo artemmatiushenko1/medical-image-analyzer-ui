@@ -1,3 +1,4 @@
+import { MIN_IMAGE_DIMENSIONS_PX } from '../../constants';
 import { CropSettings } from './types';
 
 const MIN_SCALE = 1;
@@ -6,7 +7,7 @@ const SCALE_STEP = 0.01;
 const DEFAULT_ASPECT_RATIO = 1;
 const INITIAL_CROP_WIDTH_PERCENTAGE = 90;
 
-const MIN_CROP_WIDTH_PX = 300;
+const MIN_CROP_WIDTH_PX = MIN_IMAGE_DIMENSIONS_PX;
 
 const DEFAULT_CROP_SETTINGS: CropSettings = {
   scale: MIN_SCALE,
