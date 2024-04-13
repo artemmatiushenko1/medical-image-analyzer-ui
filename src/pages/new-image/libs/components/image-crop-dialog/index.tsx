@@ -1,12 +1,10 @@
 import {
   Box,
   Button,
-  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Slider,
   Stack,
   Typography,
 } from '@mui/material';
@@ -15,6 +13,8 @@ import { StyledReactCrop, styles } from './styles';
 
 import { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import { CropSettingsForm } from './CropSettingsForm';
+import { CropSettingsSection } from './CropSettingsSection';
 
 type ImageCropDialogProps = {
   open: boolean;
@@ -114,37 +114,16 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
           </StyledReactCrop>
           <Stack sx={styles.rightPanelRoot}>
             <Stack sx={styles.rightPanel}>
-              <Stack sx={styles.previewRoot}>
-                <Typography variant="subtitle2">Preview</Typography>
-                <Box component="img" src={imgSrc} sx={styles.previewImg} />
-              </Stack>
-              <Stack sx={styles.settingsRoot}>
-                <Typography variant="subtitle2">Settings</Typography>
-                <Box>
-                  <Box
-                    sx={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <Typography variant="caption">Rotate</Typography>
-                    <Typography variant="caption">90&deg;</Typography>
-                  </Box>
-                  <Slider />
-                </Box>
-                <Box>
-                  <Box
-                    sx={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <Typography variant="caption">Scale</Typography>
-                    <Typography variant="caption">90%</Typography>
-                  </Box>
-                  <Slider />
-                </Box>
-                <Box>
-                  <Checkbox />
-                  <Typography variant="caption">
-                    Preserve aspect ratio
-                  </Typography>
-                </Box>
-              </Stack>
+              <CropSettingsSection
+                title="Preview"
+                content={
+                  <Box component="img" src={imgSrc} sx={styles.previewImg} />
+                }
+              />
+              <CropSettingsSection
+                title="Settings"
+                content={<CropSettingsForm />}
+              />
             </Stack>
             <DialogActions>
               <Button color="error" onClick={handleCancelButtonClick}>

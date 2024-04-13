@@ -27,7 +27,7 @@ const styles = createStyleSheet({
   previewRoot: {
     gap: 1,
   },
-  settingsRoot: {
+  settingsSectionRoot: {
     gap: 1,
   },
 });
