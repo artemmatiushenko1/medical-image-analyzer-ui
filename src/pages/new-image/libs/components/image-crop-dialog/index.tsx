@@ -40,7 +40,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc } = props;
 
   const [crop, setCrop] = useState<Crop>();
-  const [completedCrop, setCompletedCrop] = useState<Crop>();
+  // const [completedCrop, setCompletedCrop] = useState<Crop>();
 
   const [cropSettings, setCropSettings] = useState<CropSettings>(
     DEFAULT_CROP_SETTINGS,
@@ -50,9 +50,9 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
     setCrop(percentCrop);
   };
 
-  const handleCropComplete = (crop: Crop) => {
-    setCompletedCrop(crop);
-  };
+  // const handleCropComplete = (crop: Crop) => {
+  //   setCompletedCrop(crop);
+  // };
 
   const handleCancelButtonClick = () => {
     onClose();
@@ -98,7 +98,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
             aspect={DEFAULT_ASPECT_RATIO}
             keepSelection
             onChange={handleCropChange}
-            onComplete={handleCropComplete}
+            // onComplete={handleCropComplete}
           >
             <img
               src={imgSrc}

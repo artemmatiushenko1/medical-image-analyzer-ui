@@ -6,8 +6,10 @@ import { readFileAsBase64 } from '@/libs/helpers';
 import { Trans, useTranslation } from 'react-i18next';
 import { DropArea } from '../drop-area';
 import { ImageCropDialog } from '../image-crop-dialog';
-
-const FAKE_IMAGE_UPLOADING_DURATION_MS = 1000;
+import { toast } from 'react-toastify';
+import { MIN_IMAGE_DIMENSIONS_PX } from '@/pages/new-image/libs/constants';
+import { validateImageDimensions } from './helpers';
+import { FAKE_IMAGE_UPLOADING_DURATION_MS } from './constants';
 
 const ImageUpload = () => {
   const { t } = useTranslation('NewImage');
@@ -18,14 +20,24 @@ const ImageUpload = () => {
 
   const handleFileUpload = async (file: File) => {
     setIsImageUploading(true);
-    const src = await readFileAsBase64(file);
+
+    const imageSrc = await readFileAsBase64(file);
+    if (!imageSrc) return;
+
+    const areImageDimensionsValid = await validateImageDimensions(imageSrc);
+
+    if (!areImageDimensionsValid) {
+      setIsImageUploading(false);
+      toast.error(
+        `An image size should be at least ${MIN_IMAGE_DIMENSIONS_PX}px x ${MIN_IMAGE_DIMENSIONS_PX}px, please choose another one.`,
+      );
+
+      return;
+    }
 
     setTimeout(() => {
+      setPreviewImg(imageSrc);
       setIsImageUploading(false);
-
-      if (src) {
-        setPreviewImg(src);
-      }
     }, FAKE_IMAGE_UPLOADING_DURATION_MS);
   };
 

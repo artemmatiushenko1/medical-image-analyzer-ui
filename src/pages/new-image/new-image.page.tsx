@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { BottomNavigation } from './libs/components/bottom-navigation';
 import { useState } from 'react';
-import { NewImageSubmissionStep } from './libs/enums/new-image-submission-step.enum';
+import { NewImageSubmissionStep } from './libs/enums';
 import { styles } from './styles';
 import i18n from '@/libs/i18n';
 import { ImageUpload } from './libs/components/image-upload';
