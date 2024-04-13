@@ -118,7 +118,10 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
             onChange={handleCropChange}
             onComplete={handleCropComplete}
           >
-            <img src={imgSrc} />
+            <img
+              src={imgSrc}
+              style={{ transform: `scale(${cropSettings.scale})` }}
+            />
           </StyledReactCrop>
           <Stack sx={styles.rightPanelRoot}>
             <Stack sx={styles.rightPanel}>

@@ -1,4 +1,4 @@
-import { CropRotateRounded, ZoomInRounded } from '@mui/icons-material';
+import { ZoomInRounded } from '@mui/icons-material';
 import { Box, Checkbox, Slider, Typography } from '@mui/material';
 import { styles } from './styles';
 import { Controller, useForm } from 'react-hook-form';
@@ -35,7 +35,7 @@ const CropSettingsForm = (props: CropSettingsFormProps) => {
 
   return (
     <>
-      <Box>
+      {/* <Box>
         <Box display="flex" justifyContent="space-between">
           <Box sx={styles.settingTitleRoot}>
             <CropRotateRounded sx={styles.settingIcon} />
@@ -48,7 +48,7 @@ const CropSettingsForm = (props: CropSettingsFormProps) => {
           name="rotation"
           render={({ field }) => <Slider {...field} />}
         />
-      </Box>
+      </Box> */}
       <Box>
         <Box display="flex" justifyContent="space-between">
           <Box sx={styles.settingTitleRoot}>
