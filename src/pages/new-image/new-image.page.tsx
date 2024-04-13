@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { NewImageSubmissionStep } from './libs/enums';
 import { styles } from './styles';
 import i18n from '@/libs/i18n';
-import { ImageUpload } from './libs/components/image-upload';
+import { ImageUpload } from './libs/components';
 
 const steps = [
   {
