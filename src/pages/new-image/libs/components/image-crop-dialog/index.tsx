@@ -8,13 +8,15 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { StyledReactCrop, styles } from './styles';
 
 import { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { CropSettingsForm } from './CropSettingsForm';
 import { CropSettingsSection } from './CropSettingsSection';
+import { CropSettings } from './types';
+import { DEFAULT_CROP_SETTINGS } from './constants';
 
 type ImageCropDialogProps = {
   open: boolean;
@@ -22,8 +24,6 @@ type ImageCropDialogProps = {
 
   onClose: () => void;
 };
-
-console.log({ styles });
 
 const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc } = props;
@@ -34,6 +34,10 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
 
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<Crop>();
+
+  const [cropSettings, setCropSettings] = useState<CropSettings>(
+    DEFAULT_CROP_SETTINGS,
+  );
 
   const handleCropChange = (crop: Crop) => {
     setCrop(crop);
@@ -96,6 +100,10 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
     onClose();
   };
 
+  const handleCropSettingsChange = useCallback((value: CropSettings) => {
+    setCropSettings(value);
+  }, []);
+
   return (
     <Dialog open={open} onClose={onClose} PaperProps={{ sx: styles.rootPaper }}>
       <DialogTitle>
@@ -122,7 +130,12 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
               />
               <CropSettingsSection
                 title="Settings"
-                content={<CropSettingsForm />}
+                content={
+                  <CropSettingsForm
+                    values={cropSettings}
+                    onChange={handleCropSettingsChange}
+                  />
+                }
               />
             </Stack>
             <DialogActions>
