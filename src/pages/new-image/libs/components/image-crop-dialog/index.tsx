@@ -84,6 +84,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
 
     const centeredCrop = centerCrop(crop, width, height);
     setCrop(centeredCrop);
+    setCompletedCrop(centeredCrop);
   };
 
   return (
