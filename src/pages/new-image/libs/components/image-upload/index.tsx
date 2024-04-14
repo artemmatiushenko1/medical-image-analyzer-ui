@@ -18,8 +18,11 @@ const ImageUpload = () => {
   const { t } = useTranslation('NewImage');
 
   const [previewImg, setPreviewImg] = useState<string | null>(null);
+  const [croppedImg, setCroppedImg] = useState<string | null>(null);
   const [isImageUploading, setIsImageUploading] = useState(false);
   const [imageCropDialogOpen, setImageCropDialogOpen] = useState(false);
+
+  const currentImage = croppedImg || previewImg;
 
   const handleFileUpload = async (file: File) => {
     setIsImageUploading(true);
@@ -52,6 +55,7 @@ const ImageUpload = () => {
 
   const handleDeleteButtonClick = () => {
     setPreviewImg(null);
+    setCroppedImg(null);
   };
 
   const handleCropButtonClick = () => {
@@ -62,6 +66,12 @@ const ImageUpload = () => {
     setImageCropDialogOpen(false);
   };
 
+  const handleCrop = (imgUrl: string) => {
+    // TODO: use OffScreenCanvas to improve performance of saving image
+    setCroppedImg(imgUrl);
+    setImageCropDialogOpen(false);
+  };
+
   return (
     <Stack sx={styles.root}>
       {isImageUploading ? (
@@ -69,7 +79,7 @@ const ImageUpload = () => {
           <DropArea onUpload={handleFileUpload} previewImageSrc={previewImg} />
         </Skeleton>
       ) : (
-        <DropArea onUpload={handleFileUpload} previewImageSrc={previewImg} />
+        <DropArea onUpload={handleFileUpload} previewImageSrc={currentImage} />
       )}
 
       {!previewImg && !isImageUploading && (
@@ -86,7 +96,6 @@ const ImageUpload = () => {
           </Typography>
         </Box>
       )}
-
       {previewImg && (
         <Box display="flex" justifyContent="space-between">
           <Button
@@ -109,6 +118,7 @@ const ImageUpload = () => {
       {previewImg && (
         <ImageCropDialog
           imgSrc={previewImg}
+          onCrop={handleCrop}
           open={imageCropDialogOpen}
           onClose={handleImageCropDialogClose}
         />

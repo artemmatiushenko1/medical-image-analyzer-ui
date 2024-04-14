@@ -29,25 +29,27 @@ import {
   INITIAL_CROP_WIDTH_PERCENTAGE,
   MIN_CROP_WIDTH_PX,
 } from './constants';
-import { CropPreview } from './CropPreview';
+import { CropPreview, CropPreviewRef } from './CropPreview';
 
 type ImageCropDialogProps = {
   open: boolean;
   imgSrc: string;
 
   onClose: () => void;
+  onCrop: (imgUrl: string) => void;
 };
 
 const ImageCropDialog = (props: ImageCropDialogProps) => {
-  const { open, onClose, imgSrc } = props;
+  const { open, onClose, imgSrc, onCrop } = props;
 
   const [crop, setCrop] = useState<Crop>();
-  const imageRef = useRef<HTMLImageElement | null>(null);
   const [completedCrop, setCompletedCrop] = useState<PercentCrop>();
-
   const [cropSettings, setCropSettings] = useState<CropSettings>(
     DEFAULT_CROP_SETTINGS,
   );
+
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const cropPreviewRef = useRef<CropPreviewRef | null>(null);
 
   const handleCropChange = (_: PixelCrop, percentCrop: PercentCrop) => {
     setCrop(percentCrop);
@@ -87,6 +89,16 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
     setCompletedCrop(centeredCrop);
   };
 
+  const handleCropSave = () => {
+    if (!cropPreviewRef.current) return;
+
+    const croppedImg = cropPreviewRef.current.exportImage();
+
+    if (croppedImg) {
+      onCrop(croppedImg);
+    }
+  };
+
   return (
     <Dialog open={open} onClose={onClose} PaperProps={{ sx: styles.rootPaper }}>
       <DialogTitle>
@@ -119,6 +131,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
                   title="Preview"
                   content={
                     <CropPreview
+                      ref={cropPreviewRef}
                       imgElement={imageRef.current}
                       pixelCrop={convertToPixelCrop(
                         completedCrop,
@@ -143,7 +156,9 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
               <Button color="error" onClick={handleCancelButtonClick}>
                 Cancel
               </Button>
-              <Button variant="contained">Save</Button>
+              <Button variant="contained" onClick={handleCropSave}>
+                Save
+              </Button>
             </DialogActions>
           </Stack>
         </Box>
