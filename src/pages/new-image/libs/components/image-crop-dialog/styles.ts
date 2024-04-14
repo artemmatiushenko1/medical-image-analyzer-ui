@@ -2,6 +2,8 @@ import { createStyleSheet } from '@/libs/theme';
 import { styled } from '@mui/material';
 import ReactCrop from 'react-image-crop';
 
+const IMAGE_PREVIEW_ASPECT_RATIO = 16 / 9;
+
 const styles = createStyleSheet({
   rootPaper: ({ shape }) => ({
     borderRadius: shape.borderRadius,
@@ -12,12 +14,15 @@ const styles = createStyleSheet({
     justifyContent: 'space-between',
     gap: 3,
   },
-  previewImg: ({ palette, shape }) => ({
+  cropPreviewRoot: ({ palette, shape }) => ({
     width: '300px',
-    height: '200px',
+    height: `${300 / IMAGE_PREVIEW_ASPECT_RATIO}px`,
     objectFit: 'contain',
-    backgroundColor: palette.common.black,
+    backgroundColor: palette.grey[200],
     borderRadius: shape.borderRadius,
+    aspectRatio: IMAGE_PREVIEW_ASPECT_RATIO,
+    border: `1px solid ${palette.divider}`,
+    padding: 1,
   }),
   rightPanelRoot: { gap: 2 },
   rightPanel: {

@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { SyntheticEvent, useCallback, useState } from 'react';
+import { SyntheticEvent, useCallback, useRef, useState } from 'react';
 import { StyledReactCrop, styles } from './styles';
 
 import {
@@ -16,6 +16,7 @@ import {
   PercentCrop,
   PixelCrop,
   centerCrop,
+  convertToPixelCrop,
   makeAspectCrop,
 } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -28,6 +29,7 @@ import {
   INITIAL_CROP_WIDTH_PERCENTAGE,
   MIN_CROP_WIDTH_PX,
 } from './constants';
+import { CropPreview } from './CropPreview';
 
 type ImageCropDialogProps = {
   open: boolean;
@@ -40,7 +42,8 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc } = props;
 
   const [crop, setCrop] = useState<Crop>();
-  // const [completedCrop, setCompletedCrop] = useState<Crop>();
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const [completedCrop, setCompletedCrop] = useState<PercentCrop>();
 
   const [cropSettings, setCropSettings] = useState<CropSettings>(
     DEFAULT_CROP_SETTINGS,
@@ -50,9 +53,9 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
     setCrop(percentCrop);
   };
 
-  // const handleCropComplete = (crop: Crop) => {
-  //   setCompletedCrop(crop);
-  // };
+  const handleCropComplete = (_: PixelCrop, percentCrop: PercentCrop) => {
+    setCompletedCrop(percentCrop);
+  };
 
   const handleCancelButtonClick = () => {
     onClose();
@@ -65,8 +68,8 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
   const handleImageLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     const { width, height } = e.currentTarget;
 
-    // sets the initial crop area to min crop
-    // width if it's width is <= the min crop width, otherwise to 90% of the image's width
+    // sets the initial crop area to min crop width
+    // if image's width is <= min crop width, otherwise to 90% of the image's width
     const cropWidthPercentage = Math.max(
       Math.min((MIN_CROP_WIDTH_PX / width) * 100, 100),
       INITIAL_CROP_WIDTH_PERCENTAGE,
@@ -93,27 +96,38 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
       <DialogContent>
         <Box sx={styles.dialogContentWrapper}>
           <StyledReactCrop
-            crop={crop}
-            minWidth={MIN_CROP_WIDTH_PX}
-            aspect={DEFAULT_ASPECT_RATIO}
             keepSelection
+            crop={crop}
+            aspect={DEFAULT_ASPECT_RATIO}
+            minWidth={MIN_CROP_WIDTH_PX}
+            minHeight={MIN_CROP_WIDTH_PX}
             onChange={handleCropChange}
-            // onComplete={handleCropComplete}
+            onComplete={handleCropComplete}
           >
             <img
               src={imgSrc}
+              ref={imageRef}
               onLoad={handleImageLoad}
               style={{ transform: `scale(${cropSettings.scale})` }}
             />
           </StyledReactCrop>
           <Stack sx={styles.rightPanelRoot}>
             <Stack sx={styles.rightPanel}>
-              <CropSettingsSection
-                title="Preview"
-                content={
-                  <Box component="img" src={imgSrc} sx={styles.previewImg} />
-                }
-              />
+              {imageRef.current && completedCrop && (
+                <CropSettingsSection
+                  title="Preview"
+                  content={
+                    <CropPreview
+                      imgElement={imageRef.current}
+                      pixelCrop={convertToPixelCrop(
+                        completedCrop,
+                        imageRef.current.width,
+                        imageRef.current.height,
+                      )}
+                    />
+                  }
+                />
+              )}
               <CropSettingsSection
                 title="Settings"
                 content={
