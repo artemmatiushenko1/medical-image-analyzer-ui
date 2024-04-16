@@ -16,7 +16,7 @@ type NewImageState = {
   resetCrop: () => void;
 };
 
-const useNewImageStore = create<NewImageState>((set) => ({
+const useNewImageStore = create<NewImageState>()((set) => ({
   currentCrop: undefined,
   uploadedImageSrc: null,
   croppedImageSrc: null,

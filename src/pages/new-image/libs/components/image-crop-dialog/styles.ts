@@ -51,6 +51,7 @@ const StyledReactCrop = styled(ReactCrop)(({ theme: { shape } }) => ({
   borderRadius: shape.borderRadius * 3,
   overflow: 'hidden',
   maxHeight: 600,
+  height: '100%',
 }));
 
 export { styles, StyledReactCrop };

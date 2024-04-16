@@ -77,7 +77,6 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
     const { width, height } = e.currentTarget;
 
     if (completedCrop) {
-      setCrop(completedCrop);
       return;
     }
 
@@ -127,11 +126,12 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
             onChange={handleCropChange}
             minWidth={MIN_CROP_WIDTH_PX}
             minHeight={MIN_CROP_WIDTH_PX}
-            // aspect={DEFAULT_ASPECT_RATIO}
+            aspect={DEFAULT_ASPECT_RATIO}
             onComplete={handleCropComplete}
           >
             <img
               src={imgSrc}
+              width={526}
               ref={imageRef}
               onLoad={handleImageLoad}
               style={{ transform: `scale(${cropSettings.scale})` }}
