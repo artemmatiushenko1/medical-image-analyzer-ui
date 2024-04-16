@@ -13,7 +13,8 @@ const MIN_CROP_WIDTH_PX = MIN_IMAGE_DIMENSIONS_PX;
 const DEFAULT_CROP_SETTINGS: CropSettings = {
   scale: MIN_SCALE,
   rotation: 0,
-  preserveAspectRatio: false,
+  preserveAspectRatio: true,
+  aspectRatio: DEFAULT_ASPECT_RATIO,
 };
 
 export {

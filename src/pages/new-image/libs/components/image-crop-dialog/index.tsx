@@ -111,10 +111,11 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
           <StyledReactCrop
             keepSelection
             crop={crop}
-            aspect={DEFAULT_ASPECT_RATIO}
+            onChange={handleCropChange}
             minWidth={MIN_CROP_WIDTH_PX}
             minHeight={MIN_CROP_WIDTH_PX}
-            onChange={handleCropChange}
+            // aspect={cropSettings.aspectRatio}
+            aspect={DEFAULT_ASPECT_RATIO}
             onComplete={handleCropComplete}
           >
             <img
@@ -142,15 +143,18 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
                   }
                 />
               )}
-              <CropSettingsSection
-                title="Settings"
-                content={
-                  <CropSettingsForm
-                    values={cropSettings}
-                    onChange={handleCropSettingsChange}
-                  />
-                }
-              />
+              {crop && (
+                <CropSettingsSection
+                  title="Settings"
+                  content={
+                    <CropSettingsForm
+                      crop={crop}
+                      values={cropSettings}
+                      onChange={handleCropSettingsChange}
+                    />
+                  }
+                />
+              )}
             </Stack>
             <DialogActions>
               <Button color="error" onClick={handleCancelButtonClick}>

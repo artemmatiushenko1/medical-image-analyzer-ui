@@ -11,27 +11,40 @@ import {
   SCALE_STEP,
 } from './constants';
 import { getScalePercentageString } from './helpers';
+import { Crop } from 'react-image-crop';
 
 type CropSettingsFormProps = {
+  crop: Crop;
   values: CropSettings;
+
   onChange: (values: CropSettings) => void;
 };
 
 const CropSettingsForm = (props: CropSettingsFormProps) => {
-  const { values, onChange } = props;
+  const { values, onChange, crop } = props;
 
-  const { control, watch } = useForm<CropSettings>({
+  const { control, watch, setValue } = useForm<CropSettings>({
     defaultValues: { ...DEFAULT_CROP_SETTINGS, ...values },
     mode: 'onChange',
   });
 
   const scale = watch('scale');
   const rotation = watch('rotation');
+  const aspectRatio = watch('aspectRatio');
   const preserveAspectRatio = watch('preserveAspectRatio');
 
   useEffect(() => {
-    onChange({ rotation, scale, preserveAspectRatio });
-  }, [rotation, scale, preserveAspectRatio, onChange]);
+    onChange({ rotation, scale, preserveAspectRatio, aspectRatio });
+  }, [rotation, scale, preserveAspectRatio, onChange, aspectRatio]);
+
+  useEffect(() => {
+    if (!preserveAspectRatio) {
+      setValue('aspectRatio', undefined);
+    } else {
+      setValue('aspectRatio', crop.width / crop.height);
+      // calculate aspect ration based on current crop width and height
+    }
+  }, [preserveAspectRatio, setValue, crop.width, crop.height]);
 
   return (
     <>
@@ -76,7 +89,9 @@ const CropSettingsForm = (props: CropSettingsFormProps) => {
         <Controller
           control={control}
           name="preserveAspectRatio"
-          render={({ field }) => <Checkbox {...field} />}
+          render={({ field }) => (
+            <Checkbox size="small" {...field} checked={field.value} />
+          )}
         />
         <Typography variant="caption">Preserve aspect ratio</Typography>
       </Box>
