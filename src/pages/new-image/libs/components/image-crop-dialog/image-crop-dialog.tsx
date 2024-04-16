@@ -20,15 +20,15 @@ import {
   makeAspectCrop,
 } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import { CropSettingsForm } from './CropSettingsForm';
-import { CropSettingsSection } from './CropSettingsSection';
+import { CropSettingsForm } from './crop-settings-form';
+import { CropSettingsSection } from './crop-settings-section';
 import { CropSettings } from './types';
 import {
   DEFAULT_ASPECT_RATIO,
   INITIAL_CROP_WIDTH_PERCENTAGE,
   MIN_CROP_WIDTH_PX,
 } from './constants';
-import { CropPreview, CropPreviewRef } from './CropPreview';
+import { CropPreview, CropPreviewRef } from './crop-preview';
 import { useNewImageStore } from '@/pages/new-image/new-image.store';
 
 type ImageCropDialogProps = {

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { bytesToMb, readFileAsBase64 } from '@/libs/helpers';
 import { Trans, useTranslation } from 'react-i18next';
 import { DropArea } from '../drop-area';
-import { ImageCropDialog } from '../image-crop-dialog';
+import { ImageCropDialog } from '../image-crop-dialog/image-crop-dialog';
 import { toast } from 'react-toastify';
 import {
   MAX_IMAGE_SIZE_MB,
