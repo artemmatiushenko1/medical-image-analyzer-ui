@@ -1,5 +1,5 @@
 import { ZoomInRounded } from '@mui/icons-material';
-import { Box, Checkbox, Slider, Typography } from '@mui/material';
+import { Box, Slider, Typography } from '@mui/material';
 import { styles } from './styles';
 import { Controller, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
@@ -85,7 +85,7 @@ const CropSettingsForm = (props: CropSettingsFormProps) => {
           )}
         />
       </Box>
-      <Box>
+      {/* <Box>
         <Controller
           control={control}
           name="preserveAspectRatio"
@@ -94,7 +94,7 @@ const CropSettingsForm = (props: CropSettingsFormProps) => {
           )}
         />
         <Typography variant="caption">Preserve aspect ratio</Typography>
-      </Box>
+      </Box> */}
     </>
   );
 };
