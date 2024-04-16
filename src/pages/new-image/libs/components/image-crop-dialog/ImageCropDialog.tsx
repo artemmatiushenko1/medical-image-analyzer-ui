@@ -13,7 +13,6 @@ import { SyntheticEvent, useCallback, useRef, useState } from 'react';
 import { StyledReactCrop, styles } from './styles';
 
 import {
-  Crop,
   PercentCrop,
   PixelCrop,
   centerCrop,
@@ -26,11 +25,11 @@ import { CropSettingsSection } from './CropSettingsSection';
 import { CropSettings } from './types';
 import {
   DEFAULT_ASPECT_RATIO,
-  DEFAULT_CROP_SETTINGS,
   INITIAL_CROP_WIDTH_PERCENTAGE,
   MIN_CROP_WIDTH_PX,
 } from './constants';
 import { CropPreview, CropPreviewRef } from './CropPreview';
+import { useNewImageStore } from '@/pages/new-image/new-image.store';
 
 type ImageCropDialogProps = {
   open: boolean;
@@ -43,12 +42,14 @@ type ImageCropDialogProps = {
 const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc, onCrop } = props;
 
-  const [crop, setCrop] = useState<Crop>();
+  const completedCrop = useNewImageStore((state) => state.currentCrop);
+  const cropSettings = useNewImageStore((state) => state.cropSettings);
+
+  const setCompletedCrop = useNewImageStore((state) => state.setCurrentCrop);
+  const setCropSettings = useNewImageStore((state) => state.setCropSettings);
+
+  const [crop, setCrop] = useState(completedCrop);
   const [isSavingCrop, setIsSavingCrop] = useState(false);
-  const [completedCrop, setCompletedCrop] = useState<PercentCrop>();
-  const [cropSettings, setCropSettings] = useState<CropSettings>(
-    DEFAULT_CROP_SETTINGS,
-  );
 
   const imageRef = useRef<HTMLImageElement | null>(null);
   const cropPreviewRef = useRef<CropPreviewRef | null>(null);
@@ -65,12 +66,20 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
     onClose();
   };
 
-  const handleCropSettingsChange = useCallback((value: CropSettings) => {
-    setCropSettings(value);
-  }, []);
+  const handleCropSettingsChange = useCallback(
+    (value: CropSettings) => {
+      setCropSettings(value);
+    },
+    [setCropSettings],
+  );
 
   const handleImageLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     const { width, height } = e.currentTarget;
+
+    if (completedCrop) {
+      setCrop(completedCrop);
+      return;
+    }
 
     // sets the initial crop area to min crop width
     // if image's width is <= min crop width, otherwise to 90% of the image's width
@@ -118,8 +127,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
             onChange={handleCropChange}
             minWidth={MIN_CROP_WIDTH_PX}
             minHeight={MIN_CROP_WIDTH_PX}
-            // aspect={cropSettings.aspectRatio}
-            aspect={DEFAULT_ASPECT_RATIO}
+            // aspect={DEFAULT_ASPECT_RATIO}
             onComplete={handleCropComplete}
           >
             <img

@@ -13,19 +13,30 @@ import {
 } from '../../../libs/constants';
 import { validateImageDimensions } from './helpers';
 import { FAKE_IMAGE_UPLOADING_DURATION_MS } from './constants';
+import { useNewImageStore } from '@/pages/new-image/new-image.store';
 
 const ImageUpload = () => {
   const { t } = useTranslation('NewImage');
 
-  const [previewImg, setPreviewImg] = useState<string | null>(null);
-  const [croppedImg, setCroppedImg] = useState<string | null>(null);
+  const uploadedImageSrc = useNewImageStore((state) => state.uploadedImageSrc);
+  const croppedImageSrc = useNewImageStore((state) => state.croppedImageSrc);
+
+  const setUploadedImageSrc = useNewImageStore(
+    (state) => state.setUploadedImageSrc,
+  );
+  const setCroppedImageSrc = useNewImageStore(
+    (state) => state.setCroppedImageSrc,
+  );
+  const resetCrop = useNewImageStore((state) => state.resetCrop);
+
   const [isImageUploading, setIsImageUploading] = useState(false);
   const [imageCropDialogOpen, setImageCropDialogOpen] = useState(false);
 
-  const currentImage = croppedImg || previewImg;
+  const currentImage = croppedImageSrc || uploadedImageSrc;
 
   const handleFileUpload = async (file: File) => {
     setIsImageUploading(true);
+
     if (bytesToMb(file.size) > MAX_IMAGE_SIZE_MB) {
       setIsImageUploading(false);
 
@@ -48,14 +59,15 @@ const ImageUpload = () => {
     }
 
     setTimeout(() => {
-      setPreviewImg(imageSrc);
+      setUploadedImageSrc(imageSrc);
       setIsImageUploading(false);
     }, FAKE_IMAGE_UPLOADING_DURATION_MS);
   };
 
   const handleDeleteButtonClick = () => {
-    setPreviewImg(null);
-    setCroppedImg(null);
+    resetCrop();
+    setUploadedImageSrc(null);
+    setCroppedImageSrc(null);
   };
 
   const handleCropButtonClick = () => {
@@ -67,7 +79,7 @@ const ImageUpload = () => {
   };
 
   const handleCrop = (imgUrl: string) => {
-    setCroppedImg(imgUrl);
+    setCroppedImageSrc(imgUrl);
     setImageCropDialogOpen(false);
   };
 
@@ -75,13 +87,15 @@ const ImageUpload = () => {
     <Stack sx={styles.root}>
       {isImageUploading ? (
         <Skeleton animation="wave" sx={{ transform: 'none' }}>
-          <DropArea onUpload={handleFileUpload} previewImageSrc={previewImg} />
+          <DropArea
+            onUpload={handleFileUpload}
+            previewImageSrc={uploadedImageSrc}
+          />
         </Skeleton>
       ) : (
         <DropArea onUpload={handleFileUpload} previewImageSrc={currentImage} />
       )}
-
-      {!previewImg && !isImageUploading && (
+      {!uploadedImageSrc && !isImageUploading && (
         <Box sx={styles.hints}>
           <Typography variant="caption">
             {t('ImageUpload.SupportedFormats')}: jpeg, png
@@ -95,7 +109,7 @@ const ImageUpload = () => {
           </Typography>
         </Box>
       )}
-      {previewImg && (
+      {uploadedImageSrc && (
         <Box display="flex" justifyContent="space-between">
           <Button
             startIcon={<CropRounded />}
@@ -114,10 +128,10 @@ const ImageUpload = () => {
           </Button>
         </Box>
       )}
-      {previewImg && (
+      {uploadedImageSrc && (
         <ImageCropDialog
-          imgSrc={previewImg}
           onCrop={handleCrop}
+          imgSrc={uploadedImageSrc}
           open={imageCropDialogOpen}
           onClose={handleImageCropDialogClose}
         />
