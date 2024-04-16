@@ -134,6 +134,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
                     <CropPreview
                       ref={cropPreviewRef}
                       imgElement={imageRef.current}
+                      cropSettings={cropSettings}
                       pixelCrop={convertToPixelCrop(
                         completedCrop,
                         imageRef.current.width,
