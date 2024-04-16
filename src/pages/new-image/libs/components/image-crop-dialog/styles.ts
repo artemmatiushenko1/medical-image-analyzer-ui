@@ -50,6 +50,7 @@ const StyledReactCrop = styled(ReactCrop)(({ theme: { shape } }) => ({
   alignSelf: 'self-start',
   borderRadius: shape.borderRadius * 3,
   overflow: 'hidden',
+  // TODO: fix issues with crop when image is larger than 600px
   maxHeight: 600,
   height: '100%',
 }));

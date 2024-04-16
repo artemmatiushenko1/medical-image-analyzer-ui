@@ -16,7 +16,6 @@ import {
   PercentCrop,
   PixelCrop,
   centerCrop,
-  convertToPixelCrop,
   makeAspectCrop,
 } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -134,7 +133,10 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
               width={526}
               ref={imageRef}
               onLoad={handleImageLoad}
-              style={{ transform: `scale(${cropSettings.scale})` }}
+              style={{
+                transform: `scale(${cropSettings.scale})`,
+                objectFit: 'cover',
+              }}
             />
           </StyledReactCrop>
           <Stack sx={styles.rightPanelRoot}>
@@ -147,11 +149,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
                       ref={cropPreviewRef}
                       imgElement={imageRef.current}
                       cropSettings={cropSettings}
-                      pixelCrop={convertToPixelCrop(
-                        completedCrop,
-                        imageRef.current.width,
-                        imageRef.current.height,
-                      )}
+                      crop={completedCrop}
                     />
                   }
                 />
