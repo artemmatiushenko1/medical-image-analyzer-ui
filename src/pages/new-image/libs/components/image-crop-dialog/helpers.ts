@@ -1,3 +1,4 @@
+import { readFileAsBase64 } from '@/libs/helpers';
 import { PixelCrop } from 'react-image-crop';
 
 const getScalePercentageString = (scale: number) =>
@@ -5,7 +6,7 @@ const getScalePercentageString = (scale: number) =>
 
 const TO_RADIANS = Math.PI / 180;
 
-const setCanvasPreview = (
+const renderCanvasPreview = (
   image: HTMLImageElement,
   canvas: HTMLCanvasElement,
   crop: PixelCrop,
@@ -55,4 +56,41 @@ const setCanvasPreview = (
   ctx.restore();
 };
 
-export { getScalePercentageString, setCanvasPreview };
+const getCroppedImage = async (
+  image: HTMLImageElement,
+  canvas: HTMLCanvasElement,
+  crop: PixelCrop,
+) => {
+  const scaleX = image.naturalWidth / image.width;
+  const scaleY = image.naturalHeight / image.height;
+
+  const offscreen = new OffscreenCanvas(
+    crop.width * scaleX,
+    crop.height * scaleY,
+  );
+  const ctx = offscreen.getContext('2d');
+  if (!ctx) {
+    throw new Error('No 2d context');
+  }
+
+  ctx.drawImage(
+    canvas,
+    0,
+    0,
+    canvas.width,
+    canvas.height,
+    0,
+    0,
+    offscreen.width,
+    offscreen.height,
+  );
+
+  const blob = await offscreen.convertToBlob({
+    type: 'image/jpeg',
+    quality: 0.9,
+  });
+
+  return readFileAsBase64(blob);
+};
+
+export { getScalePercentageString, renderCanvasPreview, getCroppedImage };

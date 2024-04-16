@@ -67,7 +67,6 @@ const ImageUpload = () => {
   };
 
   const handleCrop = (imgUrl: string) => {
-    // TODO: use OffScreenCanvas to improve performance of saving image
     setCroppedImg(imgUrl);
     setImageCropDialogOpen(false);
   };

@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { styles } from './styles';
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { PixelCrop } from 'react-image-crop';
-import { setCanvasPreview } from './helpers';
+import { getCroppedImage, renderCanvasPreview } from './helpers';
 import { CropSettings } from './types';
 
 type CropPreviewProps = {
@@ -12,7 +12,7 @@ type CropPreviewProps = {
 };
 
 type CropPreviewRef = {
-  exportImage: () => string | null;
+  exportImage: () => Promise<string | null>;
 };
 
 const CropPreview = forwardRef<CropPreviewRef, CropPreviewProps>(
@@ -24,7 +24,7 @@ const CropPreview = forwardRef<CropPreviewRef, CropPreviewProps>(
     useEffect(() => {
       if (!innerCanvasRef.current) return;
 
-      setCanvasPreview(
+      renderCanvasPreview(
         imgElement,
         innerCanvasRef.current,
         pixelCrop,
@@ -40,9 +40,9 @@ const CropPreview = forwardRef<CropPreviewRef, CropPreviewProps>(
     ]);
 
     useImperativeHandle(ref, () => ({
-      exportImage: () => {
+      exportImage: async () => {
         if (!innerCanvasRef.current) return null;
-        return innerCanvasRef.current.toDataURL();
+        return getCroppedImage(imgElement, innerCanvasRef.current, pixelCrop);
       },
     }));
 

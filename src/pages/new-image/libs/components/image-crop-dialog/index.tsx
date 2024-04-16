@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -43,6 +44,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc, onCrop } = props;
 
   const [crop, setCrop] = useState<Crop>();
+  const [isSavingCrop, setIsSavingCrop] = useState(false);
   const [completedCrop, setCompletedCrop] = useState<PercentCrop>();
   const [cropSettings, setCropSettings] = useState<CropSettings>(
     DEFAULT_CROP_SETTINGS,
@@ -89,10 +91,12 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
     setCompletedCrop(centeredCrop);
   };
 
-  const handleCropSave = () => {
+  const handleCropSave = async () => {
     if (!cropPreviewRef.current) return;
 
-    const croppedImg = cropPreviewRef.current.exportImage();
+    setIsSavingCrop(true);
+    const croppedImg = await cropPreviewRef.current.exportImage();
+    setIsSavingCrop(false);
 
     if (croppedImg) {
       onCrop(croppedImg);
@@ -158,10 +162,23 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
               )}
             </Stack>
             <DialogActions>
-              <Button color="error" onClick={handleCancelButtonClick}>
+              <Button
+                disabled={isSavingCrop}
+                color="error"
+                onClick={handleCancelButtonClick}
+              >
                 Cancel
               </Button>
-              <Button variant="contained" onClick={handleCropSave}>
+              <Button
+                variant="contained"
+                disabled={isSavingCrop}
+                onClick={handleCropSave}
+                startIcon={
+                  isSavingCrop && (
+                    <CircularProgress color="inherit" size="12px" />
+                  )
+                }
+              >
                 Save
               </Button>
             </DialogActions>
