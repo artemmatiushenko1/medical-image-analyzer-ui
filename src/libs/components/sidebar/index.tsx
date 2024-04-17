@@ -1,4 +1,5 @@
 import {
+  Box,
   Divider,
   List,
   ListItemButton,
@@ -39,7 +40,9 @@ const Sidebar = () => {
 
   return (
     <Stack sx={styles.wrapper}>
-      <Logo />
+      <Box sx={{ padding: '17.5px 25px' }}>
+        <Logo />
+      </Box>
       <Divider sx={{ mx: '16px' }} />
       <List component="nav">
         <ListSubheader sx={styles.navItemSubHeader}>Main</ListSubheader>
