@@ -40,10 +40,10 @@ const Sidebar = () => {
 
   return (
     <Stack sx={styles.wrapper}>
-      <Box sx={{ padding: '17.5px 25px' }}>
+      <Box sx={styles.logoWrapper}>
         <Logo />
       </Box>
-      <Divider sx={{ mx: '16px' }} />
+      <Divider sx={styles.divider} />
       <List component="nav">
         <ListSubheader sx={styles.navItemSubHeader}>Main</ListSubheader>
         {navItems.map(({ key, icon: Icon, title, path }) => {

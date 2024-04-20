@@ -1,31 +1,26 @@
-import { Box, Stack, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { Box } from '@mui/material';
+import logo from '@/assets/logo.png';
 
 const Logo = () => {
-  const { t } = useTranslation('App');
-
   return (
-    <Stack
-      direction="row"
+    <Box
       gap={1}
       sx={{
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        maxWidth: '220px',
+        maxWidth: '125px',
         width: '100%',
       }}
     >
       <Box
-        component="img"
+        src={logo}
+        width="100%"
         height="auto"
-        width={50}
+        component="img"
         sx={{ alignSelf: 'center' }}
-        src="https://med.comsys.kpi.ua/images/logo.png"
       />
-      <Typography fontSize="10px" fontWeight="600">
-        {t('LogoText')}
-      </Typography>
-    </Stack>
+    </Box>
   );
 };
 

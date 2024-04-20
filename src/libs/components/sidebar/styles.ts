@@ -20,6 +20,12 @@ const styles = createStyleSheet({
   navItemIcon: {
     minWidth: '40px',
   },
+  logoWrapper: {
+    padding: '17.5px 25px',
+  },
+  divider: {
+    mx: '16px',
+  },
 });
 
 export { styles };
