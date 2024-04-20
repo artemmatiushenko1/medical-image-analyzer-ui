@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { bytesToMb, readFileAsBase64 } from '@/libs/helpers';
 import { Trans, useTranslation } from 'react-i18next';
 import { DropArea } from '../drop-area';
-import { ImageCropDialog } from '../image-crop-dialog/image-crop-dialog';
+import { ImageCropDialog } from '../image-crop-dialog';
 import { toast } from 'react-toastify';
 import {
   MAX_IMAGE_SIZE_MB,
   MIN_IMAGE_DIMENSIONS_PX,
-} from '../../../libs/constants';
+} from '@/pages/new-image/libs/constants';
 import { validateImageDimensions } from './helpers';
 import { FAKE_IMAGE_UPLOADING_DURATION_MS } from './constants';
 import { useNewImageStore } from '@/pages/new-image/new-image.store';
@@ -96,7 +96,7 @@ const ImageUpload = () => {
         <DropArea onUpload={handleFileUpload} previewImageSrc={currentImage} />
       )}
       {!uploadedImageSrc && !isImageUploading && (
-        <Box sx={styles.hints}>
+        <Box sx={styles.imageUploadHints}>
           <Typography variant="caption">
             {t('ImageUpload.SupportedFormats')}: jpeg, png
           </Typography>

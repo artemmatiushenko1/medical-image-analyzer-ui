@@ -12,12 +12,25 @@ import { NewImageSubmissionStep } from './libs/enums';
 import { styles } from './styles';
 import i18n from '@/libs/i18n';
 import { ImageUpload } from './libs/components';
+import { StudyInfoForm } from './libs/components/study-info-form/study-info-form';
 
 const steps = [
   {
     key: NewImageSubmissionStep.UPLOAD_IMAGE,
     title: i18n.t('NewImage:SubmissionSteps.UploadImage'),
-    component: <ImageUpload />,
+    component: (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+          gap: 12,
+        }}
+      >
+        <ImageUpload />
+        <StudyInfoForm />
+      </Box>
+    ),
   },
   {
     key: NewImageSubmissionStep.CHOOSE_DIAGNOSTICS,
@@ -54,10 +67,11 @@ const NewImage = () => {
       <Box sx={styles.header}>
         <Stack sx={{ flex: '50%' }}>
           <Typography variant="h6" fontWeight={600}>
-            New image analysis
+            New study
           </Typography>
           <Typography variant="caption">
-            Follow the following steps to submit an image for analysis
+            Follow the following steps to submit an image for an AI-powered
+            study.
           </Typography>
         </Stack>
         <Stepper sx={{ flex: '50%' }} activeStep={activeStepIndex}>

@@ -4,7 +4,7 @@ const styles = createStyleSheet({
   root: {
     gap: 1,
   },
-  hints: {
+  imageUploadHints: {
     display: 'flex',
     justifyContent: 'space-between',
   },

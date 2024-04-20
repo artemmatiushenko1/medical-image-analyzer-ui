@@ -84,7 +84,7 @@ const Header = () => {
             startIcon={<AddOutlinedIcon />}
             onClick={handleNewImageClick}
           >
-            New Image
+            New Study
           </Button>
           <Divider orientation="vertical" flexItem />
           <IconButton>
