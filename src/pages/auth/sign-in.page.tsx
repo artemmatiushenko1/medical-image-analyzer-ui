@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { styles } from './styles';
 import { SignInForm } from './libs/components';
-import signInHero from '@/assets/sign-in-hero.svg';
+import signInHero from '@/assets/sign-in-hero.png';
 
 const SignIn = () => {
   return (

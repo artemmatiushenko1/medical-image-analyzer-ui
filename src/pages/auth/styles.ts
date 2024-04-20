@@ -14,7 +14,7 @@ const styles = createStyleSheet({
     alignItems: 'center',
   },
   leftSideImage: {
-    width: '50%',
+    width: '85%',
   },
   rightSide: {
     flex: 0.45,

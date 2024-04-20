@@ -7,6 +7,7 @@ import {
   IconButton,
   Stack,
   TextField,
+  Typography,
 } from '@mui/material';
 
 import { styles } from './styles';
@@ -39,6 +40,7 @@ const SignInForm = () => {
   return (
     <Box component="form" sx={styles.form} onSubmit={handleFormSubmit}>
       <Box sx={styles.logoWrapper}>
+        <Typography variant="caption">Welcome to</Typography>
         <Logo />
       </Box>
       <Stack sx={styles.controlsStack}>
