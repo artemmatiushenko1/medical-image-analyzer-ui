@@ -1,4 +1,4 @@
-import { MIN_IMAGE_DIMENSIONS_PX } from '@/pages/new-image/libs/constants';
+import { MIN_IMAGE_DIMENSIONS_PX } from '@/pages/new-study/libs/constants';
 
 const validateImageDimensions = (
   imageSrc: string,

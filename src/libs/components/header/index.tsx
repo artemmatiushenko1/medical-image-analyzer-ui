@@ -18,23 +18,23 @@ import { styles } from './styles';
 import { useUiStore } from '@/stores/ui.store';
 import { useState } from 'react';
 import { ProfileMenu } from '../profile-menu';
-import { useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/libs/enums';
 import { ExpandMoreRounded, NotificationsRounded } from '@mui/icons-material';
 
 const Header = () => {
-  const navigate = useNavigate();
+  const toggleSidebarCollapsed = useUiStore(
+    (state) => state.toggleSidebarCollapsed,
+  );
+  const sidebarCollapsed = useUiStore((state) => state.sidebarCollapsed);
 
+  const navigate = useNavigate();
+  const newStudyPageMath = useMatch(AppRoute.NEW_STUDY);
   const [profileMenuAnchor, setprofileMenuAnchor] =
     useState<null | HTMLElement>(null);
 
   const profileMenuOpen = Boolean(profileMenuAnchor);
-
-  const toggleSidebarCollapsed = useUiStore(
-    (state) => state.toggleSidebarCollapsed,
-  );
-
-  const sidebarCollapsed = useUiStore((state) => state.sidebarCollapsed);
+  const isNewStudyPage = Boolean(newStudyPageMath);
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
     setprofileMenuAnchor(event.currentTarget);
@@ -44,8 +44,8 @@ const Header = () => {
     setprofileMenuAnchor(null);
   };
 
-  const handleNewImageClick = () => {
-    navigate(AppRoute.NEW_IMAGE);
+  const handleNewStudyClick = () => {
+    navigate(AppRoute.NEW_STUDY);
     toggleSidebarCollapsed();
   };
 
@@ -79,13 +79,15 @@ const Header = () => {
           )}
         </IconButton>
         <Stack direction="row" gap={2} alignItems="center">
-          <Button
-            variant="contained"
-            startIcon={<AddOutlinedIcon />}
-            onClick={handleNewImageClick}
-          >
-            New Study
-          </Button>
+          {!isNewStudyPage && (
+            <Button
+              variant="contained"
+              startIcon={<AddOutlinedIcon />}
+              onClick={handleNewStudyClick}
+            >
+              New Study
+            </Button>
+          )}
           <Divider orientation="vertical" flexItem />
           <IconButton>
             <Badge badgeContent={12} color="error">

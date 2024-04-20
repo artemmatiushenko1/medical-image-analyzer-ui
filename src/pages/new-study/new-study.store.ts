@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { CropSettings } from './libs/components/image-crop-dialog';
 import { DEFAULT_CROP_SETTINGS } from './libs/components/image-crop-dialog';
 
-type NewImageState = {
+type NewStudyState = {
   uploadedImageSrc: string | null;
   croppedImageSrc: string | null;
   currentCrop: PercentCrop | undefined;
@@ -16,7 +16,7 @@ type NewImageState = {
   resetCrop: () => void;
 };
 
-const useNewImageStore = create<NewImageState>()((set) => ({
+const useNewStudyStore = create<NewStudyState>()((set) => ({
   currentCrop: undefined,
   uploadedImageSrc: null,
   croppedImageSrc: null,
@@ -32,4 +32,4 @@ const useNewImageStore = create<NewImageState>()((set) => ({
     set({ cropSettings: DEFAULT_CROP_SETTINGS, currentCrop: undefined }),
 }));
 
-export { useNewImageStore };
+export { useNewStudyStore };

@@ -1,5 +1,5 @@
 import { AppRoute } from '@/libs/enums';
-import { Home, Viewer, NewImage, SignIn } from '@/pages';
+import { Home, Viewer, NewStudy, SignIn } from '@/pages';
 import { RouteObject } from 'react-router-dom';
 import { PrimaryLayout } from '../layouts';
 import { PrivateRoute, PublicRoute } from '../router';
@@ -19,7 +19,7 @@ const routes: RouteObject[] = [
         path: AppRoute.VIEWER,
         element: <Viewer />,
       },
-      { element: <NewImage />, path: AppRoute.NEW_IMAGE },
+      { element: <NewStudy />, path: AppRoute.NEW_STUDY },
     ],
   },
   {

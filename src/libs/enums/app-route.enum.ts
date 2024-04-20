@@ -4,5 +4,5 @@ export const AppRoute = {
   SIGN_UP: '/sign-up',
   VIEWER: '/viewer',
   REPORTS: '/reports',
-  NEW_IMAGE: '/new-image',
+  NEW_STUDY: '/new-study',
 } as const;

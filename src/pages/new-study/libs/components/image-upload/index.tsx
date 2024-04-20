@@ -10,24 +10,24 @@ import { toast } from 'react-toastify';
 import {
   MAX_IMAGE_SIZE_MB,
   MIN_IMAGE_DIMENSIONS_PX,
-} from '@/pages/new-image/libs/constants';
+} from '@/pages/new-study/libs/constants';
 import { validateImageDimensions } from './helpers';
 import { FAKE_IMAGE_UPLOADING_DURATION_MS } from './constants';
-import { useNewImageStore } from '@/pages/new-image/new-image.store';
+import { useNewStudyStore } from '@/pages/new-study/new-study.store';
 
 const ImageUpload = () => {
-  const { t } = useTranslation('NewImage');
+  const { t } = useTranslation('NewStudy');
 
-  const uploadedImageSrc = useNewImageStore((state) => state.uploadedImageSrc);
-  const croppedImageSrc = useNewImageStore((state) => state.croppedImageSrc);
+  const uploadedImageSrc = useNewStudyStore((state) => state.uploadedImageSrc);
+  const croppedImageSrc = useNewStudyStore((state) => state.croppedImageSrc);
 
-  const setUploadedImageSrc = useNewImageStore(
+  const setUploadedImageSrc = useNewStudyStore(
     (state) => state.setUploadedImageSrc,
   );
-  const setCroppedImageSrc = useNewImageStore(
+  const setCroppedImageSrc = useNewStudyStore(
     (state) => state.setCroppedImageSrc,
   );
-  const resetCrop = useNewImageStore((state) => state.resetCrop);
+  const resetCrop = useNewStudyStore((state) => state.resetCrop);
 
   const [isImageUploading, setIsImageUploading] = useState(false);
   const [imageCropDialogOpen, setImageCropDialogOpen] = useState(false);

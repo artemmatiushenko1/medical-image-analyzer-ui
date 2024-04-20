@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { BottomNavigation } from './libs/components/bottom-navigation';
 import { useState } from 'react';
-import { NewImageSubmissionStep } from './libs/enums';
+import { NewStudyCreationStep } from './libs/enums';
 import { styles } from './styles';
 import i18n from '@/libs/i18n';
 import { ImageUpload } from './libs/components';
@@ -16,8 +16,8 @@ import { StudyInfoForm } from './libs/components/study-info-form/study-info-form
 
 const steps = [
   {
-    key: NewImageSubmissionStep.UPLOAD_IMAGE,
-    title: i18n.t('NewImage:SubmissionSteps.UploadImage'),
+    key: NewStudyCreationStep.UPLOAD_IMAGE,
+    title: i18n.t('NewStudy:SubmissionSteps.UploadImage'),
     component: (
       <Box
         sx={{
@@ -33,18 +33,18 @@ const steps = [
     ),
   },
   {
-    key: NewImageSubmissionStep.CHOOSE_DIAGNOSTICS,
-    title: i18n.t('NewImage:SubmissionSteps.ChooseDiagnostics'),
+    key: NewStudyCreationStep.CHOOSE_DIAGNOSTICS,
+    title: i18n.t('NewStudy:SubmissionSteps.ChooseDiagnostics'),
     component: <div>Choose diagnostics</div>,
   },
   {
-    key: NewImageSubmissionStep.CONFIRM,
-    title: i18n.t('NewImage:SubmissionSteps.Confirm'),
+    key: NewStudyCreationStep.CONFIRM,
+    title: i18n.t('NewStudy:SubmissionSteps.Confirm'),
     component: <div>Confirm</div>,
   },
 ];
 
-const NewImage = () => {
+const NewStudy = () => {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   const isOnFinalStep = activeStepIndex === steps.length - 1;
@@ -93,4 +93,4 @@ const NewImage = () => {
   );
 };
 
-export { NewImage };
+export { NewStudy };

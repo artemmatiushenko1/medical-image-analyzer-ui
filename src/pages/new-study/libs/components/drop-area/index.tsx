@@ -16,7 +16,7 @@ const DropArea = (props: DropAreaProps) => {
 
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
-  const { t } = useTranslation('NewImage', { keyPrefix: 'ImageUpload' });
+  const { t } = useTranslation('NewStudy', { keyPrefix: 'ImageUpload' });
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const [file] = e.target.files ?? [];

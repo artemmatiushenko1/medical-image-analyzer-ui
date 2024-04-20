@@ -28,7 +28,7 @@ import {
   MIN_CROP_WIDTH_PX,
 } from './constants';
 import { CropPreview, CropPreviewRef } from './crop-preview';
-import { useNewImageStore } from '@/pages/new-image/new-image.store';
+import { useNewStudyStore } from '@/pages/new-study/new-study.store';
 
 type ImageCropDialogProps = {
   open: boolean;
@@ -41,11 +41,11 @@ type ImageCropDialogProps = {
 const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc, onCrop } = props;
 
-  const completedCrop = useNewImageStore((state) => state.currentCrop);
-  const cropSettings = useNewImageStore((state) => state.cropSettings);
+  const completedCrop = useNewStudyStore((state) => state.currentCrop);
+  const cropSettings = useNewStudyStore((state) => state.cropSettings);
 
-  const setCompletedCrop = useNewImageStore((state) => state.setCurrentCrop);
-  const setCropSettings = useNewImageStore((state) => state.setCropSettings);
+  const setCompletedCrop = useNewStudyStore((state) => state.setCurrentCrop);
+  const setCropSettings = useNewStudyStore((state) => state.setCropSettings);
 
   const [crop, setCrop] = useState(completedCrop);
   const [isSavingCrop, setIsSavingCrop] = useState(false);
