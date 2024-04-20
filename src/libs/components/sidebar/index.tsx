@@ -19,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import { mergeSx } from '@/libs/theme';
 
 const Sidebar = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('App');
   const location = useLocation();
   const navigate = useNavigate();
 

@@ -1,3 +1,7 @@
 {
-  "LogoText": "System of detection and diagnosis of human diseases"
+  "LogoText": "System of detection and diagnosis of human diseases",
+  "Sidebar": {
+    "Overview": "Overview",
+    "Reports": "Reports"
+  }
 }
