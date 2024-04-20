@@ -32,6 +32,16 @@ const styles = createStyleSheet({
     backgroundColor: ({ palette }) =>
       alpha(palette.primary.light, palette.action.selectedOpacity),
   },
+  uploadedImgWrapper: {
+    background: ({ palette }) => palette.common.black,
+    width: '100%',
+    height: '100%',
+  },
+  uploadedImg: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'contain',
+  },
 });
 
 export { styles };
