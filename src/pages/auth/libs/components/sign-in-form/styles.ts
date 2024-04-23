@@ -17,6 +17,9 @@ const styles = createStyleSheet({
   logoWrapper: {
     marginBottom: 8,
   },
+  formControlLabel: {
+    fontSize: '15px',
+  },
 });
 
 export { styles };

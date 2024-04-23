@@ -45,11 +45,15 @@ const SignInForm = () => {
       </Box>
       <Stack sx={styles.controlsStack}>
         <FormControl sx={styles.formControl}>
-          <FormLabel htmlFor="email">Email address</FormLabel>
+          <FormLabel htmlFor="email" sx={styles.formControlLabel}>
+            Email address
+          </FormLabel>
           <TextField id="email" placeholder="Your email address" />
         </FormControl>
         <FormControl sx={styles.formControl}>
-          <FormLabel htmlFor="password">Password</FormLabel>
+          <FormLabel htmlFor="password" sx={styles.formControlLabel}>
+            Password
+          </FormLabel>
           <TextField
             id="password"
             type={isPasswordVisible ? 'text' : 'password'}
