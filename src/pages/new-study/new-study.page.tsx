@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { NewStudyCreationStep } from './libs/enums';
 import { styles } from './styles';
 import i18n from '@/libs/i18n';
-import { ImageUpload } from './libs/components';
+import { ChooseDiagnostics, ImageUpload } from './libs/components';
 import { StudyInfoForm } from './libs/components/study-info-form/study-info-form';
 
 const steps = [
@@ -35,7 +35,7 @@ const steps = [
   {
     key: NewStudyCreationStep.CHOOSE_DIAGNOSTICS,
     title: i18n.t('NewStudy:SubmissionSteps.ChooseDiagnostics'),
-    component: <div>Choose diagnostics</div>,
+    component: <ChooseDiagnostics />,
   },
   {
     key: NewStudyCreationStep.CONFIRM,
