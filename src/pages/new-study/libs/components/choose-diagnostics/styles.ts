@@ -2,14 +2,11 @@ import { createStyleSheet } from '@/libs/theme';
 
 const cardStyles = createStyleSheet({
   root: {
-    width: '49%',
-    height: '155px',
-    minWidth: '255px',
     borderRadius: ({ shape }) => shape.borderRadius,
     overflow: 'hidden',
     cursor: 'pointer',
     position: 'relative',
-    border: ({ palette }) => `1px solid ${palette.divider}`,
+    outline: ({ palette }) => `1px solid ${palette.divider}`,
     ':hover': {
       transform: 'scale(0.99)',
     },
@@ -17,7 +14,7 @@ const cardStyles = createStyleSheet({
     aspectRatio: 3 / 2,
   },
   selected: {
-    border: ({ palette }) => `1px solid ${palette.primary.main}`,
+    outline: ({ palette }) => `2px solid ${palette.primary.main}`,
   },
   image: {
     width: '100%',
@@ -59,4 +56,50 @@ const cardStyles = createStyleSheet({
   },
 });
 
-export { cardStyles };
+const styles = createStyleSheet({
+  root: {
+    gap: 12,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    height: '100%',
+    pt: 2,
+  },
+  diagnosticsList: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gridAutoRows: 'max-content',
+    gap: 1.5,
+    overflow: 'scroll',
+    padding: '5px',
+    overscrollBehavior: 'contain',
+  },
+  left: {
+    flex: 1,
+    gap: 2,
+  },
+  right: {
+    flex: 1,
+    overflow: 'auto',
+  },
+});
+
+const selectedDiagnosticAccordion = createStyleSheet({
+  root: {
+    borderRadius: ({ shape }) => shape.borderRadius,
+    '::before': {
+      display: 'none',
+    },
+    '.delete-icon': {
+      opacity: 0,
+      transition: 'opacity 0.1s ease',
+    },
+    '&:hover': {
+      '.delete-icon': {
+        opacity: 1,
+      },
+    },
+  },
+});
+
+export { styles, cardStyles, selectedDiagnosticAccordion };

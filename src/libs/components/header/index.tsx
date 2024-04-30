@@ -8,14 +8,9 @@ import {
   IconButton,
   ListItemButton,
   Stack,
-  SxProps,
-  Theme,
 } from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import ViewSidebarOutlinedIcon from '@mui/icons-material/ViewSidebarOutlined';
-import ViewSidebarFilledIcon from '@mui/icons-material/ViewSidebar';
 import { styles } from './styles';
-import { useUiStore } from '@/stores/ui.store';
 import { useState } from 'react';
 import { ProfileMenu } from '../profile-menu';
 import { useMatch, useNavigate } from 'react-router-dom';
@@ -23,11 +18,6 @@ import { AppRoute } from '@/libs/enums';
 import { ExpandMoreRounded, NotificationsRounded } from '@mui/icons-material';
 
 const Header = () => {
-  const toggleSidebarCollapsed = useUiStore(
-    (state) => state.toggleSidebarCollapsed,
-  );
-  const sidebarCollapsed = useUiStore((state) => state.sidebarCollapsed);
-
   const navigate = useNavigate();
   const newStudyPageMath = useMatch(AppRoute.NEW_STUDY);
   const [profileMenuAnchor, setprofileMenuAnchor] =
@@ -46,7 +36,6 @@ const Header = () => {
 
   const handleNewStudyClick = () => {
     navigate(AppRoute.NEW_STUDY);
-    toggleSidebarCollapsed();
   };
 
   return (
@@ -57,27 +46,7 @@ const Header = () => {
       sx={styles.appBar}
     >
       <Box sx={styles.innerContainer}>
-        <IconButton onClick={toggleSidebarCollapsed}>
-          {sidebarCollapsed ? (
-            <ViewSidebarFilledIcon
-              sx={
-                [
-                  styles.collapseSidebarIcon,
-                  styles.collapseSidebarIconActive,
-                ] as SxProps<Theme>
-              }
-            />
-          ) : (
-            <ViewSidebarOutlinedIcon
-              sx={
-                [
-                  styles.collapseSidebarIcon,
-                  styles.collapseSidebarIconInactive,
-                ] as SxProps<Theme>
-              }
-            />
-          )}
-        </IconButton>
+        <div>&nbsp;</div>
         <Stack direction="row" gap={2} alignItems="center">
           {!isNewStudyPage && (
             <Button

@@ -5,17 +5,20 @@ import { cardStyles as styles } from './styles';
 import { mergeSx } from '@/libs/theme';
 
 type DiagnosticCardProps = {
-  selected?: boolean;
   title: string;
   imgSrc: string;
   onClick: () => void;
+  selected?: boolean;
 };
 
 const DiagnosticCard = (props: DiagnosticCardProps) => {
-  const { selected = false, title, imgSrc } = props;
+  const { selected = false, title, imgSrc, onClick } = props;
 
   return (
-    <Box sx={mergeSx(styles.root, selected && styles.selected)}>
+    <Box
+      onClick={onClick}
+      sx={mergeSx(styles.root, selected && styles.selected)}
+    >
       <Box component="img" sx={styles.image} src={imgSrc} alt={title} />
       {selected && (
         <Box sx={styles.selectedIconWrapperAbsolute}>

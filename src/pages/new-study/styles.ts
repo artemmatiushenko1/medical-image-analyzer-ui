@@ -1,7 +1,13 @@
 import { createStyleSheet } from '@/libs/theme';
 
 const styles = createStyleSheet({
-  root: { maxWidth: '1150px', margin: '0 auto', height: '100%', gap: 2 },
+  root: {
+    maxWidth: '1150px',
+    margin: '0 auto',
+    height: '100%',
+    gap: 2,
+    position: 'relative',
+  },
   stepBody: {
     flex: 1,
     height: 0,

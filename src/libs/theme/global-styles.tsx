@@ -7,20 +7,12 @@ const GlobalStyles = () => {
         '*': {
           margin: 0,
           padding: 0,
-          '&::-webkit-scrollbar': {
-            width: '4px',
-            height: '4px',
-          },
-          '&::-webkit-scrollbar-thumb': {
-            borderRadius: '100px',
-            backgroundClip: 'padding-box',
-            backgroundColor: '#c2c2c2',
-          },
         },
         html: {
           width: '100%',
           height: '100%',
           WebkitOverflowScrolling: 'touch',
+          scrollbarColor: 'rgba(0,0,0,.2) transparent',
         },
         body: {
           width: '100%',

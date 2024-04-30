@@ -62,7 +62,7 @@ const DropArea = (props: DropAreaProps) => {
             component="img"
             alt="Uploaded image"
             src={previewImageSrc}
-            sx={styles.uploadedImgWrapper}
+            sx={styles.uploadedImg}
           />
         </Box>
       )}
