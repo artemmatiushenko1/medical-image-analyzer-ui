@@ -1,6 +1,5 @@
 import { Box, Stack } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import { Header } from '../header';
 import { Sidebar } from '../sidebar';
 
 const PrimaryLayout = () => {
@@ -10,15 +9,15 @@ const PrimaryLayout = () => {
         <Sidebar />
       </Box>
       <Stack sx={{ flex: 1, overflow: 'hidden' }}>
-        <Box sx={{ height: '60px', flexShrink: 0 }}>
+        {/* <Box sx={{ height: '60px', flexShrink: 0 }}>
           <Header />
-        </Box>
+        </Box> */}
         <Box
           sx={{
             flex: '1',
             overflowY: 'auto',
             background: '#f7f9ff',
-            padding: '20px',
+            padding: '40px',
             position: 'relative',
           }}
         >

@@ -19,12 +19,12 @@ import { ExpandMoreRounded, NotificationsRounded } from '@mui/icons-material';
 
 const Header = () => {
   const navigate = useNavigate();
-  const newStudyPageMath = useMatch(AppRoute.NEW_STUDY);
+  const newStudyPageMatch = useMatch(AppRoute.NEW_STUDY);
   const [profileMenuAnchor, setprofileMenuAnchor] =
     useState<null | HTMLElement>(null);
 
   const profileMenuOpen = Boolean(profileMenuAnchor);
-  const isNewStudyPage = Boolean(newStudyPageMath);
+  const isNewStudyPage = Boolean(newStudyPageMatch);
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
     setprofileMenuAnchor(event.currentTarget);

@@ -38,8 +38,8 @@ const ProfileMenu = (props: ProfileMenuProps) => {
           },
         },
       }}
-      transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-      anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+      anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
     >
       <Stack
         gap={1}

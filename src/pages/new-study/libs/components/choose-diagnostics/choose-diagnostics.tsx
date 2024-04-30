@@ -1,4 +1,4 @@
-import { DocumentScanner } from '@mui/icons-material';
+import { MonitorHeart } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
 import { DiagnosticCard } from './diagnostic-card';
 import { useState } from 'react';
@@ -94,7 +94,7 @@ const ChooseDiagnostics = () => {
       {selectedDiagnosticsIds.length > 0 && (
         <Stack sx={styles.right}>
           <StudyInfoFormSectionHeader
-            icon={<DocumentScanner color="primary" />}
+            icon={<MonitorHeart color="primary" />}
             description="Configure any available settings for each selected item."
             title="Selected diagnostics"
           />
