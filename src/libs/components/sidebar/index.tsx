@@ -69,7 +69,9 @@ const Sidebar = () => {
       <Divider sx={styles.divider} />
       <Stack sx={{ justifyContent: 'space-between', flex: 1, padding: '14px' }}>
         <List component="nav" sx={{ margin: '-14px' }}>
-          <ListSubheader sx={styles.navItemSubHeader}>Main</ListSubheader>
+          <ListSubheader sx={styles.navItemSubHeader}>
+            {t('Sidebar.Main')}
+          </ListSubheader>
           {navItems.map(({ key, icon: Icon, title, path }) => {
             const selected = Boolean(matchPath(path, location.pathname));
             const color = ({ palette }: Theme) =>
@@ -105,7 +107,7 @@ const Sidebar = () => {
             startIcon={<AddRounded />}
             onClick={handleNewStudyClick}
           >
-            New study
+            {t('Sidebar.NewStudy')}
           </Button>
           <Divider orientation="horizontal" />
           <ListItemButton

@@ -13,6 +13,7 @@ import { styles } from './styles';
 import i18n from '@/libs/i18n';
 import { ChooseDiagnostics, ImageUpload } from './libs/components';
 import { StudyInfoForm } from './libs/components/study-info-form/study-info-form';
+import { useTranslation } from 'react-i18next';
 
 const steps = [
   {
@@ -45,6 +46,7 @@ const steps = [
 ];
 
 const NewStudy = () => {
+  const { t } = useTranslation('NewStudy');
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   const isOnFinalStep = activeStepIndex === steps.length - 1;
@@ -65,16 +67,13 @@ const NewStudy = () => {
   return (
     <Stack sx={styles.root}>
       <Box sx={styles.header}>
-        <Stack sx={{ flex: '50%' }}>
+        <Stack sx={{ flex: '40%' }}>
           <Typography variant="h6" fontWeight={600}>
-            New study
+            {t('PageTitle')}
           </Typography>
-          <Typography variant="caption">
-            Follow the following steps to submit an image for an AI-powered
-            study.
-          </Typography>
+          <Typography variant="caption">{t('PageDescription')}</Typography>
         </Stack>
-        <Stepper sx={{ flex: '50%' }} activeStep={activeStepIndex}>
+        <Stepper sx={{ flex: '60%' }} activeStep={activeStepIndex}>
           {steps.map(({ key, title }) => (
             <Step key={key}>
               <StepLabel>{title}</StepLabel>

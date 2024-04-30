@@ -8,5 +8,7 @@
     "Title": "Drag & Drop file here or <bold><underlined>Choose a file</underlined></bold>",
     "SupportedFormats": "Supported formats",
     "MaximunSizeMB": "Maximum size: {{value}}MB"
-  }
+  },
+  "PageTitle": "New study",
+  "PageDescription": "Follow the following steps to submit an image for an AI-powered study."
 }
