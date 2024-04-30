@@ -10,7 +10,7 @@ declare module 'i18next' {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'uk',
+  lng: 'en',
   interpolation: {
     escapeValue: false,
   },

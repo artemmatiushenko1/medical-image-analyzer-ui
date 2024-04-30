@@ -14,6 +14,8 @@ import {
   Switch,
   Typography,
 } from '@mui/material';
+import { ChangeLanguageDialog } from '../change-language-dialog';
+import { useState } from 'react';
 
 type ProfileMenuProps = {
   open: boolean;
@@ -24,65 +26,82 @@ type ProfileMenuProps = {
 const ProfileMenu = (props: ProfileMenuProps) => {
   const { open, anchorEl, onClose } = props;
 
+  const [changeLanguageModalOpen, setChangeLanguageModalOpen] = useState(false);
+
+  const handleChangeLanguageClick = () => {
+    setChangeLanguageModalOpen(true);
+    onClose();
+  };
+
+  const handleChangeLanguageDialogClose = () => {
+    setChangeLanguageModalOpen(false);
+  };
+
   return (
-    <Menu
-      id="account-menu"
-      anchorEl={anchorEl}
-      open={open}
-      onClose={onClose}
-      slotProps={{
-        paper: {
-          elevation: 0,
-          sx: {
-            mt: 1.5,
+    <>
+      <Menu
+        id="account-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={onClose}
+        slotProps={{
+          paper: {
+            elevation: 0,
+            sx: {
+              mt: 1.5,
+            },
           },
-        },
-      }}
-      transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-      anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-    >
-      <Stack
-        gap={1}
-        direction="row"
-        alignItems="center"
-        sx={{ padding: '9px 10px' }}
+        }}
+        transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
-        <Avatar
-          alt="Artem Matiushenko"
-          src="https://avatars.githubusercontent.com/u/71723893?s=400&u=bc39da803e24ca2b1b228eb5943ab67abefe59c9&v=4"
-        />
-        <Stack>
-          <Typography variant="body2" fontWeight={500}>
-            Dr. Artem Matiushenko
-          </Typography>
-          <Typography variant="caption" color="text.secondary">
-            artom.matyushenko@gmail.com
-          </Typography>
+        <Stack
+          gap={1}
+          direction="row"
+          alignItems="center"
+          sx={{ padding: '9px 10px' }}
+        >
+          <Avatar
+            alt="Artem Matiushenko"
+            src="https://avatars.githubusercontent.com/u/71723893?s=400&u=bc39da803e24ca2b1b228eb5943ab67abefe59c9&v=4"
+          />
+          <Stack>
+            <Typography variant="body2" fontWeight={500}>
+              Dr. Artem Matiushenko
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              artom.matyushenko@gmail.com
+            </Typography>
+          </Stack>
         </Stack>
-      </Stack>
-      <MenuItem sx={{ justifyContent: 'space-between' }}>
-        <Box display="flex">
+        <MenuItem sx={{ justifyContent: 'space-between' }}>
+          <Box display="flex">
+            <ListItemIcon>
+              <DarkModeRounded fontSize="small" />
+            </ListItemIcon>
+            <Typography variant="body2">Dark theme</Typography>
+          </Box>
+          <Switch size="small" />
+        </MenuItem>
+        <MenuItem onClick={handleChangeLanguageClick}>
           <ListItemIcon>
-            <DarkModeRounded fontSize="small" />
+            <LanguageRounded fontSize="small" />
           </ListItemIcon>
-          <Typography variant="body2">Dark theme</Typography>
-        </Box>
-        <Switch size="small" />
-      </MenuItem>
-      <MenuItem onClick={onClose}>
-        <ListItemIcon>
-          <LanguageRounded fontSize="small" />
-        </ListItemIcon>
-        <Typography variant="body2">Language: English</Typography>
-      </MenuItem>
-      <Divider />
-      <MenuItem onClick={onClose}>
-        <ListItemIcon>
-          <LogoutRounded fontSize="small" />
-        </ListItemIcon>
-        <Typography variant="body2">Log out</Typography>
-      </MenuItem>
-    </Menu>
+          <Typography variant="body2">Language: English</Typography>
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={onClose}>
+          <ListItemIcon>
+            <LogoutRounded fontSize="small" />
+          </ListItemIcon>
+          <Typography variant="body2">Log out</Typography>
+        </MenuItem>
+      </Menu>
+      <ChangeLanguageDialog
+        open={changeLanguageModalOpen}
+        onClose={handleChangeLanguageDialogClose}
+      />
+    </>
   );
 };
 

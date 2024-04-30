@@ -10,44 +10,43 @@ import { BottomNavigation } from './libs/components/bottom-navigation';
 import { useState } from 'react';
 import { NewStudyCreationStep } from './libs/enums';
 import { styles } from './styles';
-import i18n from '@/libs/i18n';
 import { ChooseDiagnostics, ImageUpload } from './libs/components';
 import { StudyInfoForm } from './libs/components/study-info-form/study-info-form';
 import { useTranslation } from 'react-i18next';
 
-const steps = [
-  {
-    key: NewStudyCreationStep.UPLOAD_IMAGE,
-    title: i18n.t('NewStudy:SubmissionSteps.UploadImage'),
-    component: (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-          gap: 12,
-        }}
-      >
-        <ImageUpload />
-        <StudyInfoForm />
-      </Box>
-    ),
-  },
-  {
-    key: NewStudyCreationStep.CHOOSE_DIAGNOSTICS,
-    title: i18n.t('NewStudy:SubmissionSteps.ChooseDiagnostics'),
-    component: <ChooseDiagnostics />,
-  },
-  {
-    key: NewStudyCreationStep.CONFIRM,
-    title: i18n.t('NewStudy:SubmissionSteps.Confirm'),
-    component: <div>Confirm</div>,
-  },
-];
-
 const NewStudy = () => {
   const { t } = useTranslation('NewStudy');
   const [activeStepIndex, setActiveStepIndex] = useState(0);
+
+  const steps = [
+    {
+      key: NewStudyCreationStep.UPLOAD_IMAGE,
+      title: t('SubmissionSteps.UploadImage'),
+      component: (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            gap: 12,
+          }}
+        >
+          <ImageUpload />
+          <StudyInfoForm />
+        </Box>
+      ),
+    },
+    {
+      key: NewStudyCreationStep.CHOOSE_DIAGNOSTICS,
+      title: t('SubmissionSteps.ChooseDiagnostics'),
+      component: <ChooseDiagnostics />,
+    },
+    {
+      key: NewStudyCreationStep.CONFIRM,
+      title: t('SubmissionSteps.Confirm'),
+      component: <div>Confirm</div>,
+    },
+  ];
 
   const isOnFinalStep = activeStepIndex === steps.length - 1;
 
