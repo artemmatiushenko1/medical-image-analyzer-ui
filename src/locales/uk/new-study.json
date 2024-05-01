@@ -2,12 +2,12 @@
   "SubmissionSteps": {
     "UploadImage": "Завантажте зображення",
     "ChooseDiagnostics": "Оберіть діагностику",
-    "Confirm": "Підтвердьте заявку"
+    "SendImage": "Відправте зображення"
   },
   "ImageUpload": {
     "Title": "Перетягність файл сюди або <bold><underlined>Оберіть файл</underlined></bold>",
     "SupportedFormats": "Підтримувані формати",
-    "MaximunSizeMB": "Максимальний розмір: {{value}}MB"
+    "MaximunSizeMB": "Максимальний розмір: {{value}}МБ"
   },
   "PageTitle": "Нове досліження",
   "PageDescription": "Слідуйте наступним крокам, щоб дослідити зображення за допомогою штучного інтелекту."

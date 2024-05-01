@@ -4,5 +4,10 @@
     "Overview": "Дашборд",
     "Reports": "Звіти",
     "NewStudy": "Нове дослідження"
+  },
+  "ProfileMenu": {
+    "DarkTheme": "Темна тема",
+    "Language": "Мова",
+    "LogOut": "Вийти"
   }
 }

@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import { BottomNavigation } from './libs/components/bottom-navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { NewStudyCreationStep } from './libs/enums';
 import { styles } from './styles';
 import { ChooseDiagnostics, ImageUpload } from './libs/components';
@@ -18,35 +18,38 @@ const NewStudy = () => {
   const { t } = useTranslation('NewStudy');
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
-  const steps = [
-    {
-      key: NewStudyCreationStep.UPLOAD_IMAGE,
-      title: t('SubmissionSteps.UploadImage'),
-      component: (
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '100%',
-            gap: 12,
-          }}
-        >
-          <ImageUpload />
-          <StudyInfoForm />
-        </Box>
-      ),
-    },
-    {
-      key: NewStudyCreationStep.CHOOSE_DIAGNOSTICS,
-      title: t('SubmissionSteps.ChooseDiagnostics'),
-      component: <ChooseDiagnostics />,
-    },
-    {
-      key: NewStudyCreationStep.CONFIRM,
-      title: t('SubmissionSteps.Confirm'),
-      component: <div>Confirm</div>,
-    },
-  ];
+  const steps = useMemo(
+    () => [
+      {
+        key: NewStudyCreationStep.UPLOAD_IMAGE,
+        title: t('SubmissionSteps.UploadImage'),
+        component: (
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%',
+              gap: 12,
+            }}
+          >
+            <ImageUpload />
+            <StudyInfoForm />
+          </Box>
+        ),
+      },
+      {
+        key: NewStudyCreationStep.CHOOSE_DIAGNOSTICS,
+        title: t('SubmissionSteps.ChooseDiagnostics'),
+        component: <ChooseDiagnostics />,
+      },
+      {
+        key: NewStudyCreationStep.CONFIRM,
+        title: t('SubmissionSteps.SendImage'),
+        component: <div>Confirm</div>,
+      },
+    ],
+    [t],
+  );
 
   const isOnFinalStep = activeStepIndex === steps.length - 1;
 

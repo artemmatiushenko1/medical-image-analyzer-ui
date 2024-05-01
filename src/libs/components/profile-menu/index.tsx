@@ -16,6 +16,9 @@ import {
 } from '@mui/material';
 import { ChangeLanguageDialog } from '../change-language-dialog';
 import { useState } from 'react';
+import { useAppStore } from '@/stores/app.store';
+import { LANGUAGE_DETAILS } from '@/libs/i18n';
+import { useTranslation } from 'react-i18next';
 
 type ProfileMenuProps = {
   open: boolean;
@@ -25,6 +28,10 @@ type ProfileMenuProps = {
 
 const ProfileMenu = (props: ProfileMenuProps) => {
   const { open, anchorEl, onClose } = props;
+
+  const { t } = useTranslation('App', { keyPrefix: 'ProfileMenu' });
+
+  const appLanguage = useAppStore((state) => state.language);
 
   const [changeLanguageModalOpen, setChangeLanguageModalOpen] = useState(false);
 
@@ -79,7 +86,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
             <ListItemIcon>
               <DarkModeRounded fontSize="small" />
             </ListItemIcon>
-            <Typography variant="body2">Dark theme</Typography>
+            <Typography variant="body2">{t('DarkTheme')}</Typography>
           </Box>
           <Switch size="small" />
         </MenuItem>
@@ -87,14 +94,16 @@ const ProfileMenu = (props: ProfileMenuProps) => {
           <ListItemIcon>
             <LanguageRounded fontSize="small" />
           </ListItemIcon>
-          <Typography variant="body2">Language: English</Typography>
+          <Typography variant="body2">
+            {t('Language')}: {LANGUAGE_DETAILS[appLanguage].nativeVariant}
+          </Typography>
         </MenuItem>
         <Divider />
         <MenuItem onClick={onClose}>
           <ListItemIcon>
             <LogoutRounded fontSize="small" />
           </ListItemIcon>
-          <Typography variant="body2">Log out</Typography>
+          <Typography variant="body2">{t('LogOut')}</Typography>
         </MenuItem>
       </Menu>
       <ChangeLanguageDialog

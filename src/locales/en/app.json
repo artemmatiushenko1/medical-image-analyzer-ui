@@ -4,5 +4,10 @@
     "Overview": "Overview",
     "Reports": "Reports",
     "NewStudy": "New Study"
+  },
+  "ProfileMenu": {
+    "DarkTheme": "Dark theme",
+    "Language": "Language",
+    "LogOut": "Log out"
   }
 }

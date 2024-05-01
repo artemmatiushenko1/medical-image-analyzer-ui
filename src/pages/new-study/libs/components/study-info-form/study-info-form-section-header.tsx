@@ -1,4 +1,5 @@
-import { Box, Typography, alpha } from '@mui/material';
+import { HighlightedIcon } from '@/libs/components';
+import { Box, Typography } from '@mui/material';
 
 type StudyInfoFormSectionHeaderProps = {
   title: string;
@@ -11,20 +12,7 @@ const StudyInfoFormSectionHeader = (props: StudyInfoFormSectionHeaderProps) => {
 
   return (
     <Box display="flex" gap={2}>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '40px',
-          height: '40px',
-          background: ({ palette }) =>
-            alpha(palette.primary.main, palette.action.selectedOpacity),
-          borderRadius: ({ shape }) => shape.borderRadius,
-        }}
-      >
-        {icon}
-      </Box>
+      <HighlightedIcon iconElement={icon} />
       <Box>
         <Typography variant="body2" fontWeight={500}>
           {title}

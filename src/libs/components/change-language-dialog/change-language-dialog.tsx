@@ -1,6 +1,8 @@
 import { Language } from '@/libs/enums';
+import { LANGUAGE_DETAILS } from '@/libs/i18n';
 import { ValueOf } from '@/libs/types';
 import { useAppStore } from '@/stores/app.store';
+import { LanguageRounded } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -14,6 +16,9 @@ import {
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
+import { styles } from './styles';
+import { mergeSx } from '@/libs/theme';
+import { HighlightedIcon } from '../highlighted-icon';
 
 type ChangeLanguageDialogProps = {
   open: boolean;
@@ -37,39 +42,60 @@ const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
     onClose();
   };
 
+  const languages = [Language.ENGLISH, Language.UKRAINIAN];
+
   return (
-    <Dialog open={open} maxWidth="xs" fullWidth>
+    <Dialog
+      fullWidth
+      open={open}
+      maxWidth="xs"
+      PaperProps={{
+        sx: styles.paper,
+      }}
+    >
       <DialogTitle>
-        <Typography variant="h6">Change language</Typography>
+        <Box sx={styles.title}>
+          <HighlightedIcon iconElement={<LanguageRounded />} />
+          <Typography variant="h6">Language</Typography>
+        </Box>
       </DialogTitle>
       <DialogContent>
-        <RadioGroup value={language} onChange={handleLanguageChange}>
-          <FormControlLabel
-            sx={{ justifyContent: 'space-between', margin: 0 }}
-            value="en"
-            control={<Radio />}
-            labelPlacement="start"
-            label="English"
-          />
-          <FormControlLabel
-            sx={{ justifyContent: 'space-between', margin: 0 }}
-            value="uk"
-            labelPlacement="start"
-            control={<Radio />}
-            label={
-              <Box>
-                <Typography>Українська</Typography>
-                <Typography variant="caption">Ukrainian</Typography>
-              </Box>
-            }
-          />
+        <RadioGroup
+          value={language}
+          sx={styles.radioGroup}
+          onChange={handleLanguageChange}
+        >
+          {languages.map((item) => {
+            const languageDetails = LANGUAGE_DETAILS[item];
+
+            return (
+              <FormControlLabel
+                key={item}
+                sx={mergeSx(
+                  styles.languageItem,
+                  item === language && styles.languageItemSelected,
+                )}
+                value={item}
+                control={<Radio />}
+                labelPlacement="start"
+                label={
+                  <Box>
+                    <Typography>{languageDetails.nativeVariant}</Typography>
+                    <Typography variant="caption">
+                      {languageDetails.enVariant}
+                    </Typography>
+                  </Box>
+                }
+              />
+            );
+          })}
         </RadioGroup>
       </DialogContent>
       <DialogActions>
-        <Button color="error" onClick={onClose}>
-          Cancel
+        <Button onClick={onClose}>Cancel</Button>
+        <Button variant="contained" onClick={handleSaveClick}>
+          Save
         </Button>
-        <Button onClick={handleSaveClick}>Save</Button>
       </DialogActions>
     </Dialog>
   );
