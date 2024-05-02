@@ -1,10 +1,10 @@
 import { MonitorHeart } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
 import { DiagnosticCard } from './diagnostic-card';
-import { useState } from 'react';
 import { styles } from './styles';
 import { StudyInfoFormSectionHeader } from '../study-info-form/study-info-form-section-header';
 import { SelectedDiagnosticAccordion } from './selected-diagnostic-accordion';
+import { useNewStudyStore } from '@/pages/new-study/new-study.store';
 
 type Diagnostic = {
   id: string;
@@ -46,28 +46,23 @@ const DIAGNOSTICS: Diagnostic[] = [
 ];
 
 const ChooseDiagnostics = () => {
-  const [selectedDiagnosticsIds, setSelectedDiagnosticsIds] = useState<
-    string[]
-  >([]);
+  const selectedDiagnosticsIds = useNewStudyStore(
+    (state) => state.selectedDianosticIds,
+  );
+  const updateSelectedDiagnostictIds = useNewStudyStore(
+    (state) => state.updateSelectedDiagnostictIds,
+  );
 
   const selectedDiagnostics = selectedDiagnosticsIds
     .map((id) => DIAGNOSTICS.find((diagnostic) => diagnostic.id === id))
     .filter((diagnostic): diagnostic is Diagnostic => Boolean(diagnostic));
 
   const handleDiagnosticCardClick = (id: string) => {
-    setSelectedDiagnosticsIds((prevItems) => {
-      if (prevItems.indexOf(id) !== -1) {
-        return prevItems.filter((item) => item !== id);
-      }
-
-      return Array.from(new Set([...prevItems, id]));
-    });
+    updateSelectedDiagnostictIds(id);
   };
 
   const removeSelectedDiagnostic = (idToRemove: string) => {
-    setSelectedDiagnosticsIds((prevState) =>
-      prevState.filter((id) => id !== idToRemove),
-    );
+    updateSelectedDiagnostictIds(idToRemove);
   };
 
   return (

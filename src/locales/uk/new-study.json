@@ -2,7 +2,7 @@
   "SubmissionSteps": {
     "UploadImage": "Завантажте зображення",
     "ChooseDiagnostics": "Оберіть діагностику",
-    "SendImage": "Відправте зображення"
+    "CreateStudy": "Створіть дослідження"
   },
   "ImageUpload": {
     "Title": "Перетягність файл сюди або <bold><underlined>Оберіть файл</underlined></bold>",

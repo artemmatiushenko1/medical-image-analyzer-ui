@@ -44,7 +44,7 @@ const NewStudy = () => {
       },
       {
         key: NewStudyCreationStep.CONFIRM,
-        title: t('SubmissionSteps.SendImage'),
+        title: t('SubmissionSteps.CreateStudy'),
         component: <div>Confirm</div>,
       },
     ],
