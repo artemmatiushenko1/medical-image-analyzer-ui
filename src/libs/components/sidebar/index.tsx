@@ -122,8 +122,8 @@ const Sidebar = () => {
               sx={{ width: '100%' }}
             >
               <Avatar
-                alt="Artem Matiushenko"
-                src="https://avatars.githubusercontent.com/u/71723893?s=400&u=bc39da803e24ca2b1b228eb5943ab67abefe59c9&v=4"
+                sx={{ height: '35px', width: '35px' }}
+                alt="User avatar"
               />
               <Box sx={{ overflow: 'hidden', width: '100%' }}>
                 <Typography fontSize="12px" fontWeight={500}>

@@ -13,10 +13,13 @@ import { styles } from './styles';
 import { ChooseDiagnostics, ImageUpload } from './libs/components';
 import { StudyInfoForm } from './libs/components/study-info-form/study-info-form';
 import { useTranslation } from 'react-i18next';
+import { ValueOf } from '@/libs/types';
 
 const NewStudy = () => {
   const { t } = useTranslation('NewStudy');
-  const [activeStepIndex, setActiveStepIndex] = useState(0);
+  const [activeStepIndex, setActiveStepIndex] = useState<
+    ValueOf<typeof NewStudyCreationStep>
+  >(NewStudyCreationStep.UPLOAD_IMAGE);
 
   const steps = useMemo(
     () => [
@@ -59,11 +62,17 @@ const NewStudy = () => {
       return;
     }
 
-    setActiveStepIndex((prevActiveStep) => prevActiveStep + 1);
+    setActiveStepIndex(
+      (prevActiveStep) =>
+        (prevActiveStep + 1) as ValueOf<typeof NewStudyCreationStep>,
+    );
   };
 
   const handlePreviousStep = () => {
-    setActiveStepIndex((prevActiveStep) => prevActiveStep - 1);
+    setActiveStepIndex(
+      (prevActiveStep) =>
+        (prevActiveStep - 1) as ValueOf<typeof NewStudyCreationStep>,
+    );
   };
 
   return (

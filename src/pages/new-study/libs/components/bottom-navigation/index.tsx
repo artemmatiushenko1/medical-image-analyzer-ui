@@ -2,12 +2,15 @@ import {
   CheckCircleRounded,
   KeyboardBackspaceRounded,
 } from '@mui/icons-material';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styles } from './styles';
+import { NewStudyCreationStep } from '../../enums';
+import { useNewStudyStore } from '@/pages/new-study/new-study.store';
+import { ValueOf } from '@/libs/types';
 
 type BottomNavigationProps = {
-  activeStep: number;
+  activeStep: ValueOf<typeof NewStudyCreationStep>;
   isFinalStep: boolean;
 
   onPreviousStep: () => void;
@@ -16,8 +19,30 @@ type BottomNavigationProps = {
 
 const BottomNavigation = (props: BottomNavigationProps) => {
   const { onPreviousStep, onNextStep, activeStep, isFinalStep } = props;
+  const hasSelectedDiagnostics = useNewStudyStore(
+    (state) => state.selectedDianosticIds.length > 0,
+  );
 
   const { t } = useTranslation('Common');
+
+  const nextButtonDisabledByStep: Record<
+    ValueOf<typeof NewStudyCreationStep>,
+    {
+      disabled: boolean;
+      tooltip: string;
+    } | null
+  > = {
+    [NewStudyCreationStep.CHOOSE_DIAGNOSTICS]: {
+      disabled: !hasSelectedDiagnostics,
+      tooltip:
+        'Please choose at least one diagnostic to proceed with the next step.',
+    },
+    [NewStudyCreationStep.CONFIRM]: null,
+    [NewStudyCreationStep.UPLOAD_IMAGE]: null,
+  };
+
+  const { disabled: nextButtonDisabled, tooltip: nextButtonTooltip } =
+    nextButtonDisabledByStep[activeStep] ?? {};
 
   return (
     <Box sx={styles.root}>
@@ -35,14 +60,19 @@ const BottomNavigation = (props: BottomNavigationProps) => {
           {t('Cancel')}
         </Button>
       </Box>
-      <Button
-        variant="contained"
-        onClick={onNextStep}
-        color={isFinalStep ? 'success' : 'primary'}
-        startIcon={isFinalStep && <CheckCircleRounded />}
-      >
-        {isFinalStep ? t('Create') : t('Next')}
-      </Button>
+      <Tooltip title={nextButtonDisabled && nextButtonTooltip}>
+        <span>
+          <Button
+            variant="contained"
+            onClick={onNextStep}
+            disabled={nextButtonDisabled}
+            color={isFinalStep ? 'success' : 'primary'}
+            startIcon={isFinalStep && <CheckCircleRounded />}
+          >
+            {isFinalStep ? t('Create') : t('Next')}
+          </Button>
+        </span>
+      </Tooltip>
     </Box>
   );
 };
