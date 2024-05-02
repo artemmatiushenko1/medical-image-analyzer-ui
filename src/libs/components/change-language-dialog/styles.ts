@@ -30,6 +30,9 @@ const styles = createStyleSheet({
     background: ({ palette }) =>
       alpha(palette.primary.main, palette.action.selectedOpacity),
   },
+  cancelButton: {
+    color: ({ palette }) => palette.neutral.main,
+  },
 });
 
 export { styles };

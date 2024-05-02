@@ -92,7 +92,9 @@ const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
         </RadioGroup>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose} sx={styles.cancelButton}>
+          Cancel
+        </Button>
         <Button variant="contained" onClick={handleSaveClick}>
           Save
         </Button>
