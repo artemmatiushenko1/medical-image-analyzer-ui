@@ -8,14 +8,15 @@ const styles = createStyleSheet({
     alignItems: 'center',
     width: '450px',
     height: '450px',
-    border: `2px dashed transparent`,
     background: alpha(palette.primary.main, palette.action.hoverOpacity),
     borderRadius: shape.borderRadius,
     position: 'relative',
     overflow: 'hidden',
     transition: 'transform 0.2s ease',
+    border: ({ palette }) => `1px solid ${palette.divider}`,
   }),
   noImage: {
+    border: `2px dashed transparent`,
     borderColor: ({ palette }) => palette.primary.main,
   },
   imageIcon: {
@@ -33,7 +34,6 @@ const styles = createStyleSheet({
       alpha(palette.primary.light, palette.action.selectedOpacity),
   },
   uploadedImgWrapper: {
-    background: ({ palette }) => palette.common.black,
     width: '100%',
     height: '100%',
   },
