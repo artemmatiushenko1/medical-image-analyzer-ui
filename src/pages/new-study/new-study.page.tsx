@@ -38,6 +38,7 @@ const NewStudy = () => {
               justifyContent: 'space-between',
               width: '100%',
               gap: 12,
+              alignSelf: 'center',
             }}
           >
             <ImageUpload />
