@@ -69,7 +69,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
             color={isFinalStep ? 'success' : 'primary'}
             startIcon={isFinalStep && <CheckCircleRounded />}
           >
-            {isFinalStep ? t('Create') : t('Next')}
+            {isFinalStep ? 'Create study' : t('Next')}
           </Button>
         </span>
       </Tooltip>

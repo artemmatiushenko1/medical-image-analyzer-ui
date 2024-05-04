@@ -14,7 +14,7 @@ const styles = createStyleSheet({
     overflowY: 'auto',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   header: {
     display: 'flex',

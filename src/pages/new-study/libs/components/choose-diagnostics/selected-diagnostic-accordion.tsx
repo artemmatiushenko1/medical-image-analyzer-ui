@@ -39,7 +39,9 @@ const SelectedDiagnosticAccordion = (
             alignItems: 'center',
           }}
         >
-          <Typography>{title}</Typography>
+          <Typography variant="body2" fontWeight={500}>
+            {title}
+          </Typography>
           <IconButton
             size="small"
             className="delete-icon"
@@ -50,8 +52,10 @@ const SelectedDiagnosticAccordion = (
         </Box>
       </AccordionSummary>
       <AccordionDetails>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-        malesuada lacus ex, sit amet blandit leo lobortis eget.
+        <Typography variant="body2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          malesuada lacus ex, sit amet blandit leo lobortis eget.
+        </Typography>
       </AccordionDetails>
     </Accordion>
   );

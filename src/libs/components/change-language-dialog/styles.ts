@@ -33,6 +33,9 @@ const styles = createStyleSheet({
   cancelButton: {
     color: ({ palette }) => palette.neutral.main,
   },
+  actions: {
+    p: '16px 24px',
+  },
 });
 
 export { styles };

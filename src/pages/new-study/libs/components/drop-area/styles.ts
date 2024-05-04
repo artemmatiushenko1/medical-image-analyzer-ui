@@ -8,16 +8,18 @@ const styles = createStyleSheet({
     alignItems: 'center',
     width: '450px',
     height: '450px',
-    background: alpha(palette.primary.main, palette.action.hoverOpacity),
     borderRadius: shape.borderRadius,
     position: 'relative',
     overflow: 'hidden',
     transition: 'transform 0.2s ease',
-    border: ({ palette }) => `1px solid ${palette.divider}`,
+    border: `1px solid ${palette.divider}`,
+    background: ({ palette }) => palette.grey[200],
   }),
   noImage: {
     border: `2px dashed transparent`,
     borderColor: ({ palette }) => palette.primary.main,
+    background: ({ palette }) =>
+      alpha(palette.primary.main, palette.action.hoverOpacity),
   },
   imageIcon: {
     fontSize: '52px',

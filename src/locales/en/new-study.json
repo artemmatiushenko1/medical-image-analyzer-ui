@@ -2,7 +2,7 @@
   "SubmissionSteps": {
     "UploadImage": "Upload an image",
     "ChooseDiagnostics": "Choose diagnostics",
-    "CreateStudy": "Create study"
+    "CreateStudy": "Overview"
   },
   "ImageUpload": {
     "Title": "Drag & Drop file here or <bold><underlined>Choose a file</underlined></bold>",

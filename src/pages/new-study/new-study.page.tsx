@@ -10,13 +10,18 @@ import { BottomNavigation } from './libs/components/bottom-navigation';
 import { useMemo, useState } from 'react';
 import { NewStudyCreationStep } from './libs/enums';
 import { styles } from './styles';
-import { ChooseDiagnostics, ImageUpload } from './libs/components';
+import {
+  ChooseDiagnostics,
+  ImageUpload,
+  StudySummary,
+} from './libs/components';
 import { StudyInfoForm } from './libs/components/study-info-form/study-info-form';
 import { useTranslation } from 'react-i18next';
 import { ValueOf } from '@/libs/types';
 
 const NewStudy = () => {
   const { t } = useTranslation('NewStudy');
+
   const [activeStepIndex, setActiveStepIndex] = useState<
     ValueOf<typeof NewStudyCreationStep>
   >(NewStudyCreationStep.UPLOAD_IMAGE);
@@ -48,7 +53,7 @@ const NewStudy = () => {
       {
         key: NewStudyCreationStep.CONFIRM,
         title: t('SubmissionSteps.CreateStudy'),
-        component: <div>Confirm</div>,
+        component: <StudySummary />,
       },
     ],
     [t],
@@ -85,9 +90,12 @@ const NewStudy = () => {
           <Typography variant="caption">{t('PageDescription')}</Typography>
         </Stack>
         <Stepper sx={{ flex: '60%' }} activeStep={activeStepIndex}>
-          {steps.map(({ key, title }) => (
+          {steps.map(({ key, title }, index) => (
             <Step key={key}>
-              <StepLabel>{title}</StepLabel>
+              <StepLabel>
+                <Typography variant="caption">Step {index + 1}</Typography>
+                <Typography variant="subtitle2">{title}</Typography>
+              </StepLabel>
             </Step>
           ))}
         </Stepper>

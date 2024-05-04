@@ -91,7 +91,7 @@ const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
           })}
         </RadioGroup>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={styles.actions}>
         <Button onClick={onClose} sx={styles.cancelButton}>
           Cancel
         </Button>
