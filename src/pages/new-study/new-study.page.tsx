@@ -1,5 +1,7 @@
 import {
   Box,
+  Divider,
+  Paper,
   Stack,
   Step,
   StepLabel,
@@ -86,15 +88,20 @@ const NewStudy = () => {
   };
 
   return (
-    <Stack sx={styles.root}>
-      <Box sx={styles.header}>
-        <Stack sx={{ flex: '40%' }}>
-          <Typography variant="h6" fontWeight={600}>
+    <Box sx={styles.root}>
+      <Paper square sx={styles.sidebar}>
+        <Stack p={3}>
+          <Typography variant="h6" sx={{ fontSize: '18px' }} fontWeight={600}>
             {t('PageTitle')}
           </Typography>
           <Typography variant="caption">{t('PageDescription')}</Typography>
         </Stack>
-        <Stepper sx={{ flex: '60%' }} activeStep={activeStepIndex}>
+        <Divider />
+        <Stepper
+          orientation="vertical"
+          activeStep={activeStepIndex}
+          sx={{ p: 3 }}
+        >
           {steps.map(({ key, title }, index) => (
             <Step key={key}>
               <StepLabel>
@@ -104,16 +111,18 @@ const NewStudy = () => {
             </Step>
           ))}
         </Stepper>
-      </Box>
-      <Box sx={styles.stepBody}>{steps.at(activeStepIndex)?.component}</Box>
-      <BottomNavigation
-        activeStep={activeStepIndex}
-        isFinalStep={isOnFinalStep}
-        onNextStep={handleNextStep}
-        onPreviousStep={handlePreviousStep}
-      />
+      </Paper>
+      <Stack sx={styles.main}>
+        <Box sx={styles.stepBody}>{steps.at(activeStepIndex)?.component}</Box>
+        <BottomNavigation
+          activeStep={activeStepIndex}
+          isFinalStep={isOnFinalStep}
+          onNextStep={handleNextStep}
+          onPreviousStep={handlePreviousStep}
+        />
+      </Stack>
       {createStudyStatusDialogOpen && <CreateStudyStatusDialog />}
-    </Stack>
+    </Box>
   );
 };
 

@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  PopoverOrigin,
   Stack,
   Switch,
   Typography,
@@ -24,10 +25,12 @@ type ProfileMenuProps = {
   open: boolean;
   anchorEl: HTMLElement | null;
   onClose: () => void;
+  transformOrigin?: PopoverOrigin;
+  anchorOrigin?: PopoverOrigin;
 };
 
 const ProfileMenu = (props: ProfileMenuProps) => {
-  const { open, anchorEl, onClose } = props;
+  const { open, anchorEl, onClose, transformOrigin, anchorOrigin } = props;
 
   const { t } = useTranslation('App', { keyPrefix: 'ProfileMenu' });
 
@@ -48,9 +51,11 @@ const ProfileMenu = (props: ProfileMenuProps) => {
     <>
       <Menu
         id="account-menu"
-        anchorEl={anchorEl}
         open={open}
+        anchorEl={anchorEl}
         onClose={onClose}
+        transformOrigin={transformOrigin}
+        anchorOrigin={anchorOrigin}
         slotProps={{
           paper: {
             elevation: 0,
@@ -59,8 +64,6 @@ const ProfileMenu = (props: ProfileMenuProps) => {
             },
           },
         }}
-        transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
         <Stack
           gap={1}

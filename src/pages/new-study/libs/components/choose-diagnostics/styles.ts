@@ -14,7 +14,7 @@ const cardStyles = createStyleSheet({
     aspectRatio: 3 / 2,
   },
   selected: {
-    outline: ({ palette }) => `2px solid ${palette.primary.main}`,
+    outline: ({ palette }) => `2px solid ${palette.success.main}`,
   },
   image: {
     width: '100%',
@@ -34,7 +34,7 @@ const cardStyles = createStyleSheet({
     width: '22px',
     height: '22px',
     color: '#fff',
-    background: ({ palette }) => palette.primary.main,
+    background: ({ palette }) => palette.success.main,
     borderRadius: '2px',
   },
   selectedIcon: {
@@ -58,7 +58,7 @@ const cardStyles = createStyleSheet({
 
 const styles = createStyleSheet({
   root: {
-    gap: 12,
+    gap: 9,
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',

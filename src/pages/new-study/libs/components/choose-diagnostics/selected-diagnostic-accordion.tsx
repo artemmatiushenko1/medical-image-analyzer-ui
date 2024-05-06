@@ -29,7 +29,7 @@ const SelectedDiagnosticAccordion = (
   };
 
   return (
-    <Accordion sx={styles.root}>
+    <Accordion defaultExpanded sx={styles.root}>
       <AccordionSummary expandIcon={<ExpandMoreRounded />}>
         <Box
           sx={{

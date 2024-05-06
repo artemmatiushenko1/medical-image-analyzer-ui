@@ -6,6 +6,7 @@ const styles = createStyleSheet({
     display: 'flex',
     justifyContent: 'center',
     borderLeft: 'none',
+    px: 2,
   },
   innerContainer: {
     display: 'flex',
@@ -25,6 +26,10 @@ const styles = createStyleSheet({
   notificationIcon: {
     fill: ({ palette }) => palette.grey[400],
   },
+  logoWrapper: {
+    mr: 6,
+  },
+  navigationButtons: { display: 'flex', gap: 1, marginRight: 'auto' },
 });
 
 export { styles };

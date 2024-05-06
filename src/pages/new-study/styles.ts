@@ -2,11 +2,17 @@ import { createStyleSheet } from '@/libs/theme';
 
 const styles = createStyleSheet({
   root: {
-    maxWidth: '1150px',
-    margin: '0 auto',
+    display: 'flex',
     height: '100%',
-    gap: 2,
     position: 'relative',
+  },
+  sidebar: {
+    borderTop: 'none',
+    flex: '22%',
+  },
+  main: {
+    flex: '78%',
+    p: 3,
   },
   stepBody: {
     flex: 1,
@@ -16,10 +22,7 @@ const styles = createStyleSheet({
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
+  header: {},
   imageUploadWrapper: {
     display: 'flex',
     justifyContent: 'center',

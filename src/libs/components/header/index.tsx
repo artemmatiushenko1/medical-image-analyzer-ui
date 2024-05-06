@@ -1,13 +1,12 @@
 import {
   AppBar,
   Avatar,
-  Badge,
   Box,
   Button,
   Divider,
-  IconButton,
   ListItemButton,
   Stack,
+  Typography,
 } from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { styles } from './styles';
@@ -15,7 +14,9 @@ import { useState } from 'react';
 import { ProfileMenu } from '../profile-menu';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/libs/enums';
-import { ExpandMoreRounded, NotificationsRounded } from '@mui/icons-material';
+import { ExpandMoreRounded } from '@mui/icons-material';
+import { Logo } from '../logo';
+import { ButtonsNavigation } from '../button-navigation/button-navigation';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -46,29 +47,76 @@ const Header = () => {
       sx={styles.appBar}
     >
       <Box sx={styles.innerContainer}>
-        <div>&nbsp;</div>
+        <Box sx={styles.logoWrapper}>
+          <Logo />
+        </Box>
+        <ButtonsNavigation />
+        {/* <Box sx={styles.navigationButtons}>
+          <Button
+            startIcon={<GridViewRounded />}
+            sx={{
+              background: ({ palette }) =>
+                alpha(palette.primary.main, palette.action.selectedOpacity),
+            }}
+          >
+            Dashboard
+          </Button>
+          <Button
+            sx={{ color: ({ palette }) => palette.neutral.dark }}
+            startIcon={
+              <DescriptionRounded
+                sx={{ color: ({ palette }) => palette.neutral.main }}
+              />
+            }
+          >
+            Studies
+          </Button>
+        </Box> */}
         <Stack direction="row" gap={2} alignItems="center">
           {!isNewStudyPage && (
-            <Button
-              variant="contained"
-              startIcon={<AddOutlinedIcon />}
-              onClick={handleNewStudyClick}
-            >
-              New Study
-            </Button>
+            <>
+              <Button
+                variant="contained"
+                startIcon={<AddOutlinedIcon />}
+                onClick={handleNewStudyClick}
+              >
+                New Study
+              </Button>
+              <Divider orientation="vertical" flexItem />
+            </>
           )}
-          <Divider orientation="vertical" flexItem />
-          <IconButton>
-            <Badge badgeContent={12} color="error">
-              <NotificationsRounded />
-            </Badge>
-          </IconButton>
-          <ListItemButton disableRipple onClick={handleProfileClick}>
-            <Stack direction="row" gap={1} alignItems="center">
+          <ListItemButton
+            sx={{ flexGrow: 0, padding: '12px', margin: '-14px' }}
+            disableRipple
+            onClick={handleProfileClick}
+          >
+            <Stack
+              direction="row"
+              gap={1}
+              alignItems="center"
+              sx={{ width: '100%' }}
+            >
               <Avatar
-                alt="Artem Matiushenko"
-                src="https://avatars.githubusercontent.com/u/71723893?s=400&u=bc39da803e24ca2b1b228eb5943ab67abefe59c9&v=4"
+                alt="User avatar"
+                sx={{
+                  height: '35px',
+                  width: '35px',
+                }}
               />
+              <Box sx={{ overflow: 'hidden', width: '100%' }}>
+                <Typography fontSize="12px" fontWeight={500}>
+                  Artem Matiushenko
+                </Typography>
+                <Typography
+                  width="100%"
+                  textOverflow="ellipsis"
+                  variant="caption"
+                  display="block"
+                  overflow="hidden"
+                >
+                  artom.matyushenko@gmail.com
+                </Typography>
+              </Box>
               <ExpandMoreRounded color="primary" />
             </Stack>
           </ListItemButton>
@@ -76,6 +124,8 @@ const Header = () => {
             open={profileMenuOpen}
             anchorEl={profileMenuAnchor}
             onClose={handleProfileMenuClose}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           />
         </Stack>
       </Box>

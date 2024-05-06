@@ -39,6 +39,19 @@ const chicago = {
   '900': '#3d3d3d',
 } satisfies PaletteColorOptions;
 
+const heather = {
+  '50': '#f5f7f9',
+  '100': '#e9ecf0',
+  '200': '#d8dee5',
+  '300': '#c6ced8',
+  '400': '#9eaabc',
+  '500': '#8693ab',
+  '600': '#75809b',
+  '700': '#68718d',
+  '800': '#585e75',
+  '900': '#494e5f',
+} satisfies PaletteColorOptions;
+
 const emerald = {
   '50': '#f2fbf5',
   '100': '#e0f8e9',
@@ -52,4 +65,4 @@ const emerald = {
   '900': '#1c4b31',
 } satisfies PaletteColorOptions;
 
-export { brandBlue, cinnabar, chicago, emerald };
+export { brandBlue, cinnabar, chicago, emerald, heather };

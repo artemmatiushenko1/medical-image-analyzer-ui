@@ -60,7 +60,7 @@ const ChooseDiagnostics = () => {
             description="Configure any available settings for each selected item."
             title="Selected diagnostics"
           />
-          <Box sx={{ marginTop: '20px', overflowY: 'scroll' }}>
+          <Box sx={{ marginTop: '20px', overflowY: 'scroll', pb: 2 }}>
             {selectedDiagnostics.map(({ id, title }) => (
               <SelectedDiagnosticAccordion
                 key={id}
