@@ -1,16 +1,8 @@
 import { useDiagnosticsStore } from '@/packages/diagnostics';
 import { useNewStudyStore } from '@/pages/new-study/new-study.store';
 import { ArchitectureRounded, Crop } from '@mui/icons-material';
-import {
-  Box,
-  Chip,
-  Paper,
-  Stack,
-  Tooltip,
-  Typography,
-  alpha,
-} from '@mui/material';
-import { grey } from '@mui/material/colors';
+import { Box, Chip, Paper, Stack, Tooltip, Typography } from '@mui/material';
+import { styles } from './styles';
 
 const StudySummary = () => {
   const availableDiagnostics = useDiagnosticsStore(
@@ -30,114 +22,50 @@ const StudySummary = () => {
   );
 
   return (
-    <Stack
-      sx={{ maxWidth: '800px', width: '100%', gap: 2, paddingTop: '50px' }}
-    >
-      <Paper
-        sx={{
-          p: 3,
-          display: 'flex',
-          borderRadius: ({ shape }) => shape.borderRadius,
-          flexDirection: 'row',
-          gap: 4,
-        }}
-      >
-        {studyImage && (
-          <Box>
-            <Typography
-              variant="subtitle2"
-              marginBottom={1}
-              sx={{ color: grey[500] }}
-            >
-              Image
-            </Typography>
-            <Box
-              sx={{
-                width: '200px',
-                height: '200px',
-                backgroundColor: ({ palette }) => palette.grey[200],
-                border: ({ palette }) => `1px solid ${palette.divider}`,
-                borderRadius: ({ shape }) => shape.borderRadius,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-                position: 'relative',
-              }}
-            >
-              <Box
-                component="img"
-                src={studyImage}
-                sx={{ height: '100%', objectFit: 'contain' }}
-              />
+    <Stack sx={styles.root}>
+      {studyImage && (
+        <Box>
+          <Typography variant="subtitle2" sx={styles.sectionTitle}>
+            Image
+          </Typography>
+          <Paper sx={styles.imageWrapperPaper}>
+            <Box sx={styles.imageWrapper}>
+              <Box component="img" src={studyImage} sx={styles.image} />
               <Tooltip title="The original image was cropped">
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
-                    fontSize: '12px',
-                    position: 'absolute',
-                    bottom: '10px',
-                    right: '10px',
-                    background: ({ palette }) =>
-                      alpha(palette.primary.main, 0.4),
-                    color: ({ palette }) => palette.common.white,
-                    borderRadius: '100px',
-                    p: '2px 6px',
-                    border: ({ palette }) =>
-                      `1px solid ${palette.primary.main}`,
-                  }}
-                >
+                <Box sx={styles.cropChip}>
                   <Crop fontSize="inherit" />
                   <span>Cropped</span>
                 </Box>
               </Tooltip>
             </Box>
-          </Box>
-        )}
-        <Stack sx={{ flex: 1, gap: 1 }}>
-          <Typography variant="subtitle2" sx={{ color: grey[500] }}>
-            Selected diagnostics
-          </Typography>
-          <Stack gap={2}>
-            {selectedDiagnostics.map((diagnostic) => (
-              <Paper
-                elevation={5}
-                sx={{
-                  p: 2,
-                  borderRadius: ({ shape }) => shape.borderRadius,
-                  gap: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <Typography variant="body2" fontWeight={500}>
-                  {diagnostic?.title}
-                </Typography>
-                <Typography variant="caption" display="block">
-                  AI model configuration:
-                </Typography>
-                <Box>
-                  <Chip
-                    color="primary"
-                    sx={{
-                      fontSize: '12px',
-                      backgroundColor: ({ palette }) =>
-                        alpha(palette.primary.main, 0.1),
-                      border: ({ palette }) =>
-                        `1px solid ${palette.primary.main}`,
-                      color: ({ palette }) => palette.primary.main,
-                    }}
-                    icon={<ArchitectureRounded sx={{ fontSize: '18px' }} />}
-                    label={'Architecture: ARM64'}
-                  />
-                </Box>
-              </Paper>
-            ))}
-          </Stack>
+          </Paper>
+        </Box>
+      )}
+      <Box sx={{ flex: 1 }}>
+        <Typography variant="subtitle2" sx={styles.sectionTitle}>
+          Selected diagnostics
+        </Typography>
+        <Stack gap={2}>
+          {selectedDiagnostics.map((diagnostic) => (
+            <Paper sx={styles.diagnosticsWrapper}>
+              <Typography variant="body2" fontWeight={500}>
+                {diagnostic?.title}
+              </Typography>
+              <Typography variant="caption" display="block">
+                AI model configuration:
+              </Typography>
+              <Box>
+                <Chip
+                  color="primary"
+                  sx={styles.modelSettingChip}
+                  icon={<ArchitectureRounded sx={{ fontSize: '18px' }} />}
+                  label={'Architecture: ARM64'}
+                />
+              </Box>
+            </Paper>
+          ))}
         </Stack>
-      </Paper>
+      </Box>
     </Stack>
   );
 };

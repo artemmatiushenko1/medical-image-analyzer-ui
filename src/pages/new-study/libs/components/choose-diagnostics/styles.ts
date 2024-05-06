@@ -63,7 +63,7 @@ const styles = createStyleSheet({
     display: 'flex',
     justifyContent: 'space-between',
     height: '100%',
-    pt: 2,
+    pt: 3,
   },
   diagnosticsList: {
     display: 'grid',
@@ -71,7 +71,7 @@ const styles = createStyleSheet({
     gridAutoRows: 'max-content',
     gap: 1.5,
     overflow: 'scroll',
-    padding: '5px',
+    padding: '2px',
     overscrollBehavior: 'contain',
   },
   left: {
