@@ -20,6 +20,12 @@ const styles = createStyleSheet({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  imageUploadWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    alignSelf: 'center',
+  },
 });
 
 export { styles };

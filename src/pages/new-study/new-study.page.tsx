@@ -14,7 +14,6 @@ import {
   ChooseDiagnostics,
   ImageUpload,
   StudySummary,
-  StudyInfoForm,
   CreateStudyStatusDialog,
 } from './libs/components';
 import { useTranslation } from 'react-i18next';
@@ -46,17 +45,8 @@ const NewStudy = () => {
         key: NewStudyCreationStep.UPLOAD_IMAGE,
         title: t('SubmissionSteps.UploadImage'),
         component: (
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              width: '100%',
-              gap: 12,
-              alignSelf: 'center',
-            }}
-          >
+          <Box sx={styles.imageUploadWrapper}>
             <ImageUpload />
-            <StudyInfoForm />
           </Box>
         ),
       },
