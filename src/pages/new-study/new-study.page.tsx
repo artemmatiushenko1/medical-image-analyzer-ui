@@ -87,10 +87,29 @@ const NewStudy = () => {
     );
   };
 
+  const stepsMeta = {
+    [NewStudyCreationStep.UPLOAD_IMAGE]: {
+      title: 'Upload an image',
+      description:
+        'The better quality image has, the more precise the diagnostic result might be.',
+    },
+    [NewStudyCreationStep.CHOOSE_DIAGNOSTICS]: {
+      title: 'Choose from available diagnostics',
+      description: 'Click on the card to select a diagnostic for a image.',
+    },
+    [NewStudyCreationStep.CONFIRM]: {
+      title: 'Study Overview',
+      description:
+        "Please review the study summary. Once the study is created it won't be able to edit it.",
+    },
+  };
+
+  const stepMeta = stepsMeta[activeStepIndex];
+
   return (
     <Box sx={styles.root}>
       <Paper square sx={styles.sidebar}>
-        <Stack p={3}>
+        <Stack sx={styles.sidebarHeader}>
           <Typography variant="h6" sx={{ fontSize: '18px' }} fontWeight={600}>
             {t('PageTitle')}
           </Typography>
@@ -98,9 +117,9 @@ const NewStudy = () => {
         </Stack>
         <Divider />
         <Stepper
+          sx={styles.stepper}
           orientation="vertical"
           activeStep={activeStepIndex}
-          sx={{ p: 3 }}
         >
           {steps.map(({ key, title }, index) => (
             <Step key={key}>
@@ -113,6 +132,10 @@ const NewStudy = () => {
         </Stepper>
       </Paper>
       <Stack sx={styles.main}>
+        <Paper square sx={styles.stepHeader}>
+          <Typography variant="subtitle2">{stepMeta.title}</Typography>
+          <Typography variant="caption">{stepMeta.description}</Typography>
+        </Paper>
         <Box sx={styles.stepBody}>{steps.at(activeStepIndex)?.component}</Box>
         <BottomNavigation
           activeStep={activeStepIndex}

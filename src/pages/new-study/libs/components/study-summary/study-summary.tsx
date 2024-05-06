@@ -31,15 +31,8 @@ const StudySummary = () => {
 
   return (
     <Stack
-      sx={{ maxWidth: '800px', width: '100%', gap: 2, paddingTop: '90px' }}
+      sx={{ maxWidth: '800px', width: '100%', gap: 2, paddingTop: '50px' }}
     >
-      <Box>
-        <Typography fontWeight={500}>Study Overview</Typography>
-        <Typography variant="caption">
-          Please review the study summary. Once the study is created it won't be
-          possible to edit it.
-        </Typography>
-      </Box>
       <Paper
         sx={{
           p: 3,

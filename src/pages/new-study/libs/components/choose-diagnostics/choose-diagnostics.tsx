@@ -35,12 +35,6 @@ const ChooseDiagnostics = () => {
   return (
     <Box sx={styles.root}>
       <Stack sx={styles.left}>
-        <Stack>
-          <Typography variant="subtitle2">Available diagnostics</Typography>
-          <Typography variant="caption">
-            Click on the card to select a diagnostic for a image.
-          </Typography>
-        </Stack>
         <Box sx={styles.diagnosticsList}>
           {availableDiagnostics.map((item) => (
             <DiagnosticCard

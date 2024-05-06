@@ -29,6 +29,21 @@ const styles = createStyleSheet({
     width: '100%',
     alignSelf: 'center',
   },
+  stepHeader: {
+    px: 3,
+    py: 2,
+    marginLeft: -3,
+    marginRight: -3,
+    marginTop: -3,
+    borderLeft: 'none',
+    borderTop: 'none',
+  },
+  stepper: {
+    p: 3,
+  },
+  sidebarHeader: {
+    p: 3,
+  },
 });
 
 export { styles };
