@@ -15,7 +15,7 @@ import {
   ImageUpload,
   StudySummary,
   StudyInfoForm,
-  CreateStudyLoadingDialog,
+  CreateStudyStatusDialog,
 } from './libs/components';
 import { useTranslation } from 'react-i18next';
 import { ValueOf } from '@/libs/types';
@@ -109,7 +109,7 @@ const NewStudy = () => {
         onNextStep={handleNextStep}
         onPreviousStep={handlePreviousStep}
       />
-      <CreateStudyLoadingDialog />
+      <CreateStudyStatusDialog />
     </Stack>
   );
 };

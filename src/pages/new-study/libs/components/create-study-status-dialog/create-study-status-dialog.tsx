@@ -11,7 +11,7 @@ import {
 import { useQuery } from 'react-query';
 import { styles } from './styles';
 
-const CreateStudyLoadingDialog = () => {
+const CreateStudyStatusDialog = () => {
   const { isLoading, isSuccess } = useQuery(
     'create-study',
     () => new Promise((resolve) => setTimeout(() => resolve(undefined), 2000)),
@@ -62,4 +62,4 @@ const CreateStudyLoadingDialog = () => {
   );
 };
 
-export { CreateStudyLoadingDialog };
+export { CreateStudyStatusDialog };
