@@ -105,7 +105,7 @@ const StudySummary = () => {
         )}
         <Stack sx={{ flex: 1, gap: 1 }}>
           <Typography variant="subtitle2" sx={{ color: grey[500] }}>
-            Selected Diagnostics
+            Selected diagnostics
           </Typography>
           <Stack gap={2}>
             {selectedDiagnostics.map((diagnostic) => (

@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import { BottomNavigation } from './libs/components/bottom-navigation';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { NewStudyCreationStep } from './libs/enums';
 import { styles } from './styles';
 import {
@@ -19,13 +19,26 @@ import {
 } from './libs/components';
 import { useTranslation } from 'react-i18next';
 import { ValueOf } from '@/libs/types';
+import { useNewStudyStore } from './new-study.store';
 
 const NewStudy = () => {
   const { t } = useTranslation('NewStudy');
 
+  const createStudyStatusDialogOpen = useNewStudyStore(
+    (state) => state.createStudyStatusDialogOpen,
+  );
+
+  const setCreateStudyStatusDialogOpen = useNewStudyStore(
+    (state) => state.setCreateStudyStatusDialogOpen,
+  );
+
+  const resetNewStudyStore = useNewStudyStore((state) => state.reset);
+
   const [activeStepIndex, setActiveStepIndex] = useState<
     ValueOf<typeof NewStudyCreationStep>
   >(NewStudyCreationStep.UPLOAD_IMAGE);
+
+  useEffect(() => resetNewStudyStore, [resetNewStudyStore]);
 
   const steps = useMemo(
     () => [
@@ -65,7 +78,7 @@ const NewStudy = () => {
 
   const handleNextStep = () => {
     if (isOnFinalStep) {
-      // TODO: handle form submission
+      setCreateStudyStatusDialogOpen(true);
       return;
     }
 
@@ -109,7 +122,7 @@ const NewStudy = () => {
         onNextStep={handleNextStep}
         onPreviousStep={handlePreviousStep}
       />
-      <CreateStudyStatusDialog />
+      {createStudyStatusDialogOpen && <CreateStudyStatusDialog />}
     </Stack>
   );
 };

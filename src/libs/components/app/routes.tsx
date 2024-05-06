@@ -14,7 +14,7 @@ const routes: RouteObject[] = [
     ),
     children: [
       { element: <Home />, index: true },
-      { element: <div>Reports</div>, path: AppRoute.REPORTS },
+      { element: <div>Studies</div>, path: AppRoute.STUDIES },
       {
         path: AppRoute.VIEWER,
         element: <Viewer />,

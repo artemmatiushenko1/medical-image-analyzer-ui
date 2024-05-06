@@ -19,11 +19,16 @@ type BottomNavigationProps = {
 
 const BottomNavigation = (props: BottomNavigationProps) => {
   const { onPreviousStep, onNextStep, activeStep, isFinalStep } = props;
+
+  const { t } = useTranslation('Common');
+
   const hasSelectedDiagnostics = useNewStudyStore(
     (state) => state.selectedDianosticIds.length > 0,
   );
 
-  const { t } = useTranslation('Common');
+  const hasUploadedImage = useNewStudyStore((state) =>
+    Boolean(state.uploadedImageSrc),
+  );
 
   const nextButtonDisabledByStep: Record<
     ValueOf<typeof NewStudyCreationStep>,
@@ -37,8 +42,11 @@ const BottomNavigation = (props: BottomNavigationProps) => {
       tooltip:
         'Please choose at least one diagnostic to proceed with the next step.',
     },
+    [NewStudyCreationStep.UPLOAD_IMAGE]: {
+      disabled: !hasUploadedImage,
+      tooltip: 'Please upload an image to proceed with the next step.',
+    },
     [NewStudyCreationStep.CONFIRM]: null,
-    [NewStudyCreationStep.UPLOAD_IMAGE]: null,
   };
 
   const { disabled: nextButtonDisabled, tooltip: nextButtonTooltip } =

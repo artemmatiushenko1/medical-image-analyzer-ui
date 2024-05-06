@@ -9,6 +9,7 @@ type NewStudyState = {
   currentCrop: PercentCrop | undefined;
   cropSettings: CropSettings;
   selectedDianosticIds: string[];
+  createStudyStatusDialogOpen: boolean;
 };
 
 type NewStudyActions = {
@@ -18,6 +19,8 @@ type NewStudyActions = {
   setCropSettings: (cropSettings: CropSettings) => void;
   resetCrop: () => void;
   updateSelectedDiagnostictIds: (newId: string) => void;
+  setCreateStudyStatusDialogOpen: (newOpen: boolean) => void;
+  reset: () => void;
 };
 
 const INITIAL_STATE: NewStudyState = {
@@ -26,6 +29,7 @@ const INITIAL_STATE: NewStudyState = {
   croppedImageSrc: null,
   cropSettings: DEFAULT_CROP_SETTINGS,
   selectedDianosticIds: [],
+  createStudyStatusDialogOpen: false,
 };
 
 const useNewStudyStore = create<NewStudyState & NewStudyActions>()(
@@ -49,6 +53,12 @@ const useNewStudyStore = create<NewStudyState & NewStudyActions>()(
       } else {
         set({ selectedDianosticIds: Array.from(new Set([...prevIds, newId])) });
       }
+    },
+    setCreateStudyStatusDialogOpen: (newOpen) => {
+      set({ createStudyStatusDialogOpen: newOpen });
+    },
+    reset: () => {
+      set(INITIAL_STATE);
     },
   }),
 );

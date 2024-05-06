@@ -3,6 +3,6 @@ export const AppRoute = {
   SIGN_IN: '/sign-in',
   SIGN_UP: '/sign-up',
   VIEWER: '/viewer',
-  REPORTS: '/reports',
+  STUDIES: '/studies',
   NEW_STUDY: '/new-study',
 } as const;

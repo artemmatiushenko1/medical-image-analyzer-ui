@@ -10,12 +10,20 @@ import {
 } from '@mui/material';
 import { useQuery } from 'react-query';
 import { styles } from './styles';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '@/libs/enums';
 
 const CreateStudyStatusDialog = () => {
+  const navigate = useNavigate();
+
   const { isLoading, isSuccess } = useQuery(
     'create-study',
     () => new Promise((resolve) => setTimeout(() => resolve(undefined), 2000)),
   );
+
+  const handleOkClick = () => {
+    navigate(AppRoute.STUDIES);
+  };
 
   const getLoadingTypography = () => {
     return (
@@ -53,7 +61,9 @@ const CreateStudyStatusDialog = () => {
                 <CheckRounded fontSize="large" />
               </Box>
               {getSuccessTypography()}
-              <Button variant="contained">Ok</Button>
+              <Button variant="contained" onClick={handleOkClick}>
+                Ok
+              </Button>
             </>
           )}
         </Stack>

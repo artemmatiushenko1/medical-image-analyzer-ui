@@ -12,8 +12,7 @@ import {
   Theme,
   Typography,
 } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/GridViewRounded';
-import DescriptionIcon from '@mui/icons-material/DescriptionRounded';
+import { GridViewRounded, DescriptionRounded } from '@mui/icons-material';
 import { styles } from './styles';
 import { Logo } from '../logo';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
@@ -50,14 +49,14 @@ const Sidebar = () => {
     {
       key: 'overview',
       path: AppRoute.HOME,
-      icon: DashboardIcon,
+      icon: GridViewRounded,
       title: t('Sidebar.Overview'),
     },
     {
-      key: 'reports',
-      path: AppRoute.REPORTS,
-      icon: DescriptionIcon,
-      title: t('Sidebar.Reports'),
+      key: 'studies',
+      path: AppRoute.STUDIES,
+      icon: DescriptionRounded,
+      title: t('Sidebar.Studies'),
     },
   ];
 
