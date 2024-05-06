@@ -29,9 +29,10 @@ const palette = createPalette({
     disabled: '#afb3bb',
   },
   success: {
+    contrastText: '#fff',
     light: emerald[100],
-    main: emerald[600],
-    dark: emerald[700],
+    main: emerald[500],
+    dark: emerald[600],
   },
 });
 

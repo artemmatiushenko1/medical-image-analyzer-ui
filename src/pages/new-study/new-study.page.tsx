@@ -14,8 +14,9 @@ import {
   ChooseDiagnostics,
   ImageUpload,
   StudySummary,
+  StudyInfoForm,
+  CreateStudyLoadingDialog,
 } from './libs/components';
-import { StudyInfoForm } from './libs/components/study-info-form/study-info-form';
 import { useTranslation } from 'react-i18next';
 import { ValueOf } from '@/libs/types';
 
@@ -108,6 +109,7 @@ const NewStudy = () => {
         onNextStep={handleNextStep}
         onPreviousStep={handlePreviousStep}
       />
+      <CreateStudyLoadingDialog />
     </Stack>
   );
 };

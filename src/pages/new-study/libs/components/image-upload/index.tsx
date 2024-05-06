@@ -1,5 +1,14 @@
 import { CropRounded, DeleteOutlineRounded } from '@mui/icons-material';
-import { Box, Button, Skeleton, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  IconButton,
+  Skeleton,
+  Stack,
+  Tooltip,
+  Typography,
+  alpha,
+} from '@mui/material';
 import { styles } from './styles';
 import { useState } from 'react';
 import { bytesToMb, readFileAsBase64 } from '@/libs/helpers';
@@ -85,16 +94,40 @@ const ImageUpload = () => {
 
   return (
     <Stack sx={styles.root}>
-      {isImageUploading ? (
-        <Skeleton animation="wave" sx={{ transform: 'none' }}>
+      <Box sx={{ position: 'relative' }}>
+        {isImageUploading ? (
+          <Skeleton animation="wave" sx={{ transform: 'none' }}>
+            <DropArea
+              onUpload={handleFileUpload}
+              previewImageSrc={uploadedImageSrc}
+            />
+          </Skeleton>
+        ) : (
           <DropArea
             onUpload={handleFileUpload}
-            previewImageSrc={uploadedImageSrc}
+            previewImageSrc={currentImage}
           />
-        </Skeleton>
-      ) : (
-        <DropArea onUpload={handleFileUpload} previewImageSrc={currentImage} />
-      )}
+        )}
+        {currentImage && (
+          <Tooltip title="Crop image">
+            <IconButton
+              sx={{
+                position: 'absolute',
+                bottom: '10px',
+                left: '10px',
+                color: 'white',
+                background: ({ palette }) => alpha(palette.neutral.main, 0.5),
+                ':hover': {
+                  background: ({ palette }) => alpha(palette.neutral.main, 0.9),
+                },
+              }}
+              onClick={handleCropButtonClick}
+            >
+              <CropRounded />
+            </IconButton>
+          </Tooltip>
+        )}
+      </Box>
       {!uploadedImageSrc && !isImageUploading && (
         <Box sx={styles.imageUploadHints}>
           <Typography variant="caption">
@@ -110,14 +143,7 @@ const ImageUpload = () => {
         </Box>
       )}
       {uploadedImageSrc && (
-        <Box display="flex" justifyContent="space-between">
-          <Button
-            startIcon={<CropRounded />}
-            variant="outlined"
-            onClick={handleCropButtonClick}
-          >
-            Crop
-          </Button>
+        <Box display="flex" justifyContent="end">
           <Button
             color="error"
             variant="text"

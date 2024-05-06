@@ -92,6 +92,13 @@ const components = {
       },
     },
   },
+  MuiDialog: {
+    styleOverrides: {
+      paper: {
+        borderRadius: 9,
+      },
+    },
+  },
 } satisfies Components<Omit<Theme, 'components'>>;
 
 export { components };

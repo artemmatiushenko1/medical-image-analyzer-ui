@@ -3,7 +3,6 @@ import { alpha } from '@mui/material';
 
 const styles = createStyleSheet({
   paper: {
-    borderRadius: ({ shape }) => shape.borderRadius,
     padding: 0.5,
   },
   title: {

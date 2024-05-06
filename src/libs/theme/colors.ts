@@ -40,16 +40,16 @@ const chicago = {
 } satisfies PaletteColorOptions;
 
 const emerald = {
-  '50': '#f2fbf3',
-  '100': '#e1f7e4',
-  '200': '#c4eecb',
-  '300': '#95e0a2',
-  '400': '#54c568',
-  '500': '#39ae4e',
-  '600': '#2a8f3c',
-  '700': '#247133',
-  '800': '#215a2c',
-  '900': '#1d4a27',
+  '50': '#f2fbf5',
+  '100': '#e0f8e9',
+  '200': '#c2f0d4',
+  '300': '#93e2b3',
+  '400': '#5ccc8b',
+  '500': '#3ac072',
+  '600': '#279253',
+  '700': '#227344',
+  '800': '#1f5c39',
+  '900': '#1c4b31',
 } satisfies PaletteColorOptions;
 
 export { brandBlue, cinnabar, chicago, emerald };

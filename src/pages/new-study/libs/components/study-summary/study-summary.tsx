@@ -54,7 +54,7 @@ const StudySummary = () => {
             <Typography
               variant="subtitle2"
               marginBottom={1}
-              sx={{ color: grey[500], textTransform: 'uppercase' }}
+              sx={{ color: grey[500] }}
             >
               Image
             </Typography>
@@ -104,11 +104,8 @@ const StudySummary = () => {
           </Box>
         )}
         <Stack sx={{ flex: 1, gap: 1 }}>
-          <Typography
-            variant="subtitle2"
-            sx={{ color: grey[500], textTransform: 'uppercase' }}
-          >
-            Selected diagnostics
+          <Typography variant="subtitle2" sx={{ color: grey[500] }}>
+            Selected Diagnostics
           </Typography>
           <Stack gap={2}>
             {selectedDiagnostics.map((diagnostic) => (
@@ -116,7 +113,6 @@ const StudySummary = () => {
                 elevation={5}
                 sx={{
                   p: 2,
-                  // background: ({ palette }) => alpha(palette.primary.main, 0.5),
                   borderRadius: ({ shape }) => shape.borderRadius,
                   gap: 1,
                   display: 'flex',
@@ -127,7 +123,7 @@ const StudySummary = () => {
                   {diagnostic?.title}
                 </Typography>
                 <Typography variant="caption" display="block">
-                  Ai model configuration:
+                  AI model configuration:
                 </Typography>
                 <Box>
                   <Chip
