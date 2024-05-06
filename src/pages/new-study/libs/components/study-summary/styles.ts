@@ -23,9 +23,8 @@ const styles = createStyleSheet({
   },
   modelSettingChip: {
     fontSize: '12px',
-    backgroundColor: ({ palette }) => alpha(palette.primary.main, 0.1),
-    border: ({ palette }) => `1px solid ${palette.primary.main}`,
-    color: ({ palette }) => palette.primary.main,
+    backgroundColor: 'transparent',
+    color: ({ palette }) => palette.neutral.dark,
   },
   cropChip: {
     display: 'flex',

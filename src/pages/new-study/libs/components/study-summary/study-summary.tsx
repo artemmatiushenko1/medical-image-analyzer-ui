@@ -1,6 +1,6 @@
 import { useDiagnosticsStore } from '@/packages/diagnostics';
 import { useNewStudyStore } from '@/pages/new-study/new-study.store';
-import { ArchitectureRounded, Crop } from '@mui/icons-material';
+import { Crop, SettingsSuggestRounded } from '@mui/icons-material';
 import { Box, Chip, Paper, Stack, Tooltip, Typography } from '@mui/material';
 import { styles } from './styles';
 
@@ -58,7 +58,7 @@ const StudySummary = () => {
                 <Chip
                   color="primary"
                   sx={styles.modelSettingChip}
-                  icon={<ArchitectureRounded sx={{ fontSize: '18px' }} />}
+                  icon={<SettingsSuggestRounded sx={{ fontSize: '18px' }} />}
                   label={'Architecture: ARM64'}
                 />
               </Box>
