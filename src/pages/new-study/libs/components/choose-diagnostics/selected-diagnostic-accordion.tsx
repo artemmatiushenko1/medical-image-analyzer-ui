@@ -1,4 +1,8 @@
-import { DeleteOutline, ExpandMoreRounded } from '@mui/icons-material';
+import {
+  CloseRounded,
+  ExpandMoreRounded,
+  InfoOutlined,
+} from '@mui/icons-material';
 import {
   Accordion,
   AccordionDetails,
@@ -12,6 +16,7 @@ import {
   Typography,
 } from '@mui/material';
 import { selectedDiagnosticAccordion as styles } from './styles';
+import { useId } from 'react';
 
 type SelectedDiagnosticAccordionProps = {
   id: string;
@@ -23,6 +28,8 @@ const SelectedDiagnosticAccordion = (
   props: SelectedDiagnosticAccordionProps,
 ) => {
   const { title, onDelete, id } = props;
+
+  const architectureSelectId = useId();
 
   const handleDeleteButtonClick: React.MouseEventHandler<HTMLButtonElement> = (
     e,
@@ -41,7 +48,13 @@ const SelectedDiagnosticAccordion = (
   return (
     <>
       <Accordion defaultExpanded sx={styles.root}>
-        <AccordionSummary expandIcon={<ExpandMoreRounded />}>
+        <AccordionSummary
+          expandIcon={
+            <ExpandMoreRounded
+              sx={{ color: ({ palette }) => palette.neutral.main }}
+            />
+          }
+        >
           <Box
             sx={{
               flex: 1,
@@ -56,25 +69,33 @@ const SelectedDiagnosticAccordion = (
             <IconButton
               size="small"
               className="delete-icon"
+              sx={{ color: ({ palette }) => palette.neutral.main }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline />
+              <CloseRounded />
             </IconButton>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
-          <FormControl size="small" variant="outlined" fullWidth>
-            <InputLabel htmlFor="test-select-label">
-              Model Architecture
-            </InputLabel>
-            <Select id="test-select-label" label="Model Architecture">
-              {ARCHITECTURE_OPTIONS.map(({ key, value, title }) => (
-                <MenuItem key={key} value={value}>
-                  <Typography variant="body2">{title}</Typography>
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <Box sx={styles.selectWrapper}>
+            <FormControl size="small" variant="outlined" fullWidth>
+              <InputLabel htmlFor={architectureSelectId}>
+                Model Architecture
+              </InputLabel>
+              <Select
+                id={architectureSelectId}
+                label="Model Architecture"
+                defaultValue={ARCHITECTURE_OPTIONS[0].value}
+              >
+                {ARCHITECTURE_OPTIONS.map(({ key, value, title }) => (
+                  <MenuItem key={key} value={value}>
+                    <Typography variant="body2">{title}</Typography>
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <InfoOutlined sx={styles.infoIcon} />
+          </Box>
         </AccordionDetails>
       </Accordion>
     </>

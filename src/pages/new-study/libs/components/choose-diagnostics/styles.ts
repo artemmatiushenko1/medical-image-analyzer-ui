@@ -100,6 +100,15 @@ const selectedDiagnosticAccordion = createStyleSheet({
       },
     },
   },
+  selectWrapper: {
+    display: 'flex',
+    gap: 1,
+    alignItems: 'center',
+  },
+  infoIcon: {
+    fontSize: '16px',
+    color: ({ palette }) => palette.neutral.main,
+  },
 });
 
 export { styles, cardStyles, selectedDiagnosticAccordion };
