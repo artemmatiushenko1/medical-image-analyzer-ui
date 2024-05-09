@@ -1,5 +1,5 @@
 import createPalette from '@mui/material/styles/createPalette';
-import { amber, brandBlue, cinnabar, emerald, heather } from './colors';
+import { amber, brandBlue, cinnabar, emerald, heather, sky } from './colors';
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -19,6 +19,7 @@ const palette = createPalette({
   },
   error: cinnabar,
   warning: amber,
+  info: sky,
   neutral: {
     light: heather[200],
     main: heather[300],

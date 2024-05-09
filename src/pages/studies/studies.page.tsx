@@ -1,19 +1,22 @@
 import {
   Box,
-  Button,
+  Chip,
   Divider,
+  IconButton,
   Paper,
   Stack,
   Tab,
   Tabs,
   Typography,
+  alpha,
 } from '@mui/material';
 import { styles } from './styles';
 import {
   AccessTimeFilledRounded,
+  AllInboxRounded,
   CheckCircleRounded,
   EventNote,
-  VisibilityRounded,
+  MoreHoriz,
 } from '@mui/icons-material';
 import { useState } from 'react';
 
@@ -21,11 +24,32 @@ const IMAGE_SRC =
   'https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg';
 
 const Studies = () => {
-  const [tab, setTab] = useState('');
+  const [tab, setTab] = useState<number>(0);
+
+  const tabs = [
+    {
+      icon: <AllInboxRounded />,
+      count: 36,
+      title: 'All',
+      key: 'all',
+    },
+    {
+      icon: <CheckCircleRounded />,
+      count: 34,
+      title: 'Completed',
+      key: 'completed',
+    },
+    {
+      icon: <AccessTimeFilledRounded />,
+      count: 2,
+      title: 'Pending',
+      key: 'success',
+    },
+  ];
 
   return (
     <Box sx={styles.root}>
-      <Paper sx={{ borderTop: 'none', flex: '22%' }}>
+      <Paper square sx={{ borderTop: 'none', flex: '22%' }}>
         <Stack>
           <Stack sx={{ p: 3 }}>
             <Typography variant="h6" fontSize="18px" fontWeight={600}>
@@ -42,75 +66,69 @@ const Studies = () => {
               variant="subtitle2"
               sx={{ color: ({ palette }) => palette.neutral.main, pl: 3 }}
             >
-              Status
+              Filter
             </Typography>
             <Tabs
               orientation="vertical"
               value={tab}
               onChange={(_, value) => setTab(value)}
             >
-              <Tab
-                key={1}
-                sx={{ pl: 3, maxWidth: 'unset' }}
-                label={
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      gap: 1,
-                      alignSelf: 'flex-start',
-                      width: '100%',
-                    }}
-                  >
-                    <CheckCircleRounded color="success" />
-                    <Typography
-                      fontWeight={500}
-                      sx={{ display: 'flex', flex: 1 }}
+              {tabs.map(({ key, count, title, icon }, index) => (
+                <Tab
+                  key={key}
+                  sx={{
+                    pl: 3,
+                    maxWidth: 'unset',
+                    textTransform: 'capitalize',
+                    color: ({ palette }) => palette.neutral.main,
+                    '&.Mui-selected': {
+                      color: ({ palette }) => palette.neutral.dark,
+                    },
+                  }}
+                  label={
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        gap: 1,
+                        alignSelf: 'flex-start',
+                        width: '100%',
+                        fontSize: '15px',
+                      }}
                     >
-                      <span>Completed</span>{' '}
-                      <Box
-                        component="span"
-                        sx={{ marginLeft: 'auto', fontWeight: 600 }}
+                      {icon}
+                      <Typography
+                        fontWeight={500}
+                        sx={{ display: 'flex', flex: 1, fontSize: 'inherit' }}
                       >
-                        34
-                      </Box>
-                    </Typography>
-                  </Box>
-                }
-              />
-              <Tab
-                key={2}
-                sx={{ pl: 3, maxWidth: 'unset' }}
-                label={
-                  // <Box
-                  //   sx={{ display: 'flex', gap: 1, alignSelf: 'flex-start' }}
-                  // >
-                  //   <AccessTimeFilledRounded color="warning" />
-                  //   <Typography fontWeight={500}>Pending: 2</Typography>
-                  // </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      gap: 1,
-                      alignSelf: 'flex-start',
-                      width: '100%',
-                    }}
-                  >
-                    <AccessTimeFilledRounded color="warning" />
-                    <Typography
-                      fontWeight={500}
-                      sx={{ display: 'flex', flex: 1 }}
-                    >
-                      <span>Pending</span>{' '}
-                      <Box
-                        component="span"
-                        sx={{ marginLeft: 'auto', fontWeight: 600 }}
-                      >
-                        2
-                      </Box>
-                    </Typography>
-                  </Box>
-                }
-              />
+                        <span>{title}</span>{' '}
+                        <Box
+                          component="span"
+                          sx={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginLeft: 'auto',
+                            fontWeight: 600,
+                            width: '25px',
+                            height: '25px',
+                            borderRadius: '100px',
+                            fontSize: '14px',
+                            ...(index === tab
+                              ? {
+                                  color: ({ palette }) => palette.primary.main,
+                                  backgroundColor: ({ palette }) =>
+                                    alpha(palette.primary.main, 0.1),
+                                }
+                              : {}),
+                          }}
+                        >
+                          {count}
+                        </Box>
+                      </Typography>
+                    </Box>
+                  }
+                />
+              ))}
             </Tabs>
           </Stack>
         </Stack>
@@ -121,20 +139,20 @@ const Studies = () => {
             <Box
               sx={{
                 display: 'flex',
-                fontSize: '14px',
+                // fontSize: '14px',
                 alignItems: 'center',
                 gap: 1,
                 color: ({ palette }) => palette.neutral.dark,
               }}
             >
               <EventNote fontSize="inherit" />
-              <Typography fontSize="inherit">25 May 2024</Typography>
+              <Typography variant="caption">25 May 2024</Typography>
             </Box>
             <Box>
               <Box
                 sx={{
-                  width: '140px',
-                  height: '80px',
+                  width: '120px',
+                  height: '65px',
                   overflow: 'hidden',
                   borderRadius: ({ shape }) => shape.borderRadius,
                 }}
@@ -146,8 +164,57 @@ const Studies = () => {
                 />
               </Box>
             </Box>
-            <Box>
-              <Button startIcon={<VisibilityRounded />}>View Details</Button>
+            <Stack>
+              <Typography variant="caption">Name</Typography>
+              <Typography variant="subtitle2" fontWeight={600}>
+                Lungs study
+              </Typography>
+            </Stack>
+            <Stack>
+              <Typography variant="caption">Diagnostics</Typography>
+              <Stack>
+                <Typography variant="subtitle2" fontWeight={600}>
+                  Детекція аномалій в легенях
+                </Typography>
+                <Typography variant="caption">2+ more</Typography>
+              </Stack>
+            </Stack>
+            <Box
+              sx={{
+                marginLeft: 'auto',
+                display: 'flex',
+                alignItems: 'center',
+                alignSelf: 'stretch',
+                gap: 3,
+              }}
+            >
+              <Chip
+                sx={{
+                  backgroundColor: 'transparent',
+                  py: 2,
+                  border: ({ palette }) => `1px solid ${palette.divider}`,
+                }}
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box
+                      sx={{
+                        width: '10px',
+                        height: '10px',
+                        borderRadius: 100,
+                        backgroundColor: ({ palette }) => palette.success.main,
+                      }}
+                    >
+                      &nbsp;
+                    </Box>
+                    <Typography fontSize="13px" fontWeight={500}>
+                      Completed
+                    </Typography>
+                  </Box>
+                }
+              />
+              <IconButton>
+                <MoreHoriz />
+              </IconButton>
             </Box>
           </Box>
         </Paper>
