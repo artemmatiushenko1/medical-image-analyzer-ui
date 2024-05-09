@@ -1,8 +1,6 @@
 import {
   Box,
-  Chip,
   Divider,
-  IconButton,
   Paper,
   Stack,
   Tab,
@@ -15,10 +13,10 @@ import {
   AccessTimeFilledRounded,
   AllInboxRounded,
   CheckCircleRounded,
-  EventNote,
-  MoreHoriz,
 } from '@mui/icons-material';
 import { useState } from 'react';
+import { StudyCard } from './libs/components';
+import { StudyStatus } from '@/packages/studies';
 
 const IMAGE_SRC =
   'https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg';
@@ -134,90 +132,17 @@ const Studies = () => {
         </Stack>
       </Paper>
       <Stack sx={{ flex: '78%', p: 3 }}>
-        <Paper sx={{ borderRadius: ({ shape }) => shape.borderRadius, p: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 3 }}>
-            <Box
-              sx={{
-                display: 'flex',
-                // fontSize: '14px',
-                alignItems: 'center',
-                gap: 1,
-                color: ({ palette }) => palette.neutral.dark,
-              }}
-            >
-              <EventNote fontSize="inherit" />
-              <Typography variant="caption">25 May 2024</Typography>
-            </Box>
-            <Box>
-              <Box
-                sx={{
-                  width: '120px',
-                  height: '65px',
-                  overflow: 'hidden',
-                  borderRadius: ({ shape }) => shape.borderRadius,
-                }}
-              >
-                <Box
-                  sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  component="img"
-                  src={IMAGE_SRC}
-                />
-              </Box>
-            </Box>
-            <Stack>
-              <Typography variant="caption">Name</Typography>
-              <Typography variant="subtitle2" fontWeight={600}>
-                Lungs study
-              </Typography>
-            </Stack>
-            <Stack>
-              <Typography variant="caption">Diagnostics</Typography>
-              <Stack>
-                <Typography variant="subtitle2" fontWeight={600}>
-                  Детекція аномалій в легенях
-                </Typography>
-                <Typography variant="caption">2+ more</Typography>
-              </Stack>
-            </Stack>
-            <Box
-              sx={{
-                marginLeft: 'auto',
-                display: 'flex',
-                alignItems: 'center',
-                alignSelf: 'stretch',
-                gap: 3,
-              }}
-            >
-              <Chip
-                sx={{
-                  backgroundColor: 'transparent',
-                  py: 2,
-                  border: ({ palette }) => `1px solid ${palette.divider}`,
-                }}
-                label={
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Box
-                      sx={{
-                        width: '10px',
-                        height: '10px',
-                        borderRadius: 100,
-                        backgroundColor: ({ palette }) => palette.success.main,
-                      }}
-                    >
-                      &nbsp;
-                    </Box>
-                    <Typography fontSize="13px" fontWeight={500}>
-                      Completed
-                    </Typography>
-                  </Box>
-                }
-              />
-              <IconButton>
-                <MoreHoriz />
-              </IconButton>
-            </Box>
-          </Box>
-        </Paper>
+        <StudyCard
+          imageSrc={IMAGE_SRC}
+          name="Lungs study"
+          date="25 May 2024"
+          diagnostics={[
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+          ]}
+          status={StudyStatus.COMPLETED}
+        />
       </Stack>
     </Box>
   );
