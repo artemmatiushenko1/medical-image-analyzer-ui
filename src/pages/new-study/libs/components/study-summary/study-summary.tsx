@@ -1,7 +1,7 @@
 import { useDiagnosticsStore } from '@/packages/diagnostics';
 import { useNewStudyStore } from '@/pages/new-study/new-study.store';
-import { Crop, SettingsSuggestRounded } from '@mui/icons-material';
-import { Box, Chip, Paper, Stack, Tooltip, Typography } from '@mui/material';
+import { SettingsSuggestRounded } from '@mui/icons-material';
+import { Box, Chip, Paper, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 
 const StudySummary = () => {
@@ -31,12 +31,6 @@ const StudySummary = () => {
           <Paper sx={styles.imageWrapperPaper}>
             <Box sx={styles.imageWrapper}>
               <Box component="img" src={studyImage} sx={styles.image} />
-              <Tooltip title="The original image was cropped">
-                <Box sx={styles.cropChip}>
-                  <Crop fontSize="inherit" />
-                  <span>Cropped</span>
-                </Box>
-              </Tooltip>
             </Box>
           </Paper>
         </Box>

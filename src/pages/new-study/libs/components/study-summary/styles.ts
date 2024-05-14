@@ -1,5 +1,4 @@
 import { createStyleSheet } from '@/libs/theme';
-import { alpha } from '@mui/material';
 
 const styles = createStyleSheet({
   root: {
@@ -25,20 +24,6 @@ const styles = createStyleSheet({
     fontSize: '12px',
     backgroundColor: 'transparent',
     color: ({ palette }) => palette.neutral.dark,
-  },
-  cropChip: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 1,
-    fontSize: '12px',
-    position: 'absolute',
-    bottom: '10px',
-    right: '10px',
-    background: ({ palette }) => alpha(palette.primary.main, 0.4),
-    color: ({ palette }) => palette.common.white,
-    borderRadius: '100px',
-    p: '2px 6px',
-    border: ({ palette }) => `1px solid ${palette.primary.main}`,
   },
   imageWrapperPaper: {
     p: 2,
