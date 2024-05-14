@@ -12,11 +12,11 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { styles } from './styles';
 import { useState } from 'react';
 import { ProfileMenu } from '../profile-menu';
-import { useMatch, useNavigate } from 'react-router-dom';
+import { Link, useMatch, useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/libs/enums';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { Logo } from '../logo';
-import { ButtonsNavigation } from '../button-navigation/button-navigation';
+import { ButtonsNavigation } from '../button-navigation';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -48,7 +48,9 @@ const Header = () => {
     >
       <Box sx={styles.innerContainer}>
         <Box sx={styles.logoWrapper}>
-          <Logo />
+          <Link to={AppRoute.HOME}>
+            <Logo />
+          </Link>
         </Box>
         <ButtonsNavigation />
         <Stack direction="row" gap={2} alignItems="center">

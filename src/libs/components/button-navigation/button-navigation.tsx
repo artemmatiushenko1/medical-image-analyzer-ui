@@ -1,4 +1,4 @@
-import { DescriptionRounded, GridViewRounded } from '@mui/icons-material';
+import { DescriptionRounded } from '@mui/icons-material';
 import { Box, Button, Theme, alpha } from '@mui/material';
 import { styles } from './styles';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
@@ -12,14 +12,8 @@ const ButtonsNavigation = () => {
 
   const navItems = [
     {
-      key: 'overview',
-      path: AppRoute.HOME,
-      icon: GridViewRounded,
-      title: t('Sidebar.Overview'),
-    },
-    {
       key: 'studies',
-      path: AppRoute.STUDIES,
+      path: AppRoute.HOME,
       icon: DescriptionRounded,
       title: t('Sidebar.Studies'),
     },

@@ -1,5 +1,5 @@
 import { AppRoute } from '@/libs/enums';
-import { Home, Viewer, NewStudy, SignIn, Studies } from '@/pages';
+import { NewStudy, SignIn, Studies } from '@/pages';
 import { RouteObject } from 'react-router-dom';
 import { PrimaryLayout } from '../layouts';
 import { PrivateRoute, PublicRoute } from '../router';
@@ -13,12 +13,7 @@ const routes: RouteObject[] = [
       </PrivateRoute>
     ),
     children: [
-      { element: <Home />, index: true },
-      { element: <Studies />, path: AppRoute.STUDIES },
-      {
-        path: AppRoute.VIEWER,
-        element: <Viewer />,
-      },
+      { element: <Studies />, index: true },
       { element: <NewStudy />, path: AppRoute.NEW_STUDY },
     ],
   },
