@@ -45,6 +45,27 @@ const Studies = () => {
     },
   ];
 
+  const studies = [
+    {
+      diagnostic: 'Детекція аномалій в легенях',
+      status: StudyStatus.COMPLETED,
+      imageSrc: IMAGE_SRC,
+      date: '25 May 2024',
+    },
+    {
+      diagnostic: 'Детекція аномалій в легенях',
+      status: StudyStatus.PENDING,
+      imageSrc: IMAGE_SRC,
+      date: '25 May 2024',
+    },
+    {
+      diagnostic: 'Детекція аномалій в легенях',
+      status: StudyStatus.COMPLETED,
+      imageSrc: IMAGE_SRC,
+      date: '25 May 2024',
+    },
+  ];
+
   return (
     <Box sx={styles.root}>
       <Paper square sx={{ borderTop: 'none', flex: '22%' }}>
@@ -132,93 +153,15 @@ const Studies = () => {
         </Stack>
       </Paper>
       <Stack sx={{ flex: '78%', p: 3, gap: 3, overflow: 'scroll' }}>
-        <StudyCard
-          imageSrc={IMAGE_SRC}
-          name="Lungs study"
-          date="25 May 2024"
-          diagnostics={[
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-          ]}
-          status={StudyStatus.COMPLETED}
-        />
-        <StudyCard
-          imageSrc={IMAGE_SRC}
-          name="Lungs study"
-          date="25 May 2024"
-          diagnostics={[
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-          ]}
-          status={StudyStatus.PENDING}
-        />
-        <StudyCard
-          imageSrc={IMAGE_SRC}
-          name="Lungs study"
-          date="25 May 2024"
-          diagnostics={[
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-          ]}
-          status={StudyStatus.COMPLETED}
-        />
-        <StudyCard
-          imageSrc={IMAGE_SRC}
-          name="Lungs study"
-          date="25 May 2024"
-          diagnostics={[
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-          ]}
-          status={StudyStatus.COMPLETED}
-        />
-        <StudyCard
-          imageSrc={IMAGE_SRC}
-          name="Lungs study"
-          date="25 May 2024"
-          diagnostics={[
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-          ]}
-          status={StudyStatus.COMPLETED}
-        />
-        <StudyCard
-          imageSrc={IMAGE_SRC}
-          name="Lungs study"
-          date="25 May 2024"
-          diagnostics={[
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-          ]}
-          status={StudyStatus.COMPLETED}
-        />
-        <StudyCard
-          imageSrc={IMAGE_SRC}
-          name="Lungs study"
-          date="25 May 2024"
-          diagnostics={[
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-          ]}
-          status={StudyStatus.COMPLETED}
-        />
-        <StudyCard
-          imageSrc={IMAGE_SRC}
-          name="Lungs study"
-          date="25 May 2024"
-          diagnostics={[
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-            'Детекція аномалій в легенях',
-          ]}
-          status={StudyStatus.COMPLETED}
-        />
+        {studies.map((study) => (
+          <StudyCard
+            date={study.date}
+            key={study.imageSrc}
+            status={study.status}
+            imageSrc={study.imageSrc}
+            diagnostic={study.diagnostic}
+          />
+        ))}
       </Stack>
     </Box>
   );

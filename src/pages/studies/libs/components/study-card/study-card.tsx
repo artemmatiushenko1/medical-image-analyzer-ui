@@ -14,14 +14,13 @@ import { StudyStatusChip } from '../study-status-chip';
 
 type StudyCardProps = {
   date: string;
-  name: string;
   imageSrc: string;
-  diagnostics: string[];
+  diagnostic: string;
   status: ValueOf<typeof StudyStatus>;
 };
 
 const StudyCard = (props: StudyCardProps) => {
-  const { date, imageSrc, status, name, diagnostics } = props;
+  const { date, imageSrc, status, diagnostic } = props;
 
   return (
     <Paper sx={styles.root}>
@@ -35,22 +34,11 @@ const StudyCard = (props: StudyCardProps) => {
         </Box>
       </Box>
       <Stack>
-        <Typography variant="caption">Name</Typography>
-        <Typography variant="subtitle2" fontWeight={600}>
-          {name}
-        </Typography>
-      </Stack>
-      <Stack>
-        <Typography variant="caption">Diagnostics</Typography>
+        <Typography variant="caption">Diagnostic</Typography>
         <Stack>
           <Typography variant="subtitle2" fontWeight={600}>
-            {diagnostics[0]}
+            {diagnostic}
           </Typography>
-          {diagnostics.length > 1 && (
-            <Typography variant="caption">
-              {diagnostics.length - 1}+ more
-            </Typography>
-          )}
         </Stack>
       </Stack>
       <Box sx={styles.rightPart}>
