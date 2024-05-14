@@ -11,7 +11,7 @@ const styles = createStyleSheet({
     flexDirection: 'row',
   },
   sectionTitle: {
-    color: ({ palette }) => palette.grey[400],
+    color: ({ palette }) => palette.neutral.dark,
     marginBottom: 1,
   },
   diagnosticsWrapper: {

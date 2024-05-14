@@ -131,7 +131,83 @@ const Studies = () => {
           </Stack>
         </Stack>
       </Paper>
-      <Stack sx={{ flex: '78%', p: 3 }}>
+      <Stack sx={{ flex: '78%', p: 3, gap: 3, overflow: 'scroll' }}>
+        <StudyCard
+          imageSrc={IMAGE_SRC}
+          name="Lungs study"
+          date="25 May 2024"
+          diagnostics={[
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+          ]}
+          status={StudyStatus.COMPLETED}
+        />
+        <StudyCard
+          imageSrc={IMAGE_SRC}
+          name="Lungs study"
+          date="25 May 2024"
+          diagnostics={[
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+          ]}
+          status={StudyStatus.PENDING}
+        />
+        <StudyCard
+          imageSrc={IMAGE_SRC}
+          name="Lungs study"
+          date="25 May 2024"
+          diagnostics={[
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+          ]}
+          status={StudyStatus.COMPLETED}
+        />
+        <StudyCard
+          imageSrc={IMAGE_SRC}
+          name="Lungs study"
+          date="25 May 2024"
+          diagnostics={[
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+          ]}
+          status={StudyStatus.COMPLETED}
+        />
+        <StudyCard
+          imageSrc={IMAGE_SRC}
+          name="Lungs study"
+          date="25 May 2024"
+          diagnostics={[
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+          ]}
+          status={StudyStatus.COMPLETED}
+        />
+        <StudyCard
+          imageSrc={IMAGE_SRC}
+          name="Lungs study"
+          date="25 May 2024"
+          diagnostics={[
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+          ]}
+          status={StudyStatus.COMPLETED}
+        />
+        <StudyCard
+          imageSrc={IMAGE_SRC}
+          name="Lungs study"
+          date="25 May 2024"
+          diagnostics={[
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+            'Детекція аномалій в легенях',
+          ]}
+          status={StudyStatus.COMPLETED}
+        />
         <StudyCard
           imageSrc={IMAGE_SRC}
           name="Lungs study"

@@ -1,8 +1,9 @@
 import { ValueOf } from '@/libs/types';
 import { StudyStatus } from '@/packages/studies';
 import { EventNote, MoreHoriz } from '@mui/icons-material';
-import { Box, Chip, IconButton, Paper, Stack, Typography } from '@mui/material';
+import { Box, IconButton, Paper, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
+import { StudyStatusChip } from '../study-status-chip';
 
 type StudyCardProps = {
   date: string;
@@ -13,7 +14,7 @@ type StudyCardProps = {
 };
 
 const StudyCard = (props: StudyCardProps) => {
-  const { date, imageSrc } = props;
+  const { date, imageSrc, status, name, diagnostics } = props;
 
   return (
     <Paper sx={styles.root}>
@@ -29,43 +30,24 @@ const StudyCard = (props: StudyCardProps) => {
       <Stack>
         <Typography variant="caption">Name</Typography>
         <Typography variant="subtitle2" fontWeight={600}>
-          Lungs study
+          {name}
         </Typography>
       </Stack>
       <Stack>
         <Typography variant="caption">Diagnostics</Typography>
         <Stack>
           <Typography variant="subtitle2" fontWeight={600}>
-            Детекція аномалій в легенях
+            {diagnostics[0]}
           </Typography>
-          <Typography variant="caption">2+ more</Typography>
+          {diagnostics.length > 1 && (
+            <Typography variant="caption">
+              {diagnostics.length - 1}+ more
+            </Typography>
+          )}
         </Stack>
       </Stack>
       <Box sx={styles.rightPart}>
-        <Chip
-          sx={{
-            backgroundColor: 'transparent',
-            py: 2,
-            border: ({ palette }) => `1px solid ${palette.divider}`,
-          }}
-          label={
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Box
-                sx={{
-                  width: '10px',
-                  height: '10px',
-                  borderRadius: 100,
-                  backgroundColor: ({ palette }) => palette.success.main,
-                }}
-              >
-                &nbsp;
-              </Box>
-              <Typography fontSize="13px" fontWeight={500}>
-                Completed
-              </Typography>
-            </Box>
-          }
-        />
+        <StudyStatusChip status={status} />
         <IconButton>
           <MoreHoriz />
         </IconButton>
