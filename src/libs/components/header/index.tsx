@@ -51,27 +51,6 @@ const Header = () => {
           <Logo />
         </Box>
         <ButtonsNavigation />
-        {/* <Box sx={styles.navigationButtons}>
-          <Button
-            startIcon={<GridViewRounded />}
-            sx={{
-              background: ({ palette }) =>
-                alpha(palette.primary.main, palette.action.selectedOpacity),
-            }}
-          >
-            Dashboard
-          </Button>
-          <Button
-            sx={{ color: ({ palette }) => palette.neutral.dark }}
-            startIcon={
-              <DescriptionRounded
-                sx={{ color: ({ palette }) => palette.neutral.main }}
-              />
-            }
-          >
-            Studies
-          </Button>
-        </Box> */}
         <Stack direction="row" gap={2} alignItems="center">
           {!isNewStudyPage && (
             <>
