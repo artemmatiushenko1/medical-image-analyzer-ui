@@ -1,7 +1,14 @@
 import { ValueOf } from '@/libs/types';
 import { StudyStatus } from '@/packages/studies';
-import { EventNote, MoreHoriz } from '@mui/icons-material';
-import { Box, IconButton, Paper, Stack, Typography } from '@mui/material';
+import { EventNote, MoreHoriz, VisibilityRounded } from '@mui/icons-material';
+import {
+  Box,
+  Button,
+  IconButton,
+  Paper,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { styles } from './styles';
 import { StudyStatusChip } from '../study-status-chip';
 
@@ -47,6 +54,13 @@ const StudyCard = (props: StudyCardProps) => {
         </Stack>
       </Stack>
       <Box sx={styles.rightPart}>
+        <Button
+          sx={styles.viewStudyButton}
+          className="view-study-button"
+          startIcon={<VisibilityRounded />}
+        >
+          View details
+        </Button>
         <StudyStatusChip status={status} />
         <IconButton>
           <MoreHoriz />
