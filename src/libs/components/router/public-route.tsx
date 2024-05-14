@@ -1,5 +1,5 @@
 import { AppRoute } from '@/libs/enums';
-import { useAuthStore } from '@/stores/auth.store';
+import { useAuthStore } from '@/packages/auth';
 import { Navigate, useLocation } from 'react-router-dom';
 
 type PublicRouteProps = {

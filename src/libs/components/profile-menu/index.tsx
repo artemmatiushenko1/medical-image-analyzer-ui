@@ -20,6 +20,7 @@ import { useState } from 'react';
 import { useAppStore } from '@/stores/app.store';
 import { LANGUAGE_DETAILS } from '@/libs/i18n';
 import { useTranslation } from 'react-i18next';
+import { useAuthStore } from '@/packages/auth';
 
 type ProfileMenuProps = {
   open: boolean;
@@ -35,6 +36,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
   const { t } = useTranslation('App', { keyPrefix: 'ProfileMenu' });
 
   const appLanguage = useAppStore((state) => state.language);
+  const currentUser = useAuthStore((state) => state.user);
 
   const [changeLanguageModalOpen, setChangeLanguageModalOpen] = useState(false);
 
@@ -74,10 +76,10 @@ const ProfileMenu = (props: ProfileMenuProps) => {
           <Avatar sx={{ height: '35px', width: '35px' }} alt="User avatar" />
           <Stack>
             <Typography variant="body2" fontWeight={500}>
-              Dr. Artem Matiushenko
+              {currentUser?.firstName} {currentUser?.lastName}
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              artom.matyushenko@gmail.com
+              {currentUser?.email}
             </Typography>
           </Stack>
         </Stack>

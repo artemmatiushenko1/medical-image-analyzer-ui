@@ -13,14 +13,7 @@ import {
 import { styles } from './styles';
 import { Logo } from '@/libs/components';
 import { FormEvent, useState } from 'react';
-import { useAuthStore } from '@/stores/auth.store';
-import { User } from '@/packages/users';
-
-const MOCK_USER: User = {
-  email: 'artom.matyushenko@classtim.com',
-  firstName: 'Artem',
-  lastName: 'Matiushenko',
-};
+import { MOCK_USER, useAuthStore } from '@/packages/auth';
 
 const SignInForm = () => {
   const setUser = useAuthStore((state) => state.setUser);

@@ -17,6 +17,7 @@ import { AppRoute } from '@/libs/enums';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { Logo } from '../logo';
 import { ButtonsNavigation } from '../button-navigation';
+import { useAuthStore } from '@/packages/auth';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ const Header = () => {
 
   const profileMenuOpen = Boolean(profileMenuAnchor);
   const isNewStudyPage = Boolean(newStudyPageMatch);
+
+  const currentUser = useAuthStore((state) => state.user);
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
     setprofileMenuAnchor(event.currentTarget);
@@ -86,7 +89,7 @@ const Header = () => {
               />
               <Box sx={{ overflow: 'hidden', width: '100%' }}>
                 <Typography fontSize="12px" fontWeight={500}>
-                  Artem Matiushenko
+                  {currentUser?.firstName} {currentUser?.lastName}
                 </Typography>
                 <Typography
                   width="100%"
@@ -95,7 +98,7 @@ const Header = () => {
                   display="block"
                   overflow="hidden"
                 >
-                  artom.matyushenko@gmail.com
+                  {currentUser?.email}
                 </Typography>
               </Box>
               <ExpandMoreRounded color="primary" />

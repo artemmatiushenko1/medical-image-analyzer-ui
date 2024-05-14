@@ -4,15 +4,21 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 type AuthState = {
   user: User | null;
+};
 
+type AuthActions = {
   setUser: (user: User) => void;
   logout: () => void;
 };
 
-const useAuthStore = create<AuthState>()(
+const INITIAL_STATE: AuthState = {
+  user: null,
+};
+
+const useAuthStore = create<AuthState & AuthActions>()(
   persist(
     (set) => ({
-      user: null,
+      ...INITIAL_STATE,
 
       setUser: (user: User) => set({ user }),
       logout: () => set({ user: null }),
