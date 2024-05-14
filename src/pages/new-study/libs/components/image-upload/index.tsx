@@ -1,14 +1,5 @@
 import { CropRounded, DeleteOutlineRounded } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  IconButton,
-  Skeleton,
-  Stack,
-  Tooltip,
-  Typography,
-  alpha,
-} from '@mui/material';
+import { Box, Button, Skeleton, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useState } from 'react';
 import { bytesToMb, readFileAsBase64 } from '@/libs/helpers';
@@ -108,25 +99,6 @@ const ImageUpload = () => {
             previewImageSrc={currentImage}
           />
         )}
-        {currentImage && (
-          <Tooltip title="Crop image">
-            <IconButton
-              sx={{
-                position: 'absolute',
-                bottom: '10px',
-                left: '10px',
-                color: 'white',
-                background: ({ palette }) => alpha(palette.neutral.main, 0.5),
-                ':hover': {
-                  background: ({ palette }) => alpha(palette.neutral.main, 0.9),
-                },
-              }}
-              onClick={handleCropButtonClick}
-            >
-              <CropRounded />
-            </IconButton>
-          </Tooltip>
-        )}
       </Box>
       {!uploadedImageSrc && !isImageUploading && (
         <Box sx={styles.imageUploadHints}>
@@ -143,7 +115,10 @@ const ImageUpload = () => {
         </Box>
       )}
       {uploadedImageSrc && (
-        <Box display="flex" justifyContent="end">
+        <Box display="flex" justifyContent="space-between">
+          <Button startIcon={<CropRounded />} onClick={handleCropButtonClick}>
+            Crop image
+          </Button>
           <Button
             color="error"
             variant="text"
