@@ -12,13 +12,16 @@ import { useQuery } from 'react-query';
 import { styles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/app';
+import { createQueryKey } from '@/libs/packages/react-query';
+import { StudyQueryKey, studiesApi } from '@/packages/studies';
+import { NEW_STUDY_QUERY_KEY_PREFIX } from '../../constants';
 
 const CreateStudyStatusDialog = () => {
   const navigate = useNavigate();
 
   const { isLoading, isSuccess } = useQuery(
-    'create-study',
-    () => new Promise((resolve) => setTimeout(() => resolve(undefined), 2000)),
+    createQueryKey(NEW_STUDY_QUERY_KEY_PREFIX, StudyQueryKey.CREATE_STUDY),
+    studiesApi.createStudy,
   );
 
   const handleOkClick = () => {

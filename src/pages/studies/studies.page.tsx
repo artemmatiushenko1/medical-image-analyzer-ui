@@ -17,9 +17,13 @@ import {
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { StudyCard, StudyDetailsDrawer } from './libs/components';
-import { StudyStatus, studiesApi } from '@/packages/studies';
+import { StudyQueryKey, StudyStatus, studiesApi } from '@/packages/studies';
 import { useQuery } from 'react-query';
-import { MAX_STUDY_LOADING_PREVIEWS } from './libs/constants';
+import {
+  MAX_STUDY_LOADING_PREVIEWS,
+  STUDIES_QUERY_KEY_PREFIX,
+} from './libs/constants';
+import { createQueryKey } from '@/libs/packages/react-query';
 
 const IMAGE_SRC =
   'https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg';
@@ -30,7 +34,7 @@ const Studies = () => {
   const detailsDrawerOpen = Boolean(selectedStudyId);
 
   const { isLoading, data: studies } = useQuery(
-    'Studies@create-study',
+    createQueryKey(STUDIES_QUERY_KEY_PREFIX, StudyQueryKey.GET_ALL_STUDIES),
     studiesApi.getAllStudies,
   );
 
