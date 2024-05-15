@@ -44,7 +44,7 @@ const ConfidenceWidget = (props: ConfidenceWidgetProps) => {
     [ConfidenceThreshold.HIGH]: {
       title: '+ Positive',
       description:
-        "There's a high risk of a disease been studied. Please contact a doctor as soon as possible for a furher examination.",
+        "There's a high risk of a disease under study. Please contact a doctor as soon as possible for a furher examination.",
     },
   };
 
