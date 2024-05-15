@@ -15,6 +15,10 @@ import { DetailItemText } from '../detail-item-text';
 import { StudyStatusChip } from '../study-status-chip';
 import { styles } from './styles';
 import { ConfidenceWidget } from '../confidence-widget';
+import { pdf } from '@react-pdf/renderer';
+import { StudyReportDocument } from '../../pdf';
+import { useState } from 'react';
+import FileSaver from 'file-saver';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -25,6 +29,19 @@ type StudyDetailsDrawerProps = {
 
 const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
   const { open, onClose, study } = props;
+  const [generatingPdf, setGeneratingPdf] = useState(false);
+
+  const reportFilename = `study_${study.id}_report_${study.date?.replaceAll(
+    ' ',
+    '_',
+  )}.pdf`;
+
+  const savePdfReport = async () => {
+    setGeneratingPdf(true);
+    const blob = await pdf(<StudyReportDocument study={study} />).toBlob();
+    FileSaver.saveAs(blob, reportFilename);
+    setGeneratingPdf(false);
+  };
 
   return (
     <Drawer
@@ -114,29 +131,34 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                 </Typography>
                 <Paper sx={styles.reportArea}>
                   <Typography variant="subtitle2" sx={styles.reportName}>
-                    Класифікація_COVID-аномалій_
-                    {study.date?.replaceAll(' ', '_')}.pdf
+                    {reportFilename}
                   </Typography>
                   <IconButton
+                    disabled={generatingPdf}
+                    onClick={savePdfReport}
                     sx={{
                       color: ({ palette }) => palette.primary.contrastText,
                     }}
                   >
-                    <svg
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      height="20px"
-                      width="20px"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                      <polyline points="7 10 12 15 17 10"></polyline>
-                      <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
+                    {generatingPdf ? (
+                      <CircularProgress size="20px" sx={{ color: '#fff' }} />
+                    ) : (
+                      <svg
+                        stroke="currentColor"
+                        fill="none"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        height="20px"
+                        width="20px"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                      </svg>
+                    )}
                   </IconButton>
                 </Paper>
               </Stack>
