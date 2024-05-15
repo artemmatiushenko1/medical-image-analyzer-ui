@@ -15,7 +15,7 @@ import {
   CheckCircleRounded,
 } from '@mui/icons-material';
 import { useState } from 'react';
-import { StudyCard } from './libs/components';
+import { StudyCard, StudyDetailsDrawer } from './libs/components';
 import { StudyStatus } from '@/packages/studies';
 
 const IMAGE_SRC =
@@ -163,6 +163,17 @@ const Studies = () => {
           />
         ))}
       </Stack>
+      <StudyDetailsDrawer
+        open
+        onClose={() => {}}
+        study={{
+          id: '1',
+          diagnostic: 'Класифікація COVID-аномалій',
+          status: StudyStatus.COMPLETED,
+          imageSrc: IMAGE_SRC,
+          date: '25 May 2024',
+        }}
+      />
     </Box>
   );
 };

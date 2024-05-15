@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { styles } from './styles';
 import { StudyStatusChip } from '../study-status-chip';
+import { DetailItemText } from '../detail-item-text';
 
 type StudyCardProps = {
   date: string;
@@ -24,10 +25,7 @@ const StudyCard = (props: StudyCardProps) => {
 
   return (
     <Paper sx={styles.root}>
-      <Box sx={styles.dateColumn}>
-        <EventNote fontSize="inherit" />
-        <Typography variant="caption">{date}</Typography>
-      </Box>
+      <DetailItemText iconComponent={EventNote}>{date}</DetailItemText>
       <Box>
         <Box sx={styles.imageWrapper}>
           <Box src={imageSrc} component="img" sx={styles.image} />
