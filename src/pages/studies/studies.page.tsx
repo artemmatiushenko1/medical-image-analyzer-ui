@@ -1,14 +1,4 @@
-import {
-  Box,
-  Divider,
-  Paper,
-  Skeleton,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
-  alpha,
-} from '@mui/material';
+import { Box, Divider, Paper, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import {
   AccessTimeFilledRounded,
@@ -16,7 +6,11 @@ import {
   CheckCircleRounded,
 } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import { StudyCard, StudyDetailsDrawer } from './libs/components';
+import {
+  StudiesFilter,
+  StudyCard,
+  StudyDetailsDrawer,
+} from './libs/components';
 import {
   Study,
   StudyQueryKey,
@@ -29,10 +23,13 @@ import {
   STUDIES_QUERY_KEY_PREFIX,
 } from './libs/constants';
 import { createQueryKey } from '@/libs/packages/react-query';
+import { ValueOf } from '@/libs/types';
 
 const Studies = () => {
   const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
-  const [tab, setTab] = useState<number>(0);
+  const [statusFilter, setStatusFilter] = useState<ValueOf<
+    typeof StudyStatus
+  > | null>(null);
   const [detailsDrawerOpen, setDetailsDrawerOpen] = useState(
     Boolean(selectedStudyId),
   );
@@ -62,21 +59,26 @@ const Studies = () => {
       icon: <AllInboxRounded />,
       count: studies?.length ?? 0,
       title: 'All',
-      key: 'all',
+      key: null,
     },
     {
       icon: <CheckCircleRounded />,
       count: completedStudiesCount?.length ?? 0,
       title: 'Completed',
-      key: 'completed',
+      key: StudyStatus.COMPLETED,
     },
     {
       icon: <AccessTimeFilledRounded />,
       count: pendingStudiesCount?.length ?? 0,
       title: 'Pending',
-      key: 'success',
+      key: StudyStatus.PENDING,
     },
   ];
+
+  const filteredStudies =
+    statusFilter === null
+      ? studies
+      : studies?.filter((study) => study.status === statusFilter);
 
   const handleViewStudyDetails = (id: string) => {
     setSelectedStudyId(id);
@@ -111,79 +113,12 @@ const Studies = () => {
             >
               Filter
             </Typography>
-            <Tabs
-              orientation="vertical"
-              value={tab}
-              onChange={(_, value) => setTab(value)}
-            >
-              {tabs.map(({ key, count, title, icon }, index) => (
-                <Tab
-                  disabled={isLoading}
-                  key={key}
-                  sx={{
-                    pl: 3,
-                    maxWidth: 'unset',
-                    textTransform: 'capitalize',
-                    color: ({ palette }) => palette.neutral.main,
-                    '&.Mui-selected': {
-                      color: ({ palette }) => palette.neutral.dark,
-                    },
-                  }}
-                  label={
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        gap: 1,
-                        alignSelf: 'flex-start',
-                        width: '100%',
-                        fontSize: '15px',
-                      }}
-                    >
-                      {icon}
-                      <Typography
-                        fontWeight={500}
-                        sx={{ display: 'flex', flex: 1, fontSize: 'inherit' }}
-                      >
-                        <span>{title}</span>{' '}
-                        {isLoading ? (
-                          <Skeleton
-                            width={25}
-                            height={25}
-                            variant="circular"
-                            sx={{ marginLeft: 'auto' }}
-                          />
-                        ) : (
-                          <Box
-                            component="span"
-                            sx={{
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              marginLeft: 'auto',
-                              fontWeight: 600,
-                              width: '25px',
-                              height: '25px',
-                              borderRadius: '100px',
-                              fontSize: '14px',
-                              ...(index === tab
-                                ? {
-                                    color: ({ palette }) =>
-                                      palette.primary.main,
-                                    backgroundColor: ({ palette }) =>
-                                      alpha(palette.primary.main, 0.1),
-                                  }
-                                : {}),
-                            }}
-                          >
-                            {count}
-                          </Box>
-                        )}
-                      </Typography>
-                    </Box>
-                  }
-                />
-              ))}
-            </Tabs>
+            <StudiesFilter
+              tabs={tabs}
+              value={statusFilter}
+              onChange={setStatusFilter}
+              isLoading={isLoading}
+            />
           </Stack>
         </Stack>
       </Paper>
@@ -192,7 +127,7 @@ const Studies = () => {
           Array(MAX_STUDY_LOADING_PREVIEWS)
             .fill(crypto.randomUUID)
             .map((_, index) => <StudyCard.Skeleton key={index} />)}
-        {studies?.map((study) => (
+        {filteredStudies?.map((study) => (
           <StudyCard
             key={study.id}
             id={study.id}
