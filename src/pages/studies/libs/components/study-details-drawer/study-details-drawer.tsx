@@ -13,10 +13,8 @@ import {
 } from '@mui/material';
 import { DetailItemText } from '../detail-item-text';
 import { StudyStatusChip } from '../study-status-chip';
-import {
-  CONFIDENCE_PROGRESS_SIZE,
-  CONFIDENCE_PROGRESS_THICKNESS,
-} from './constants';
+import { styles } from './styles';
+import { ConfidenceWidget } from '../confidence-widget';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -30,25 +28,13 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
 
   return (
     <Drawer
-      PaperProps={{
-        sx: {
-          borderTopLeftRadius: ({ shape }) => shape.borderRadius * 3,
-          borderBottomLeftRadius: ({ shape }) => shape.borderRadius * 3,
-          width: '500px',
-        },
-      }}
       open={open}
       onClose={onClose}
       anchor="right"
+      PaperProps={{ sx: styles.paper }}
     >
       <DialogTitle>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
+        <Box sx={styles.titleInner}>
           <Box>
             <Typography display="inline-block" fontSize="18px" fontWeight={600}>
               {study.diagnostic}
@@ -64,7 +50,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
       </DialogTitle>
       <DialogContent>
         <Stack gap={3}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={styles.meta}>
             <StudyStatusChip status={study.status} />
             <DetailItemText iconComponent={EventNote}>
               {study.date}
@@ -78,25 +64,8 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
             >
               Image
             </Typography>
-            <Box
-              sx={{
-                borderRadius: ({ shape }) => shape.borderRadius,
-                overflow: 'hidden',
-                height: 'auto',
-                width: '450px',
-                objectFit: 'contain',
-              }}
-            >
-              <Box
-                component="img"
-                sx={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  display: 'block',
-                }}
-                src={study.imageSrc}
-              />
+            <Box sx={styles.imageWrapper}>
+              <Box component="img" sx={styles.image} src={study.imageSrc} />
             </Box>
           </Stack>
           {study.status === StudyStatus.PENDING && (
@@ -122,70 +91,18 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
           {study.status === StudyStatus.COMPLETED && (
             <Stack gap={3}>
               <Stack gap={2}>
-                <Typography
-                  fontSize="14px"
-                  fontWeight={600}
-                  sx={{ color: ({ palette }) => palette.neutral.dark }}
-                >
-                  Confidence
-                </Typography>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    gap: 2,
-                    alignItems: 'center',
-                  }}
-                >
-                  <Box sx={{ position: 'relative' }}>
-                    <CircularProgress
-                      variant="determinate"
-                      value={100}
-                      sx={{
-                        color: ({ palette }) => palette.error.light,
-                      }}
-                      size={CONFIDENCE_PROGRESS_SIZE}
-                      thickness={CONFIDENCE_PROGRESS_THICKNESS}
-                    />
-                    <CircularProgress
-                      variant="determinate"
-                      value={87}
-                      color="error"
-                      size={CONFIDENCE_PROGRESS_SIZE}
-                      thickness={CONFIDENCE_PROGRESS_THICKNESS}
-                      sx={{
-                        strokeLinecap: 'round',
-                        position: 'absolute',
-                        inset: 0,
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        inset: 0,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: CONFIDENCE_PROGRESS_SIZE,
-                      }}
+                {study.confidence && (
+                  <>
+                    <Typography
+                      fontSize="14px"
+                      fontWeight={600}
+                      sx={{ color: ({ palette }) => palette.neutral.dark }}
                     >
-                      <Typography
-                        variant="subtitle2"
-                        fontSize="16px"
-                        sx={{
-                          display: 'inline-block',
-                        }}
-                      >
-                        87.5%
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Stack>
-                    <Typography fontWeight={600}>+ Positive</Typography>
-                    <Typography variant="caption">
-                      There's a high risk of a disease been studied.
+                      Confidence
                     </Typography>
-                  </Stack>
-                </Box>
+                    <ConfidenceWidget confidence={study.confidence} />
+                  </>
+                )}
               </Stack>
               <Stack gap={2}>
                 <Typography

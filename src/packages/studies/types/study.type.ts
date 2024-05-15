@@ -7,6 +7,7 @@ type Study = {
   date: string;
   imageSrc: string;
   status: ValueOf<typeof StudyStatus>;
+  confidence?: number;
 };
 
 export { type Study };
