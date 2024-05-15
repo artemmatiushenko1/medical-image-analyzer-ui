@@ -9,7 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { ThemeConfig } from './libs/theme';
 import { initi18n } from './i18n';
-import { useAppStore } from './stores/app.store';
+import { useAppStore } from './app';
 import { QueryClientProvider } from 'react-query';
 import { queryClient } from './libs/packages/react-query';
 

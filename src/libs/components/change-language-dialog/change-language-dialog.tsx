@@ -1,6 +1,6 @@
 import { Language } from '@/libs/enums';
 import { ValueOf } from '@/libs/types';
-import { useAppStore } from '@/stores/app.store';
+import { useAppStore } from '@/app';
 import { LanguageRounded } from '@mui/icons-material';
 import {
   Box,

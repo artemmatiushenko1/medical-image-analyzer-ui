@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import { ChangeLanguageDialog } from '../change-language-dialog';
 import { useState } from 'react';
-import { useAppStore } from '@/stores/app.store';
+import { useAppStore } from '@/app';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/packages/auth';
 import { LANGUAGE_DETAILS } from '@/i18n';
