@@ -1,5 +1,5 @@
 import { Language } from '@/libs/enums';
-import { LANGUAGE_DETAILS } from '@/libs/i18n';
+import { LANGUAGE_DETAILS } from '@/i18n';
 import { ValueOf } from '@/libs/types';
 import { useAppStore } from '@/stores/app.store';
 import { LanguageRounded } from '@mui/icons-material';

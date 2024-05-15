@@ -18,7 +18,7 @@ import {
 import { ChangeLanguageDialog } from '../change-language-dialog';
 import { useState } from 'react';
 import { useAppStore } from '@/stores/app.store';
-import { LANGUAGE_DETAILS } from '@/libs/i18n';
+import { LANGUAGE_DETAILS } from '@/i18n';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/packages/auth';
 
