@@ -17,7 +17,12 @@ import {
 } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { StudyCard, StudyDetailsDrawer } from './libs/components';
-import { Study, StudyQueryKey, studiesApi } from '@/packages/studies';
+import {
+  Study,
+  StudyQueryKey,
+  StudyStatus,
+  studiesApi,
+} from '@/packages/studies';
 import { useQuery } from 'react-query';
 import {
   MAX_STUDY_LOADING_PREVIEWS,
@@ -44,22 +49,30 @@ const Studies = () => {
     setDetailsDrawerOpen(selectedStudyId ? true : false);
   }, [selectedStudyId]);
 
+  const completedStudiesCount = studies?.filter(
+    (item) => item.status === StudyStatus.COMPLETED,
+  );
+
+  const pendingStudiesCount = studies?.filter(
+    (item) => item.status === StudyStatus.PENDING,
+  );
+
   const tabs = [
     {
       icon: <AllInboxRounded />,
-      count: 36,
+      count: studies?.length ?? 0,
       title: 'All',
       key: 'all',
     },
     {
       icon: <CheckCircleRounded />,
-      count: 34,
+      count: completedStudiesCount?.length ?? 0,
       title: 'Completed',
       key: 'completed',
     },
     {
       icon: <AccessTimeFilledRounded />,
-      count: 2,
+      count: pendingStudiesCount?.length ?? 0,
       title: 'Pending',
       key: 'success',
     },
