@@ -180,7 +180,7 @@ const Studies = () => {
         open={detailsDrawerOpen}
         onClose={handleDetailsDrawerClose}
         study={{
-          id: '1',
+          id: '3455',
           diagnostic: 'Класифікація COVID-аномалій',
           status: StudyStatus.COMPLETED,
           imageSrc: IMAGE_SRC,

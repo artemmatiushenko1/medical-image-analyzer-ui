@@ -1,5 +1,4 @@
 import { Language } from '@/libs/enums';
-import { LANGUAGE_DETAILS } from '@/i18n';
 import { ValueOf } from '@/libs/types';
 import { useAppStore } from '@/stores/app.store';
 import { LanguageRounded } from '@mui/icons-material';
@@ -19,6 +18,7 @@ import { useState } from 'react';
 import { styles } from './styles';
 import { mergeSx } from '@/libs/theme';
 import { HighlightedIcon } from '../highlighted-icon';
+import { LANGUAGE_DETAILS } from '@/i18n';
 
 type ChangeLanguageDialogProps = {
   open: boolean;

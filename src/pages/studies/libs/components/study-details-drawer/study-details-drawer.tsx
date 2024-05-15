@@ -53,7 +53,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
               {study.diagnostic}
             </Typography>
             <Typography variant="caption" fontSize="14px" display="block">
-              #3455
+              #{study.id}
             </Typography>
           </Box>
           <IconButton onClick={onClose}>

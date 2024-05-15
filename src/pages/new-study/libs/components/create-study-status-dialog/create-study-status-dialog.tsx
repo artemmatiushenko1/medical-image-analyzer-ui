@@ -11,7 +11,7 @@ import {
 import { useQuery } from 'react-query';
 import { styles } from './styles';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '@/libs/enums';
+import { AppRoute } from '@/app';
 
 const CreateStudyStatusDialog = () => {
   const navigate = useNavigate();
