@@ -37,6 +37,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
 
   const appLanguage = useAppStore((state) => state.language);
   const currentUser = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
 
   const [changeLanguageModalOpen, setChangeLanguageModalOpen] = useState(false);
 
@@ -101,7 +102,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
           </Typography>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={onClose}>
+        <MenuItem onClick={logout}>
           <ListItemIcon>
             <LogoutRounded fontSize="small" />
           </ListItemIcon>
