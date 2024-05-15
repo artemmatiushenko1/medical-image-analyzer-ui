@@ -13,6 +13,10 @@ import {
 } from '@mui/material';
 import { DetailItemText } from '../detail-item-text';
 import { StudyStatusChip } from '../study-status-chip';
+import {
+  CONFIDENCE_PROGRESS_SIZE,
+  CONFIDENCE_PROGRESS_THICKNESS,
+} from './constants';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -20,9 +24,6 @@ type StudyDetailsDrawerProps = {
 
   onClose: () => void;
 };
-
-const PROGRESS_SIZE = '85px';
-const PROGRESS_THICKNESS = 4.5;
 
 const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
   const { open, onClose, study } = props;
@@ -81,7 +82,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
               sx={{
                 borderRadius: ({ shape }) => shape.borderRadius,
                 overflow: 'hidden',
-                height: '450px',
+                height: 'auto',
                 width: '450px',
                 objectFit: 'contain',
               }}
@@ -92,7 +93,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                 sx={{
                   width: '100%',
                   height: '100%',
-
+                  objectFit: 'contain',
                   display: 'block',
                 }}
                 src={study.imageSrc}
@@ -113,8 +114,8 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                   sx={{ animationDuration: '550ms' }}
                 />
                 <Typography variant="caption">
-                  There's no result available yet. The study is still processing
-                  by AI.
+                  There's no result available yet.
+                  <br /> The study is still being processed by AI.
                 </Typography>
               </Stack>
             </Paper>
@@ -140,15 +141,15 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                     sx={{
                       color: ({ palette }) => palette.error.light,
                     }}
-                    size={PROGRESS_SIZE}
-                    thickness={PROGRESS_THICKNESS}
+                    size={CONFIDENCE_PROGRESS_SIZE}
+                    thickness={CONFIDENCE_PROGRESS_THICKNESS}
                   />
                   <CircularProgress
                     variant="determinate"
                     value={87}
                     color="error"
-                    size={PROGRESS_SIZE}
-                    thickness={PROGRESS_THICKNESS}
+                    size={CONFIDENCE_PROGRESS_SIZE}
+                    thickness={CONFIDENCE_PROGRESS_THICKNESS}
                     sx={{
                       strokeLinecap: 'round',
                       position: 'absolute',
@@ -162,7 +163,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      height: PROGRESS_SIZE,
+                      height: CONFIDENCE_PROGRESS_SIZE,
                     }}
                   >
                     <Typography
@@ -209,7 +210,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                   variant="subtitle2"
                   sx={{ color: ({ palette }) => palette.primary.contrastText }}
                 >
-                  Класифікація_COVID-аномалій_{study.date.replaceAll(' ', '_')}
+                  Класифікація_COVID-аномалій_{study.date?.replaceAll(' ', '_')}
                   .pdf
                 </Typography>
                 <IconButton

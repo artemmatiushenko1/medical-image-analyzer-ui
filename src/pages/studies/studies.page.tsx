@@ -15,9 +15,9 @@ import {
   AllInboxRounded,
   CheckCircleRounded,
 } from '@mui/icons-material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StudyCard, StudyDetailsDrawer } from './libs/components';
-import { StudyQueryKey, StudyStatus, studiesApi } from '@/packages/studies';
+import { Study, StudyQueryKey, studiesApi } from '@/packages/studies';
 import { useQuery } from 'react-query';
 import {
   MAX_STUDY_LOADING_PREVIEWS,
@@ -25,18 +25,24 @@ import {
 } from './libs/constants';
 import { createQueryKey } from '@/libs/packages/react-query';
 
-const IMAGE_SRC =
-  'https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg';
-
 const Studies = () => {
   const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
   const [tab, setTab] = useState<number>(0);
-  const detailsDrawerOpen = Boolean(selectedStudyId);
+  const [detailsDrawerOpen, setDetailsDrawerOpen] = useState(
+    Boolean(selectedStudyId),
+  );
 
   const { isLoading, data: studies } = useQuery(
     createQueryKey(STUDIES_QUERY_KEY_PREFIX, StudyQueryKey.GET_ALL_STUDIES),
     studiesApi.getAllStudies,
   );
+
+  const selectedStudy =
+    studies?.find((study) => study.id === selectedStudyId) ?? ({} as Study);
+
+  useEffect(() => {
+    setDetailsDrawerOpen(selectedStudyId ? true : false);
+  }, [selectedStudyId]);
 
   const tabs = [
     {
@@ -59,8 +65,16 @@ const Studies = () => {
     },
   ];
 
+  const handleViewStudyDetails = (id: string) => {
+    setSelectedStudyId(id);
+    setDetailsDrawerOpen(true);
+  };
+
   const handleDetailsDrawerClose = () => {
-    setSelectedStudyId(null);
+    setTimeout(() => {
+      setSelectedStudyId(null);
+    }, 100);
+    setDetailsDrawerOpen(false);
   };
 
   return (
@@ -173,20 +187,14 @@ const Studies = () => {
             status={study.status}
             imageSrc={study.imageSrc}
             diagnostic={study.diagnostic}
-            onViewDetails={setSelectedStudyId}
+            onViewDetails={handleViewStudyDetails}
           />
         ))}
       </Stack>
       <StudyDetailsDrawer
         open={detailsDrawerOpen}
         onClose={handleDetailsDrawerClose}
-        study={{
-          id: '3455',
-          diagnostic: 'Класифікація COVID-аномалій',
-          status: StudyStatus.COMPLETED,
-          imageSrc: IMAGE_SRC,
-          date: '25 May 2024',
-        }}
+        study={selectedStudy}
       />
     </Box>
   );
