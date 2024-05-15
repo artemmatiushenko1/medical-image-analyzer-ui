@@ -56,7 +56,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
               #3455
             </Typography>
           </Box>
-          <IconButton>
+          <IconButton onClick={onClose}>
             <CloseRounded />
           </IconButton>
         </Box>

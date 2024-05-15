@@ -16,13 +16,17 @@ import {
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { StudyCard, StudyDetailsDrawer } from './libs/components';
-import { StudyStatus } from '@/packages/studies';
+import { Study, StudyStatus } from '@/packages/studies';
 
 const IMAGE_SRC =
   'https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg';
 
 const Studies = () => {
+  const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
+
   const [tab, setTab] = useState<number>(0);
+
+  const detailsDrawerOpen = Boolean(selectedStudyId);
 
   const tabs = [
     {
@@ -45,26 +49,33 @@ const Studies = () => {
     },
   ];
 
-  const studies = [
+  const studies: Study[] = [
     {
+      id: '1',
       diagnostic: 'Детекція аномалій в легенях',
       status: StudyStatus.COMPLETED,
       imageSrc: IMAGE_SRC,
       date: '25 May 2024',
     },
     {
+      id: '2',
       diagnostic: 'Детекція аномалій в легенях',
       status: StudyStatus.PENDING,
       imageSrc: IMAGE_SRC,
       date: '25 May 2024',
     },
     {
+      id: '3',
       diagnostic: 'Детекція аномалій в легенях',
       status: StudyStatus.COMPLETED,
       imageSrc: IMAGE_SRC,
       date: '25 May 2024',
     },
   ];
+
+  const handleDetailsDrawerClose = () => {
+    setSelectedStudyId(null);
+  };
 
   return (
     <Box sx={styles.root}>
@@ -155,17 +166,19 @@ const Studies = () => {
       <Stack sx={{ flex: '78%', p: 3, gap: 3, overflow: 'scroll' }}>
         {studies.map((study) => (
           <StudyCard
+            id={study.id}
             date={study.date}
             key={study.imageSrc}
             status={study.status}
             imageSrc={study.imageSrc}
             diagnostic={study.diagnostic}
+            onViewDetails={setSelectedStudyId}
           />
         ))}
       </Stack>
       <StudyDetailsDrawer
-        open
-        onClose={() => {}}
+        open={detailsDrawerOpen}
+        onClose={handleDetailsDrawerClose}
         study={{
           id: '1',
           diagnostic: 'Класифікація COVID-аномалій',

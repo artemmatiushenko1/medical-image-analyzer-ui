@@ -14,14 +14,21 @@ import { StudyStatusChip } from '../study-status-chip';
 import { DetailItemText } from '../detail-item-text';
 
 type StudyCardProps = {
+  id: string;
   date: string;
   imageSrc: string;
   diagnostic: string;
   status: ValueOf<typeof StudyStatus>;
+
+  onViewDetails: (id: string) => void;
 };
 
 const StudyCard = (props: StudyCardProps) => {
-  const { date, imageSrc, status, diagnostic } = props;
+  const { date, imageSrc, status, diagnostic, id, onViewDetails } = props;
+
+  const handleViewDetails = () => {
+    onViewDetails(id);
+  };
 
   return (
     <Paper sx={styles.root}>
@@ -43,6 +50,7 @@ const StudyCard = (props: StudyCardProps) => {
         <Button
           sx={styles.viewStudyButton}
           className="view-study-button"
+          onClick={handleViewDetails}
           startIcon={<VisibilityRounded />}
         >
           View details
