@@ -25,7 +25,7 @@ const CreateStudyStatusDialog = () => {
   );
 
   const handleOkClick = () => {
-    navigate(AppRoute.STUDIES);
+    navigate(AppRoute.HOME);
   };
 
   const getLoadingTypography = () => {

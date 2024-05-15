@@ -28,6 +28,20 @@ const styles = createStyleSheet({
     objectFit: 'contain',
     display: 'block',
   },
+  reportArea: {
+    px: 3,
+    py: 1,
+    pr: 2,
+    backgroundColor: ({ palette }) => palette.primary.main,
+    border: 'none',
+    borderRadius: ({ shape }) => shape.borderRadius,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  reportName: {
+    color: ({ palette }) => palette.primary.contrastText,
+  },
 });
 
 export { styles };

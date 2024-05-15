@@ -112,28 +112,10 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                 >
                   Report
                 </Typography>
-                <Paper
-                  sx={{
-                    px: 3,
-                    py: 1,
-                    pr: 2,
-                    backgroundColor: ({ palette }) => palette.primary.main,
-                    border: 'none',
-                    borderRadius: ({ shape }) => shape.borderRadius,
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      color: ({ palette }) => palette.primary.contrastText,
-                    }}
-                  >
+                <Paper sx={styles.reportArea}>
+                  <Typography variant="subtitle2" sx={styles.reportName}>
                     Класифікація_COVID-аномалій_
-                    {study.date?.replaceAll(' ', '_')}
-                    .pdf
+                    {study.date?.replaceAll(' ', '_')}.pdf
                   </Typography>
                   <IconButton
                     sx={{
