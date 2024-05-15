@@ -1,0 +1,11 @@
+import { MOCK_STUDIES } from './mocks';
+import { Study } from './types';
+
+class StudiesApi {
+  getAllStudies = () =>
+    new Promise<Study[]>((resolve) =>
+      setTimeout(() => resolve(MOCK_STUDIES), 2000),
+    );
+}
+
+export { StudiesApi };

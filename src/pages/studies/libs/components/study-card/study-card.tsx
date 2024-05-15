@@ -6,6 +6,7 @@ import {
   Button,
   IconButton,
   Paper,
+  Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
@@ -59,6 +60,37 @@ const StudyCard = (props: StudyCardProps) => {
         <IconButton>
           <MoreHoriz />
         </IconButton>
+      </Box>
+    </Paper>
+  );
+};
+
+StudyCard.Skeleton = () => {
+  return (
+    <Paper sx={styles.root}>
+      <Skeleton width="100px" height={20} />
+      <Box>
+        <Skeleton
+          variant="rounded"
+          sx={{ borderRadius: ({ shape }) => shape.borderRadius }}
+          height={65}
+          width={120}
+        />
+      </Box>
+      <Box>
+        <Stack>
+          <Skeleton width="100px" height={20} />
+          <Skeleton width="140px" height={20} />
+        </Stack>
+      </Box>
+      <Box sx={styles.rightPart}>
+        <Skeleton
+          variant="rounded"
+          width={112}
+          height={34}
+          sx={{ borderRadius: '100px' }}
+        />
+        <Skeleton variant="circular" width={30} height={30} sx={{ mr: 1 }} />
       </Box>
     </Paper>
   );

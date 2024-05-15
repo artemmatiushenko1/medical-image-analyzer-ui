@@ -2,6 +2,7 @@ import {
   Box,
   Divider,
   Paper,
+  Skeleton,
   Stack,
   Tab,
   Tabs,
@@ -16,17 +17,22 @@ import {
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { StudyCard, StudyDetailsDrawer } from './libs/components';
-import { Study, StudyStatus } from '@/packages/studies';
+import { StudyStatus, studiesApi } from '@/packages/studies';
+import { useQuery } from 'react-query';
+import { MAX_STUDY_LOADING_PREVIEWS } from './libs/constants';
 
 const IMAGE_SRC =
   'https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg';
 
 const Studies = () => {
   const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
-
   const [tab, setTab] = useState<number>(0);
-
   const detailsDrawerOpen = Boolean(selectedStudyId);
+
+  const { isLoading, data: studies } = useQuery(
+    'Studies@create-study',
+    studiesApi.getAllStudies,
+  );
 
   const tabs = [
     {
@@ -46,30 +52,6 @@ const Studies = () => {
       count: 2,
       title: 'Pending',
       key: 'success',
-    },
-  ];
-
-  const studies: Study[] = [
-    {
-      id: '1',
-      diagnostic: 'Детекція аномалій в легенях',
-      status: StudyStatus.COMPLETED,
-      imageSrc: IMAGE_SRC,
-      date: '25 May 2024',
-    },
-    {
-      id: '2',
-      diagnostic: 'Детекція аномалій в легенях',
-      status: StudyStatus.PENDING,
-      imageSrc: IMAGE_SRC,
-      date: '25 May 2024',
-    },
-    {
-      id: '3',
-      diagnostic: 'Детекція аномалій в легенях',
-      status: StudyStatus.COMPLETED,
-      imageSrc: IMAGE_SRC,
-      date: '25 May 2024',
     },
   ];
 
@@ -105,6 +87,7 @@ const Studies = () => {
             >
               {tabs.map(({ key, count, title, icon }, index) => (
                 <Tab
+                  disabled={isLoading}
                   key={key}
                   sx={{
                     pl: 3,
@@ -131,29 +114,39 @@ const Studies = () => {
                         sx={{ display: 'flex', flex: 1, fontSize: 'inherit' }}
                       >
                         <span>{title}</span>{' '}
-                        <Box
-                          component="span"
-                          sx={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            marginLeft: 'auto',
-                            fontWeight: 600,
-                            width: '25px',
-                            height: '25px',
-                            borderRadius: '100px',
-                            fontSize: '14px',
-                            ...(index === tab
-                              ? {
-                                  color: ({ palette }) => palette.primary.main,
-                                  backgroundColor: ({ palette }) =>
-                                    alpha(palette.primary.main, 0.1),
-                                }
-                              : {}),
-                          }}
-                        >
-                          {count}
-                        </Box>
+                        {isLoading ? (
+                          <Skeleton
+                            width={25}
+                            height={25}
+                            variant="circular"
+                            sx={{ marginLeft: 'auto' }}
+                          />
+                        ) : (
+                          <Box
+                            component="span"
+                            sx={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              marginLeft: 'auto',
+                              fontWeight: 600,
+                              width: '25px',
+                              height: '25px',
+                              borderRadius: '100px',
+                              fontSize: '14px',
+                              ...(index === tab
+                                ? {
+                                    color: ({ palette }) =>
+                                      palette.primary.main,
+                                    backgroundColor: ({ palette }) =>
+                                      alpha(palette.primary.main, 0.1),
+                                  }
+                                : {}),
+                            }}
+                          >
+                            {count}
+                          </Box>
+                        )}
                       </Typography>
                     </Box>
                   }
@@ -164,11 +157,15 @@ const Studies = () => {
         </Stack>
       </Paper>
       <Stack sx={{ flex: '78%', p: 3, gap: 3, overflow: 'scroll' }}>
-        {studies.map((study) => (
+        {isLoading &&
+          Array(MAX_STUDY_LOADING_PREVIEWS)
+            .fill(crypto.randomUUID)
+            .map((_, index) => <StudyCard.Skeleton key={index} />)}
+        {studies?.map((study) => (
           <StudyCard
+            key={study.id}
             id={study.id}
             date={study.date}
-            key={study.imageSrc}
             status={study.status}
             imageSrc={study.imageSrc}
             diagnostic={study.diagnostic}
