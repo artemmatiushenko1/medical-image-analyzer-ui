@@ -1,8 +1,8 @@
 import { AppRoute } from '@/libs/enums';
 import { NewStudy, SignIn, Studies } from '@/pages';
 import { RouteObject } from 'react-router-dom';
-import { PrimaryLayout } from '../layouts';
-import { PrivateRoute, PublicRoute } from '../router';
+import { PrimaryLayout } from '../libs/components/layouts';
+import { PrivateRoute, PublicRoute } from '../libs/components/router';
 
 const routes: RouteObject[] = [
   {
