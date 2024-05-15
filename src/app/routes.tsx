@@ -1,4 +1,4 @@
-import { AppRoute } from '@/libs/enums';
+import { AppRoute } from './enums';
 import { NewStudy, SignIn, Studies } from '@/pages';
 import { RouteObject } from 'react-router-dom';
 import { PrimaryLayout } from '../libs/components/layouts';

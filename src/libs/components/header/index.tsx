@@ -13,7 +13,7 @@ import { styles } from './styles';
 import { useState } from 'react';
 import { ProfileMenu } from '../profile-menu';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
-import { AppRoute } from '@/libs/enums';
+import { AppRoute } from '@/app';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { Logo } from '../logo';
 import { ButtonsNavigation } from '../button-navigation';

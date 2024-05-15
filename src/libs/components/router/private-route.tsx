@@ -1,4 +1,4 @@
-import { AppRoute } from '@/libs/enums';
+import { AppRoute } from '@/app';
 import { useAuthStore } from '@/packages/auth';
 import { Navigate, useLocation } from 'react-router-dom';
 

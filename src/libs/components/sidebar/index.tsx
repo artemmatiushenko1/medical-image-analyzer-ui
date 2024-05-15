@@ -16,7 +16,7 @@ import { GridViewRounded, DescriptionRounded } from '@mui/icons-material';
 import { styles } from './styles';
 import { Logo } from '../logo';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
-import { AppRoute } from '@/libs/enums';
+import { AppRoute } from '@/app';
 import { useTranslation } from 'react-i18next';
 import { mergeSx } from '@/libs/theme';
 import { ProfileMenu } from '../profile-menu';

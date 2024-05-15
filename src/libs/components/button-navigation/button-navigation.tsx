@@ -2,7 +2,7 @@ import { DescriptionRounded } from '@mui/icons-material';
 import { Box, Button, Theme, alpha } from '@mui/material';
 import { styles } from './styles';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
-import { AppRoute } from '@/libs/enums';
+import { AppRoute } from '@/app';
 import { useTranslation } from 'react-i18next';
 
 const ButtonsNavigation = () => {
