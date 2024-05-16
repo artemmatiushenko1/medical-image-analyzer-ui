@@ -1,1 +1,1 @@
-export { PrimaryLayout } from './primary-layout';
+export { UserLayout } from './user-layout';

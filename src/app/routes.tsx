@@ -1,7 +1,7 @@
 import { AppRoute } from './enums';
 import { NewStudy, SignIn, Studies } from '@/pages';
 import { RouteObject } from 'react-router-dom';
-import { PrimaryLayout } from '../libs/components/layouts';
+import { UserLayout } from '../libs/components/layouts';
 import { PrivateRoute, PublicRoute } from '../libs/components/router';
 
 const routes: RouteObject[] = [
@@ -9,7 +9,7 @@ const routes: RouteObject[] = [
     path: AppRoute.HOME,
     element: (
       <PrivateRoute>
-        <PrimaryLayout />
+        <UserLayout />
       </PrivateRoute>
     ),
     children: [

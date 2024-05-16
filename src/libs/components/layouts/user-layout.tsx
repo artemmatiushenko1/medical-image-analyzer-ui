@@ -2,7 +2,7 @@ import { Box, Stack } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { Header } from '../header';
 
-const PrimaryLayout = () => {
+const UserLayout = () => {
   return (
     <Stack sx={{ height: '100vh', width: '100%' }} direction="row">
       <Stack sx={{ flex: 1, overflow: 'hidden' }}>
@@ -24,4 +24,4 @@ const PrimaryLayout = () => {
   );
 };
 
-export { PrimaryLayout };
+export { UserLayout };
