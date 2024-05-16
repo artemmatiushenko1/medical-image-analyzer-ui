@@ -7,7 +7,7 @@ const MOCK_STUDIES: Study[] = [
     diagnostic: 'Детекція аномалій в легенях',
     status: StudyStatus.COMPLETED,
     imageSrc:
-      'https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg',
+      'https://www.shutterstock.com/shutterstock/photos/114216295/display_1500/stock-photo-x-ray-114216295.jpg',
     date: '23 May 2024',
     confidence: 0.856,
   },

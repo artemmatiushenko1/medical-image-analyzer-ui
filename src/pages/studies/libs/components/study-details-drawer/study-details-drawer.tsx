@@ -19,6 +19,7 @@ import { pdf } from '@react-pdf/renderer';
 import { StudyReportDocument } from '../../pdf';
 import { useState } from 'react';
 import FileSaver from 'file-saver';
+import { useAuthStore } from '@/packages/auth';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -29,6 +30,9 @@ type StudyDetailsDrawerProps = {
 
 const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
   const { open, onClose, study } = props;
+
+  const currentUser = useAuthStore((state) => state.user);
+
   const [generatingPdf, setGeneratingPdf] = useState(false);
 
   const reportFilename = `study_${study.id}_report_${study.date?.replaceAll(
@@ -37,8 +41,12 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
   )}.pdf`;
 
   const savePdfReport = async () => {
+    if (!currentUser) return;
+
     setGeneratingPdf(true);
-    const blob = await pdf(<StudyReportDocument study={study} />).toBlob();
+    const blob = await pdf(
+      <StudyReportDocument study={study} issuer={currentUser} />,
+    ).toBlob();
     FileSaver.saveAs(blob, reportFilename);
     setGeneratingPdf(false);
   };
