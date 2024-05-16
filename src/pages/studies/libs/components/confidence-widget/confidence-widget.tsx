@@ -1,11 +1,7 @@
 import { Box, CircularProgress, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { toPercentString } from '@/libs/helpers';
-import { getConfidenceThreshold } from '../../helpers';
-import {
-  COLOR_BY_CONFIDENCE_THRESHOLD,
-  TEXT_BY_CONFIDENCE_THRESHOLD,
-} from '../../constants';
+import { useConfidenceDescriptors } from '../../hooks';
 
 const CONFIDENCE_PROGRESS_SIZE = '85px';
 const CONFIDENCE_PROGRESS_THICKNESS = 4.5;
@@ -17,9 +13,8 @@ type ConfidenceWidgetProps = {
 const ConfidenceWidget = (props: ConfidenceWidgetProps) => {
   const { confidence } = props;
 
-  const confidenceThreshold = getConfidenceThreshold(confidence);
-  const colors = COLOR_BY_CONFIDENCE_THRESHOLD[confidenceThreshold];
-  const text = TEXT_BY_CONFIDENCE_THRESHOLD[confidenceThreshold];
+  const { text: confidenceText, color: confidenceColor } =
+    useConfidenceDescriptors(confidence);
 
   return (
     <Box sx={styles.root}>
@@ -27,14 +22,14 @@ const ConfidenceWidget = (props: ConfidenceWidgetProps) => {
         <CircularProgress
           variant="determinate"
           value={100}
-          sx={{ color: colors.light }}
+          sx={{ color: confidenceColor.light }}
           size={CONFIDENCE_PROGRESS_SIZE}
           thickness={CONFIDENCE_PROGRESS_THICKNESS}
         />
         <CircularProgress
           variant="determinate"
           value={confidence * 100}
-          sx={{ ...styles.progressValueTrack, color: colors.dark }}
+          sx={{ ...styles.progressValueTrack, color: confidenceColor.dark }}
           size={CONFIDENCE_PROGRESS_SIZE}
           thickness={CONFIDENCE_PROGRESS_THICKNESS}
         />
@@ -56,8 +51,8 @@ const ConfidenceWidget = (props: ConfidenceWidgetProps) => {
         </Box>
       </Box>
       <Stack>
-        <Typography fontWeight={600}>{text.title}</Typography>
-        <Typography variant="caption">{text.description}</Typography>
+        <Typography fontWeight={600}>{confidenceText.title}</Typography>
+        <Typography variant="caption">{confidenceText.description}</Typography>
       </Stack>
     </Box>
   );

@@ -16,11 +16,7 @@ import { shape } from '@/libs/theme/shape';
 import RobotoRegular from '@/assets/fonts/Roboto-Regular.ttf';
 import RobotoMedium from '@/assets/fonts/Roboto-Medium.ttf';
 import { User } from '@/packages/users';
-import {
-  COLOR_BY_CONFIDENCE_THRESHOLD,
-  TEXT_BY_CONFIDENCE_THRESHOLD,
-} from '../constants';
-import { getConfidenceThreshold } from '../helpers';
+import { useConfidenceDescriptors } from '../hooks';
 
 Font.register({
   family: 'Roboto',
@@ -136,14 +132,13 @@ const TableRow = (props: TableRowProps) => {
 const StudyReportDocument = (props: StudyReportDocumentProps) => {
   const { study, issuer } = props;
 
+  const { text: confidenceText, color: confidenceColor } =
+    useConfidenceDescriptors(study.confidence ?? 0);
+
   const currentDate = toDate(new Date());
   const formattedDate = format(currentDate, 'yyyy-MM-dd');
 
   const labelColWidth = '32%';
-
-  const confidenceThreshold = getConfidenceThreshold(study.confidence ?? 0);
-  const confidenceText = TEXT_BY_CONFIDENCE_THRESHOLD[confidenceThreshold];
-  const confidenceColor = COLOR_BY_CONFIDENCE_THRESHOLD[confidenceThreshold];
 
   return (
     <Document>
