@@ -1,7 +1,1 @@
-type User = {
-  email: string;
-  firstName: string;
-  lastName: string;
-};
-
-export { type User };
+export { type User } from './user.type';
