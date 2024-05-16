@@ -12,11 +12,10 @@ import { Study } from '@/packages/studies';
 import { toDate, format } from 'date-fns';
 import { heather } from '@/libs/theme/colors';
 import { shape } from '@/libs/theme/shape';
-
 import RobotoRegular from '@/assets/fonts/Roboto-Regular.ttf';
 import RobotoMedium from '@/assets/fonts/Roboto-Medium.ttf';
 import { User } from '@/packages/users';
-import { useConfidenceDescriptors } from '../hooks';
+import { useConfidenceDescriptors } from '../pages/studies/libs/hooks';
 
 Font.register({
   family: 'Roboto',

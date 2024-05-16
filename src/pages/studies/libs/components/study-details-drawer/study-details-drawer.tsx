@@ -15,11 +15,9 @@ import { DetailItemText } from '../detail-item-text';
 import { StudyStatusChip } from '../study-status-chip';
 import { styles } from './styles';
 import { ConfidenceWidget } from '../confidence-widget';
-import { pdf } from '@react-pdf/renderer';
-import { StudyReportDocument } from '../../pdf';
-import { useState } from 'react';
-import FileSaver from 'file-saver';
+import { StudyReportDocument } from '@/pdf-templates';
 import { useAuthStore } from '@/packages/auth';
+import { useSavePdf } from '@/libs/hooks';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -31,24 +29,22 @@ type StudyDetailsDrawerProps = {
 const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
   const { open, onClose, study } = props;
 
-  const currentUser = useAuthStore((state) => state.user);
+  const { savePdf, isLoading: isPdfLoading } = useSavePdf();
 
-  const [generatingPdf, setGeneratingPdf] = useState(false);
+  const currentUser = useAuthStore((state) => state.user);
 
   const reportFilename = `study_${study.id}_report_${study.date?.replaceAll(
     ' ',
     '_',
   )}.pdf`;
 
-  const savePdfReport = async () => {
+  const handleReportDownload = () => {
     if (!currentUser) return;
 
-    setGeneratingPdf(true);
-    const blob = await pdf(
+    savePdf(
       <StudyReportDocument study={study} issuer={currentUser} />,
-    ).toBlob();
-    FileSaver.saveAs(blob, reportFilename);
-    setGeneratingPdf(false);
+      reportFilename,
+    );
   };
 
   return (
@@ -142,13 +138,13 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                     {reportFilename}
                   </Typography>
                   <IconButton
-                    disabled={generatingPdf}
-                    onClick={savePdfReport}
+                    disabled={isPdfLoading}
+                    onClick={handleReportDownload}
                     sx={{
                       color: ({ palette }) => palette.primary.contrastText,
                     }}
                   >
-                    {generatingPdf ? (
+                    {isPdfLoading ? (
                       <CircularProgress size="20px" sx={{ color: '#fff' }} />
                     ) : (
                       <svg
