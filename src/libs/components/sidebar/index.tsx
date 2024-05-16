@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Divider,
   List,
   ListItemButton,
@@ -12,18 +11,28 @@ import {
   Theme,
   Typography,
 } from '@mui/material';
-import { GridViewRounded, DescriptionRounded } from '@mui/icons-material';
+import { SvgIconComponent } from '@mui/icons-material';
 import { styles } from './styles';
 import { Logo } from '../logo';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
-import { AppRoute } from '@/app';
 import { useTranslation } from 'react-i18next';
 import { mergeSx } from '@/libs/theme';
 import { ProfileMenu } from '../profile-menu';
-import { AddRounded, ExpandMoreRounded } from '@mui/icons-material';
+import { ExpandMoreRounded } from '@mui/icons-material';
 import { useState } from 'react';
 
-const Sidebar = () => {
+type SidebarProps = {
+  navItems: {
+    key: string;
+    path: string;
+    icon: SvgIconComponent;
+    title: string;
+  }[];
+};
+
+const Sidebar = (props: SidebarProps) => {
+  const { navItems } = props;
+
   const { t } = useTranslation('App');
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,25 +49,6 @@ const Sidebar = () => {
   const handleProfileMenuClose = () => {
     setprofileMenuAnchor(null);
   };
-
-  const handleNewStudyClick = () => {
-    navigate(AppRoute.NEW_STUDY);
-  };
-
-  const navItems = [
-    {
-      key: 'overview',
-      path: AppRoute.HOME,
-      icon: GridViewRounded,
-      title: t('Sidebar.Overview'),
-    },
-    {
-      key: 'studies',
-      path: AppRoute.STUDIES,
-      icon: DescriptionRounded,
-      title: t('Sidebar.Studies'),
-    },
-  ];
 
   return (
     <Stack sx={styles.wrapper}>
@@ -101,13 +91,6 @@ const Sidebar = () => {
           })}
         </List>
         <Stack gap={2}>
-          <Button
-            variant="contained"
-            startIcon={<AddRounded />}
-            onClick={handleNewStudyClick}
-          >
-            {t('Sidebar.NewStudy')}
-          </Button>
           <Divider orientation="horizontal" />
           <ListItemButton
             sx={{ flexGrow: 0, padding: '12px', margin: '-14px' }}

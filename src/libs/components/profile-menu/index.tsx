@@ -50,6 +50,10 @@ const ProfileMenu = (props: ProfileMenuProps) => {
     setChangeLanguageModalOpen(false);
   };
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <>
       <Menu
@@ -102,7 +106,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
           </Typography>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={logout}>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <LogoutRounded fontSize="small" />
           </ListItemIcon>

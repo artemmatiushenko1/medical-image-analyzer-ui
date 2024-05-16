@@ -12,6 +12,7 @@ import { initi18n } from './i18n';
 import { useAppStore } from './app';
 import { QueryClientProvider } from 'react-query';
 import { queryClient } from './libs/packages/react-query';
+import { BrowserRouter } from 'react-router-dom';
 
 const renderApp = () => {
   initi18n(useAppStore.getState().language);
@@ -21,7 +22,9 @@ const renderApp = () => {
       <QueryClientProvider client={queryClient}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <ThemeConfig>
-            <App />
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
           </ThemeConfig>
         </LocalizationProvider>
       </QueryClientProvider>
