@@ -13,15 +13,19 @@ import {
   IconButton,
   MenuItem,
   Select,
+  SelectProps,
   Tooltip,
   Typography,
 } from '@mui/material';
 import { selectedDiagnosticAccordion as styles } from './styles';
 import { useId } from 'react';
+import { useNewStudyStore } from '@/pages/new-study/new-study.store';
+import { heather } from '@/libs/theme/colors';
 
 type SelectedDiagnosticAccordionProps = {
   id: string;
   title: string;
+
   onDelete: (id: string) => void;
 };
 
@@ -32,6 +36,12 @@ const SelectedDiagnosticAccordion = (
 
   const modelSelectId = useId();
 
+  const availableModels = useNewStudyStore((state) => state.availableModels);
+  const selectedModelIds = useNewStudyStore((state) => state.selectedModelIds);
+  const updateSelectedModelIds = useNewStudyStore(
+    (state) => state.updateSelectedModelIds,
+  );
+
   const handleDeleteButtonClick: React.MouseEventHandler<HTMLButtonElement> = (
     e,
   ) => {
@@ -40,11 +50,11 @@ const SelectedDiagnosticAccordion = (
     onDelete(id);
   };
 
-  const AI_MODEL_SELECT_OPTIONS = [
-    { key: '1', title: 'Feedforward Neural Networks (FNN)', value: '1' },
-    { key: '2', title: 'Recurrent Neural Networks (RNN)', value: '2' },
-    { key: '3', title: 'Generative Adversarial Networks (GAN)', value: '3' },
-  ];
+  const handleModelSelectChange: SelectProps<string[]>['onChange'] = (e) => {
+    if (Array.isArray(e.target.value)) {
+      updateSelectedModelIds(e.target.value);
+    }
+  };
 
   return (
     <>
@@ -95,28 +105,37 @@ const SelectedDiagnosticAccordion = (
               <Select
                 multiple
                 id={modelSelectId}
-                defaultValue={[AI_MODEL_SELECT_OPTIONS[0].value]}
+                value={
+                  selectedModelIds.length > 0
+                    ? selectedModelIds
+                    : [availableModels[0].id]
+                }
+                onChange={handleModelSelectChange}
                 renderValue={(selected) => (
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => {
-                      const option = AI_MODEL_SELECT_OPTIONS.find(
-                        (item) => item.value === value,
+                      const option = availableModels.find(
+                        (model) => model.id === value,
                       );
 
                       return (
                         <Chip
-                          sx={{ alignSelf: 'center' }}
+                          sx={{
+                            alignSelf: 'center',
+                            backgroundColor: heather[100],
+                            color: heather[800],
+                          }}
                           key={value}
-                          label={option?.title}
+                          label={option?.name}
                         />
                       );
                     })}
                   </Box>
                 )}
               >
-                {AI_MODEL_SELECT_OPTIONS.map(({ key, value, title }) => (
-                  <MenuItem key={key} value={value}>
-                    <Typography variant="body2">{title}</Typography>
+                {availableModels.map(({ id, name }) => (
+                  <MenuItem key={id} value={id}>
+                    <Typography variant="body2">{name}</Typography>
                   </MenuItem>
                 ))}
               </Select>

@@ -2,6 +2,7 @@ import { PercentCrop } from 'react-image-crop';
 import { create } from 'zustand';
 import { CropSettings } from './libs/components/image-crop-dialog';
 import { DEFAULT_CROP_SETTINGS } from './libs/components/image-crop-dialog';
+import { Model } from '@/packages/models';
 
 type NewStudyState = {
   uploadedImageSrc: string | null;
@@ -10,6 +11,8 @@ type NewStudyState = {
   cropSettings: CropSettings;
   selectedDianosticIds: string[];
   createStudyStatusDialogOpen: boolean;
+  selectedModelIds: string[];
+  availableModels: Model[];
 };
 
 type NewStudyActions = {
@@ -21,6 +24,7 @@ type NewStudyActions = {
   updateSelectedDiagnostictIds: (newId: string) => void;
   setCreateStudyStatusDialogOpen: (newOpen: boolean) => void;
   reset: () => void;
+  updateSelectedModelIds: (ids: string[]) => void;
 };
 
 const INITIAL_STATE: NewStudyState = {
@@ -30,11 +34,18 @@ const INITIAL_STATE: NewStudyState = {
   cropSettings: DEFAULT_CROP_SETTINGS,
   selectedDianosticIds: [],
   createStudyStatusDialogOpen: false,
+  selectedModelIds: [],
+  availableModels: [
+    { id: '1', name: 'Feedforward Neural Networks (FNN)' },
+    { id: '2', name: 'Recurrent Neural Networks (RNN)' },
+    { id: '3', name: 'Generative Adversarial Networks (GAN)' },
+  ],
 };
 
 const useNewStudyStore = create<NewStudyState & NewStudyActions>()(
   (set, get) => ({
     ...INITIAL_STATE,
+
     setCurrentCrop: (currentCrop: PercentCrop) => set({ currentCrop }),
     setUploadedImageSrc: (uploadedImageSrc: string | null) =>
       set({ uploadedImageSrc }),
@@ -53,6 +64,9 @@ const useNewStudyStore = create<NewStudyState & NewStudyActions>()(
       } else {
         set({ selectedDianosticIds: Array.from(new Set([...prevIds, newId])) });
       }
+    },
+    updateSelectedModelIds: (newIds: string[]) => {
+      set({ selectedModelIds: newIds });
     },
     setCreateStudyStatusDialogOpen: (newOpen) => {
       set({ createStudyStatusDialogOpen: newOpen });

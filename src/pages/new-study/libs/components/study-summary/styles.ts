@@ -1,4 +1,5 @@
 import { createStyleSheet } from '@/libs/theme';
+import { heather } from '@/libs/theme/colors';
 
 const styles = createStyleSheet({
   root: {
@@ -22,8 +23,9 @@ const styles = createStyleSheet({
   },
   modelSettingChip: {
     fontSize: '12px',
-    backgroundColor: 'transparent',
-    color: ({ palette }) => palette.neutral.dark,
+    padding: 1,
+    backgroundColor: heather[100],
+    color: heather[800],
   },
   imageWrapperPaper: {
     p: 2,

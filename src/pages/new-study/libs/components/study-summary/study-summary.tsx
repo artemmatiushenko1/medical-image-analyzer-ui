@@ -9,12 +9,20 @@ const StudySummary = () => {
     (state) => state.availableDiagnostics,
   );
 
+  const availableModels = useNewStudyStore((state) => state.availableModels);
+
   const studyImage = useNewStudyStore(
     (state) => state.croppedImageSrc || state.uploadedImageSrc,
   );
 
   const selectedDiagnosticIds = useNewStudyStore(
     (state) => state.selectedDianosticIds,
+  );
+
+  const selectedModelIds = useNewStudyStore((state) => state.selectedModelIds);
+
+  const selectedModels = selectedModelIds.map((id) =>
+    availableModels.find((model) => model.id === id),
   );
 
   const selectedDiagnostics = selectedDiagnosticIds.map((id) =>
@@ -45,16 +53,22 @@ const StudySummary = () => {
               <Typography variant="body2" fontWeight={500}>
                 {diagnostic?.title}
               </Typography>
-              <Typography variant="caption" display="block">
-                AI model configuration:
+              <Typography
+                variant="caption"
+                sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}
+              >
+                <SettingsSuggestRounded sx={{ fontSize: '18px' }} /> AI Models:
               </Typography>
-              <Box>
-                <Chip
-                  color="primary"
-                  sx={styles.modelSettingChip}
-                  icon={<SettingsSuggestRounded sx={{ fontSize: '18px' }} />}
-                  label={'Architecture: ARM64'}
-                />
+              <Box display="flex" flexWrap="wrap" gap={1}>
+                {selectedModels.map((model) => {
+                  return (
+                    <Chip
+                      key={model?.id}
+                      sx={styles.modelSettingChip}
+                      label={model?.name}
+                    />
+                  );
+                })}
               </Box>
             </Paper>
           ))}
