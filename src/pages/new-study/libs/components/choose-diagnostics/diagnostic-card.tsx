@@ -9,15 +9,20 @@ type DiagnosticCardProps = {
   imgSrc: string;
   onClick: () => void;
   selected?: boolean;
+  disabled: boolean;
 };
 
 const DiagnosticCard = (props: DiagnosticCardProps) => {
-  const { selected = false, title, imgSrc, onClick } = props;
+  const { selected = false, disabled = false, title, imgSrc, onClick } = props;
 
   return (
     <Box
       onClick={onClick}
-      sx={mergeSx(styles.root, selected && styles.selected)}
+      sx={mergeSx(
+        styles.root,
+        selected && styles.selected,
+        disabled && styles.disabled,
+      )}
     >
       <Box component="img" sx={styles.image} src={imgSrc} alt={title} />
       {selected && (

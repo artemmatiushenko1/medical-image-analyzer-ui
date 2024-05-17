@@ -1,30 +1,38 @@
 import { MonitorHeart } from '@mui/icons-material';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { DiagnosticCard } from './diagnostic-card';
 import { styles } from './styles';
 import { StudyInfoFormSectionHeader } from '../study-info-form/study-info-form-section-header';
 import { SelectedDiagnosticAccordion } from './selected-diagnostic-accordion';
 import { useNewStudyStore } from '@/pages/new-study/new-study.store';
 import { Diagnostic, useDiagnosticsStore } from '@/packages/diagnostics';
+import { MAX_SELECTED_DIAGNOSTICS } from '../../constants';
 
 const ChooseDiagnostics = () => {
   const availableDiagnostics = useDiagnosticsStore(
     (state) => state.availableDiagnostics,
   );
-  const selectedDiagnosticsIds = useNewStudyStore(
+  const selectedDiagnosticIds = useNewStudyStore(
     (state) => state.selectedDianosticIds,
   );
   const updateSelectedDiagnostictIds = useNewStudyStore(
     (state) => state.updateSelectedDiagnostictIds,
   );
 
-  const selectedDiagnostics = selectedDiagnosticsIds
+  const selectedDiagnostics = selectedDiagnosticIds
     .map((id) =>
       availableDiagnostics.find((diagnostic) => diagnostic.id === id),
     )
     .filter((diagnostic): diagnostic is Diagnostic => Boolean(diagnostic));
 
   const handleDiagnosticCardClick = (id: string) => {
+    if (
+      selectedDiagnosticIds.length >= MAX_SELECTED_DIAGNOSTICS &&
+      !selectedDiagnosticIds.includes(id)
+    ) {
+      return;
+    }
+
     updateSelectedDiagnostictIds(id);
   };
 
@@ -38,16 +46,20 @@ const ChooseDiagnostics = () => {
         <Box sx={styles.diagnosticsList}>
           {availableDiagnostics.map((item) => (
             <DiagnosticCard
+              disabled={
+                selectedDiagnosticIds.length >= MAX_SELECTED_DIAGNOSTICS &&
+                !selectedDiagnosticIds.includes(item.id)
+              }
               key={item.id}
               title={item.title}
               imgSrc={item.previewImg}
-              selected={selectedDiagnosticsIds.indexOf(item.id) !== -1}
+              selected={selectedDiagnosticIds.indexOf(item.id) !== -1}
               onClick={() => handleDiagnosticCardClick(item.id)}
             />
           ))}
         </Box>
       </Stack>
-      {selectedDiagnosticsIds.length > 0 && (
+      {selectedDiagnosticIds.length > 0 && (
         <Stack sx={styles.right}>
           <StudyInfoFormSectionHeader
             icon={<MonitorHeart color="primary" />}
@@ -64,22 +76,6 @@ const ChooseDiagnostics = () => {
               />
             ))}
           </Box>
-          {!selectedDiagnosticsIds.length && (
-            <Box
-              sx={{
-                display: 'flex',
-                flex: 1,
-                height: 0,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Typography textAlign="center" color="InactiveCaptionText">
-                No diagnostics selected.
-                <br /> Please choose them on the left side.
-              </Typography>
-            </Box>
-          )}
         </Stack>
       )}
     </Box>

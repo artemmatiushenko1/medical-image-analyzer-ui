@@ -16,6 +16,10 @@ const cardStyles = createStyleSheet({
   selected: {
     outline: ({ palette }) => `2px solid ${palette.success.main}`,
   },
+  disabled: {
+    cursor: 'not-allowed',
+    opacity: 0.8,
+  },
   image: {
     width: '100%',
     height: '100%',
@@ -106,7 +110,8 @@ const selectedDiagnosticAccordion = createStyleSheet({
     alignItems: 'center',
   },
   infoIcon: {
-    fontSize: '16px',
+    fontSize: '15px',
+    ml: 1,
     color: ({ palette }) => palette.neutral.main,
   },
 });

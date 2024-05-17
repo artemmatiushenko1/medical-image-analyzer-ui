@@ -95,7 +95,7 @@ const NewStudy = () => {
     },
     [NewStudyCreationStep.CHOOSE_DIAGNOSTICS]: {
       title: 'Choose from available diagnostics',
-      description: 'Click on the card to select a diagnostic for a image.',
+      description: 'Click on the card to select a diagnostic for an image.',
     },
     [NewStudyCreationStep.CONFIRM]: {
       title: 'Study Overview',

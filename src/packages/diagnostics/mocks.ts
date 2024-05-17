@@ -14,17 +14,17 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
   {
     id: '3',
     previewImg: 'https://med.comsys.kpi.ua/images/services/3.jpg',
-    title: 'Класифікація COVID-аномалій',
+    title: 'Діагностування COVID-19',
   },
   {
     id: '4',
     previewImg: 'https://med.comsys.kpi.ua/images/services/4.jpg',
-    title: 'Класифікація аномалій шкіри (меланома)',
+    title: 'Діагностування меланоми',
   },
   {
     id: '5',
     previewImg: 'https://med.comsys.kpi.ua/images/services/5.jpg',
-    title: 'Класифікація аномалій шкіри (хвороба Лайма)',
+    title: 'Діагностування хвороби Лайма',
   },
   {
     id: '6',
