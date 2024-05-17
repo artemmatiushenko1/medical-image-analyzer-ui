@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "generate-dependency-graph": "npx depcruise src --include-only \"^src\" --output-type dot | dot -T svg > dependency-graph.svg"
+    "generate-dependency-graph:svg": "npx depcruise src --include-only \"^src\" --output-type dot | dot -T svg > dependency-graph.svg",
+    "generate-dependency-graph:png": "npx depcruise src --include-only \"^src\" --output-type dot | dot -Tpng > dependency-graph.png"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
