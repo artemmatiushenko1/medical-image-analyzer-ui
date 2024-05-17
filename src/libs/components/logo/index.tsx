@@ -11,6 +11,7 @@ const Logo = () => {
         justifyContent: 'center',
         maxWidth: '125px',
         width: '100%',
+        height: '23px',
       }}
     >
       <Box

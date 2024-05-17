@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { SignInForm } from './libs/components';
 import signInHero from '@/assets/sign-in-hero.png';
@@ -6,9 +6,10 @@ import signInHero from '@/assets/sign-in-hero.png';
 const SignIn = () => {
   return (
     <Box sx={styles.root}>
-      <Box sx={styles.leftSide}>
+      <Stack sx={styles.leftSide}>
         <Box sx={styles.leftSideImage} component="img" src={signInHero} />
-      </Box>
+        <Typography sx={styles.motto}>AI Vision for Your Health</Typography>
+      </Stack>
       <Box sx={styles.rightSide}>
         <SignInForm />
       </Box>
