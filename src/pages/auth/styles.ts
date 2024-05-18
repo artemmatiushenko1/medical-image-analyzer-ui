@@ -39,7 +39,7 @@ const styles = createStyleSheet({
     bottom: '5%',
     left: '50%',
     color: ({ palette }) => palette.primary.contrastText,
-    fontSize: '11px',
+    fontSize: '14px',
     transform: 'translateX(-50%)',
   },
 });

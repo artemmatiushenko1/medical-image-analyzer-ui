@@ -1,6 +1,7 @@
 import { Components, Theme } from '@mui/material';
 import { palette } from './palette';
 import { shape } from './shape';
+import { heather } from './colors';
 
 const components = {
   MuiButton: {
@@ -54,9 +55,25 @@ const components = {
   MuiInputBase: {
     styleOverrides: {
       root: {
+        fontSize: '15px',
         borderRadius: '7px !important',
         '::before, ::after': {
           display: 'none',
+        },
+        ':hover:not(&.Mui-focused) .MuiOutlinedInput-notchedOutline': {
+          borderColor: heather[500],
+        },
+        '.MuiOutlinedInput-notchedOutline': {
+          borderColor: heather[400],
+        },
+      },
+    },
+  },
+  MuiTextField: {
+    styleOverrides: {
+      root: {
+        '.MuiInputAdornment-root': {
+          color: heather[400],
         },
       },
     },

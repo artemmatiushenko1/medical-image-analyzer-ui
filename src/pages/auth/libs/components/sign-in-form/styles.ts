@@ -18,7 +18,10 @@ const styles = createStyleSheet({
     marginBottom: 8,
   },
   formControlLabel: {
-    fontSize: '15px',
+    fontSize: '14px',
+  },
+  input: {
+    fontSize: '12px',
   },
 });
 

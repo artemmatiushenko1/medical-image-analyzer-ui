@@ -1,10 +1,15 @@
-import { VisibilityOffRounded, VisibilityRounded } from '@mui/icons-material';
+import {
+  AlternateEmailRounded,
+  VisibilityOffRounded,
+  VisibilityRounded,
+} from '@mui/icons-material';
 import {
   Box,
   Button,
   FormControl,
   FormLabel,
   IconButton,
+  InputAdornment,
   Stack,
   TextField,
   Typography,
@@ -14,6 +19,8 @@ import { styles } from './styles';
 import { Logo } from '@/libs/components';
 import { FormEvent, useState } from 'react';
 import { MOCK_USER, useAuthStore } from '@/packages/auth';
+import { Link } from 'react-router-dom';
+import { palette } from '@/libs/theme/palette';
 
 const SignInForm = () => {
   const setUser = useAuthStore((state) => state.setUser);
@@ -41,7 +48,18 @@ const SignInForm = () => {
           <FormLabel htmlFor="email" sx={styles.formControlLabel}>
             Email address
           </FormLabel>
-          <TextField id="email" placeholder="Your email address" />
+          <TextField
+            sx={styles.input}
+            id="email"
+            placeholder="Your email address"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end" sx={{ pr: 0.5 }}>
+                  <AlternateEmailRounded />
+                </InputAdornment>
+              ),
+            }}
+          />
         </FormControl>
         <FormControl sx={styles.formControl}>
           <FormLabel htmlFor="password" sx={styles.formControlLabel}>
@@ -51,27 +69,39 @@ const SignInForm = () => {
             id="password"
             type={isPasswordVisible ? 'text' : 'password'}
             placeholder="Your password"
+            sx={styles.input}
             InputProps={{
               endAdornment: (
-                <IconButton onClick={handlePasswordVisibilityToggle}>
-                  {isPasswordVisible ? (
-                    <VisibilityOffRounded />
-                  ) : (
-                    <VisibilityRounded />
-                  )}
-                </IconButton>
+                <InputAdornment position="end" sx={{ mr: -0.5 }}>
+                  <IconButton
+                    color="inherit"
+                    onClick={handlePasswordVisibilityToggle}
+                  >
+                    {isPasswordVisible ? (
+                      <VisibilityOffRounded />
+                    ) : (
+                      <VisibilityRounded />
+                    )}
+                  </IconButton>
+                </InputAdornment>
               ),
             }}
           />
         </FormControl>
         <Button
           type="submit"
-          sx={styles.signInButton}
-          variant="contained"
           size="large"
+          variant="contained"
+          sx={styles.signInButton}
         >
           Sign in
         </Button>
+        <Typography textAlign="center" variant="caption">
+          Don't have an account?{' '}
+          <Link to="#" style={{ color: palette.primary.main }}>
+            Request access
+          </Link>
+        </Typography>
       </Stack>
     </Box>
   );
