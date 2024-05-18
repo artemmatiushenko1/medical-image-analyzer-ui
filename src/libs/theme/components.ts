@@ -60,11 +60,15 @@ const components = {
         '::before, ::after': {
           display: 'none',
         },
-        ':hover:not(&.Mui-focused) .MuiOutlinedInput-notchedOutline': {
-          borderColor: heather[500],
-        },
+        ':hover:not(&.Mui-focused, :has(.Mui-disabled)) .MuiOutlinedInput-notchedOutline':
+          {
+            borderColor: heather[500],
+          },
         '.MuiOutlinedInput-notchedOutline': {
           borderColor: heather[400],
+        },
+        'input::placeholder': {
+          color: heather[700],
         },
       },
     },
@@ -113,6 +117,13 @@ const components = {
     styleOverrides: {
       paper: {
         borderRadius: 9,
+      },
+    },
+  },
+  MuiFormLabel: {
+    styleOverrides: {
+      root: {
+        fontSize: '14px',
       },
     },
   },

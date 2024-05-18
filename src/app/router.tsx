@@ -16,8 +16,11 @@ const UserRoutes = (
 const AdminRoutes = (
   <>
     <Route path={AppRoute.USERS} element={<Users />} />
-    <Route path={AppRoute.MODELS} element={<Models />} />
-    <Route path={AppRoute.HOME} element={<Navigate to={AppRoute.USERS} />} />
+    <Route path={AppRoute.DIAGNOSTICS} element={<Models />} />
+    <Route
+      path={AppRoute.HOME}
+      element={<Navigate to={AppRoute.DIAGNOSTICS} />}
+    />
   </>
 );
 

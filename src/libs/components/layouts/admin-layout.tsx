@@ -1,22 +1,25 @@
 import { Box, Stack } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from '../sidebar';
-import { ManageAccountsRounded, SettingsSuggest } from '@mui/icons-material';
+import {
+  ManageAccountsRounded,
+  MonitorHeartRounded,
+} from '@mui/icons-material';
 import { AppRoute } from '@/app';
 
 const AdminLayout = () => {
   const navItems = [
     {
+      key: 'diagnostics',
+      path: AppRoute.DIAGNOSTICS,
+      icon: MonitorHeartRounded,
+      title: 'Diagnostics',
+    },
+    {
       key: 'users',
       path: AppRoute.USERS,
       icon: ManageAccountsRounded,
       title: 'Users',
-    },
-    {
-      key: 'models',
-      path: AppRoute.MODELS,
-      icon: SettingsSuggest,
-      title: 'Models',
     },
   ];
 

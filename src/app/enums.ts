@@ -4,8 +4,8 @@ const AppRoute = {
   SIGN_IN: '/sign-in',
   STUDIES: '/studies',
   NEW_STUDY: '/new-study',
-  USERS: '/users',
-  MODELS: '/models',
+  USERS: '/managment/users',
+  DIAGNOSTICS: '/managment/diagnostics',
 } as const;
 
 export { AppRoute };
