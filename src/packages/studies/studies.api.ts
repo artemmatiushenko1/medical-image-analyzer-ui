@@ -11,4 +11,6 @@ class StudiesApi {
     new Promise((resolve) => setTimeout(() => resolve(undefined), 2000));
 }
 
-export { StudiesApi };
+const studiesApi = new StudiesApi();
+
+export { studiesApi };

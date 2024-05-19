@@ -11,18 +11,8 @@ import {
   StudyCard,
   StudyDetailsDrawer,
 } from './libs/components';
-import {
-  Study,
-  StudyQueryKey,
-  StudyStatus,
-  studiesApi,
-} from '@/packages/studies';
-import { useQuery } from 'react-query';
-import {
-  MAX_STUDY_LOADING_PREVIEWS,
-  STUDIES_QUERY_KEY_PREFIX,
-} from './libs/constants';
-import { createQueryKey } from '@/libs/packages/react-query';
+import { Study, StudyStatus, useGetStudies } from '@/packages/studies';
+import { MAX_STUDY_LOADING_PREVIEWS } from './libs/constants';
 import { ValueOf } from '@/libs/types';
 
 const Studies = () => {
@@ -34,10 +24,7 @@ const Studies = () => {
     Boolean(selectedStudyId),
   );
 
-  const { isLoading, data: studies } = useQuery(
-    createQueryKey(STUDIES_QUERY_KEY_PREFIX, StudyQueryKey.GET_ALL_STUDIES),
-    studiesApi.getAllStudies,
-  );
+  const { isLoading, data: studies } = useGetStudies();
 
   const selectedStudy =
     studies?.find((study) => study.id === selectedStudyId) ?? ({} as Study);

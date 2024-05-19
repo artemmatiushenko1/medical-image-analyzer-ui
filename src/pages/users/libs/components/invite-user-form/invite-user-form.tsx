@@ -1,27 +1,18 @@
 import { Button } from '@/libs/components';
-import { showNotification } from '@/libs/helpers';
-import { AddUserRequest, usersApi } from '@/packages/users';
+import { AddUserRequest } from '@/packages/users';
+import { useAddUser } from '@/packages/users/queries';
 import { Box, FormControl, FormLabel, Stack, TextField } from '@mui/material';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
 
 const InviteUserForm = () => {
   const { control, handleSubmit: submit } = useForm<AddUserRequest>({
     defaultValues: { firstName: '', lastName: '', email: '' },
   });
 
-  const { mutate: addUserMutate, isLoading } = useMutation(
-    (request: AddUserRequest) => usersApi.addUser(request),
-    {
-      onSettled: (_, error) =>
-        error
-          ? showNotification('Failed to add new user.', 'error')
-          : showNotification('New user was successfully created.', 'success'),
-    },
-  );
+  const { mutate: addUser, isLoading } = useAddUser();
 
   const handleSubmit: SubmitHandler<AddUserRequest> = (data) => {
-    addUserMutate(data);
+    addUser(data);
   };
 
   return (

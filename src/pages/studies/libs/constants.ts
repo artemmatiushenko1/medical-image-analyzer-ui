@@ -4,8 +4,6 @@ import { amber } from '@mui/material/colors';
 
 const MAX_STUDY_LOADING_PREVIEWS = 6;
 
-const STUDIES_QUERY_KEY_PREFIX = 'Studies';
-
 const COLOR_BY_CONFIDENCE_THRESHOLD = {
   [ConfidenceThreshold.LOW]: {
     dark: emerald[400],
@@ -41,7 +39,6 @@ const TEXT_BY_CONFIDENCE_THRESHOLD = {
 
 export {
   MAX_STUDY_LOADING_PREVIEWS,
-  STUDIES_QUERY_KEY_PREFIX,
   COLOR_BY_CONFIDENCE_THRESHOLD,
   TEXT_BY_CONFIDENCE_THRESHOLD,
 };

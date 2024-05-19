@@ -8,21 +8,15 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useQuery } from 'react-query';
 import { styles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/app';
-import { createQueryKey } from '@/libs/packages/react-query';
-import { StudyQueryKey, studiesApi } from '@/packages/studies';
-import { NEW_STUDY_QUERY_KEY_PREFIX } from '../../constants';
+import { useCreateStudy } from '@/packages/studies';
 
 const CreateStudyStatusDialog = () => {
   const navigate = useNavigate();
 
-  const { isLoading, isSuccess } = useQuery(
-    createQueryKey(NEW_STUDY_QUERY_KEY_PREFIX, StudyQueryKey.CREATE_STUDY),
-    studiesApi.createStudy,
-  );
+  const { isLoading, isSuccess } = useCreateStudy();
 
   const handleOkClick = () => {
     navigate(AppRoute.HOME);

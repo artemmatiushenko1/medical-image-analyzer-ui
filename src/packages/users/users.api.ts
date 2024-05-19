@@ -5,4 +5,6 @@ class UsersApi {
   addUser = (request: AddUserRequest) => delayResolve(2000, request);
 }
 
-export { UsersApi };
+const usersApi = new UsersApi();
+
+export { usersApi };
