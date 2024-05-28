@@ -1,5 +1,5 @@
 import { AppRoute } from './enums';
-import { Models, NewStudy, SignIn, Studies, Users } from '@/pages';
+import { Diagnostics, NewStudy, SignIn, Studies, Users } from '@/pages';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AdminLayout, UserLayout } from '../libs/components';
 import { PrivateRoute, PublicRoute } from '../libs/components/router';
@@ -16,7 +16,7 @@ const UserRoutes = (
 const AdminRoutes = (
   <>
     <Route path={AppRoute.USERS} element={<Users />} />
-    <Route path={AppRoute.DIAGNOSTICS} element={<Models />} />
+    <Route path={AppRoute.DIAGNOSTICS} element={<Diagnostics />} />
     <Route
       path={AppRoute.HOME}
       element={<Navigate to={AppRoute.DIAGNOSTICS} />}
