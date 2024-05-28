@@ -10,6 +10,9 @@ const styles = createStyleSheet({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    '.MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
+      px: 3,
+    },
   },
 });
 
