@@ -11,7 +11,7 @@ const Close = () => {
       onClick={onClose}
       sx={{
         color: ({ palette }) => palette.primary.main,
-        background: ({ palette }) => alpha(palette.primary.main, 0.05),
+        background: ({ palette }) => alpha(palette.primary.main, 0.04),
       }}
     >
       <CloseRounded />

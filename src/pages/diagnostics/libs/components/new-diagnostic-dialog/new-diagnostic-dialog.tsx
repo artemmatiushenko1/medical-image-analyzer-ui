@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { NewDiagnosticForm } from '../new-diagnostic-form';
 import { Dialog } from '@/libs/components';
 
@@ -11,7 +11,12 @@ const NewDiagnosticDialog = (props: NewDiagnosticDialogProps) => {
   const { open, onClose } = props;
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="sm"
+      PaperProps={{ sx: { width: '400px' } }}
+    >
       <Dialog.Title
         sx={{
           display: 'flex',
@@ -25,7 +30,9 @@ const NewDiagnosticDialog = (props: NewDiagnosticDialogProps) => {
         <Dialog.Close />
       </Dialog.Title>
       <Dialog.Content>
-        <NewDiagnosticForm />
+        <Box sx={{ pt: 2 }}>
+          <NewDiagnosticForm />
+        </Box>
       </Dialog.Content>
     </Dialog>
   );
