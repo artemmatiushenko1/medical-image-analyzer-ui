@@ -15,9 +15,9 @@ import { DetailItemText } from '../detail-item-text';
 import { StudyStatusChip } from '../study-status-chip';
 import { styles } from './styles';
 import { ConfidenceWidget } from '../confidence-widget';
-import { StudyReportDocument } from '@/pdf-templates';
 import { useAuthStore } from '@/packages/auth';
 import { useSavePdf } from '@/libs/hooks';
+import { StudyReportDocument } from '../../pdf-templates';
 
 type StudyDetailsDrawerProps = {
   open: boolean;

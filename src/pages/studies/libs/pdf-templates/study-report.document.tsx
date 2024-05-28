@@ -15,7 +15,7 @@ import { shape } from '@/libs/theme/shape';
 import RobotoRegular from '@/assets/fonts/Roboto-Regular.ttf';
 import RobotoMedium from '@/assets/fonts/Roboto-Medium.ttf';
 import { User } from '@/packages/users';
-import { useConfidenceDescriptors } from '../pages/studies/libs/hooks';
+import { useConfidenceDescriptors } from '../hooks';
 
 Font.register({
   family: 'Roboto',
