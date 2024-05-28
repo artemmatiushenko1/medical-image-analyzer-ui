@@ -16,11 +16,11 @@ import {
   Typography,
 } from '@mui/material';
 import { ChangeLanguageDialog } from '../change-language-dialog';
-import { useState } from 'react';
 import { useAppStore } from '@/app';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/packages/auth';
 import { LANGUAGE_DETAILS } from '@/i18n';
+import { useClosable } from '@/libs/hooks';
 
 type ProfileMenuProps = {
   open: boolean;
@@ -39,15 +39,15 @@ const ProfileMenu = (props: ProfileMenuProps) => {
   const currentUser = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
-  const [changeLanguageModalOpen, setChangeLanguageModalOpen] = useState(false);
+  const {
+    isOpen: isChangeLanguageDialogOpen,
+    close: closeChangeLanguageDialog,
+    open: openChangeLanguageDialog,
+  } = useClosable(false);
 
   const handleChangeLanguageClick = () => {
-    setChangeLanguageModalOpen(true);
+    openChangeLanguageDialog();
     onClose();
-  };
-
-  const handleChangeLanguageDialogClose = () => {
-    setChangeLanguageModalOpen(false);
   };
 
   const handleLogout = () => {
@@ -114,8 +114,8 @@ const ProfileMenu = (props: ProfileMenuProps) => {
         </MenuItem>
       </Menu>
       <ChangeLanguageDialog
-        open={changeLanguageModalOpen}
-        onClose={handleChangeLanguageDialogClose}
+        open={isChangeLanguageDialogOpen}
+        onClose={closeChangeLanguageDialog}
       />
     </>
   );

@@ -5,10 +5,6 @@ import { LanguageRounded } from '@mui/icons-material';
 import {
   Box,
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   FormControlLabel,
   Radio,
   RadioGroup,
@@ -19,6 +15,7 @@ import { styles } from './styles';
 import { mergeSx } from '@/libs/theme';
 import { HighlightedIcon } from '../highlighted-icon';
 import { LANGUAGE_DETAILS } from '@/i18n';
+import { Dialog } from '../dialog';
 
 type ChangeLanguageDialogProps = {
   open: boolean;
@@ -53,13 +50,13 @@ const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
         sx: styles.paper,
       }}
     >
-      <DialogTitle>
+      <Dialog.Title>
         <Box sx={styles.title}>
           <HighlightedIcon iconElement={<LanguageRounded />} />
           <Typography variant="h6">Language</Typography>
         </Box>
-      </DialogTitle>
-      <DialogContent>
+      </Dialog.Title>
+      <Dialog.Content>
         <RadioGroup
           value={language}
           sx={styles.radioGroup}
@@ -90,15 +87,15 @@ const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
             );
           })}
         </RadioGroup>
-      </DialogContent>
-      <DialogActions sx={styles.actions}>
+      </Dialog.Content>
+      <Dialog.Actions sx={styles.actions}>
         <Button onClick={onClose} sx={styles.cancelButton}>
           Cancel
         </Button>
         <Button variant="contained" onClick={handleSaveClick}>
           Save
         </Button>
-      </DialogActions>
+      </Dialog.Actions>
     </Dialog>
   );
 };

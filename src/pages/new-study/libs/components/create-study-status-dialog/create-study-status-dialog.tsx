@@ -3,8 +3,6 @@ import {
   Box,
   Button,
   CircularProgress,
-  Dialog,
-  DialogContent,
   Stack,
   Typography,
 } from '@mui/material';
@@ -12,6 +10,7 @@ import { styles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/app';
 import { useCreateStudy } from '@/packages/studies';
+import { Dialog } from '@/libs/components';
 
 const CreateStudyStatusDialog = () => {
   const navigate = useNavigate();
@@ -44,7 +43,7 @@ const CreateStudyStatusDialog = () => {
 
   return (
     <Dialog open maxWidth="lg">
-      <DialogContent sx={styles.dialogContent}>
+      <Dialog.Content sx={styles.dialogContent}>
         <Stack alignItems="center" gap={4}>
           {isLoading && (
             <>
@@ -64,7 +63,7 @@ const CreateStudyStatusDialog = () => {
             </>
           )}
         </Stack>
-      </DialogContent>
+      </Dialog.Content>
     </Dialog>
   );
 };

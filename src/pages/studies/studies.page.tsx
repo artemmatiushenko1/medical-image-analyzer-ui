@@ -14,15 +14,18 @@ import {
 import { Study, StudyStatus, useGetStudies } from '@/packages/studies';
 import { MAX_STUDY_LOADING_PREVIEWS } from './libs/constants';
 import { ValueOf } from '@/libs/types';
+import { useClosable } from '@/libs/hooks';
 
 const Studies = () => {
   const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<ValueOf<
     typeof StudyStatus
   > | null>(null);
-  const [detailsDrawerOpen, setDetailsDrawerOpen] = useState(
-    Boolean(selectedStudyId),
-  );
+  const {
+    isOpen: isDetailsDrawerOpen,
+    close: closeDetailsDrawer,
+    open: openDetailsDrawer,
+  } = useClosable(Boolean(selectedStudyId));
 
   const { isLoading, data: studies } = useGetStudies();
 
@@ -30,7 +33,11 @@ const Studies = () => {
     studies?.find((study) => study.id === selectedStudyId) ?? ({} as Study);
 
   useEffect(() => {
-    setDetailsDrawerOpen(selectedStudyId ? true : false);
+    if (selectedStudyId) {
+      openDetailsDrawer();
+    } else {
+      closeDetailsDrawer();
+    }
   }, [selectedStudyId]);
 
   const completedStudiesCount = studies?.filter(
@@ -69,14 +76,14 @@ const Studies = () => {
 
   const handleViewStudyDetails = (id: string) => {
     setSelectedStudyId(id);
-    setDetailsDrawerOpen(true);
+    openDetailsDrawer();
   };
 
   const handleDetailsDrawerClose = () => {
     setTimeout(() => {
       setSelectedStudyId(null);
     }, 100);
-    setDetailsDrawerOpen(false);
+    closeDetailsDrawer();
   };
 
   return (
@@ -129,7 +136,7 @@ const Studies = () => {
         ))}
       </Stack>
       <StudyDetailsDrawer
-        open={detailsDrawerOpen}
+        open={isDetailsDrawerOpen}
         onClose={handleDetailsDrawerClose}
         study={selectedStudy}
       />

@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 
 type DialogContext = {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 const DialogContext = createContext<DialogContext>({

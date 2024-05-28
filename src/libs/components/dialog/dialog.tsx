@@ -1,4 +1,5 @@
 import {
+  DialogActions,
   DialogContent,
   DialogTitle,
   Dialog as MuiDialog,
@@ -7,7 +8,7 @@ import {
 import { DialogContextProvider } from './dialog.context';
 import { Close } from './close';
 
-type DialogProps = Omit<MuiDialogProps, 'onClose'> & { onClose: () => void };
+type DialogProps = Omit<MuiDialogProps, 'onClose'> & { onClose?: () => void };
 
 const Dialog = (props: DialogProps) => {
   const { open, onClose } = props;
@@ -22,5 +23,6 @@ const Dialog = (props: DialogProps) => {
 Dialog.Close = Close;
 Dialog.Title = DialogTitle;
 Dialog.Content = DialogContent;
+Dialog.Actions = DialogActions;
 
 export { Dialog };
