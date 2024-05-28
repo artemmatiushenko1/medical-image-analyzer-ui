@@ -10,7 +10,7 @@ class UsersApi {
     const user = await delayResolve<AddUserResponse>(2000, {
       ...request,
       id: crypto.randomUUID(),
-      role: Role.USER,
+      role: Role.ADMIN,
     });
     this.users = [...this.users, user];
     return user;

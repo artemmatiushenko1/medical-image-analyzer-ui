@@ -4,3 +4,4 @@ export { AdminLayout, UserLayout } from './layouts';
 export { Button } from './button';
 export { Loader } from './loader';
 export { Breadcrumbs } from './breadcrumbs';
+export { Dialog } from './dialog';
