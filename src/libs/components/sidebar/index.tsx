@@ -128,6 +128,8 @@ const Sidebar = (props: SidebarProps) => {
             open={profileMenuOpen}
             anchorEl={profileMenuAnchor}
             onClose={handleProfileMenuClose}
+            transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
           />
         </Stack>
       </Stack>
