@@ -8,7 +8,7 @@ const useAddUser = () => {
 
   return useMutation((request: AddUserRequest) => usersApi.addUser(request), {
     onSuccess: () => {
-      queryClient.invalidateQueries([UsersQueryKey.GET_ALL_USERS]);
+      queryClient.invalidateQueries(UsersQueryKey.GET_ALL_USERS);
     },
   });
 };
