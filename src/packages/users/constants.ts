@@ -1,0 +1,3 @@
+const USERS_QUERY_KEY_PREFIX = 'Users';
+
+export { USERS_QUERY_KEY_PREFIX };

@@ -18,10 +18,12 @@ const components = {
   },
   MuiPaper: {
     styleOverrides: {
-      root: (props) => ({
-        border: `1px solid ${palette.neutral.light}`,
+      rounded: (props) => ({
         borderRadius: !props.square ? shape.borderRadius * 3 : 0,
       }),
+      root: {
+        border: `1px solid ${palette.neutral.light}`,
+      },
     },
     defaultProps: {
       elevation: 0,

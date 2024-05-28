@@ -1,11 +1,12 @@
 import { Loader } from '@/libs/components';
 import { DataGrid, DataGridProps } from '@mui/x-data-grid';
 import { styles } from './styles';
+import { columns } from './columns';
 
-type UsersTableProps = Pick<DataGridProps, 'loading' | 'columns' | 'rows'>;
+type UsersTableProps = Pick<DataGridProps, 'loading' | 'rows'>;
 
 const UsersTable = (props: UsersTableProps) => {
-  const { loading, rows, columns } = props;
+  const { loading, rows } = props;
 
   return (
     <DataGrid

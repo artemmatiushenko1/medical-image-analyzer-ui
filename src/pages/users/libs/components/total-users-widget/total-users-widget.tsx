@@ -17,7 +17,7 @@ const TotalUsersWidget = (props: TotalUsersWidgetProps) => {
             sx={{ color: ({ palette }) => palette.neutral.main }}
           />
           {loading ? (
-            <Skeleton animation="wave" width={100} height={38} />
+            <Skeleton animation="wave" width={100} height={32} />
           ) : (
             <Typography variant="h6" fontWeight={600}>
               {count}

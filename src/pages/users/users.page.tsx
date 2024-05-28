@@ -8,73 +8,12 @@ import {
 import { styles } from './styles';
 import { AddRounded } from '@mui/icons-material';
 import { useState } from 'react';
-import { GridColDef, GridRowsProp } from '@mui/x-data-grid';
-import { Role, User } from '@/packages/users';
+import { useGetAllUsers } from '@/packages/users';
 import { Breadcrumbs } from '@/libs/components';
 
-const rows: GridRowsProp<User> = [
-  {
-    id: '1',
-    firstName: 'Artem',
-    lastName: 'Matiushenko',
-    email: 'artem.matiushenko@gmail.com',
-    role: Role.USER,
-  },
-  {
-    id: '2',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@gmail.com',
-    role: Role.USER,
-  },
-  {
-    id: '3',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@gmail.com',
-    role: Role.USER,
-  },
-  {
-    id: '4',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@gmail.com',
-    role: Role.USER,
-  },
-  {
-    id: '5',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@gmail.com',
-    role: Role.USER,
-  },
-];
-
-const columns: GridColDef<User>[] = [
-  {
-    field: 'firstName',
-    headerName: 'First Name',
-    sortable: false,
-    resizable: false,
-    flex: 1,
-  },
-  {
-    field: 'lastName',
-    headerName: 'Last Name',
-    sortable: false,
-    resizable: false,
-    flex: 1,
-  },
-  {
-    field: 'email',
-    headerName: 'Email',
-    sortable: false,
-    resizable: false,
-    flex: 1,
-  },
-];
-
 const Users = () => {
+  const { isLoading, data: users = [] } = useGetAllUsers();
+
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const breadcrumbs = ['Home', 'Users'];
@@ -82,8 +21,6 @@ const Users = () => {
   const handleHandleAddUserClick = () => {
     setDrawerOpen((prev) => !prev);
   };
-
-  const loading = false;
 
   const handleAddUserDraweClose = () => {
     setDrawerOpen(false);
@@ -118,8 +55,8 @@ const Users = () => {
               </Button>
             </Box>
           </Stack>
-          <TotalUsersWidget loading={loading} count={123} />
-          <UsersTable loading={loading} columns={columns} rows={rows} />
+          <TotalUsersWidget loading={isLoading} count={users.length} />
+          <UsersTable loading={isLoading} rows={users} />
         </Stack>
         <AddUserDrawer open={drawerOpen} onClose={handleAddUserDraweClose} />
       </Stack>
