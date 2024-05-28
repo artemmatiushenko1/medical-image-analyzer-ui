@@ -110,6 +110,8 @@ const Studies = () => {
         </Stack>
       </Paper>
       <Stack sx={{ flex: '78%', p: 3, gap: 3, overflow: 'scroll' }}>
+        <Paper>Positive scans: 23</Paper>
+        <Paper>Negative scans: 23</Paper>
         {isLoading &&
           Array(MAX_STUDY_LOADING_PREVIEWS)
             .fill(crypto.randomUUID)

@@ -33,7 +33,7 @@ const AdminLayout = () => {
           sx={{
             flex: '1',
             overflowY: 'auto',
-            background: '#f7f9ff',
+            background: '#fcfcff',
             padding: '40px',
             position: 'relative',
           }}

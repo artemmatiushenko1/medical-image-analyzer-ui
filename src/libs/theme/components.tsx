@@ -2,6 +2,7 @@ import { Components, Theme } from '@mui/material';
 import { palette } from './palette';
 import { shape } from './shape';
 import { heather } from './colors';
+import { NavigateNextRounded } from '@mui/icons-material';
 
 const components = {
   MuiButton: {
@@ -17,9 +18,10 @@ const components = {
   },
   MuiPaper: {
     styleOverrides: {
-      root: {
+      root: (props) => ({
         border: `1px solid ${palette.neutral.light}`,
-      },
+        borderRadius: !props.square ? shape.borderRadius * 3 : 0,
+      }),
     },
     defaultProps: {
       elevation: 0,
@@ -125,6 +127,18 @@ const components = {
       root: {
         fontSize: '14px',
       },
+    },
+  },
+  MuiBreadcrumbs: {
+    styleOverrides: {
+      root: {
+        color: heather[400],
+        fontSize: '14px',
+        '.MuiTypography-root': { fontSize: 'inherit' },
+      },
+    },
+    defaultProps: {
+      separator: <NavigateNextRounded fontSize="small" />,
     },
   },
 } satisfies Components<Omit<Theme, 'components'>>;

@@ -1,7 +1,7 @@
 import { Button } from '@/libs/components';
 import { AddUserRequest } from '@/packages/users';
 import { useAddUser } from '@/packages/users/queries';
-import { Box, FormControl, FormLabel, Stack, TextField } from '@mui/material';
+import { Box, FormControl, FormLabel, TextField } from '@mui/material';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 const InviteUserForm = () => {
@@ -19,30 +19,34 @@ const InviteUserForm = () => {
     <Box
       component="form"
       onSubmit={submit(handleSubmit)}
-      sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+        width: '100%',
+        height: '100%',
+      }}
     >
-      <Stack direction="row" gap={2}>
-        <FormControl fullWidth>
-          <FormLabel sx={{ mb: 1 }}>First name</FormLabel>
-          <Controller
-            control={control}
-            name="firstName"
-            render={({ field }) => (
-              <TextField placeholder="First name" {...field} />
-            )}
-          />
-        </FormControl>
-        <FormControl fullWidth>
-          <FormLabel sx={{ mb: 1 }}>First name</FormLabel>
-          <Controller
-            control={control}
-            name="lastName"
-            render={({ field }) => (
-              <TextField placeholder="Last name" {...field} />
-            )}
-          />
-        </FormControl>
-      </Stack>
+      <FormControl fullWidth>
+        <FormLabel sx={{ mb: 1 }}>First name</FormLabel>
+        <Controller
+          control={control}
+          name="firstName"
+          render={({ field }) => (
+            <TextField placeholder="First name" {...field} />
+          )}
+        />
+      </FormControl>
+      <FormControl fullWidth>
+        <FormLabel sx={{ mb: 1 }}>First name</FormLabel>
+        <Controller
+          control={control}
+          name="lastName"
+          render={({ field }) => (
+            <TextField placeholder="Last name" {...field} />
+          )}
+        />
+      </FormControl>
       <FormControl fullWidth>
         <FormLabel sx={{ mb: 1 }}>Email address</FormLabel>
         <Controller
@@ -56,7 +60,7 @@ const InviteUserForm = () => {
       <Button
         isLoading={isLoading}
         type="submit"
-        sx={{ alignSelf: 'flex-end' }}
+        sx={{ alignSelf: 'flex-end', marginTop: 'auto' }}
         variant="contained"
       >
         Add
