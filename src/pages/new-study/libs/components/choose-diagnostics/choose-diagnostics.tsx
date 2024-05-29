@@ -51,7 +51,7 @@ const ChooseDiagnostics = () => {
                 !selectedDiagnosticIds.includes(item.id)
               }
               key={item.id}
-              title={item.title}
+              title={item.name}
               imgSrc={item.previewImg}
               selected={selectedDiagnosticIds.indexOf(item.id) !== -1}
               onClick={() => handleDiagnosticCardClick(item.id)}
@@ -67,11 +67,11 @@ const ChooseDiagnostics = () => {
             title="Selected diagnostics"
           />
           <Box sx={{ marginTop: '20px', overflowY: 'scroll', pb: 2 }}>
-            {selectedDiagnostics.map(({ id, title }) => (
+            {selectedDiagnostics.map(({ id, name }) => (
               <SelectedDiagnosticAccordion
                 key={id}
                 id={id}
-                title={title}
+                title={name}
                 onDelete={removeSelectedDiagnostic}
               />
             ))}

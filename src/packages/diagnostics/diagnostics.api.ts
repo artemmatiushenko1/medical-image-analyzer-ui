@@ -8,7 +8,7 @@ class DiagnosticsApi {
     delayResolve(2000, {
       id: crypto.randomUUID(),
       previewImg: '',
-      title: request.name,
+      name: request.name,
     });
 }
 

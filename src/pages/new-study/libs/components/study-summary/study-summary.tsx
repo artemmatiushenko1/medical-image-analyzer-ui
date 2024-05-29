@@ -51,7 +51,7 @@ const StudySummary = () => {
           {selectedDiagnostics.map((diagnostic) => (
             <Paper sx={styles.diagnosticsWrapper}>
               <Typography variant="body2" fontWeight={500}>
-                {diagnostic?.title}
+                {diagnostic?.name}
               </Typography>
               <Typography
                 variant="caption"
