@@ -3,7 +3,11 @@ import { AddRounded } from '@mui/icons-material';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useClosable } from '@/libs/hooks';
-import { DiagnosticsTable, NewDiagnosticDialog } from './libs/components';
+import {
+  DiagnosticDetailDrawer,
+  DiagnosticsTable,
+  NewDiagnosticDialog,
+} from './libs/components';
 import { useGetAllDiagnostics } from '@/packages/diagnostics';
 
 const Diagnostics = () => {
@@ -52,6 +56,7 @@ const Diagnostics = () => {
         open={isNewDiagnosticDialogOpen}
         onClose={closeNewDiagnosticDialog}
       />
+      <DiagnosticDetailDrawer />
     </Stack>
   );
 };

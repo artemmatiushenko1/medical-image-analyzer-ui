@@ -91,8 +91,16 @@ const components = {
       root: {
         padding: 0,
         borderRadius: '100px',
+        '&& .Mui-checked+.MuiSwitch-track': {
+          opacity: 1,
+        },
       },
-      sizeSmall: {},
+      thumb: {
+        color: '#fff',
+      },
+      track: {
+        backgroundColor: heather[600],
+      },
     },
   },
   MuiListItemIcon: {
