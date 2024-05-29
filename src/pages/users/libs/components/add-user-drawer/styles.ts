@@ -10,7 +10,6 @@ const styles = createStyleSheet({
     },
   },
   addUserDrawerPaper: {
-    p: 3,
     borderRadius: 0,
     borderTop: 'none',
   },

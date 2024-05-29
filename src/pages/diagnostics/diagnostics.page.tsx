@@ -3,7 +3,7 @@ import { AddRounded } from '@mui/icons-material';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useClosable } from '@/libs/hooks';
-import { NewDiagnosticDialog } from './libs/components';
+import { DiagnosticsTable, NewDiagnosticDialog } from './libs/components';
 
 const Diagnostics = () => {
   const breadcrumbs = ['Home', 'Diagnostics'];
@@ -43,6 +43,7 @@ const Diagnostics = () => {
             </Button>
           </Box>
         </Stack>
+        <DiagnosticsTable rows={[{ id: 1, name: 'Melanoma detection' }]} />
       </Stack>
       <NewDiagnosticDialog
         open={isNewDiagnosticDialogOpen}

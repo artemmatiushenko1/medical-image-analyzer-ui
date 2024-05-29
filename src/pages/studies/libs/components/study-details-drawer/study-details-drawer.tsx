@@ -1,10 +1,11 @@
 import { Study, StudyStatus } from '@/packages/studies';
-import { CloseRounded, EventNote } from '@mui/icons-material';
+import { EventNote, NavigateNextRounded } from '@mui/icons-material';
 import {
   Box,
   CircularProgress,
   DialogContent,
   DialogTitle,
+  Divider,
   Drawer,
   IconButton,
   Paper,
@@ -64,11 +65,15 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
               #{study.id}
             </Typography>
           </Box>
-          <IconButton onClick={onClose}>
-            <CloseRounded />
+          <IconButton
+            onClick={onClose}
+            sx={{ color: ({ palette }) => palette.neutral.dark }}
+          >
+            <NavigateNextRounded />
           </IconButton>
         </Box>
       </DialogTitle>
+      <Divider />
       <DialogContent>
         <Stack gap={3}>
           <Box sx={styles.meta}>

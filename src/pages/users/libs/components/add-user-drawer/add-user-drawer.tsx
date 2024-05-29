@@ -1,7 +1,15 @@
-import { KeyboardTabRounded } from '@mui/icons-material';
-import { Box, Drawer, IconButton, Stack, Typography } from '@mui/material';
+import { NavigateNextRounded } from '@mui/icons-material';
+import {
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { InviteUserForm } from '../invite-user-form';
 import { styles } from './styles';
+import { Dialog } from '@/libs/components';
 
 type AddUserDrawerProps = {
   open: boolean;
@@ -21,9 +29,9 @@ const AddUserDrawer = (props: AddUserDrawerProps) => {
     >
       <Stack
         direction="row"
-        alignItems="flex-start"
+        alignItems="center"
         justifyContent="space-between"
-        mb={3}
+        sx={{ padding: '16px 24px' }}
       >
         <Box sx={{ maxWidth: '70%' }}>
           <Typography variant="h6" fontWeight={600}>
@@ -39,12 +47,13 @@ const AddUserDrawer = (props: AddUserDrawerProps) => {
             color: ({ palette }) => palette.neutral.dark,
           }}
         >
-          <KeyboardTabRounded />
+          <NavigateNextRounded />
         </IconButton>
       </Stack>
-      <Box sx={{ flex: 1, height: 0 }}>
+      <Divider />
+      <Dialog.Content sx={{ flex: 1, height: 0 }}>
         <InviteUserForm />
-      </Box>
+      </Dialog.Content>
     </Drawer>
   );
 };

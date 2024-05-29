@@ -1,7 +1,7 @@
 type Diagnostic = {
   id: string;
   previewImg: string;
-  title: string;
+  name: string;
 };
 
 export { type Diagnostic };
