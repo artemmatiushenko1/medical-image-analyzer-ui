@@ -4,6 +4,7 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useClosable } from '@/libs/hooks';
 import { DiagnosticsTable, NewDiagnosticDialog } from './libs/components';
+import { useGetAllDiagnostics } from '@/packages/diagnostics';
 
 const Diagnostics = () => {
   const breadcrumbs = ['Home', 'Diagnostics'];
@@ -13,6 +14,8 @@ const Diagnostics = () => {
     close: closeNewDiagnosticDialog,
     open: openNewDiagnosticDialog,
   } = useClosable();
+
+  const { isLoading, data: diagnostics = [] } = useGetAllDiagnostics();
 
   return (
     <Stack sx={styles.root} direction="row">
@@ -43,7 +46,7 @@ const Diagnostics = () => {
             </Button>
           </Box>
         </Stack>
-        <DiagnosticsTable rows={[{ id: 1, name: 'Melanoma detection' }]} />
+        <DiagnosticsTable loading={isLoading} rows={diagnostics} />
       </Stack>
       <NewDiagnosticDialog
         open={isNewDiagnosticDialogOpen}
