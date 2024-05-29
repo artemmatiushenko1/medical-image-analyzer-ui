@@ -6,6 +6,7 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Skeleton,
   Stack,
   Switch,
   Typography,
@@ -15,11 +16,12 @@ import { useMenuPopover } from '@/libs/hooks';
 
 type ModelCardProps = {
   name: string;
-  version: string;
+  version: number;
+  enabled: boolean;
 };
 
 const ModelCard = (props: ModelCardProps) => {
-  const { name, version } = props;
+  const { name, version, enabled } = props;
 
   const { open, openMenu, closeMenu, anchorEl } =
     useMenuPopover<HTMLButtonElement>();
@@ -41,7 +43,7 @@ const ModelCard = (props: ModelCardProps) => {
         </Stack>
         <Stack direction="row" alignItems="center" spacing={2} flex={0.33}>
           <Stack spacing={0.5}>
-            <Switch color="success" size="small" />
+            <Switch color="success" size="small" checked={enabled} />
             <Typography variant="caption">Enabled</Typography>
           </Stack>
           <IconButton
@@ -50,20 +52,83 @@ const ModelCard = (props: ModelCardProps) => {
           >
             <MoreVertRounded />
           </IconButton>
-          <Menu
-            open={open}
-            anchorEl={anchorEl}
-            onClose={closeMenu}
-            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-          >
-            <MenuItem>
-              <ListItemIcon>
-                <HistoryRounded fontSize="small" />
-              </ListItemIcon>
-              <Typography variant="body2">View versions</Typography>
-            </MenuItem>
-          </Menu>
+        </Stack>
+        <Menu
+          open={open}
+          anchorEl={anchorEl}
+          onClose={closeMenu}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        >
+          <MenuItem>
+            <ListItemIcon>
+              <HistoryRounded fontSize="small" />
+            </ListItemIcon>
+            <Typography variant="body2">View versions</Typography>
+          </MenuItem>
+        </Menu>
+      </CardContent>
+    </Card>
+  );
+};
+
+ModelCard.Skeleton = () => {
+  const subtitleHeight = 14;
+  const valueHeight = 25.9;
+  const spacing = 0.9;
+
+  return (
+    <Card sx={styles.root}>
+      <CardContent sx={styles.content}>
+        <Stack flex={1} spacing={spacing}>
+          <Skeleton
+            variant="rounded"
+            width={150}
+            height={valueHeight}
+            animation="wave"
+          />
+          <Skeleton
+            variant="rounded"
+            width={100}
+            height={subtitleHeight}
+            animation="wave"
+          />
+        </Stack>
+        <Stack flex={0.33} spacing={spacing}>
+          <Skeleton
+            variant="rounded"
+            width={70}
+            height={valueHeight}
+            animation="wave"
+          />
+          <Skeleton
+            variant="rounded"
+            width={50}
+            height={subtitleHeight}
+            animation="wave"
+          />
+        </Stack>
+        <Stack direction="row" alignItems="center" spacing={2} flex={0.33}>
+          <Stack spacing={spacing}>
+            <Skeleton
+              variant="rounded"
+              width={50}
+              height={valueHeight}
+              animation="wave"
+            />
+            <Skeleton
+              variant="rounded"
+              width={50}
+              height={subtitleHeight}
+              animation="wave"
+            />
+          </Stack>
+          <Skeleton
+            variant="circular"
+            animation="wave"
+            width={30}
+            height={30}
+          />
         </Stack>
       </CardContent>
     </Card>

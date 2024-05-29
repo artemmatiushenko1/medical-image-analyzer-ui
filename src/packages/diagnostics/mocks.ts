@@ -33,4 +33,11 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
   },
 ];
 
-export { MOCK_DIAGNOSTICS };
+const MOCK_MODELS = [
+  { name: 'CoviScanNet', id: '1', version: 1, enabled: true },
+  { name: 'SARS-CoV-2Analyzer', id: '2', version: 2, enabled: true },
+  { name: 'CovidVisionAI', id: '3', version: 1, enabled: false },
+  { name: 'CoviScanNet-2', id: '4', version: 3, enabled: true },
+];
+
+export { MOCK_DIAGNOSTICS, MOCK_MODELS };

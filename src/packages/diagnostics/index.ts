@@ -1,3 +1,11 @@
-export { type Diagnostic, type CreateDiagnosticRequest } from './types';
+export {
+  type Diagnostic,
+  type CreateDiagnosticRequest,
+  type Model,
+} from './types';
 export { useDiagnosticsStore } from './diagnostics.store';
-export { useCreateDiagnostic, useGetAllDiagnostics } from './queries';
+export {
+  useCreateDiagnostic,
+  useGetAllDiagnostics,
+  useGetDiagnosticModels,
+} from './queries';

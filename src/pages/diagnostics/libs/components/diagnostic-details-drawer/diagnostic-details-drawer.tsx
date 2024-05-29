@@ -9,7 +9,8 @@ import {
   Typography,
 } from '@mui/material';
 import { ModelCard } from '../model-card';
-import { Diagnostic } from '@/packages/diagnostics';
+import { Diagnostic, useGetDiagnosticModels } from '@/packages/diagnostics';
+import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
 
 type DiagnosticDetailsDrawer = {
   open: boolean;
@@ -21,17 +22,9 @@ type DiagnosticDetailsDrawer = {
 const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
   const { open, onClose, diagnostic, onCloseFinished } = props;
 
-  const models = [
-    { name: 'CoviScanNet', id: '1', version: '1' },
-    { name: 'SARS-CoV-2Analyzer', id: '2', version: '2' },
-    { name: 'CovidVisionAI', id: '3', version: '1' },
-    { name: 'CoviScanNet', id: '1', version: '1' },
-    { name: 'SARS-CoV-2Analyzer', id: '2', version: '2' },
-    { name: 'CovidVisionAI', id: '3', version: '1' },
-    { name: 'CoviScanNet', id: '1', version: '1' },
-    { name: 'SARS-CoV-2Analyzer', id: '2', version: '2' },
-    { name: 'CovidVisionAI', id: '3', version: '1' },
-  ];
+  const { isLoading, data: diagnosticModels = [] } = useGetDiagnosticModels(
+    diagnostic?.id,
+  );
 
   return (
     <Drawer
@@ -106,11 +99,16 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
               </Typography>
             </Stack>
           </Stack>
-          {models.map((model) => (
+          {isLoading &&
+            Array(MAX_MODELS_LOADING_PREVIEWS)
+              .fill(crypto.randomUUID)
+              .map((_, index) => <ModelCard.Skeleton key={index} />)}
+          {diagnosticModels.map((model) => (
             <ModelCard
               name={model.name}
               key={model.id}
               version={model.version}
+              enabled={model.enabled}
             />
           ))}
         </Stack>
