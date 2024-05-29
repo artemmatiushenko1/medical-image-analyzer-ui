@@ -1,14 +1,10 @@
+import { wait } from '@/libs/helpers';
 import { MOCK_STUDIES } from './mocks';
-import { Study } from './types';
 
 class StudiesApi {
-  getAllStudies = () =>
-    new Promise<Study[]>((resolve) =>
-      setTimeout(() => resolve(MOCK_STUDIES), 2000),
-    );
+  getAllStudies = () => wait(2000).then(() => MOCK_STUDIES);
 
-  createStudy = () =>
-    new Promise((resolve) => setTimeout(() => resolve(undefined), 2000));
+  createStudy = () => wait(2000).then();
 }
 
 const studiesApi = new StudiesApi();

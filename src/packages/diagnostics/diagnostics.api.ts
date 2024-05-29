@@ -1,15 +1,15 @@
-import { delayResolve } from '@/libs/helpers';
+import { wait } from '@/libs/helpers';
 import { CreateDiagnosticRequest, CreateDiagnosticResponse } from './types';
 
 class DiagnosticsApi {
   createDiagnostic = async (
     request: CreateDiagnosticRequest,
   ): Promise<CreateDiagnosticResponse> =>
-    delayResolve(2000, {
+    wait(2000).then(() => ({
       id: crypto.randomUUID(),
       previewImg: '',
       name: request.name,
-    });
+    }));
 }
 
 const diagnosticsApi = new DiagnosticsApi();
