@@ -9,7 +9,6 @@ const styles = createStyleSheet({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: '16px !important',
   },
 });
 

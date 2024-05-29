@@ -57,7 +57,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
   return (
     <>
       <Menu
-        id="account-menu"
+        id="profile-menu"
         open={open}
         anchorEl={anchorEl}
         onClose={onClose}
