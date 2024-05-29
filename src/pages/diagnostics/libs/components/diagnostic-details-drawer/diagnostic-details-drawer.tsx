@@ -1,6 +1,7 @@
 import { Dialog } from '@/libs/components';
 import { NavigateBeforeRounded } from '@mui/icons-material';
 import {
+  Box,
   Button,
   Divider,
   Drawer,
@@ -12,18 +13,30 @@ import { ModelCard } from '../model-card';
 
 const DiagnosticDetailDrawer = () => {
   const models = [
-    { name: 'CoviScanNet', id: '1' },
-    { name: 'SARS-CoV-2Analyzer', id: '2' },
-    { name: 'CovidVisionAI', id: '3' },
+    { name: 'CoviScanNet', id: '1', version: '1' },
+    { name: 'SARS-CoV-2Analyzer', id: '2', version: '2' },
+    { name: 'CovidVisionAI', id: '3', version: '1' },
+    { name: 'CoviScanNet', id: '1', version: '1' },
+    { name: 'SARS-CoV-2Analyzer', id: '2', version: '2' },
+    { name: 'CovidVisionAI', id: '3', version: '1' },
+    { name: 'CoviScanNet', id: '1', version: '1' },
+    { name: 'SARS-CoV-2Analyzer', id: '2', version: '2' },
+    { name: 'CovidVisionAI', id: '3', version: '1' },
   ];
 
   return (
     <Drawer
       open
       anchor="right"
+      PaperProps={{ square: false }}
       sx={{
         width: '600px',
-        '& > .MuiPaper-root': { width: '600px', borderTop: 'none' },
+        '& > .MuiPaper-root': {
+          width: '600px',
+          borderTop: 'none',
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0,
+        },
       }}
     >
       <Stack direction="row">
@@ -36,25 +49,13 @@ const DiagnosticDetailDrawer = () => {
         >
           <NavigateBeforeRounded />
         </IconButton>
-        <Dialog.Title lineHeight={2.6}>Дігностування меланоми</Dialog.Title>
+        <Dialog.Title lineHeight={2.6} fontSize={18}>
+          Діагностування меланоми
+        </Dialog.Title>
       </Stack>
       <Divider />
       <Dialog.Content sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Stack>
-            <Typography
-              fontSize="14px"
-              fontWeight={600}
-              sx={{ color: ({ palette }) => palette.neutral.dark }}
-            >
-              AI Models
-            </Typography>
-            <Typography variant="caption">List of models</Typography>
-          </Stack>
+        <Stack direction="row" alignItems="center" justifyContent="end">
           <Button
             startIcon={
               <svg
@@ -74,13 +75,43 @@ const DiagnosticDetailDrawer = () => {
               </svg>
             }
             variant="contained"
+            fullWidth
           >
             Upload new model
           </Button>
         </Stack>
         <Stack spacing={2}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Stack>
+              <Typography fontSize="14px" variant="subtitle2">
+                Models
+              </Typography>
+              <Typography variant="caption">
+                View and manage related AI models
+              </Typography>
+            </Stack>
+            <Typography
+              component="div"
+              variant="caption"
+              fontSize={14}
+              textAlign="right"
+            >
+              Total models:{' '}
+              <Box component="span" fontWeight={600}>
+                {models.length}
+              </Box>
+            </Typography>
+          </Stack>
           {models.map((model) => (
-            <ModelCard name={model.name} key={model.id} />
+            <ModelCard
+              name={model.name}
+              key={model.id}
+              version={model.version}
+            />
           ))}
         </Stack>
       </Dialog.Content>
