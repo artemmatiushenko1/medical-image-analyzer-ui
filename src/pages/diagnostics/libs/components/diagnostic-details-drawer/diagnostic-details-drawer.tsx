@@ -1,7 +1,6 @@
 import { Dialog } from '@/libs/components';
 import { NavigateBeforeRounded } from '@mui/icons-material';
 import {
-  Box,
   Button,
   Divider,
   Drawer,
@@ -40,7 +39,6 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
       onClose={onClose}
       anchor="right"
       PaperProps={{ square: false }}
-      ModalProps={{ closeAfterTransition: true }}
       onTransitionExited={onCloseFinished}
       sx={{
         width: '600px',
@@ -107,17 +105,6 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
                 View and manage related AI models
               </Typography>
             </Stack>
-            <Typography
-              component="div"
-              variant="caption"
-              fontSize={14}
-              textAlign="right"
-            >
-              Total models:{' '}
-              <Box component="span" fontWeight={600}>
-                {models.length}
-              </Box>
-            </Typography>
           </Stack>
           {models.map((model) => (
             <ModelCard
