@@ -21,6 +21,7 @@ const Studies = () => {
   const [statusFilter, setStatusFilter] = useState<ValueOf<
     typeof StudyStatus
   > | null>(null);
+
   const {
     isOpen: isDetailsDrawerOpen,
     close: closeDetailsDrawer,
@@ -79,11 +80,8 @@ const Studies = () => {
     openDetailsDrawer();
   };
 
-  const handleDetailsDrawerClose = () => {
-    setTimeout(() => {
-      setSelectedStudyId(null);
-    }, 100);
-    closeDetailsDrawer();
+  const handleDetailsDrawerCloseFinised = () => {
+    setSelectedStudyId(null);
   };
 
   return (
@@ -137,8 +135,9 @@ const Studies = () => {
       </Stack>
       <StudyDetailsDrawer
         open={isDetailsDrawerOpen}
-        onClose={handleDetailsDrawerClose}
+        onClose={closeDetailsDrawer}
         study={selectedStudy}
+        onCloseFinished={handleDetailsDrawerCloseFinised}
       />
     </Box>
   );

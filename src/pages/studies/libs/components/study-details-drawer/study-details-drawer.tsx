@@ -25,10 +25,11 @@ type StudyDetailsDrawerProps = {
   study: Study;
 
   onClose: () => void;
+  onCloseFinished: () => void;
 };
 
 const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
-  const { open, onClose, study } = props;
+  const { open, onClose, study, onCloseFinished } = props;
 
   const { savePdf, isLoading: isPdfLoading } = useSavePdf();
 
@@ -52,6 +53,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
     <Drawer
       open={open}
       onClose={onClose}
+      onTransitionExited={onCloseFinished}
       anchor="right"
       PaperProps={{ sx: styles.paper }}
     >
