@@ -8,10 +8,15 @@ import {
   DiagnosticsTable,
   NewDiagnosticDialog,
 } from './libs/components';
-import { useGetAllDiagnostics } from '@/packages/diagnostics';
+import { Diagnostic, useGetAllDiagnostics } from '@/packages/diagnostics';
+import { useState } from 'react';
+import { GridRowParams } from '@mui/x-data-grid';
 
 const Diagnostics = () => {
   const breadcrumbs = ['Home', 'Diagnostics'];
+
+  const [selectedDiagnostic, setSelectedDiagnostic] =
+    useState<Diagnostic | null>(null);
 
   const {
     isOpen: isNewDiagnosticDialogOpen,
@@ -19,16 +24,22 @@ const Diagnostics = () => {
     open: openNewDiagnosticDialog,
   } = useClosable();
 
+  const { isOpen: isDiagnosticDrawerOpen, close: closeDiagnosticDrawer } =
+    useClosable(!!selectedDiagnostic);
+
   const { isLoading, data: diagnostics = [] } = useGetAllDiagnostics();
+
+  const handleRowClick = (data: GridRowParams<Diagnostic>) => {
+    setSelectedDiagnostic(data.row);
+  };
+
+  const handleDiagnosticDrawerCloseFinished = () => {
+    setSelectedDiagnostic(null);
+  };
 
   return (
     <Stack sx={styles.root} direction="row">
-      <Stack
-        sx={{
-          ...styles.contentWrapper,
-          // marginRight: drawerOpen ? 0 : `-${ADD_USER_DRAWER_WIDTH_PX}px`,
-        }}
-      >
+      <Stack sx={styles.contentWrapper}>
         <Breadcrumbs segments={breadcrumbs} />
         <Stack direction="row" justifyContent="space-between">
           <Box sx={{ flex: 0.6 }}>
@@ -50,13 +61,22 @@ const Diagnostics = () => {
             </Button>
           </Box>
         </Stack>
-        <DiagnosticsTable loading={isLoading} rows={diagnostics} />
+        <DiagnosticsTable
+          loading={isLoading}
+          rows={diagnostics}
+          onRowClick={handleRowClick}
+        />
       </Stack>
       <NewDiagnosticDialog
         open={isNewDiagnosticDialogOpen}
         onClose={closeNewDiagnosticDialog}
       />
-      <DiagnosticDetailDrawer />
+      <DiagnosticDetailDrawer
+        open={isDiagnosticDrawerOpen}
+        onClose={closeDiagnosticDrawer}
+        onCloseFinished={handleDiagnosticDrawerCloseFinished}
+        diagnostic={selectedDiagnostic}
+      />
     </Stack>
   );
 };

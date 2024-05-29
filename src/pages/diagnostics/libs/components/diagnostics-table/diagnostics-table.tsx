@@ -3,10 +3,10 @@ import { DataGrid, DataGridProps } from '@mui/x-data-grid';
 import { columns } from './columns';
 import { styles } from './styles';
 
-type DiagnosticsTable = Pick<DataGridProps, 'rows' | 'loading'>;
+type DiagnosticsTable = Pick<DataGridProps, 'rows' | 'loading' | 'onRowClick'>;
 
 const DiagnosticsTable = (props: DiagnosticsTable) => {
-  const { loading, rows } = props;
+  const { loading, rows, onRowClick } = props;
 
   return (
     <DataGrid
@@ -19,6 +19,7 @@ const DiagnosticsTable = (props: DiagnosticsTable) => {
       disableRowSelectionOnClick
       rows={rows}
       columns={columns}
+      onRowClick={onRowClick}
     />
   );
 };

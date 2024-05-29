@@ -10,8 +10,18 @@ import {
   Typography,
 } from '@mui/material';
 import { ModelCard } from '../model-card';
+import { Diagnostic } from '@/packages/diagnostics';
 
-const DiagnosticDetailDrawer = () => {
+type DiagnosticDetailsDrawer = {
+  open: boolean;
+  onClose: () => void;
+  onCloseFinished: () => void;
+  diagnostic: Diagnostic | null;
+};
+
+const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
+  const { open, onClose, diagnostic, onCloseFinished } = props;
+
   const models = [
     { name: 'CoviScanNet', id: '1', version: '1' },
     { name: 'SARS-CoV-2Analyzer', id: '2', version: '2' },
@@ -26,9 +36,12 @@ const DiagnosticDetailDrawer = () => {
 
   return (
     <Drawer
-      open
+      open={open}
+      onClose={onClose}
       anchor="right"
       PaperProps={{ square: false }}
+      ModalProps={{ closeAfterTransition: true }}
+      onTransitionExited={onCloseFinished}
       sx={{
         width: '600px',
         '& > .MuiPaper-root': {
@@ -50,7 +63,7 @@ const DiagnosticDetailDrawer = () => {
           <NavigateBeforeRounded />
         </IconButton>
         <Dialog.Title lineHeight={2.6} fontSize={18}>
-          Діагностування меланоми
+          {diagnostic?.name}
         </Dialog.Title>
       </Stack>
       <Divider />
@@ -61,10 +74,10 @@ const DiagnosticDetailDrawer = () => {
               <svg
                 stroke="currentColor"
                 fill="none"
-                stroke-width="2"
+                strokeWidth="2"
                 viewBox="0 0 24 24"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 height="20px"
                 width="20px"
                 xmlns="http://www.w3.org/2000/svg"
