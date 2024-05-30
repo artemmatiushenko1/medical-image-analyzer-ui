@@ -6,23 +6,16 @@ const styles = createStyleSheet({
     gap: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '450px',
-    height: '450px',
     borderRadius: shape.borderRadius,
     position: 'relative',
     overflow: 'hidden',
     transition: 'transform 0.2s ease',
-    border: `1px solid ${palette.divider}`,
-    background: ({ palette }) => palette.grey[200],
-  }),
-  noImage: {
     border: `2px dashed transparent`,
-    borderColor: ({ palette }) => palette.primary.main,
-    background: ({ palette }) =>
-      alpha(palette.primary.main, palette.action.hoverOpacity),
-  },
+    borderColor: palette.primary.main,
+    background: alpha(palette.primary.main, palette.action.hoverOpacity),
+  }),
   imageIcon: {
-    fontSize: '52px',
+    fontSize: '50px',
   },
   input: {
     opacity: 0,
@@ -35,14 +28,9 @@ const styles = createStyleSheet({
     backgroundColor: ({ palette }) =>
       alpha(palette.primary.light, palette.action.selectedOpacity),
   },
-  uploadedImgWrapper: {
-    width: '100%',
-    height: '100%',
-  },
-  uploadedImg: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'contain',
+  imageUploadHints: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 });
 

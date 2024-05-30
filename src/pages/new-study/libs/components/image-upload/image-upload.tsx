@@ -1,10 +1,13 @@
-import { CropRounded, DeleteOutlineRounded } from '@mui/icons-material';
-import { Box, Button, Skeleton, Stack, Typography } from '@mui/material';
+import {
+  CropRounded,
+  DeleteOutlineRounded,
+  PhotoRounded,
+} from '@mui/icons-material';
+import { Box, Button, Skeleton, Stack } from '@mui/material';
 import { styles } from './styles';
 import { useState } from 'react';
-import { bytesToMb, readFileAsBase64 } from '@/libs/helpers';
-import { Trans, useTranslation } from 'react-i18next';
-import { DropArea } from '../drop-area';
+import { readFileAsBase64 } from '@/libs/helpers';
+import { DropArea } from '@/libs/components/drop-area';
 import { ImageCropDialog } from '../image-crop-dialog';
 import { toast } from 'react-toastify';
 import {
@@ -14,10 +17,9 @@ import {
 import { validateImageDimensions } from './helpers';
 import { FAKE_IMAGE_UPLOADING_DURATION_MS } from './constants';
 import { useNewStudyStore } from '@/pages/new-study/new-study.store';
+import { MimeType } from '@/libs/enums';
 
 const ImageUpload = () => {
-  const { t } = useTranslation('NewStudy');
-
   const uploadedImageSrc = useNewStudyStore((state) => state.uploadedImageSrc);
   const croppedImageSrc = useNewStudyStore((state) => state.croppedImageSrc);
 
@@ -36,14 +38,6 @@ const ImageUpload = () => {
 
   const handleFileUpload = async (file: File) => {
     setIsImageUploading(true);
-
-    if (bytesToMb(file.size) > MAX_IMAGE_SIZE_MB) {
-      setIsImageUploading(false);
-
-      return toast.error(
-        `File is too large. Maximum file size is ${MAX_IMAGE_SIZE_MB}MB.`,
-      );
-    }
 
     const imageSrc = await readFileAsBase64(file);
     if (!imageSrc) return;
@@ -85,33 +79,41 @@ const ImageUpload = () => {
 
   return (
     <Stack sx={styles.root}>
-      <Box sx={{ position: 'relative' }}>
+      <Box>
         {isImageUploading ? (
           <Skeleton animation="wave" sx={{ transform: 'none' }}>
             <DropArea
+              width="450px"
+              height="450px"
+              icon={PhotoRounded}
               onUpload={handleFileUpload}
               previewImageSrc={uploadedImageSrc}
+              supportedFormats={[MimeType.JPEG, MimeType.PNG]}
+              maxFileSizeMb={MAX_IMAGE_SIZE_MB}
             />
           </Skeleton>
         ) : (
-          <DropArea
-            onUpload={handleFileUpload}
-            previewImageSrc={currentImage}
-          />
+          !currentImage && (
+            <DropArea
+              width="450px"
+              height="450px"
+              icon={PhotoRounded}
+              onUpload={handleFileUpload}
+              previewImageSrc={currentImage}
+              supportedFormats={[MimeType.JPEG, MimeType.PNG]}
+              maxFileSizeMb={MAX_IMAGE_SIZE_MB}
+            />
+          )
         )}
       </Box>
-      {!uploadedImageSrc && !isImageUploading && (
-        <Box sx={styles.imageUploadHints}>
-          <Typography variant="caption">
-            {t('ImageUpload.SupportedFormats')}: jpeg, png
-          </Typography>
-          <Typography variant="caption">
-            <Trans
-              t={t}
-              i18nKey="ImageUpload.MaximunSizeMB"
-              values={{ value: MAX_IMAGE_SIZE_MB }}
-            />
-          </Typography>
+      {currentImage && (
+        <Box sx={styles.uploadedImgWrapper}>
+          <Box
+            component="img"
+            alt="Uploaded image"
+            src={currentImage}
+            sx={styles.uploadedImg}
+          />
         </Box>
       )}
       {uploadedImageSrc && (

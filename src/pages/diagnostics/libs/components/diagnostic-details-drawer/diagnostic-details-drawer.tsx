@@ -1,5 +1,5 @@
 import { Dialog } from '@/libs/components';
-import { NavigateBeforeRounded } from '@mui/icons-material';
+import { NavigateBeforeRounded, UploadFileRounded } from '@mui/icons-material';
 import {
   Button,
   Divider,
@@ -11,6 +11,8 @@ import {
 import { ModelCard } from '../model-card';
 import { Diagnostic, useGetDiagnosticModels } from '@/packages/diagnostics';
 import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
+import { DropArea } from '@/libs/components';
+import { MimeType } from '@/libs/enums';
 
 type DiagnosticDetailsDrawer = {
   open: boolean;
@@ -85,6 +87,13 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
           </Button>
         </Stack>
         <Stack spacing={2}>
+          <DropArea
+            supportedFormats={[MimeType.HDF5]}
+            icon={UploadFileRounded}
+            previewImageSrc=""
+            onUpload={() => {}}
+            maxFileSizeMb={1000}
+          />
           <Stack
             direction="row"
             justifyContent="space-between"
