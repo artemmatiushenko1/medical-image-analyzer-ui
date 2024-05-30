@@ -73,7 +73,7 @@ const ModelCard = (props: ModelCardProps) => {
 };
 
 ModelCard.Skeleton = () => {
-  const subtitleHeight = 14;
+  const subtitleHeight = 15;
   const valueHeight = 25.9;
   const spacing = 0.9;
 
@@ -81,47 +81,17 @@ ModelCard.Skeleton = () => {
     <Card sx={styles.root}>
       <CardContent sx={styles.content}>
         <Stack flex={1} spacing={spacing}>
-          <Skeleton
-            variant="rounded"
-            width={150}
-            height={valueHeight}
-            animation="wave"
-          />
-          <Skeleton
-            variant="rounded"
-            width={100}
-            height={subtitleHeight}
-            animation="wave"
-          />
+          <Skeleton width={150} height={valueHeight} animation="wave" />
+          <Skeleton width={100} height={subtitleHeight} animation="wave" />
         </Stack>
         <Stack flex={0.33} spacing={spacing}>
-          <Skeleton
-            variant="rounded"
-            width={70}
-            height={valueHeight}
-            animation="wave"
-          />
-          <Skeleton
-            variant="rounded"
-            width={50}
-            height={subtitleHeight}
-            animation="wave"
-          />
+          <Skeleton width={70} height={valueHeight} animation="wave" />
+          <Skeleton width={50} height={subtitleHeight} animation="wave" />
         </Stack>
         <Stack direction="row" alignItems="center" spacing={2} flex={0.33}>
           <Stack spacing={spacing}>
-            <Skeleton
-              variant="rounded"
-              width={50}
-              height={valueHeight}
-              animation="wave"
-            />
-            <Skeleton
-              variant="rounded"
-              width={50}
-              height={subtitleHeight}
-              animation="wave"
-            />
+            <Skeleton width={50} height={valueHeight} animation="wave" />
+            <Skeleton width={50} height={subtitleHeight} animation="wave" />
           </Stack>
           <Skeleton
             variant="circular"
