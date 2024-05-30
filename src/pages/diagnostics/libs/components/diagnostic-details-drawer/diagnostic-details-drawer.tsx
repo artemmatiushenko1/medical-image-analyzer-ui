@@ -29,8 +29,6 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
     ValueOf<typeof DiagnosticDrawerStage>[]
   >([DiagnosticDrawerStage.DIAGNOSTIC_DETAILS]);
 
-  const currentStage = stagesStack.at(-1);
-
   const stageToDetailsMap: {
     [key in ValueOf<typeof DiagnosticDrawerStage>]: {
       component: React.ReactNode;
@@ -56,6 +54,11 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
     [DiagnosticDrawerStage.MODEL_DETAILS]: null,
   };
 
+  const handleDrawerCloseFinished = () => {
+    setStagesStack([DiagnosticDrawerStage.DIAGNOSTIC_DETAILS]);
+    onCloseFinished();
+  };
+
   const handleNavigateBackClick = () => {
     if (stagesStack.length === 1) {
       onClose();
@@ -71,6 +74,8 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
     setStagesStack((prevState) => [...prevState, stage]);
   };
 
+  const currentStage = stagesStack.at(-1);
+
   const currentStageDetails = currentStage
     ? stageToDetailsMap[currentStage]
     : null;
@@ -81,7 +86,7 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
       onClose={onClose}
       anchor="right"
       PaperProps={{ square: false }}
-      onTransitionExited={onCloseFinished}
+      onTransitionExited={handleDrawerCloseFinished}
       sx={{
         width: '600px',
         '& > .MuiPaper-root': {
