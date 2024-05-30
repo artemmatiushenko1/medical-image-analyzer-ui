@@ -3,12 +3,15 @@ import { Stack, Typography } from '@mui/material';
 import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
 import { ModelCard } from '../model-card';
 import { Button, Dialog } from '@/libs/components';
+
 type ModelsListProps = {
   diagnosticId: string;
+
+  onUploadNewModelClick: () => void;
 };
 
 const ModelsList = (props: ModelsListProps) => {
-  const { diagnosticId } = props;
+  const { diagnosticId, onUploadNewModelClick } = props;
 
   const { isLoading, data: diagnosticModels = [] } =
     useGetDiagnosticModels(diagnosticId);
@@ -17,6 +20,7 @@ const ModelsList = (props: ModelsListProps) => {
     <Dialog.Content sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Stack spacing={2}>
         <Button
+          onClick={onUploadNewModelClick}
           startIcon={
             <svg
               stroke="currentColor"
