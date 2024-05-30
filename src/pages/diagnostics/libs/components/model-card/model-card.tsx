@@ -1,4 +1,4 @@
-import { HistoryRounded, MoreVertRounded } from '@mui/icons-material';
+import { ManageHistoryRounded, MoreVertRounded } from '@mui/icons-material';
 import {
   Card,
   CardContent,
@@ -62,9 +62,9 @@ const ModelCard = (props: ModelCardProps) => {
         >
           <MenuItem>
             <ListItemIcon>
-              <HistoryRounded fontSize="small" />
+              <ManageHistoryRounded fontSize="small" />
             </ListItemIcon>
-            <Typography variant="body2">View versions</Typography>
+            <Typography variant="body2">View details</Typography>
           </MenuItem>
         </Menu>
       </CardContent>
