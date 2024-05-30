@@ -66,10 +66,10 @@ const components = {
         },
         ':hover:not(&.Mui-focused, :has(.Mui-disabled)) .MuiOutlinedInput-notchedOutline':
           {
-            borderColor: heather[500],
+            borderColor: palette.neutral.light,
           },
         '.MuiOutlinedInput-notchedOutline': {
-          borderColor: heather[400],
+          borderColor: palette.neutral.light,
         },
         'input::placeholder': {
           color: heather[700],

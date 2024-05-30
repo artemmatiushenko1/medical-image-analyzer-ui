@@ -86,8 +86,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
           </Box>
           <Stack gap={2}>
             <Typography
-              fontSize="14px"
-              fontWeight={600}
+              variant="subtitle2"
               sx={{ color: ({ palette }) => palette.neutral.dark }}
             >
               Image

@@ -17,6 +17,9 @@ const palette = createPalette({
     main: brandBlue[700],
     dark: brandBlue[800],
   },
+  secondary: {
+    main: '#FF5858',
+  },
   error: cinnabar,
   warning: amber,
   info: sky,

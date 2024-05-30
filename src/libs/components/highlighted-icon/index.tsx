@@ -2,10 +2,11 @@ import { Box, alpha } from '@mui/material';
 
 type HighlightedIcon = {
   iconElement: React.ReactNode;
+  rounded?: boolean;
 };
 
 const HighlightedIcon = (props: HighlightedIcon) => {
-  const { iconElement } = props;
+  const { iconElement, rounded } = props;
 
   return (
     <Box
@@ -15,7 +16,7 @@ const HighlightedIcon = (props: HighlightedIcon) => {
         color: ({ palette }) => palette.primary.main,
         background: ({ palette }) =>
           alpha(palette.primary.main, palette.action.selectedOpacity),
-        borderRadius: ({ shape }) => shape.borderRadius,
+        borderRadius: ({ shape }) => (rounded ? '100px' : shape.borderRadius),
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
