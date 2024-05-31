@@ -11,8 +11,10 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
     <MuiBreadcrumbs>
       {segments.map((item, index) => (
         <Typography
+          noWrap
           key={item}
           color={index === segments.length - 1 ? 'text.primary' : 'inherit'}
+          sx={{ maxWidth: '200px' }}
         >
           {item}
         </Typography>
