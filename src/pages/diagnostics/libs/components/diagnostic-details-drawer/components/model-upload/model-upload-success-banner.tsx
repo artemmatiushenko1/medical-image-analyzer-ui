@@ -1,13 +1,13 @@
 import { SuccessCheckmark } from '@/libs/components';
 import { Button, Stack, Typography } from '@mui/material';
-import { useDiagnosticDrawerStagesStore } from '../../store';
+import { useDiagnosticDrawerStore } from '../../store';
 import { DiagnosticDrawerStage } from '../../enums';
 
 const ModelUploadSuccessBanner = () => {
-  const { navigateUntil } = useDiagnosticDrawerStagesStore();
+  const { navigateUntilStage } = useDiagnosticDrawerStore();
 
   const handleOkClick = () => {
-    navigateUntil(DiagnosticDrawerStage.ROOT);
+    navigateUntilStage(DiagnosticDrawerStage.ROOT);
   };
 
   return (

@@ -12,7 +12,7 @@ import { Diagnostic } from '@/packages/diagnostics';
 import { ModelUpload, ModelsList } from './components';
 import { DiagnosticDrawerStage } from './enums';
 import { ValueOf } from '@/libs/types';
-import { useDiagnosticDrawerStagesStore } from './store';
+import { useDiagnosticDrawerStore } from './store';
 
 type DiagnosticDetailsDrawer = {
   open: boolean;
@@ -25,16 +25,14 @@ type DiagnosticDetailsDrawer = {
 const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
   const { open, onClose, diagnostic, onCloseFinished } = props;
 
-  const stagesStack = useDiagnosticDrawerStagesStore(
-    (state) => state.stagesStack,
+  const stagesStack = useDiagnosticDrawerStore((state) => state.stagesStack);
+  const navigateToNextStage = useDiagnosticDrawerStore(
+    (state) => state.navigateToNextStage,
   );
-  const navigateNext = useDiagnosticDrawerStagesStore(
-    (state) => state.navigateNext,
+  const navigateToPreviousStage = useDiagnosticDrawerStore(
+    (state) => state.navigateToPreviousStage,
   );
-  const navigateBack = useDiagnosticDrawerStagesStore(
-    (state) => state.navigateBack,
-  );
-  const resetStages = useDiagnosticDrawerStagesStore((state) => state.reset);
+  const resetStages = useDiagnosticDrawerStore((state) => state.reset);
 
   const stageToDetailsMap: {
     [key in ValueOf<typeof DiagnosticDrawerStage>]: {
@@ -48,7 +46,7 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
         <ModelsList
           diagnosticId={diagnostic.id}
           onUploadNewModelClick={() =>
-            navigateNext(DiagnosticDrawerStage.UPLOAD_MODEL)
+            navigateToNextStage(DiagnosticDrawerStage.UPLOAD_MODEL)
           }
         />
       ),
@@ -68,8 +66,8 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
     onCloseFinished();
   };
 
-  const handleNavigateBackClick = () => {
-    navigateBack(onClose);
+  const handlenavigateToPreviousStageClick = () => {
+    navigateToPreviousStage(onClose);
   };
 
   const currentStage = stagesStack.at(-1);
@@ -98,7 +96,7 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
       <Stack direction="row">
         <Tooltip title="Back">
           <IconButton
-            onClick={handleNavigateBackClick}
+            onClick={handlenavigateToPreviousStageClick}
             sx={{
               color: ({ palette }) => palette.neutral.dark,
               alignSelf: 'center',

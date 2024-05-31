@@ -2,30 +2,32 @@ import { create } from 'zustand';
 import { DiagnosticDrawerStage } from './enums';
 import { ValueOf } from '@/libs/types';
 
-type DiagnosticDrawerStagesState = {
+type DiagnosticDrawerState = {
   stagesStack: ValueOf<typeof DiagnosticDrawerStage>[];
 };
 
-type DiagnosticDrawerStagesActions = {
-  navigateNext: (stage: ValueOf<typeof DiagnosticDrawerStage>) => void;
-  navigateBack: (onExit: () => void) => void;
-  navigateUntil: (targetStage: ValueOf<typeof DiagnosticDrawerStage>) => void;
+type DiagnosticDrawerActions = {
+  navigateToNextStage: (stage: ValueOf<typeof DiagnosticDrawerStage>) => void;
+  navigateToPreviousStage: (onExit: () => void) => void;
+  navigateUntilStage: (
+    targetStage: ValueOf<typeof DiagnosticDrawerStage>,
+  ) => void;
   reset: () => void;
 };
 
-const INITIAL_STATE: DiagnosticDrawerStagesState = {
+const INITIAL_STATE: DiagnosticDrawerState = {
   stagesStack: [DiagnosticDrawerStage.ROOT],
 };
 
-const useDiagnosticDrawerStagesStore = create<
-  DiagnosticDrawerStagesState & DiagnosticDrawerStagesActions
+const useDiagnosticDrawerStore = create<
+  DiagnosticDrawerState & DiagnosticDrawerActions
 >()((set, get) => ({
   ...INITIAL_STATE,
 
-  navigateNext: (stage: ValueOf<typeof DiagnosticDrawerStage>) => {
+  navigateToNextStage: (stage: ValueOf<typeof DiagnosticDrawerStage>) => {
     set({ stagesStack: [...get().stagesStack, stage] });
   },
-  navigateBack: (onExit) => {
+  navigateToPreviousStage: (onExit) => {
     const { stagesStack } = get();
 
     if (stagesStack.length === 1) {
@@ -35,7 +37,7 @@ const useDiagnosticDrawerStagesStore = create<
 
     set({ stagesStack: stagesStack.slice(0, stagesStack.length - 1) });
   },
-  navigateUntil: (targetStage: ValueOf<typeof DiagnosticDrawerStage>) => {
+  navigateUntilStage: (targetStage: ValueOf<typeof DiagnosticDrawerStage>) => {
     const stagesStack = [...get().stagesStack];
 
     let currentStage = stagesStack.at(-1);
@@ -52,4 +54,4 @@ const useDiagnosticDrawerStagesStore = create<
   },
 }));
 
-export { useDiagnosticDrawerStagesStore };
+export { useDiagnosticDrawerStore };
