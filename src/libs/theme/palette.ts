@@ -12,6 +12,7 @@ declare module '@mui/material/styles' {
 }
 
 const palette = createPalette({
+  // mode: 'dark',
   primary: {
     light: brandBlue[600],
     main: brandBlue[700],
@@ -29,9 +30,9 @@ const palette = createPalette({
     dark: heather[500],
   },
   text: {
-    primary: '#000000',
+    // primary: '#000000',
     secondary: '#afb3bb',
-    disabled: '#afb3bb',
+    // disabled: '#afb3bb',
   },
   success: {
     contrastText: '#fff',
@@ -39,6 +40,7 @@ const palette = createPalette({
     main: emerald[500],
     dark: emerald[600],
   },
+  // background: { paper: '#222e42', default: '#222e42' },
 });
 
 export { palette };

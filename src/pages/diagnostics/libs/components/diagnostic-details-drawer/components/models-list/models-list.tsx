@@ -1,26 +1,43 @@
-import { useGetDiagnosticModels } from '@/packages/diagnostics';
+import { Model, useGetDiagnosticModels } from '@/packages/diagnostics';
 import { Stack, Typography } from '@mui/material';
 import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
 import { ModelCard } from '../model-card';
 import { Button, Dialog } from '@/libs/components';
+import { useDiagnosticDrawerStore } from '../../store';
+import { DiagnosticDrawerStage } from '../../enums';
 
 type ModelsListProps = {
   diagnosticId: string;
-
-  onUploadNewModelClick: () => void;
 };
 
 const ModelsList = (props: ModelsListProps) => {
-  const { diagnosticId, onUploadNewModelClick } = props;
+  const { diagnosticId } = props;
 
   const { isLoading, data: diagnosticModels = [] } =
     useGetDiagnosticModels(diagnosticId);
+
+  const navigateToNextStage = useDiagnosticDrawerStore(
+    (state) => state.navigateToNextStage,
+  );
+
+  const setSelectedModel = useDiagnosticDrawerStore(
+    (state) => state.setSelectedModel,
+  );
+
+  const handleUploadNewModelClick = () => {
+    navigateToNextStage(DiagnosticDrawerStage.UPLOAD_MODEL);
+  };
+
+  const handleViewModelDetails = (model: Model) => {
+    navigateToNextStage(DiagnosticDrawerStage.MODEL_DETAILS);
+    setSelectedModel(model);
+  };
 
   return (
     <Dialog.Content sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Stack spacing={2}>
         <Button
-          onClick={onUploadNewModelClick}
+          onClick={handleUploadNewModelClick}
           startIcon={
             <svg
               stroke="currentColor"
@@ -67,6 +84,7 @@ const ModelsList = (props: ModelsListProps) => {
             key={model.id}
             version={model.version}
             enabled={model.enabled}
+            onViewDetails={() => handleViewModelDetails(model)}
           />
         ))}
       </Stack>

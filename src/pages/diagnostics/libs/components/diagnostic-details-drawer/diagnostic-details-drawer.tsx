@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from '@mui/material';
 import { Diagnostic } from '@/packages/diagnostics';
-import { ModelUpload, ModelsList } from './components';
+import { ModelDetails, ModelUpload, ModelsList } from './components';
 import { DiagnosticDrawerStage } from './enums';
 import { ValueOf } from '@/libs/types';
 import { useDiagnosticDrawerStore } from './store';
@@ -25,14 +25,15 @@ type DiagnosticDetailsDrawer = {
 const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
   const { open, onClose, diagnostic, onCloseFinished } = props;
 
-  const stagesStack = useDiagnosticDrawerStore((state) => state.stagesStack);
-  const navigateToNextStage = useDiagnosticDrawerStore(
-    (state) => state.navigateToNextStage,
+  const selectedModel = useDiagnosticDrawerStore(
+    (state) => state.selectedModel,
   );
+  const stagesStack = useDiagnosticDrawerStore((state) => state.stagesStack);
+
   const navigateToPreviousStage = useDiagnosticDrawerStore(
     (state) => state.navigateToPreviousStage,
   );
-  const resetStages = useDiagnosticDrawerStore((state) => state.reset);
+  const resetStages = useDiagnosticDrawerStore((state) => state.resetStages);
 
   const stageToDetailsMap: {
     [key in ValueOf<typeof DiagnosticDrawerStage>]: {
@@ -42,14 +43,7 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
   } = {
     [DiagnosticDrawerStage.ROOT]: {
       title: diagnostic?.name ?? '',
-      component: diagnostic && (
-        <ModelsList
-          diagnosticId={diagnostic.id}
-          onUploadNewModelClick={() =>
-            navigateToNextStage(DiagnosticDrawerStage.UPLOAD_MODEL)
-          }
-        />
-      ),
+      component: diagnostic && <ModelsList diagnosticId={diagnostic.id} />,
     },
     [DiagnosticDrawerStage.UPLOAD_MODEL]: {
       title: 'Upload a new model',
@@ -58,7 +52,10 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
       ) : null,
     },
     [DiagnosticDrawerStage.UPLOAD_MODEL_VERSION]: null,
-    [DiagnosticDrawerStage.MODEL_DETAILS]: null,
+    [DiagnosticDrawerStage.MODEL_DETAILS]: {
+      component: <ModelDetails />,
+      title: selectedModel?.name ?? '',
+    },
   };
 
   const handleDrawerCloseFinished = () => {

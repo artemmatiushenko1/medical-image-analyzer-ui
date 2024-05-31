@@ -18,10 +18,12 @@ type ModelCardProps = {
   name: string;
   version: number;
   enabled: boolean;
+
+  onViewDetails: () => void;
 };
 
 const ModelCard = (props: ModelCardProps) => {
-  const { name, version, enabled } = props;
+  const { name, version, enabled, onViewDetails } = props;
 
   const { open, openMenu, closeMenu, anchorEl } =
     useMenuPopover<HTMLButtonElement>();
@@ -60,7 +62,7 @@ const ModelCard = (props: ModelCardProps) => {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem>
+          <MenuItem onClick={onViewDetails}>
             <ListItemIcon>
               <ManageHistoryRounded fontSize="small" />
             </ListItemIcon>
