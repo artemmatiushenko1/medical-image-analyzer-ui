@@ -2,9 +2,12 @@ import { wait } from '@/libs/helpers';
 import {
   CreateDiagnosticRequest,
   CreateDiagnosticResponse,
+  CreateModelRequest,
+  CreateModelResponse,
   Diagnostic,
   GetAllDiagnosticsResponse,
   GetDiagnosticModelsResponse,
+  Model,
 } from './types';
 import { MOCK_DIAGNOSTICS, MOCK_MODELS } from './mocks';
 
@@ -33,6 +36,23 @@ class DiagnosticsApi {
   getDiagnosticModels = async (
     diagnosticId: string,
   ): Promise<GetDiagnosticModelsResponse> => wait(2000).then(() => this.models);
+
+  createModel = async (
+    diagnosticId: string,
+    request: CreateModelRequest,
+  ): Promise<CreateModelResponse> =>
+    wait(2000).then(() => {
+      const newModel: Model = {
+        id: crypto.randomUUID(),
+        name: request.name,
+        enabled: true,
+        version: 1,
+      };
+
+      this.models = [...this.models, newModel];
+
+      return newModel;
+    });
 }
 
 const diagnosticsApi = new DiagnosticsApi();
