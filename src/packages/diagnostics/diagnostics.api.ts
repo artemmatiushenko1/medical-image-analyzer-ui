@@ -34,11 +34,11 @@ class DiagnosticsApi {
     });
 
   getDiagnosticModels = async (
-    diagnosticId: string,
+    _diagnosticId: string,
   ): Promise<GetDiagnosticModelsResponse> => wait(2000).then(() => this.models);
 
   createModel = async (
-    diagnosticId: string,
+    _diagnosticId: string,
     request: CreateModelRequest,
   ): Promise<CreateModelResponse> =>
     wait(2000).then(() => {

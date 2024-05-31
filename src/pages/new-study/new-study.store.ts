@@ -2,7 +2,7 @@ import { PercentCrop } from 'react-image-crop';
 import { create } from 'zustand';
 import { CropSettings } from './libs/components/image-crop-dialog';
 import { DEFAULT_CROP_SETTINGS } from './libs/components/image-crop-dialog';
-import { Model } from '@/packages/models';
+import { Model } from '@/packages/diagnostics';
 
 type NewStudyState = {
   uploadedImageSrc: string | null;
@@ -36,9 +36,24 @@ const INITIAL_STATE: NewStudyState = {
   createStudyStatusDialogOpen: false,
   selectedModelIds: [],
   availableModels: [
-    { id: '1', name: 'Feedforward Neural Networks (FNN)' },
-    { id: '2', name: 'Recurrent Neural Networks (RNN)' },
-    { id: '3', name: 'Generative Adversarial Networks (GAN)' },
+    {
+      id: '1',
+      name: 'Feedforward Neural Networks (FNN)',
+      enabled: true,
+      version: 1,
+    },
+    {
+      id: '2',
+      name: 'Recurrent Neural Networks (RNN)',
+      enabled: true,
+      version: 1,
+    },
+    {
+      id: '3',
+      name: 'Generative Adversarial Networks (GAN)',
+      enabled: true,
+      version: 1,
+    },
   ],
 };
 
