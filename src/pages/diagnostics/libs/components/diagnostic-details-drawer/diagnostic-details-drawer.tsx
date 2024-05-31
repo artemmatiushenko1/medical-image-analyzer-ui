@@ -9,11 +9,10 @@ import {
   Tooltip,
 } from '@mui/material';
 import { Diagnostic } from '@/packages/diagnostics';
-import { ModelUpload } from '../model-upload';
-import { ModelsList } from '../models-list';
-import { useState } from 'react';
-import { DiagnosticDrawerStage } from '../../enums';
+import { ModelUpload, ModelsList } from './components';
+import { DiagnosticDrawerStage } from './enums';
 import { ValueOf } from '@/libs/types';
+import { useDiagnosticDrawerStagesStore } from './store';
 
 type DiagnosticDetailsDrawer = {
   open: boolean;
@@ -25,9 +24,16 @@ type DiagnosticDetailsDrawer = {
 const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
   const { open, onClose, diagnostic, onCloseFinished } = props;
 
-  const [stagesStack, setStagesStack] = useState<
-    ValueOf<typeof DiagnosticDrawerStage>[]
-  >([DiagnosticDrawerStage.DIAGNOSTIC_DETAILS]);
+  const stagesStack = useDiagnosticDrawerStagesStore(
+    (state) => state.stagesStack,
+  );
+  const navigateNext = useDiagnosticDrawerStagesStore(
+    (state) => state.navigateNext,
+  );
+  const navigateBack = useDiagnosticDrawerStagesStore(
+    (state) => state.navigateBack,
+  );
+  const resetStages = useDiagnosticDrawerStagesStore((state) => state.reset);
 
   const stageToDetailsMap: {
     [key in ValueOf<typeof DiagnosticDrawerStage>]: {
@@ -35,13 +41,13 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
       title: string;
     } | null;
   } = {
-    [DiagnosticDrawerStage.DIAGNOSTIC_DETAILS]: {
+    [DiagnosticDrawerStage.ROOT]: {
       title: diagnostic?.name ?? '',
       component: diagnostic && (
         <ModelsList
           diagnosticId={diagnostic.id}
           onUploadNewModelClick={() =>
-            navigateToStage(DiagnosticDrawerStage.UPLOAD_MODEL)
+            navigateNext(DiagnosticDrawerStage.UPLOAD_MODEL)
           }
         />
       ),
@@ -57,23 +63,12 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
   };
 
   const handleDrawerCloseFinished = () => {
-    setStagesStack([DiagnosticDrawerStage.DIAGNOSTIC_DETAILS]);
+    resetStages();
     onCloseFinished();
   };
 
   const handleNavigateBackClick = () => {
-    if (stagesStack.length === 1) {
-      onClose();
-      return;
-    }
-
-    setStagesStack((prevState) => [
-      ...prevState.slice(0, prevState.length - 1),
-    ]);
-  };
-
-  const navigateToStage = (stage: ValueOf<typeof DiagnosticDrawerStage>) => {
-    setStagesStack((prevState) => [...prevState, stage]);
+    navigateBack(onClose);
   };
 
   const currentStage = stagesStack.at(-1);

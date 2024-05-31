@@ -1,7 +1,15 @@
 import { SuccessCheckmark } from '@/libs/components';
 import { Button, Stack, Typography } from '@mui/material';
+import { useDiagnosticDrawerStagesStore } from '../../store';
+import { DiagnosticDrawerStage } from '../../enums';
 
 const ModelUploadSuccessBanner = () => {
+  const { navigateUntil } = useDiagnosticDrawerStagesStore();
+
+  const handleOkClick = () => {
+    navigateUntil(DiagnosticDrawerStage.ROOT);
+  };
+
   return (
     <Stack
       alignItems="center"
@@ -24,7 +32,7 @@ const ModelUploadSuccessBanner = () => {
           diagnostic details view.
         </Typography>
       </Stack>
-      <Button size="small" variant="outlined">
+      <Button size="small" variant="outlined" onClick={handleOkClick}>
         Ok
       </Button>
     </Stack>
