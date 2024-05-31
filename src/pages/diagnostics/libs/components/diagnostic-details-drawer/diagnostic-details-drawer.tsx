@@ -16,9 +16,10 @@ import { useDiagnosticDrawerStagesStore } from './store';
 
 type DiagnosticDetailsDrawer = {
   open: boolean;
+  diagnostic: Diagnostic | null;
+
   onClose: () => void;
   onCloseFinished: () => void;
-  diagnostic: Diagnostic | null;
 };
 
 const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
