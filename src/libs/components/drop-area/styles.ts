@@ -14,6 +14,12 @@ const styles = createStyleSheet({
     borderColor: palette.primary.main,
     background: alpha(palette.primary.main, palette.action.hoverOpacity),
   }),
+  error: ({ palette }) => ({
+    borderColor: palette.error.main,
+    svg: {
+      color: palette.error.main,
+    },
+  }),
   imageIcon: {
     fontSize: '50px',
   },

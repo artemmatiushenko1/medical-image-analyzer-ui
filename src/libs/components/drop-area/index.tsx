@@ -1,8 +1,14 @@
 import { mergeSx } from '@/libs/theme';
-import { Box, Stack, SvgIconProps, Typography } from '@mui/material';
+import {
+  Box,
+  FormHelperText,
+  Stack,
+  SvgIconProps,
+  Typography,
+} from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { styles } from './styles';
-import { CSSProperties, useState } from 'react';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
 import { MimeType } from '@/libs/enums';
 import { ValueOf } from '@/libs/types';
 import { bytesToMb, parseMimeType } from '@/libs/helpers';
@@ -15,6 +21,9 @@ type DropAreaProps = {
   icon: React.FC<SvgIconProps>;
   maxFileSizeMb: number;
   supportedFormats: ValueOf<typeof MimeType>[];
+  error?: boolean;
+  helperText?: string;
+  value?: File;
 
   onUpload: (file: File) => void;
 };
@@ -27,11 +36,22 @@ const DropArea = (props: DropAreaProps) => {
     icon: Icon,
     maxFileSizeMb,
     supportedFormats,
+    error = false,
+    helperText,
+    value,
   } = props;
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
   const { t } = useTranslation('NewStudy', { keyPrefix: 'ImageUpload' });
+
+  useEffect(() => {
+    if (!value && fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  }, [value]);
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const [file] = e.target.files ?? [];
@@ -50,11 +70,16 @@ const DropArea = (props: DropAreaProps) => {
   return (
     <Stack gap={1}>
       <Stack
-        sx={mergeSx(styles.root, isDraggingOver && styles.draggedOver, {
-          height,
-          width,
-          py: 4,
-        })}
+        sx={mergeSx(
+          styles.root,
+          isDraggingOver && styles.draggedOver,
+          error && styles.error,
+          {
+            height,
+            width,
+            py: 4,
+          },
+        )}
       >
         <Icon color="primary" sx={styles.imageIcon} />
         <Typography variant="body2" color="text.secondary">
@@ -65,6 +90,7 @@ const DropArea = (props: DropAreaProps) => {
           />
         </Typography>
         <Box
+          ref={fileInputRef}
           component="input"
           type="file"
           sx={styles.input}
@@ -92,6 +118,11 @@ const DropArea = (props: DropAreaProps) => {
           </Typography>
         )}
       </Box>
+      {helperText && (
+        <FormHelperText sx={{ ml: '14px' }} error>
+          {helperText}
+        </FormHelperText>
+      )}
     </Stack>
   );
 };
