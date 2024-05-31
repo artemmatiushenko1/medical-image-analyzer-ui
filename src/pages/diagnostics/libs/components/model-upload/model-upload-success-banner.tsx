@@ -1,5 +1,5 @@
-import { CheckRounded } from '@mui/icons-material';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { SuccessCheckmark } from '@/libs/components';
+import { Button, Stack, Typography } from '@mui/material';
 
 const ModelUploadSuccessBanner = () => {
   return (
@@ -14,22 +14,7 @@ const ModelUploadSuccessBanner = () => {
         background: ({ palette }) => palette.background.paper,
       }}
     >
-      <Box
-        sx={{
-          background: ({ palette }) => palette.success.main,
-          borderRadius: '100px',
-          color: '#fff',
-          padding: 2,
-          width: '50px',
-          height: '50px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {/* TODO: Add fancy checkmark animation */}
-        <CheckRounded fontSize="large" />
-      </Box>
+      <SuccessCheckmark />
       <Stack>
         <Typography variant="h6" fontSize={16} textAlign="center" gutterBottom>
           New model was successfully uploaded!

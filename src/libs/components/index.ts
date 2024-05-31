@@ -6,3 +6,4 @@ export { Loader } from './loader';
 export { Breadcrumbs } from './breadcrumbs';
 export { Dialog } from './dialog';
 export { DropArea } from './drop-area';
+export { SuccessCheckmark } from './success-checkmark';

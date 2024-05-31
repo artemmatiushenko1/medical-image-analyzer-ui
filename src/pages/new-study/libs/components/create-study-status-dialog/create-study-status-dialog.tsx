@@ -1,16 +1,9 @@
-import { CheckRounded } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Button, CircularProgress, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/app';
 import { useCreateStudy } from '@/packages/studies';
-import { Dialog } from '@/libs/components';
+import { Dialog, SuccessCheckmark } from '@/libs/components';
 
 const CreateStudyStatusDialog = () => {
   const navigate = useNavigate();
@@ -53,9 +46,7 @@ const CreateStudyStatusDialog = () => {
           )}
           {isSuccess && (
             <>
-              <Box sx={styles.successIconWrapper}>
-                <CheckRounded fontSize="large" />
-              </Box>
+              <SuccessCheckmark />
               {getSuccessTypography()}
               <Button variant="contained" onClick={handleOkClick}>
                 Ok

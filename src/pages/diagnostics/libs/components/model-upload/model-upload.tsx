@@ -111,8 +111,9 @@ const ModelUpload = (props: ModelUploadProps) => {
         </Stack>
         {isSuccess && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial="initial"
+            animate="finished"
+            variants={{ initial: { opacity: 0 }, finished: { opacity: 1 } }}
             transition={{
               duration: 0.2,
             }}
