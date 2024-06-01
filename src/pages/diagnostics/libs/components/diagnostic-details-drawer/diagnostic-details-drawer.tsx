@@ -46,12 +46,15 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
       component: diagnostic && <ModelsList diagnosticId={diagnostic.id} />,
     },
     [DiagnosticDrawerStage.UPLOAD_MODEL]: {
-      title: 'Upload a new model',
+      title: 'New model',
       component: diagnostic ? (
         <ModelUpload diagnosticId={diagnostic?.id} />
       ) : null,
     },
-    [DiagnosticDrawerStage.UPLOAD_MODEL_VERSION]: null,
+    [DiagnosticDrawerStage.UPLOAD_MODEL_VERSION]: {
+      component: <div>Upload new model version</div>,
+      title: 'New model version',
+    },
     [DiagnosticDrawerStage.MODEL_DETAILS]: {
       component: <ModelDetails />,
       title: selectedModel?.name ?? '',

@@ -1,4 +1,5 @@
-import { Diagnostic } from './types';
+import dayjs from 'dayjs';
+import { Diagnostic, Model, ModelVersion } from './types';
 
 const MOCK_DIAGNOSTICS: Diagnostic[] = [
   {
@@ -33,11 +34,62 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
   },
 ];
 
-const MOCK_MODELS = [
-  { name: 'CoviScanNet', id: '1', version: 1, enabled: true },
-  { name: 'SARS-CoV-2Analyzer', id: '2', version: 2, enabled: true },
-  { name: 'CovidVisionAI', id: '3', version: 1, enabled: false },
-  { name: 'CoviScanNet-2', id: '4', version: 3, enabled: true },
+const MOCK_MODEL_VERSIONS: ModelVersion[] = [
+  {
+    id: crypto.randomUUID(),
+    createdAt: dayjs().toISOString(),
+    revision: 4,
+    name: 'Increased accuracy',
+    notes: '',
+  },
+  {
+    id: crypto.randomUUID(),
+    createdAt: dayjs().toISOString(),
+    revision: 3,
+    name: 'Increased accuracy',
+    notes: '',
+  },
+  {
+    id: crypto.randomUUID(),
+    createdAt: dayjs().toISOString(),
+    revision: 2,
+    name: 'Increased accuracy',
+    notes: '',
+  },
+  {
+    id: crypto.randomUUID(),
+    createdAt: dayjs().toISOString(),
+    revision: 1,
+    name: 'Increased accuracy',
+    notes: '',
+  },
+];
+
+const MOCK_MODELS: Model[] = [
+  {
+    name: 'CoviScanNet',
+    id: '1',
+    currentVersion: MOCK_MODEL_VERSIONS[0],
+    enabled: true,
+  },
+  {
+    name: 'SARS-CoV-2Analyzer',
+    id: '2',
+    currentVersion: MOCK_MODEL_VERSIONS[0],
+    enabled: true,
+  },
+  {
+    name: 'CovidVisionAI',
+    id: '3',
+    currentVersion: MOCK_MODEL_VERSIONS[0],
+    enabled: false,
+  },
+  {
+    name: 'CoviScanNet-2',
+    id: '4',
+    currentVersion: MOCK_MODEL_VERSIONS[0],
+    enabled: true,
+  },
 ];
 
 export { MOCK_DIAGNOSTICS, MOCK_MODELS };

@@ -1,77 +1,84 @@
 import { Button, Dialog } from '@/libs/components';
-import { mergeSx } from '@/libs/theme';
-import {
-  Box,
-  Chip,
-  Stack,
-  Step,
-  StepLabel,
-  Stepper,
-  Theme,
-  Typography,
-  alpha,
-} from '@mui/material';
+import { UploadIcon } from '@/libs/components/icons';
+import { Stack, Typography } from '@mui/material';
+import { useDiagnosticDrawerStore } from '../../store';
+import { DiagnosticDrawerStage } from '../../enums';
+import { ModelVersionHistory } from '../model-version-history';
+import { ModelVersion } from '@/packages/diagnostics';
 
 const ModelDetails = () => {
-  const versions = [
+  const selectedModel = useDiagnosticDrawerStore(
+    (state) => state.selectedModel,
+  );
+  const navigateToNextStage = useDiagnosticDrawerStore(
+    (state) => state.navigateToNextStage,
+  );
+
+  const versions: ModelVersion[] = [
     {
-      revision: 10,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-    },
-    {
-      revision: 9,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-    },
-    {
-      revision: 8,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-    },
-    {
+      id: '7',
       revision: 7,
       name: 'Increased precision',
       createdAt: '15 Mar 2024',
+      notes: '',
     },
     {
+      id: '6',
       revision: 6,
       name: 'Increased precision',
       createdAt: '15 Mar 2024',
+      notes: '',
     },
     {
+      id: '5',
       revision: 5,
       name: 'Increased precision',
       createdAt: '15 Mar 2024',
+      notes: '',
     },
     {
+      id: '4',
       revision: 4,
       name: 'Increased precision',
       createdAt: '15 Mar 2024',
+      notes: '',
     },
     {
+      id: '3',
       revision: 3,
       name: 'Increased precision',
       createdAt: '15 Mar 2024',
+      notes: '',
     },
     {
+      id: '2',
       revision: 2,
       name: 'Increased precision',
       createdAt: '15 Mar 2024',
+      notes: '',
     },
     {
+      id: '1',
       revision: 1,
       name: 'Increased precision',
       createdAt: '15 Mar 2024',
+      notes: '',
     },
   ];
 
-  const activeVersion = 10;
+  const handleUploadNewVersionClick = () => {
+    navigateToNextStage(DiagnosticDrawerStage.UPLOAD_MODEL_VERSION);
+  };
 
   return (
     <Dialog.Content>
       <Stack spacing={3}>
-        <Button fullWidth variant="contained">
+        <Button
+          fullWidth
+          variant="contained"
+          startIcon={<UploadIcon />}
+          onClick={handleUploadNewVersionClick}
+        >
           Upload new version
         </Button>
         <Stack>
@@ -80,76 +87,12 @@ const ModelDetails = () => {
             All the existing model versions listed below.
           </Typography>
         </Stack>
-        <Stepper
-          orientation="vertical"
-          sx={{
-            '.MuiStepConnector-root': { ml: '34px', mb: '-6px', mt: '-6px' },
-            '.MuiStepConnector-line': { minHeight: '50px' },
-          }}
-        >
-          {versions.map((version) => {
-            const isActive = version.revision === activeVersion;
-            const getColor = ({ palette }: Theme) =>
-              isActive ? palette?.primary.main : palette.neutral.dark;
-
-            return (
-              <Step
-                key={version.revision}
-                sx={mergeSx(
-                  { display: 'flex' },
-                  isActive && {
-                    '& + .MuiStepConnector-root .MuiStepConnector-line': {
-                      borderColor: ({ palette }) => palette.primary.main,
-                    },
-                  },
-                )}
-              >
-                <StepLabel
-                  sx={{ gap: 2, padding: 0 }}
-                  StepIconComponent={() => (
-                    <Chip
-                      sx={{
-                        color: getColor,
-                        backgroundColor: (theme) => alpha(getColor(theme), 0.1),
-                        border: (theme) => `1px solid ${getColor(theme)}`,
-                      }}
-                      disabled={!isActive}
-                      color={!isActive ? 'default' : 'primary'}
-                      label={
-                        <Stack direction="row" alignItems="center" gap={1}>
-                          <Box
-                            sx={{
-                              width: '6px',
-                              height: '6px',
-                              backgroundColor: 'currentColor',
-                              borderRadius: '100px',
-                            }}
-                          />
-                          <Typography
-                            fontSize="inherit"
-                            color="text.primary"
-                          >{`v${version.revision}.0`}</Typography>
-                        </Stack>
-                      }
-                    />
-                  )}
-                  optional={
-                    <Typography variant="caption">
-                      {version.createdAt}
-                    </Typography>
-                  }
-                >
-                  {version.name}
-                </StepLabel>
-                <Box sx={{ marginLeft: 'auto' }}>
-                  <Button disabled={isActive}>
-                    {isActive ? 'Current' : 'Restore'}
-                  </Button>
-                </Box>
-              </Step>
-            );
-          })}
-        </Stepper>
+        {selectedModel && (
+          <ModelVersionHistory
+            currentVersionId={versions[0].id}
+            history={versions}
+          />
+        )}
       </Stack>
     </Dialog.Content>
   );

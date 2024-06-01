@@ -3,6 +3,7 @@ export {
   type CreateDiagnosticRequest,
   type Model,
   type CreateModelRequest,
+  type ModelVersion,
 } from './types';
 export { useDiagnosticsStore } from './diagnostics.store';
 export {
