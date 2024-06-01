@@ -22,8 +22,11 @@ import { MOCK_USER, useAuthStore } from '@/packages/auth';
 import { Link } from 'react-router-dom';
 import { palette } from '@/libs/theme/palette';
 import { Role } from '@/packages/users';
+import { useTranslation } from 'react-i18next';
 
 const SignInForm = () => {
+  const { t } = useTranslation('Auth');
+
   const setUser = useAuthStore((state) => state.setUser);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -47,20 +50,20 @@ const SignInForm = () => {
   return (
     <Box component="form" sx={styles.form} onSubmit={handleFormSubmit}>
       <Box sx={styles.logoWrapper}>
-        <Typography variant="caption">Welcome to</Typography>
+        <Typography variant="caption">{t('WelcomeTo')}</Typography>
         <Logo />
       </Box>
       <Stack sx={styles.controlsStack}>
         <FormControl sx={styles.formControl}>
           <FormLabel htmlFor="email" sx={styles.formControlLabel}>
-            Email address
+            {t('EmailAddress')}
           </FormLabel>
           <TextField
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             sx={styles.input}
             id="email"
-            placeholder="Your email address"
+            placeholder={t('YourEmailAddress')}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end" sx={{ pr: 0.5 }}>
@@ -72,12 +75,12 @@ const SignInForm = () => {
         </FormControl>
         <FormControl sx={styles.formControl}>
           <FormLabel htmlFor="password" sx={styles.formControlLabel}>
-            Password
+            {t('Password')}
           </FormLabel>
           <TextField
             id="password"
             type={isPasswordVisible ? 'text' : 'password'}
-            placeholder="Your password"
+            placeholder={t('YourPassword')}
             sx={styles.input}
             InputProps={{
               endAdornment: (
@@ -103,12 +106,12 @@ const SignInForm = () => {
           variant="contained"
           sx={styles.signInButton}
         >
-          Sign in
+          {t('SignIn')}
         </Button>
         <Typography textAlign="center" variant="caption">
-          Don't have an account?{' '}
+          {t('DontHaveAnAccount')}{' '}
           <Link to="#" style={{ color: palette.primary.main }}>
-            Request access
+            {t('RequestAccess')}
           </Link>
         </Typography>
       </Stack>

@@ -3,12 +3,14 @@ import newStudyEn from './en/new-study.json';
 import appEn from './en/app.json';
 import diagnosticsEn from './en/diagnostics.json';
 import usersEn from './en/users.json';
+import authEn from './en/auth.json';
 
 import commonUk from './uk/common.json';
 import appUk from './uk/app.json';
 import newStudyUk from './uk/new-study.json';
 import usersUk from './uk/users.json';
 import diagnosticsUk from './uk/diagnostics.json';
+import authUk from './uk/auth.json';
 
 const resources = {
   en: {
@@ -17,6 +19,7 @@ const resources = {
     App: appEn,
     Diagnostics: diagnosticsEn,
     Users: usersEn,
+    Auth: authEn,
   },
   uk: {
     Common: commonUk,
@@ -24,6 +27,7 @@ const resources = {
     NewStudy: newStudyUk,
     Users: usersUk,
     Diagnostics: diagnosticsUk,
+    Auth: authUk,
   },
 } as const;
 
