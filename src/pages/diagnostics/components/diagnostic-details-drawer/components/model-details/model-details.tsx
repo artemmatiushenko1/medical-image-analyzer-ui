@@ -5,9 +5,15 @@ import { ModelVersionHistory } from '../model-version-history';
 import { useGetModelVersions } from '@/packages/diagnostics';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
+import { useTranslation } from 'react-i18next';
 
 const ModelDetails = () => {
+  const { t } = useTranslation('Diagnostics', {
+    keyPrefix: 'DiagnosticsDrawer.Stages.ModelDetails',
+  });
+
   const selectedModel = useDiagnosticsStore((state) => state.selectedModel);
+
   const navigateToNextStage = useDiagnosticsStore(
     (state) => state.navigateToNextStage,
   );
@@ -28,12 +34,14 @@ const ModelDetails = () => {
           startIcon={<UploadIcon />}
           onClick={handleUploadNewVersionClick}
         >
-          Upload new version
+          {t('UploadNewVersionButton')}
         </Button>
         <Stack>
-          <Typography variant="subtitle2">Version History</Typography>
+          <Typography variant="subtitle2">
+            {t('VersionHistoryLabel')}
+          </Typography>
           <Typography variant="caption">
-            All the existing model versions listed below.
+            {t('VersionHistoryCaption')}
           </Typography>
         </Stack>
         {isLoading ? (

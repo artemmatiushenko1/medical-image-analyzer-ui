@@ -3,8 +3,13 @@ import { AddUserRequest } from '@/packages/users';
 import { useAddUser } from '@/packages/users/queries';
 import { Box, FormControl, FormLabel, TextField } from '@mui/material';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 const InviteUserForm = () => {
+  const { t } = useTranslation('Users');
+
+  const { t: tCommon } = useTranslation('Common');
+
   const { control, handleSubmit: submit } = useForm<AddUserRequest>({
     defaultValues: { firstName: '', lastName: '', email: '' },
   });
@@ -28,27 +33,39 @@ const InviteUserForm = () => {
       }}
     >
       <FormControl fullWidth>
-        <FormLabel sx={{ mb: 1 }}>First name</FormLabel>
+        <FormLabel sx={{ mb: 1 }}>
+          {t('AddNewUserDrawer.FirstNameLabel')}
+        </FormLabel>
         <Controller
           control={control}
           name="firstName"
           render={({ field }) => (
-            <TextField placeholder="First name" {...field} />
+            <TextField
+              placeholder={t('AddNewUserDrawer.FirstNamePlaceholder')}
+              {...field}
+            />
           )}
         />
       </FormControl>
       <FormControl fullWidth>
-        <FormLabel sx={{ mb: 1 }}>First name</FormLabel>
+        <FormLabel sx={{ mb: 1 }}>
+          {t('AddNewUserDrawer.LastNameLabel')}
+        </FormLabel>
         <Controller
           control={control}
           name="lastName"
           render={({ field }) => (
-            <TextField placeholder="Last name" {...field} />
+            <TextField
+              placeholder={t('AddNewUserDrawer.LastNamePlaceholder')}
+              {...field}
+            />
           )}
         />
       </FormControl>
       <FormControl fullWidth>
-        <FormLabel sx={{ mb: 1 }}>Email address</FormLabel>
+        <FormLabel sx={{ mb: 1 }}>
+          {t('AddNewUserDrawer.EmailAddressLabel')}
+        </FormLabel>
         <Controller
           name="email"
           control={control}
@@ -63,7 +80,7 @@ const InviteUserForm = () => {
         sx={{ alignSelf: 'flex-end', marginTop: 'auto' }}
         variant="contained"
       >
-        Add
+        {tCommon('Add')}
       </Button>
     </Box>
   );

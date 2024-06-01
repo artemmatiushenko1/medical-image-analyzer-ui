@@ -13,6 +13,7 @@ import { ValueOf } from '@/libs/types';
 import { VersionUpload } from './components/version-upload';
 import { useDiagnosticsStore } from '../../store';
 import { DiagnosticDrawerStage } from '../../libs/enums';
+import { useTranslation } from 'react-i18next';
 
 type DiagnosticDetailsDrawer = {
   open: boolean;
@@ -23,6 +24,11 @@ type DiagnosticDetailsDrawer = {
 
 const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
   const { open, onClose, onCloseFinished } = props;
+
+  const { t } = useTranslation('Diagnostics', {
+    keyPrefix: 'DiagnosticsDrawer.Stages',
+  });
+  const { t: tCommon } = useTranslation('Common');
 
   const selectedDiagnostic = useDiagnosticsStore(
     (state) => state.selectedDiagnostic,
@@ -46,12 +52,12 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
       component: selectedDiagnostic && <ModelsList />,
     },
     [DiagnosticDrawerStage.UPLOAD_MODEL]: {
-      title: 'New model',
+      title: t('NewModel.Title'),
       component: selectedDiagnostic ? <ModelUpload /> : null,
     },
     [DiagnosticDrawerStage.UPLOAD_MODEL_VERSION]: {
       component: <VersionUpload />,
-      title: 'New version',
+      title: t('NewVersion.Title'),
     },
     [DiagnosticDrawerStage.MODEL_DETAILS]: {
       component: <ModelDetails />,
@@ -92,7 +98,7 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
       }}
     >
       <Stack direction="row">
-        <Tooltip title="Back">
+        <Tooltip title={tCommon('Back')}>
           <IconButton
             onClick={handlenavigateToPreviousStageClick}
             sx={{

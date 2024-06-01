@@ -15,8 +15,14 @@ import { Controller, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { motion } from 'framer-motion';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
+import { useTranslation } from 'react-i18next';
 
 const ModelUpload = () => {
+  const { t } = useTranslation('Diagnostics', {
+    keyPrefix: 'DiagnosticsDrawer.Stages.NewModel',
+  });
+  const { t: tCommon } = useTranslation('Common');
+
   const selectedDiagnostic = useDiagnosticsStore(
     (state) => state.selectedDiagnostic,
   );
@@ -58,7 +64,7 @@ const ModelUpload = () => {
         <Stack spacing={3}>
           <Stack spacing={1}>
             <Typography variant="subtitle2" gutterBottom>
-              Model name
+              {t('ModelNameLabel')}
             </Typography>
             <Controller
               control={control}
@@ -69,7 +75,7 @@ const ModelUpload = () => {
                   helperText={errors.name ? errors.name.message : undefined}
                   variant="outlined"
                   fullWidth
-                  placeholder="Enter model name"
+                  placeholder={t('ModelNamePlaceholder')}
                   {...field}
                 />
               )}
@@ -92,14 +98,9 @@ const ModelUpload = () => {
             }}
           >
             <OperationStatusBanner
-              title="New model was successfully uploaded!"
-              description={
-                <>
-                  You can now manage it through <br />
-                  diagnostic details view.
-                </>
-              }
               status="success"
+              title={t('SuccessMessageTitle')}
+              description={t('SuccessMessageDescription')}
               onOkClick={() => navigateToPreviousStage()}
             />
           </motion.div>
@@ -116,7 +117,7 @@ const ModelUpload = () => {
             disabled={isDirty && !isValid}
             onClick={handleFormSubmit}
           >
-            Upload
+            {tCommon('Upload')}
           </Button>
         </Box>
       )}

@@ -59,7 +59,7 @@ const Sidebar = (props: SidebarProps) => {
       <Stack sx={{ justifyContent: 'space-between', flex: 1, padding: '14px' }}>
         <List component="nav" sx={{ margin: '-14px' }}>
           <ListSubheader sx={styles.navItemSubHeader}>
-            {t('Sidebar.Main')}
+            {t('Navigation.Main')}
           </ListSubheader>
           {navItems.map(({ key, icon: Icon, title, path }) => {
             const selected = Boolean(matchPath(path, location.pathname));

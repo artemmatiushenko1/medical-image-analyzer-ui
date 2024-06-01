@@ -1,12 +1,39 @@
 import { Loader } from '@/libs/components';
-import { DataGrid, DataGridProps } from '@mui/x-data-grid';
+import { DataGrid, DataGridProps, GridColDef } from '@mui/x-data-grid';
 import { styles } from './styles';
-import { columns } from './columns';
+import { User } from '@/packages/users';
+import { useTranslation } from 'react-i18next';
 
 type UsersTableProps = Pick<DataGridProps, 'loading' | 'rows'>;
 
 const UsersTable = (props: UsersTableProps) => {
   const { loading, rows } = props;
+
+  const { t } = useTranslation('Users');
+
+  const columns: GridColDef<User>[] = [
+    {
+      field: 'firstName',
+      headerName: t('UsersTable.Columns.FirstName'),
+      sortable: false,
+      resizable: false,
+      flex: 1,
+    },
+    {
+      field: 'lastName',
+      headerName: t('UsersTable.Columns.LastName'),
+      sortable: false,
+      resizable: false,
+      flex: 1,
+    },
+    {
+      field: 'email',
+      headerName: t('UsersTable.Columns.Email'),
+      sortable: false,
+      resizable: false,
+      flex: 1,
+    },
+  ];
 
   return (
     <DataGrid

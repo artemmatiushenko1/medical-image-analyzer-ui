@@ -5,6 +5,7 @@ import {
 } from '@/packages/diagnostics';
 import { Stack, TextField } from '@mui/material';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 type NewDiagnosticFormProps = {
   onSuccess: () => void;
@@ -12,6 +13,12 @@ type NewDiagnosticFormProps = {
 
 const NewDiagnosticForm = (props: NewDiagnosticFormProps) => {
   const { onSuccess } = props;
+
+  const { t } = useTranslation('Diagnostics', {
+    keyPrefix: 'NewDiagnosticDialog',
+  });
+
+  const { t: tCommon } = useTranslation('Common');
 
   const { control, handleSubmit: submit } = useForm<CreateDiagnosticRequest>({
     defaultValues: { name: '' },
@@ -32,9 +39,9 @@ const NewDiagnosticForm = (props: NewDiagnosticFormProps) => {
           render={({ field }) => (
             <TextField
               fullWidth
-              label="Diagnostic name"
+              label={t('DiagnosticNameLabel')}
               variant="outlined"
-              helperText="E.g. Melanoma diagnosis, COVID-19 detection"
+              helperText={t('DiagnosticNameHelperText')}
               {...field}
             />
           )}
@@ -46,7 +53,7 @@ const NewDiagnosticForm = (props: NewDiagnosticFormProps) => {
         sx={{ alignSelf: 'flex-end' }}
         variant="contained"
       >
-        Create
+        {tCommon('Create')}
       </Button>
     </Stack>
   );

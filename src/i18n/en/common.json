@@ -3,5 +3,11 @@
   "Next": "Next",
   "Cancel": "Cancel",
   "Finish": "Finish",
-  "Create": "Create"
+  "Create": "Create",
+  "Upload": "Upload",
+  "Add": "Add",
+  "FileUpload": {
+    "ChooseFileLabel": "Choose file",
+    "SelectedFileLabel": "Selected file"
+  }
 }

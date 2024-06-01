@@ -11,9 +11,12 @@ import {
 import { Diagnostic, useGetAllDiagnostics } from '@/packages/diagnostics';
 import { GridRowParams } from '@mui/x-data-grid';
 import { useDiagnosticsStore } from './store';
+import { useTranslation } from 'react-i18next';
 
 const Diagnostics = () => {
-  const breadcrumbs = ['Home', 'Diagnostics'];
+  const { t } = useTranslation('Diagnostics');
+
+  const breadcrumbs = [t('Breadcrumbs.Home'), t('Breadcrumbs.Diagnostics')];
 
   const setSelectedDiagnostic = useDiagnosticsStore(
     (state) => state.setSelectedDiagnostic,
@@ -48,12 +51,9 @@ const Diagnostics = () => {
         <Stack direction="row" justifyContent="space-between">
           <Box sx={{ flex: 0.6 }}>
             <Typography variant="h6" fontWeight={600}>
-              Diagnostics management
+              {t('PageTitle')}
             </Typography>
-            <Typography variant="caption">
-              View and manage diagnostics with corresponding AI models for
-              disease diagnosis.
-            </Typography>
+            <Typography variant="caption">{t('PageDescription')}</Typography>
           </Box>
           <Box>
             <Button
@@ -61,7 +61,7 @@ const Diagnostics = () => {
               variant="contained"
               onClick={openNewDiagnosticDialog}
             >
-              New diagnostic
+              {t('NewDiagnosticButton')}
             </Button>
           </Box>
         </Stack>

@@ -10,8 +10,11 @@ import { AddRounded } from '@mui/icons-material';
 import { useGetAllUsers } from '@/packages/users';
 import { Breadcrumbs } from '@/libs/components';
 import { useClosable } from '@/libs/hooks';
+import { useTranslation } from 'react-i18next';
 
 const Users = () => {
+  const { t } = useTranslation('Users');
+
   const { isLoading, data: users = [] } = useGetAllUsers();
 
   const {
@@ -20,7 +23,7 @@ const Users = () => {
     open: openDrawer,
   } = useClosable();
 
-  const breadcrumbs = ['Home', 'Users'];
+  const breadcrumbs = [t('Breadcrumbs.Home'), t('Breadcrumbs.Users')];
 
   return (
     <Stack sx={styles.root} direction="row">
@@ -34,11 +37,9 @@ const Users = () => {
         <Stack direction="row" justifyContent="space-between">
           <Box sx={{ flex: 0.6 }}>
             <Typography variant="h6" fontWeight={600}>
-              Users management
+              {t('PageTitle')}
             </Typography>
-            <Typography variant="caption">
-              View the list of users and add new ones.
-            </Typography>
+            <Typography variant="caption">{t('PageDescription')}</Typography>
           </Box>
           <Box>
             <Button
@@ -46,7 +47,7 @@ const Users = () => {
               variant="contained"
               onClick={openDrawer}
             >
-              Add new user
+              {t('AddNewUserButton')}
             </Button>
           </Box>
         </Stack>

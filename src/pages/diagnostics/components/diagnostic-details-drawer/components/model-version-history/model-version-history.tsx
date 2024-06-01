@@ -17,6 +17,7 @@ import { styles } from './styles';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { formatVersionString } from '@/pages/diagnostics/libs/helpers';
+import { useTranslation } from 'react-i18next';
 
 type ModelVersionHistoryProps = {
   currentVersionId: string;
@@ -25,6 +26,10 @@ type ModelVersionHistoryProps = {
 
 const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
   const { currentVersionId, history } = props;
+
+  const { t } = useTranslation('Diagnostics', {
+    keyPrefix: 'DiagnosticsDrawer.Stages.ModelDetails',
+  });
 
   return (
     <Stepper orientation="vertical" sx={styles.root}>
@@ -71,7 +76,9 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
             </StepLabel>
             <Box sx={styles.extraButton}>
               <Button disabled={isActive}>
-                {isActive ? 'Current' : 'Restore'}
+                {isActive
+                  ? t('CurrentVersionButton')
+                  : t('RestoreVersionButton')}
               </Button>
             </Box>
           </Step>

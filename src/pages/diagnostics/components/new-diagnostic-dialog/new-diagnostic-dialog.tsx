@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { NewDiagnosticForm } from '../new-diagnostic-form';
 import { Dialog } from '@/libs/components';
+import { useTranslation } from 'react-i18next';
 
 type NewDiagnosticDialogProps = {
   open: boolean;
@@ -9,6 +10,8 @@ type NewDiagnosticDialogProps = {
 
 const NewDiagnosticDialog = (props: NewDiagnosticDialogProps) => {
   const { open, onClose } = props;
+
+  const { t } = useTranslation('Diagnostics');
 
   return (
     <Dialog
@@ -25,7 +28,7 @@ const NewDiagnosticDialog = (props: NewDiagnosticDialogProps) => {
         }}
       >
         <Typography variant="h6" fontSize={18}>
-          New Diagnostic
+          {t('NewDiagnosticDialog.Title')}
         </Typography>
         <Dialog.Close />
       </Dialog.Title>

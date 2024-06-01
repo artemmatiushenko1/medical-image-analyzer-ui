@@ -1,0 +1,55 @@
+{
+  "PageTitle": "Diagnostics management",
+  "PageDescription": "View and manage diagnostics with corresponding AI models for disease diagnosis.",
+  "Breadcrumbs": {
+    "Home": "Home",
+    "Diagnostics": "Diagnostics"
+  },
+  "NewDiagnosticButton": "New Diagnostic",
+  "NewDiagnosticDialog": {
+    "Title": "New Diagnostic",
+    "DiagnosticNameLabel": "Diagnostic name",
+    "DiagnosticNameHelperText": "E.g. Melanoma diagnosis, COVID-19 detection"
+  },
+  "DiagnosticsDrawer": {
+    "Stages": {
+      "DiagnosticDetails": {
+        "UploadModelButton": "Upload new model",
+        "Title": "Models",
+        "Caption": "View and manage related AI models.",
+        "ModelCard": {
+          "NameLabel": "Name",
+          "VersionLabel": "Version",
+          "EnabledLabel": "Enabled",
+          "ViewDetailsItem": "View details"
+        }
+      },
+      "NewVersion": {
+        "Title": "New version",
+        "VersionNameLabel": "Version name",
+        "VersionNameCaption": "Provide a unique name for this version of the AI model.",
+        "VersionNamePlaceholder": "Enter version name",
+        "ChangelogLabel": "Changelog",
+        "ChangelogCaption": "Describe the changes or updates made in this version.",
+        "ChangelogPlaceholder": "Enter version changelog (optional)",
+        "SuccessMessageTitle": "New version was successfully added!",
+        "SuccessMessageDescription": "You can now view or manage the new <br /> version of the AI model.",
+        "SuccessMessageOkButton": "Back to model details"
+      },
+      "NewModel": {
+        "Title": "New model",
+        "ModelNameLabel": "Model name",
+        "ModelNamePlaceholder": "Enter model name",
+        "SuccessMessageTitle": "New model was successfully uploaded!",
+        "SuccessMessageDescription": "You can now manage it through <br />diagnostic details view."
+      },
+      "ModelDetails": {
+        "VersionHistoryLabel": "Version history",
+        "VersionHistoryCaption": "All the existing model versions listed below.",
+        "CurrentVersionButton": "Current",
+        "RestoreVersionButton": "Restore",
+        "UploadNewVersionButton": "Upload new version"
+      }
+    }
+  }
+}

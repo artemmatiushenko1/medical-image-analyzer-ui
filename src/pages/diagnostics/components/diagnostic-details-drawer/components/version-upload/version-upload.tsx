@@ -15,8 +15,15 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const VersionUpload = () => {
+  const { t } = useTranslation('Diagnostics', {
+    keyPrefix: 'DiagnosticsDrawer.Stages.NewVersion',
+  });
+
+  const { t: tCommon } = useTranslation('Common');
+
   const selectedModel = useDiagnosticsStore((state) => state.selectedModel);
 
   const navigateToPreviousStage = useDiagnosticsStore(
@@ -61,9 +68,11 @@ const VersionUpload = () => {
         <Stack spacing={3}>
           <Stack spacing={1}>
             <Stack>
-              <Typography variant="subtitle2">Version name</Typography>
+              <Typography variant="subtitle2">
+                {t('VersionNameLabel')}
+              </Typography>
               <Typography variant="caption">
-                Provide a unique name for this version of the AI model.
+                {t('VersionNameCaption')}
               </Typography>
             </Stack>
             <Controller
@@ -76,7 +85,7 @@ const VersionUpload = () => {
                   helperText={errors.name ? errors.name.message : undefined}
                   variant="outlined"
                   fullWidth
-                  placeholder="Enter model name"
+                  placeholder={t('VersionNamePlaceholder')}
                   {...field}
                 />
               )}
@@ -84,10 +93,8 @@ const VersionUpload = () => {
           </Stack>
           <Stack spacing={1}>
             <Stack>
-              <Typography variant="subtitle2">Changelog</Typography>
-              <Typography variant="caption">
-                Describe the changes or updates made in this version.
-              </Typography>
+              <Typography variant="subtitle2">{t('ChangelogLabel')}</Typography>
+              <Typography variant="caption">{t('ChangelogCaption')}</Typography>
             </Stack>
             <Controller
               control={control}
@@ -102,7 +109,7 @@ const VersionUpload = () => {
                   }
                   variant="outlined"
                   fullWidth
-                  placeholder="Enter version changelog (optional)"
+                  placeholder={t('ChangelogPlaceholder')}
                   {...field}
                 />
               )}
@@ -125,15 +132,10 @@ const VersionUpload = () => {
             }}
           >
             <OperationStatusBanner
-              title="New version was successfully added!"
-              description={
-                <>
-                  You can now view or manage the new <br />
-                  version of the AI model.
-                </>
-              }
+              title={t('SuccessMessageTitle')}
+              description={t('SuccessMessageDescription')}
               status="success"
-              okText="Back to versions"
+              okText={t('SuccessMessageOkButton')}
               onOkClick={() => navigateToPreviousStage()}
             />
           </motion.div>
@@ -150,7 +152,7 @@ const VersionUpload = () => {
             disabled={isDirty && !isValid}
             onClick={handleFormSubmit}
           >
-            Upload
+            {tCommon('Upload')}
           </Button>
         </Box>
       )}

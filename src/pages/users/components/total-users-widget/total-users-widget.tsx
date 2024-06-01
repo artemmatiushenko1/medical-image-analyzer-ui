@@ -1,5 +1,6 @@
 import { PersonRounded } from '@mui/icons-material';
 import { Box, Card, CardContent, Skeleton, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 type TotalUsersWidgetProps = {
   count: number;
@@ -8,6 +9,8 @@ type TotalUsersWidgetProps = {
 
 const TotalUsersWidget = (props: TotalUsersWidgetProps) => {
   const { count, loading } = props;
+
+  const { t } = useTranslation('Users');
 
   return (
     <Card variant="outlined" sx={{ maxWidth: '250px' }}>
@@ -24,7 +27,7 @@ const TotalUsersWidget = (props: TotalUsersWidgetProps) => {
             </Typography>
           )}
         </Box>
-        <Typography variant="caption">Total Users</Typography>
+        <Typography variant="caption">{t('TotalUsersCard.Title')}</Typography>
       </CardContent>
     </Card>
   );

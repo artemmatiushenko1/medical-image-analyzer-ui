@@ -6,20 +6,23 @@ import {
   MonitorHeartRounded,
 } from '@mui/icons-material';
 import { AppRoute } from '@/app';
+import { useTranslation } from 'react-i18next';
 
 const AdminLayout = () => {
+  const { t } = useTranslation('App', { keyPrefix: 'Navigation' });
+
   const navItems = [
     {
       key: 'diagnostics',
       path: AppRoute.DIAGNOSTICS,
       icon: MonitorHeartRounded,
-      title: 'Diagnostics',
+      title: t('Diagnostics'),
     },
     {
       key: 'users',
       path: AppRoute.USERS,
       icon: ManageAccountsRounded,
-      title: 'Users',
+      title: t('Users'),
     },
   ];
 

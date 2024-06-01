@@ -14,6 +14,7 @@ import {
 import { styles } from './styles';
 import { useMenuPopover } from '@/libs/hooks';
 import { formatVersionString } from '@/pages/diagnostics/libs/helpers';
+import { useTranslation } from 'react-i18next';
 
 type ModelCardProps = {
   name: string;
@@ -25,6 +26,10 @@ type ModelCardProps = {
 
 const ModelCard = (props: ModelCardProps) => {
   const { name, version, enabled, onViewDetails } = props;
+
+  const { t } = useTranslation('Diagnostics', {
+    keyPrefix: 'DiagnosticsDrawer.Stages.DiagnosticDetails',
+  });
 
   const { open, openMenu, closeMenu, anchorEl } =
     useMenuPopover<HTMLButtonElement>();
@@ -42,18 +47,22 @@ const ModelCard = (props: ModelCardProps) => {
           >
             {name}
           </Typography>
-          <Typography variant="caption">Name</Typography>
+          <Typography variant="caption">{t('ModelCard.NameLabel')}</Typography>
         </Stack>
         <Stack flex={0.33}>
           <Typography component="div" fontWeight={500} fontSize={16}>
             {formatVersionString(version)}
           </Typography>
-          <Typography variant="caption">Version</Typography>
+          <Typography variant="caption">
+            {t('ModelCard.VersionLabel')}
+          </Typography>
         </Stack>
         <Stack direction="row" alignItems="center" spacing={2} flex={0.33}>
           <Stack spacing={0.5}>
             <Switch color="success" size="small" checked={enabled} />
-            <Typography variant="caption">Enabled</Typography>
+            <Typography variant="caption">
+              {t('ModelCard.EnabledLabel')}
+            </Typography>
           </Stack>
           <IconButton
             onClick={openMenu}
@@ -73,7 +82,9 @@ const ModelCard = (props: ModelCardProps) => {
             <ListItemIcon>
               <ManageHistoryRounded fontSize="small" />
             </ListItemIcon>
-            <Typography variant="body2">View details</Typography>
+            <Typography variant="body2">
+              {t('ModelCard.ViewDetailsItem')}
+            </Typography>
           </MenuItem>
         </Menu>
       </CardContent>

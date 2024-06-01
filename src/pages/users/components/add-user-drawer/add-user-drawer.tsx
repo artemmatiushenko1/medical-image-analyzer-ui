@@ -10,6 +10,7 @@ import {
 import { InviteUserForm } from '../invite-user-form';
 import { styles } from './styles';
 import { Dialog } from '@/libs/components';
+import { useTranslation } from 'react-i18next';
 
 type AddUserDrawerProps = {
   open: boolean;
@@ -18,6 +19,8 @@ type AddUserDrawerProps = {
 
 const AddUserDrawer = (props: AddUserDrawerProps) => {
   const { open, onClose } = props;
+
+  const { t } = useTranslation('Users');
 
   return (
     <Drawer
@@ -35,10 +38,10 @@ const AddUserDrawer = (props: AddUserDrawerProps) => {
       >
         <Box sx={{ maxWidth: '70%' }}>
           <Typography variant="h6" fontWeight={600}>
-            Add a new user
+            {t('AddNewUserDrawer.Title')}
           </Typography>
           <Typography variant="caption">
-            Please fill out the form below to add a new user to the system.
+            {t('AddNewUserDrawer.Caption')}
           </Typography>
         </Box>
         <IconButton

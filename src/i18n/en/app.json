@@ -1,9 +1,10 @@
 {
-  "Sidebar": {
+  "Navigation": {
     "Main": "Main",
-    "Overview": "Overview",
     "Studies": "My Studies",
-    "NewStudy": "New Study"
+    "NewStudy": "New Study",
+    "Diagnostics": "Diagnostics",
+    "Users": "Users"
   },
   "ProfileMenu": {
     "DarkTheme": "Dark theme",

@@ -9,6 +9,7 @@ import {
 } from 'react-hook-form';
 import { ValueOf } from '@/libs/types';
 import { MimeType } from '@/libs/enums';
+import { useTranslation } from 'react-i18next';
 
 type FileUploadProps<T extends FieldValues> = UseControllerProps<T> & {
   allowedMimeTypes: ValueOf<typeof MimeType>[];
@@ -16,6 +17,8 @@ type FileUploadProps<T extends FieldValues> = UseControllerProps<T> & {
 };
 
 const FileUpload = <T extends FieldValues>(props: FileUploadProps<T>) => {
+  const { t } = useTranslation('Common');
+
   const { allowedMimeTypes = [], maxFileSizeMb, ...controlProps } = props;
 
   const {
@@ -26,7 +29,9 @@ const FileUpload = <T extends FieldValues>(props: FileUploadProps<T>) => {
   return (
     <>
       <Stack spacing={1}>
-        <Typography variant="subtitle2">Choose file</Typography>
+        <Typography variant="subtitle2">
+          {t('FileUpload.ChooseFileLabel')}
+        </Typography>
         <DropArea
           value={value}
           error={Boolean(error)}
@@ -39,7 +44,9 @@ const FileUpload = <T extends FieldValues>(props: FileUploadProps<T>) => {
       </Stack>
       {value && (
         <Stack spacing={1}>
-          <Typography variant="subtitle2">Selected file</Typography>
+          <Typography variant="subtitle2">
+            {t('FileUpload.SelectedFileLabel')}
+          </Typography>
           <SelectedFileCard
             sizeBytes={value.size}
             name={value.name}

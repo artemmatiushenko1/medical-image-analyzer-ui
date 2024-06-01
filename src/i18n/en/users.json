@@ -1,0 +1,28 @@
+{
+  "PageTitle": "Users management",
+  "PageDescription": "View the list of users and add new ones.",
+  "Breadcrumbs": {
+    "Home": "Home",
+    "Users": "Users"
+  },
+  "TotalUsersCard": {
+    "Title": "Total Users"
+  },
+  "UsersTable": {
+    "Columns": {
+      "FirstName": "First Name",
+      "LastName": "Last Name",
+      "Email": "Email"
+    }
+  },
+  "AddNewUserButton": "Add new user",
+  "AddNewUserDrawer": {
+    "Title": "Add a new user",
+    "Caption": "Please fill out the form below to add a new user to the system.",
+    "FirstNameLabel": "First name",
+    "FirstNamePlaceholder": "Enter first name",
+    "LastNameLabel": "Last name",
+    "LastNamePlaceholder": "Enter last name",
+    "EmailAddressLabel": "Email address"
+  }
+}
