@@ -14,15 +14,15 @@ import { Box, Stack, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { motion } from 'framer-motion';
-import { useDiagnosticDrawerStore } from '@/pages/diagnostics/diagnostic-drawer.store';
+import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 
 const ModelUpload = () => {
-  const selectedDiagnostic = useDiagnosticDrawerStore(
+  const selectedDiagnostic = useDiagnosticsStore(
     (state) => state.selectedDiagnostic,
   );
 
-  const navigateUntilStage = useDiagnosticDrawerStore(
+  const navigateUntilStage = useDiagnosticsStore(
     (state) => state.navigateUntilStage,
   );
 

@@ -11,7 +11,7 @@ import {
 import { ModelDetails, ModelUpload, ModelsList } from './components';
 import { ValueOf } from '@/libs/types';
 import { VersionUpload } from './components/version-upload';
-import { useDiagnosticDrawerStore } from '../../diagnostic-drawer.store';
+import { useDiagnosticsStore } from '../../store';
 import { DiagnosticDrawerStage } from '../../libs/enums';
 
 type DiagnosticDetailsDrawer = {
@@ -24,18 +24,16 @@ type DiagnosticDetailsDrawer = {
 const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
   const { open, onClose, onCloseFinished } = props;
 
-  const selectedDiagnostic = useDiagnosticDrawerStore(
+  const selectedDiagnostic = useDiagnosticsStore(
     (state) => state.selectedDiagnostic,
   );
-  const selectedModel = useDiagnosticDrawerStore(
-    (state) => state.selectedModel,
-  );
-  const stagesStack = useDiagnosticDrawerStore((state) => state.stagesStack);
+  const selectedModel = useDiagnosticsStore((state) => state.selectedModel);
+  const stagesStack = useDiagnosticsStore((state) => state.stagesStack);
 
-  const navigateToPreviousStage = useDiagnosticDrawerStore(
+  const navigateToPreviousStage = useDiagnosticsStore(
     (state) => state.navigateToPreviousStage,
   );
-  const resetStages = useDiagnosticDrawerStore((state) => state.resetStages);
+  const resetStages = useDiagnosticsStore((state) => state.resetStages);
 
   const stageToDetailsMap: {
     [key in ValueOf<typeof DiagnosticDrawerStage>]: {

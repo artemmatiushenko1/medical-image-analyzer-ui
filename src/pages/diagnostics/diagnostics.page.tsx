@@ -10,15 +10,15 @@ import {
 } from './components';
 import { Diagnostic, useGetAllDiagnostics } from '@/packages/diagnostics';
 import { GridRowParams } from '@mui/x-data-grid';
-import { useDiagnosticDrawerStore } from './diagnostic-drawer.store';
+import { useDiagnosticsStore } from './store';
 
 const Diagnostics = () => {
   const breadcrumbs = ['Home', 'Diagnostics'];
 
-  const setSelectedDiagnostic = useDiagnosticDrawerStore(
+  const setSelectedDiagnostic = useDiagnosticsStore(
     (state) => state.setSelectedDiagnostic,
   );
-  const selectedDiagnostic = useDiagnosticDrawerStore(
+  const selectedDiagnostic = useDiagnosticsStore(
     (state) => state.selectedDiagnostic,
   );
 

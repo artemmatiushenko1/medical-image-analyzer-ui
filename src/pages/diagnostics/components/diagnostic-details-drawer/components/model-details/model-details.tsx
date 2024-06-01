@@ -3,14 +3,12 @@ import { UploadIcon } from '@/libs/components/icons';
 import { Stack, Typography } from '@mui/material';
 import { ModelVersionHistory } from '../model-version-history';
 import { useGetModelVersions } from '@/packages/diagnostics';
-import { useDiagnosticDrawerStore } from '@/pages/diagnostics/diagnostic-drawer.store';
+import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 
 const ModelDetails = () => {
-  const selectedModel = useDiagnosticDrawerStore(
-    (state) => state.selectedModel,
-  );
-  const navigateToNextStage = useDiagnosticDrawerStore(
+  const selectedModel = useDiagnosticsStore((state) => state.selectedModel);
+  const navigateToNextStage = useDiagnosticsStore(
     (state) => state.navigateToNextStage,
   );
   const { isLoading, data: versionHistory = [] } = useGetModelVersions(

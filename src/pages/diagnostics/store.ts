@@ -3,13 +3,13 @@ import { ValueOf } from '@/libs/types';
 import { Diagnostic, Model } from '@/packages/diagnostics';
 import { DiagnosticDrawerStage } from './libs/enums';
 
-type DiagnosticDrawerState = {
+type State = {
   stagesStack: ValueOf<typeof DiagnosticDrawerStage>[];
   selectedModel: Model | null;
   selectedDiagnostic: Diagnostic | null;
 };
 
-type DiagnosticDrawerActions = {
+type Actions = {
   setSelectedModel: (model: Model | null) => void;
   setSelectedDiagnostic: (model: Diagnostic | null) => void;
   navigateToNextStage: (stage: ValueOf<typeof DiagnosticDrawerStage>) => void;
@@ -20,16 +20,14 @@ type DiagnosticDrawerActions = {
   resetStages: () => void;
 };
 
-const INITIAL_STATE: DiagnosticDrawerState = {
+const INITIAL_STATE: State = {
   stagesStack: [DiagnosticDrawerStage.ROOT],
   selectedModel: null,
   selectedDiagnostic: null,
 };
 
 /** TODO: split into slices */
-const useDiagnosticDrawerStore = create<
-  DiagnosticDrawerState & DiagnosticDrawerActions
->()((set, get) => ({
+const useDiagnosticsStore = create<State & Actions>()((set, get) => ({
   ...INITIAL_STATE,
 
   /* ----- common ----- */
@@ -71,4 +69,4 @@ const useDiagnosticDrawerStore = create<
   },
 }));
 
-export { useDiagnosticDrawerStore };
+export { useDiagnosticsStore };

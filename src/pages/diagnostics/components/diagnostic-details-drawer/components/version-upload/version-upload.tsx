@@ -10,18 +10,16 @@ import {
   createModelVersionSchema,
   useCreateModelVersion,
 } from '@/packages/diagnostics';
-import { useDiagnosticDrawerStore } from '@/pages/diagnostics/diagnostic-drawer.store';
+import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 
 const VersionUpload = () => {
-  const selectedModel = useDiagnosticDrawerStore(
-    (state) => state.selectedModel,
-  );
+  const selectedModel = useDiagnosticsStore((state) => state.selectedModel);
 
-  const navigateToPreviousStage = useDiagnosticDrawerStore(
+  const navigateToPreviousStage = useDiagnosticsStore(
     (state) => state.navigateToPreviousStage,
   );
 

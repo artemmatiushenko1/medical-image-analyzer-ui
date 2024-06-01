@@ -4,11 +4,11 @@ import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
 import { ModelCard } from '../model-card';
 import { Button, Dialog } from '@/libs/components';
 import { UploadIcon } from '@/libs/components/icons';
-import { useDiagnosticDrawerStore } from '@/pages/diagnostics/diagnostic-drawer.store';
+import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 
 const ModelsList = () => {
-  const selectedDiagnostic = useDiagnosticDrawerStore(
+  const selectedDiagnostic = useDiagnosticsStore(
     (state) => state.selectedDiagnostic,
   );
 
@@ -16,11 +16,11 @@ const ModelsList = () => {
     selectedDiagnostic?.id,
   );
 
-  const navigateToNextStage = useDiagnosticDrawerStore(
+  const navigateToNextStage = useDiagnosticsStore(
     (state) => state.navigateToNextStage,
   );
 
-  const setSelectedModel = useDiagnosticDrawerStore(
+  const setSelectedModel = useDiagnosticsStore(
     (state) => state.setSelectedModel,
   );
 
