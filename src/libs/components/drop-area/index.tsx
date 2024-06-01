@@ -15,7 +15,7 @@ import { bytesToMb, parseMimeType } from '@/libs/helpers';
 import { toast } from 'react-toastify';
 
 type DropAreaProps = {
-  previewImageSrc: string | null;
+  previewImageSrc?: string;
   width?: CSSProperties['width'];
   height?: CSSProperties['height'];
   icon: React.FC<SvgIconProps>;

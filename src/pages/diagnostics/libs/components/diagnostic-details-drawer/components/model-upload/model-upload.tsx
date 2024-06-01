@@ -1,14 +1,13 @@
-import { Button, Dialog, DropArea } from '@/libs/components';
+import { Button, Dialog } from '@/libs/components';
 import { MimeType } from '@/libs/enums';
 import { CreateModelRequest, useCreateModel } from '@/packages/diagnostics';
-import { UploadFileRounded } from '@mui/icons-material';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import Joi from 'joi';
 import { Controller, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { SelectedFileCard } from './selected-file-card';
 import { ModelUploadSuccessBanner } from './model-upload-success-banner';
 import { motion } from 'framer-motion';
+import { FileUpload } from '../file-upload';
 
 const schema = Joi.object({
   name: Joi.string().required(),
@@ -26,8 +25,6 @@ const ModelUpload = (props: ModelUploadProps) => {
     control,
     formState: { errors },
     handleSubmit: sumbit,
-    resetField,
-    watch,
   } = useForm<Omit<CreateModelRequest, 'file'> & { file: File }>({
     defaultValues: { name: '' },
     resolver: joiResolver(schema),
@@ -38,8 +35,6 @@ const ModelUpload = (props: ModelUploadProps) => {
   const handleFormSubmit = sumbit((data) => {
     createModel({ diagnosticId, request: { ...data, file: '' } });
   });
-
-  const selectedFile = watch('file');
 
   return (
     <>
@@ -71,42 +66,11 @@ const ModelUpload = (props: ModelUploadProps) => {
               )}
             />
           </Stack>
-          <Controller
+          <FileUpload
             name="file"
             control={control}
-            render={({ field: { value, onChange } }) => {
-              return (
-                <>
-                  <Stack spacing={1}>
-                    <Typography variant="subtitle2">
-                      Choose model file
-                    </Typography>
-                    <DropArea
-                      value={value}
-                      error={Boolean(errors.file)}
-                      supportedFormats={[MimeType.HDF5]}
-                      icon={UploadFileRounded}
-                      previewImageSrc=""
-                      onUpload={onChange}
-                      maxFileSizeMb={1000}
-                      helperText={errors.file?.message}
-                    />
-                  </Stack>
-                  {selectedFile && (
-                    <Stack spacing={1}>
-                      <Typography variant="subtitle2">Selected file</Typography>
-                      <SelectedFileCard
-                        sizeBytes={selectedFile.size}
-                        name={selectedFile.name}
-                        onRemoveFile={() => {
-                          resetField('file');
-                        }}
-                      />
-                    </Stack>
-                  )}
-                </>
-              );
-            }}
+            allowedMimeTypes={[MimeType.HDF5]}
+            maxFileSizeMb={1000}
           />
         </Stack>
         {isSuccess && (
