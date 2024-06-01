@@ -13,6 +13,8 @@ import {
 import { styles } from './styles';
 import { StudyStatusChip } from '../study-status-chip';
 import { DetailItemText } from '../detail-item-text';
+import dayjs from 'dayjs';
+import { DateFormat } from '@/libs/enums';
 
 type StudyCardProps = {
   id: string;
@@ -33,7 +35,9 @@ const StudyCard = (props: StudyCardProps) => {
 
   return (
     <Paper sx={styles.root}>
-      <DetailItemText iconComponent={EventNote}>{date}</DetailItemText>
+      <DetailItemText iconComponent={EventNote}>
+        {dayjs(date).format(DateFormat.DAY_ABBREV_MONTH_YEAR)}
+      </DetailItemText>
       <Box>
         <Box sx={styles.imageWrapper}>
           <Box src={imageSrc} component="img" sx={styles.image} />
@@ -71,10 +75,10 @@ StudyCard.Skeleton = () => {
       <Skeleton width="100px" height={20} />
       <Box>
         <Skeleton
-          variant="rounded"
-          sx={{ borderRadius: ({ shape }) => shape.borderRadius }}
           height={65}
           width={120}
+          variant="rounded"
+          sx={{ borderRadius: ({ shape }) => shape.borderRadius }}
         />
       </Box>
       <Box>

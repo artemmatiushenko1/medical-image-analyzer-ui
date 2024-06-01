@@ -143,7 +143,7 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
         <View style={styles.header}>
           <Image source={logoImg} style={styles.logo} />
           <Text style={styles.generationTimestamp}>
-            {dayjs().format(DateFormat.YEAR_MONTH_DAY_DASHES)}
+            {dayjs(study.date).format(DateFormat.YEAR_MONTH_DAY_DASHES)}
           </Text>
         </View>
         <Text style={styles.studyTitle}>Study #{study.id}</Text>
