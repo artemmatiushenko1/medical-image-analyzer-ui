@@ -66,6 +66,8 @@ class DiagnosticsApi {
   getModelVersions = (_modelId: string): Promise<GetModelVersionsResponse> => {
     return wait(2000).then(() => this.modelVersions);
   };
+
+  // restoreModelVersion = (_modelId: string) => {};
 }
 
 const diagnosticsApi = new DiagnosticsApi();

@@ -32,7 +32,13 @@ const ModelCard = (props: ModelCardProps) => {
     <Card sx={styles.root}>
       <CardContent sx={styles.content}>
         <Stack flex={1}>
-          <Typography component="div" fontWeight={500} fontSize={16} noWrap>
+          <Typography
+            component="div"
+            fontWeight={500}
+            fontSize={16}
+            noWrap
+            maxWidth={200}
+          >
             {name}
           </Typography>
           <Typography variant="caption">Name</Typography>
@@ -75,32 +81,41 @@ const ModelCard = (props: ModelCardProps) => {
 };
 
 ModelCard.Skeleton = () => {
-  const subtitleHeight = 15;
-  const valueHeight = 25.9;
-  const spacing = 0.9;
+  const spacing = 0.35;
 
   return (
     <Card sx={styles.root}>
-      <CardContent sx={styles.content}>
+      <CardContent sx={{ ...styles.content, gap: 2 }}>
         <Stack flex={1} spacing={spacing}>
-          <Skeleton width={150} height={valueHeight} animation="wave" />
-          <Skeleton width={100} height={subtitleHeight} animation="wave" />
+          <Typography component="div" fontWeight={500} fontSize={16}>
+            <Skeleton />
+          </Typography>
+          <Typography component="div" variant="caption">
+            <Skeleton />
+          </Typography>
         </Stack>
         <Stack flex={0.33} spacing={spacing}>
-          <Skeleton width={70} height={valueHeight} animation="wave" />
-          <Skeleton width={50} height={subtitleHeight} animation="wave" />
+          <Typography component="div" fontWeight={500} fontSize={16}>
+            <Skeleton />
+          </Typography>
+          <Typography component="div" variant="caption">
+            <Skeleton />
+          </Typography>
         </Stack>
         <Stack direction="row" alignItems="center" spacing={2} flex={0.33}>
           <Stack spacing={spacing}>
-            <Skeleton width={50} height={valueHeight} animation="wave" />
-            <Skeleton width={50} height={subtitleHeight} animation="wave" />
+            <Skeleton component="div" variant="rounded">
+              <Switch size="small" />
+            </Skeleton>
+            <Typography component="div" variant="caption">
+              <Skeleton />
+            </Typography>
           </Stack>
-          <Skeleton
-            variant="circular"
-            animation="wave"
-            width={30}
-            height={30}
-          />
+          <Skeleton component="div" variant="circular">
+            <IconButton>
+              <MoreVertRounded />
+            </IconButton>
+          </Skeleton>
         </Stack>
       </CardContent>
     </Card>

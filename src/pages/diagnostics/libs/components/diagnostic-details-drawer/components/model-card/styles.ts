@@ -3,7 +3,7 @@ import { alpha } from '@mui/material';
 
 const styles = createStyleSheet({
   root: {
-    background: ({ palette }) => alpha(palette.neutral.light, 0.1),
+    background: ({ palette }) => alpha(palette.neutral.light, 0.05),
   },
   content: {
     display: 'flex',

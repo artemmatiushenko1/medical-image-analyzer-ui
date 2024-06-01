@@ -106,7 +106,13 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
             <NavigateBeforeRounded />
           </IconButton>
         </Tooltip>
-        <Dialog.Title lineHeight={2.6} fontSize={18} component="div">
+        <Dialog.Title
+          lineHeight={2.6}
+          fontSize={18}
+          component="div"
+          noWrap
+          maxWidth={500}
+        >
           {currentStageDetails?.title}
         </Dialog.Title>
       </Stack>
