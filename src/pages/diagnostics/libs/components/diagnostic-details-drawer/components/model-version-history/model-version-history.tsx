@@ -16,6 +16,7 @@ import {
 import { styles } from './styles';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
+import { formatVersionString } from '@/pages/diagnostics/libs/helpers';
 
 type ModelVersionHistoryProps = {
   currentVersionId: string;
@@ -51,10 +52,9 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
                   label={
                     <Stack direction="row" alignItems="center" gap={1}>
                       <Box sx={styles.versionChipLabel} />
-                      <Typography
-                        fontSize="inherit"
-                        color="text.primary"
-                      >{`v${version.revision}.0`}</Typography>
+                      <Typography fontSize="inherit" color="text.primary">
+                        {formatVersionString(version.revision)}
+                      </Typography>
                     </Stack>
                   }
                 />

@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { styles } from './styles';
 import { useMenuPopover } from '@/libs/hooks';
+import { formatVersionString } from '@/pages/diagnostics/libs/helpers';
 
 type ModelCardProps = {
   name: string;
@@ -45,7 +46,7 @@ const ModelCard = (props: ModelCardProps) => {
         </Stack>
         <Stack flex={0.33}>
           <Typography component="div" fontWeight={500} fontSize={16}>
-            v{version}.0.0
+            {formatVersionString(version)}
           </Typography>
           <Typography variant="caption">Version</Typography>
         </Stack>
