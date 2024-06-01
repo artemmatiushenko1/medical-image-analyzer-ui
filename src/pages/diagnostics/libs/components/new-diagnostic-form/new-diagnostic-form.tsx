@@ -6,15 +6,21 @@ import {
 import { Stack, TextField } from '@mui/material';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 
-const NewDiagnosticForm = () => {
+type NewDiagnosticFormProps = {
+  onSuccess: () => void;
+};
+
+const NewDiagnosticForm = (props: NewDiagnosticFormProps) => {
+  const { onSuccess } = props;
+
   const { control, handleSubmit: submit } = useForm<CreateDiagnosticRequest>({
     defaultValues: { name: '' },
   });
 
-  const { mutate: createDiagnostic, isPending } = useCreateDiagnostic();
+  const { mutateAsync: createDiagnostic, isPending } = useCreateDiagnostic();
 
   const handleSubmit: SubmitHandler<CreateDiagnosticRequest> = (data) => {
-    createDiagnostic(data);
+    createDiagnostic(data).then(onSuccess);
   };
 
   return (

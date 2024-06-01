@@ -31,7 +31,7 @@ const NewDiagnosticDialog = (props: NewDiagnosticDialogProps) => {
       </Dialog.Title>
       <Dialog.Content>
         <Box sx={{ pt: 2 }}>
-          <NewDiagnosticForm />
+          <NewDiagnosticForm onSuccess={onClose} />
         </Box>
       </Dialog.Content>
     </Dialog>
