@@ -7,3 +7,4 @@ export { type GetDiagnosticModelsResponse } from './get-diagnostic-models-respon
 export { type CreateModelRequest } from './create-model-request.type';
 export { type CreateModelResponse } from './create-model-response.type';
 export { type ModelVersion } from './model-version.type';
+export { type GetModelVersionsResponse } from './get-model-versions-response.type';

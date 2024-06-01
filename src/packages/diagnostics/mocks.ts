@@ -92,4 +92,4 @@ const MOCK_MODELS: Model[] = [
   },
 ];
 
-export { MOCK_DIAGNOSTICS, MOCK_MODELS };
+export { MOCK_DIAGNOSTICS, MOCK_MODELS, MOCK_MODEL_VERSIONS };

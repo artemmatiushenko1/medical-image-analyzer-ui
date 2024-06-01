@@ -11,4 +11,5 @@ export {
   useGetAllDiagnostics,
   useGetDiagnosticModels,
   useCreateModel,
+  useGetModelVersions,
 } from './queries';

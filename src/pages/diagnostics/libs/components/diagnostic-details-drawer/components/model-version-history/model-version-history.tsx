@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Chip,
+  Skeleton,
   Stack,
   Step,
   StepLabel,
@@ -13,6 +14,8 @@ import {
   alpha,
 } from '@mui/material';
 import { styles } from './styles';
+import dayjs from 'dayjs';
+import { DateFormat } from '@/libs/enums';
 
 type ModelVersionHistoryProps = {
   currentVersionId: string;
@@ -57,7 +60,11 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
                 />
               )}
               optional={
-                <Typography variant="caption">{version.createdAt}</Typography>
+                <Typography variant="caption">
+                  {dayjs(version.createdAt).format(
+                    DateFormat.DAY_ABBREV_MONTH_YEAR,
+                  )}
+                </Typography>
               }
             >
               {version.name}
@@ -71,6 +78,30 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
         );
       })}
     </Stepper>
+  );
+};
+
+ModelVersionHistory.Skeleton = () => {
+  return (
+    <Stack direction="row" alignItems="center" gap="16px">
+      <Skeleton
+        sx={{ borderRadius: '100px' }}
+        variant="rounded"
+        height={32}
+        width={66}
+      />
+      <Stack flex={1}>
+        <Typography variant="subtitle2">
+          <Skeleton />
+        </Typography>
+        <Typography variant="caption">
+          <Skeleton />
+        </Typography>
+      </Stack>
+      <Skeleton>
+        <Button>Restore</Button>
+      </Skeleton>
+    </Stack>
   );
 };
 

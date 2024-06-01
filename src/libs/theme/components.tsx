@@ -151,6 +151,11 @@ const components = {
       separator: <NavigateNextRounded fontSize="small" />,
     },
   },
+  MuiSkeleton: {
+    defaultProps: {
+      animation: 'wave',
+    },
+  },
 } satisfies Components<Omit<Theme, 'components'>>;
 
 export { components };

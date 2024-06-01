@@ -4,7 +4,7 @@ import { Stack, Typography } from '@mui/material';
 import { useDiagnosticDrawerStore } from '../../store';
 import { DiagnosticDrawerStage } from '../../enums';
 import { ModelVersionHistory } from '../model-version-history';
-import { ModelVersion } from '@/packages/diagnostics';
+import { useGetModelVersions } from '@/packages/diagnostics';
 
 const ModelDetails = () => {
   const selectedModel = useDiagnosticDrawerStore(
@@ -13,58 +13,9 @@ const ModelDetails = () => {
   const navigateToNextStage = useDiagnosticDrawerStore(
     (state) => state.navigateToNextStage,
   );
-
-  const versions: ModelVersion[] = [
-    {
-      id: '7',
-      revision: 7,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-      notes: '',
-    },
-    {
-      id: '6',
-      revision: 6,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-      notes: '',
-    },
-    {
-      id: '5',
-      revision: 5,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-      notes: '',
-    },
-    {
-      id: '4',
-      revision: 4,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-      notes: '',
-    },
-    {
-      id: '3',
-      revision: 3,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-      notes: '',
-    },
-    {
-      id: '2',
-      revision: 2,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-      notes: '',
-    },
-    {
-      id: '1',
-      revision: 1,
-      name: 'Increased precision',
-      createdAt: '15 Mar 2024',
-      notes: '',
-    },
-  ];
+  const { isLoading, data: versionHistory = [] } = useGetModelVersions(
+    selectedModel?.id,
+  );
 
   const handleUploadNewVersionClick = () => {
     navigateToNextStage(DiagnosticDrawerStage.UPLOAD_MODEL_VERSION);
@@ -87,10 +38,19 @@ const ModelDetails = () => {
             All the existing model versions listed below.
           </Typography>
         </Stack>
+        {isLoading ? (
+          <Stack gap="40px">
+            <ModelVersionHistory.Skeleton />
+            <ModelVersionHistory.Skeleton />
+            <ModelVersionHistory.Skeleton />
+            <ModelVersionHistory.Skeleton />
+            <ModelVersionHistory.Skeleton />
+          </Stack>
+        ) : null}
         {selectedModel && (
           <ModelVersionHistory
-            currentVersionId={versions[0].id}
-            history={versions}
+            currentVersionId={selectedModel.currentVersion.id}
+            history={versionHistory}
           />
         )}
       </Stack>
