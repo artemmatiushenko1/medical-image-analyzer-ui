@@ -52,7 +52,7 @@ class DiagnosticsApi {
         id: crypto.randomUUID(),
         name: request.name,
         enabled: true,
-        currentVersion: this.modelVersions[-1],
+        currentVersion: this.modelVersions[0],
       };
 
       this.models = [...this.models, newModel];
@@ -66,13 +66,12 @@ class DiagnosticsApi {
 
   createModelVersion = (
     _modelId: string,
-    _request: CreateModelVersionRequest,
+    request: CreateModelVersionRequest,
   ): Promise<CreateModelVersionResponse> => {
     const newVersion: ModelVersion = {
+      ...request,
       id: crypto.randomUUID(),
       createdAt: dayjs().toISOString(),
-      name: 'Increased efficiency',
-      changelog: 'Some description goes here...',
       revision: 5,
     };
 

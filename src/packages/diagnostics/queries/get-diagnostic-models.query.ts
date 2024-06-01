@@ -9,7 +9,7 @@ const useGetDiagnosticModels = (diagnosticId?: string) => {
       diagnosticId
         ? diagnosticsApi.getDiagnosticModels(diagnosticId)
         : undefined,
-    // enabled: Boolean(diagnosticId),
+    enabled: Boolean(diagnosticId),
   });
 };
 

@@ -15,15 +15,14 @@ import { Controller, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { motion } from 'framer-motion';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
-import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 
 const ModelUpload = () => {
   const selectedDiagnostic = useDiagnosticsStore(
     (state) => state.selectedDiagnostic,
   );
 
-  const navigateUntilStage = useDiagnosticsStore(
-    (state) => state.navigateUntilStage,
+  const navigateToPreviousStage = useDiagnosticsStore(
+    (state) => state.navigateToPreviousStage,
   );
 
   const {
@@ -101,9 +100,7 @@ const ModelUpload = () => {
                 </>
               }
               status="success"
-              onOkClick={() =>
-                navigateUntilStage(DiagnosticDrawerStage.MODEL_DETAILS)
-              }
+              onOkClick={() => navigateToPreviousStage()}
             />
           </motion.div>
         )}
