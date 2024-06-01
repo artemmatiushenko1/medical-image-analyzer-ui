@@ -1,7 +1,7 @@
 import { SuccessCheckmark } from '@/libs/components';
 import { Button, Stack, Typography } from '@mui/material';
-import { useDiagnosticDrawerStore } from '../../store';
-import { DiagnosticDrawerStage } from '../../enums';
+import { useDiagnosticDrawerStore } from '@/pages/diagnostics/diagnostic-drawer.store';
+import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 
 const ModelUploadSuccessBanner = () => {
   const { navigateUntilStage } = useDiagnosticDrawerStore();

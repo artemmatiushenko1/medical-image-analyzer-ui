@@ -1,17 +1,19 @@
 import { create } from 'zustand';
-import { DiagnosticDrawerStage } from './enums';
 import { ValueOf } from '@/libs/types';
-import { Model } from '@/packages/diagnostics';
+import { Diagnostic, Model } from '@/packages/diagnostics';
+import { DiagnosticDrawerStage } from './libs/enums';
 
 type DiagnosticDrawerState = {
   stagesStack: ValueOf<typeof DiagnosticDrawerStage>[];
   selectedModel: Model | null;
+  selectedDiagnostic: Diagnostic | null;
 };
 
 type DiagnosticDrawerActions = {
   setSelectedModel: (model: Model | null) => void;
+  setSelectedDiagnostic: (model: Diagnostic | null) => void;
   navigateToNextStage: (stage: ValueOf<typeof DiagnosticDrawerStage>) => void;
-  navigateToPreviousStage: (onExit: () => void) => void;
+  navigateToPreviousStage: (onExit?: () => void) => void;
   navigateUntilStage: (
     targetStage: ValueOf<typeof DiagnosticDrawerStage>,
   ) => void;
@@ -21,14 +23,21 @@ type DiagnosticDrawerActions = {
 const INITIAL_STATE: DiagnosticDrawerState = {
   stagesStack: [DiagnosticDrawerStage.ROOT],
   selectedModel: null,
+  selectedDiagnostic: null,
 };
 
+/** TODO: split into slices */
 const useDiagnosticDrawerStore = create<
   DiagnosticDrawerState & DiagnosticDrawerActions
 >()((set, get) => ({
   ...INITIAL_STATE,
+
+  /* ----- common ----- */
   setSelectedModel: (model: Model | null) => {
     set({ selectedModel: model });
+  },
+  setSelectedDiagnostic: (diagnostic: Diagnostic | null) => {
+    set({ selectedDiagnostic: diagnostic });
   },
 
   /* ----- stages navigation ----- */
@@ -39,7 +48,7 @@ const useDiagnosticDrawerStore = create<
     const { stagesStack } = get();
 
     if (stagesStack.length === 1) {
-      onExit();
+      onExit?.();
       return;
     }
 

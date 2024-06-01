@@ -71,7 +71,7 @@ const components = {
         '.MuiOutlinedInput-notchedOutline': {
           borderColor: palette.neutral.light,
         },
-        'input::placeholder': {
+        'input::placeholder, textarea::placeholder': {
           color: heather[700],
         },
       },

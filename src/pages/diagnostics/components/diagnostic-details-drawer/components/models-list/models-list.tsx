@@ -3,19 +3,18 @@ import { Stack, Typography } from '@mui/material';
 import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
 import { ModelCard } from '../model-card';
 import { Button, Dialog } from '@/libs/components';
-import { useDiagnosticDrawerStore } from '../../store';
-import { DiagnosticDrawerStage } from '../../enums';
 import { UploadIcon } from '@/libs/components/icons';
+import { useDiagnosticDrawerStore } from '@/pages/diagnostics/diagnostic-drawer.store';
+import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 
-type ModelsListProps = {
-  diagnosticId: string;
-};
+const ModelsList = () => {
+  const selectedDiagnostic = useDiagnosticDrawerStore(
+    (state) => state.selectedDiagnostic,
+  );
 
-const ModelsList = (props: ModelsListProps) => {
-  const { diagnosticId } = props;
-
-  const { isLoading, data: diagnosticModels = [] } =
-    useGetDiagnosticModels(diagnosticId);
+  const { isLoading, data: diagnosticModels = [] } = useGetDiagnosticModels(
+    selectedDiagnostic?.id,
+  );
 
   const navigateToNextStage = useDiagnosticDrawerStore(
     (state) => state.navigateToNextStage,

@@ -40,28 +40,24 @@ const MOCK_MODEL_VERSIONS: ModelVersion[] = [
     createdAt: dayjs().toISOString(),
     revision: 4,
     name: 'Increased accuracy',
-    notes: '',
   },
   {
     id: crypto.randomUUID(),
     createdAt: dayjs().toISOString(),
     revision: 3,
     name: 'Increased accuracy',
-    notes: '',
   },
   {
     id: crypto.randomUUID(),
     createdAt: dayjs().toISOString(),
     revision: 2,
     name: 'Increased accuracy',
-    notes: '',
   },
   {
     id: crypto.randomUUID(),
     createdAt: dayjs().toISOString(),
     revision: 1,
     name: 'Increased accuracy',
-    notes: '',
   },
 ];
 

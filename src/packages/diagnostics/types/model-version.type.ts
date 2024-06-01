@@ -3,7 +3,7 @@ type ModelVersion = {
   revision: number;
   createdAt: string;
   name: string;
-  notes?: string;
+  changelog?: string;
 };
 
 export { type ModelVersion };

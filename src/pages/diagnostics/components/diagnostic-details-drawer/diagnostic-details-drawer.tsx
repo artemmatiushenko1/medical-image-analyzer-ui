@@ -8,23 +8,25 @@ import {
   Stack,
   Tooltip,
 } from '@mui/material';
-import { Diagnostic } from '@/packages/diagnostics';
 import { ModelDetails, ModelUpload, ModelsList } from './components';
-import { DiagnosticDrawerStage } from './enums';
 import { ValueOf } from '@/libs/types';
-import { useDiagnosticDrawerStore } from './store';
+import { VersionUpload } from './components/version-upload';
+import { useDiagnosticDrawerStore } from '../../diagnostic-drawer.store';
+import { DiagnosticDrawerStage } from '../../libs/enums';
 
 type DiagnosticDetailsDrawer = {
   open: boolean;
-  diagnostic: Diagnostic | null;
 
   onClose: () => void;
   onCloseFinished: () => void;
 };
 
 const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
-  const { open, onClose, diagnostic, onCloseFinished } = props;
+  const { open, onClose, onCloseFinished } = props;
 
+  const selectedDiagnostic = useDiagnosticDrawerStore(
+    (state) => state.selectedDiagnostic,
+  );
   const selectedModel = useDiagnosticDrawerStore(
     (state) => state.selectedModel,
   );
@@ -42,18 +44,16 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
     } | null;
   } = {
     [DiagnosticDrawerStage.ROOT]: {
-      title: diagnostic?.name ?? '',
-      component: diagnostic && <ModelsList diagnosticId={diagnostic.id} />,
+      title: selectedDiagnostic?.name ?? '',
+      component: selectedDiagnostic && <ModelsList />,
     },
     [DiagnosticDrawerStage.UPLOAD_MODEL]: {
       title: 'New model',
-      component: diagnostic ? (
-        <ModelUpload diagnosticId={diagnostic?.id} />
-      ) : null,
+      component: selectedDiagnostic ? <ModelUpload /> : null,
     },
     [DiagnosticDrawerStage.UPLOAD_MODEL_VERSION]: {
-      component: <div>Upload new model version</div>,
-      title: 'New model version',
+      component: <VersionUpload />,
+      title: 'New version',
     },
     [DiagnosticDrawerStage.MODEL_DETAILS]: {
       component: <ModelDetails />,

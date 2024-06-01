@@ -1,10 +1,10 @@
 import { Button, Dialog } from '@/libs/components';
 import { UploadIcon } from '@/libs/components/icons';
 import { Stack, Typography } from '@mui/material';
-import { useDiagnosticDrawerStore } from '../../store';
-import { DiagnosticDrawerStage } from '../../enums';
 import { ModelVersionHistory } from '../model-version-history';
 import { useGetModelVersions } from '@/packages/diagnostics';
+import { useDiagnosticDrawerStore } from '@/pages/diagnostics/diagnostic-drawer.store';
+import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 
 const ModelDetails = () => {
   const selectedModel = useDiagnosticDrawerStore(

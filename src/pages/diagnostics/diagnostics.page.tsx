@@ -9,14 +9,18 @@ import {
   NewDiagnosticDialog,
 } from './components';
 import { Diagnostic, useGetAllDiagnostics } from '@/packages/diagnostics';
-import { useState } from 'react';
 import { GridRowParams } from '@mui/x-data-grid';
+import { useDiagnosticDrawerStore } from './diagnostic-drawer.store';
 
 const Diagnostics = () => {
   const breadcrumbs = ['Home', 'Diagnostics'];
 
-  const [selectedDiagnostic, setSelectedDiagnostic] =
-    useState<Diagnostic | null>(null);
+  const setSelectedDiagnostic = useDiagnosticDrawerStore(
+    (state) => state.setSelectedDiagnostic,
+  );
+  const selectedDiagnostic = useDiagnosticDrawerStore(
+    (state) => state.selectedDiagnostic,
+  );
 
   const {
     isOpen: isNewDiagnosticDialogOpen,
@@ -75,7 +79,6 @@ const Diagnostics = () => {
         open={isDiagnosticDrawerOpen}
         onClose={closeDiagnosticDrawer}
         onCloseFinished={handleDiagnosticDrawerCloseFinished}
-        diagnostic={selectedDiagnostic}
       />
     </Stack>
   );

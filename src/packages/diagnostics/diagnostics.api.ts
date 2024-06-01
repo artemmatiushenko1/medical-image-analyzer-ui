@@ -4,11 +4,14 @@ import {
   CreateDiagnosticResponse,
   CreateModelRequest,
   CreateModelResponse,
+  CreateModelVersionRequest,
+  CreateModelVersionResponse,
   Diagnostic,
   GetAllDiagnosticsResponse,
   GetDiagnosticModelsResponse,
   GetModelVersionsResponse,
   Model,
+  ModelVersion,
 } from './types';
 import { MOCK_DIAGNOSTICS, MOCK_MODELS, MOCK_MODEL_VERSIONS } from './mocks';
 import dayjs from 'dayjs';
@@ -49,13 +52,7 @@ class DiagnosticsApi {
         id: crypto.randomUUID(),
         name: request.name,
         enabled: true,
-        currentVersion: {
-          id: crypto.randomUUID(),
-          name: 'Increased accuracy',
-          notes: '',
-          createdAt: dayjs().toISOString(),
-          revision: 1,
-        },
+        currentVersion: this.modelVersions[-1],
       };
 
       this.models = [...this.models, newModel];
@@ -65,6 +62,23 @@ class DiagnosticsApi {
 
   getModelVersions = (_modelId: string): Promise<GetModelVersionsResponse> => {
     return wait(2000).then(() => this.modelVersions);
+  };
+
+  createModelVersion = (
+    _modelId: string,
+    _request: CreateModelVersionRequest,
+  ): Promise<CreateModelVersionResponse> => {
+    const newVersion: ModelVersion = {
+      id: crypto.randomUUID(),
+      createdAt: dayjs().toISOString(),
+      name: 'Increased efficiency',
+      changelog: 'Some description goes here...',
+      revision: 5,
+    };
+
+    this.modelVersions = [newVersion, ...this.modelVersions];
+
+    return wait(2000).then(() => newVersion);
   };
 
   // restoreModelVersion = (_modelId: string) => {};

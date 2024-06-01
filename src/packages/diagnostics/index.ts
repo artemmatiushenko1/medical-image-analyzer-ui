@@ -4,6 +4,7 @@ export {
   type Model,
   type CreateModelRequest,
   type ModelVersion,
+  type CreateModelVersionRequest,
 } from './types';
 export { useDiagnosticsStore } from './diagnostics.store';
 export {
@@ -12,4 +13,9 @@ export {
   useGetDiagnosticModels,
   useCreateModel,
   useGetModelVersions,
+  useCreateModelVersion,
 } from './queries';
+export {
+  createModelSchema,
+  createModelVersionSchema,
+} from './validation-schemas';

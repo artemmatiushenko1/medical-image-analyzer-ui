@@ -22,7 +22,7 @@ type DropAreaProps = {
   supportedFormats: ValueOf<typeof MimeType>[];
   error?: boolean;
   helperText?: string;
-  value?: File;
+  value: File | null;
 
   onUpload: (file: File) => void;
 };

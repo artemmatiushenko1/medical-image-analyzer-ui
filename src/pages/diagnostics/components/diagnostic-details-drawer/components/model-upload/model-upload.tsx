@@ -1,38 +1,49 @@
-import { Button, Dialog, FileUpload } from '@/libs/components';
+import {
+  Button,
+  Dialog,
+  FileUpload,
+  OperationStatusBanner,
+} from '@/libs/components';
 import { MimeType } from '@/libs/enums';
-import { CreateModelRequest, useCreateModel } from '@/packages/diagnostics';
+import {
+  CreateModelRequest,
+  createModelSchema,
+  useCreateModel,
+} from '@/packages/diagnostics';
 import { Box, Stack, TextField, Typography } from '@mui/material';
-import Joi from 'joi';
 import { Controller, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { ModelUploadSuccessBanner } from './model-upload-success-banner';
 import { motion } from 'framer-motion';
+import { useDiagnosticDrawerStore } from '@/pages/diagnostics/diagnostic-drawer.store';
+import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 
-const schema = Joi.object({
-  name: Joi.string().required(),
-  file: Joi.required(),
-});
+const ModelUpload = () => {
+  const selectedDiagnostic = useDiagnosticDrawerStore(
+    (state) => state.selectedDiagnostic,
+  );
 
-type ModelUploadProps = {
-  diagnosticId: string;
-};
-
-const ModelUpload = (props: ModelUploadProps) => {
-  const { diagnosticId } = props;
+  const navigateUntilStage = useDiagnosticDrawerStore(
+    (state) => state.navigateUntilStage,
+  );
 
   const {
     control,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
     handleSubmit: sumbit,
   } = useForm<Omit<CreateModelRequest, 'file'> & { file: File }>({
     defaultValues: { name: '' },
-    resolver: joiResolver(schema),
+    resolver: joiResolver(createModelSchema),
   });
 
   const { mutate: createModel, isPending, isSuccess } = useCreateModel();
 
   const handleFormSubmit = sumbit((data) => {
-    createModel({ diagnosticId, request: { ...data, file: '' } });
+    if (!selectedDiagnostic) return;
+
+    createModel({
+      diagnosticId: selectedDiagnostic?.id,
+      request: { ...data, file: '' },
+    });
   });
 
   return (
@@ -81,7 +92,19 @@ const ModelUpload = (props: ModelUploadProps) => {
               duration: 0.2,
             }}
           >
-            <ModelUploadSuccessBanner />
+            <OperationStatusBanner
+              title="New model was successfully uploaded!"
+              description={
+                <>
+                  You can now manage it through <br />
+                  diagnostic details view.
+                </>
+              }
+              status="success"
+              onOkClick={() =>
+                navigateUntilStage(DiagnosticDrawerStage.MODEL_DETAILS)
+              }
+            />
           </motion.div>
         )}
       </Dialog.Content>
@@ -93,6 +116,7 @@ const ModelUpload = (props: ModelUploadProps) => {
             isLoading={isPending}
             variant="contained"
             color="success"
+            disabled={isDirty && !isValid}
             onClick={handleFormSubmit}
           >
             Upload
