@@ -7,7 +7,7 @@ import {
   DiagnosticDetailDrawer,
   DiagnosticsTable,
   NewDiagnosticDialog,
-} from './libs/components';
+} from './components';
 import { Diagnostic, useGetAllDiagnostics } from '@/packages/diagnostics';
 import { useState } from 'react';
 import { GridRowParams } from '@mui/x-data-grid';

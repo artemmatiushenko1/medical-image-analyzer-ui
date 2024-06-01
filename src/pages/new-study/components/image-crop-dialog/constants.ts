@@ -1,4 +1,4 @@
-import { MIN_IMAGE_DIMENSIONS_PX } from '../../constants';
+import { MIN_IMAGE_DIMENSIONS_PX } from '../../libs/constants';
 import { CropSettings } from './types';
 
 const MIN_SCALE = 1;

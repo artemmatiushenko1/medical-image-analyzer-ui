@@ -5,9 +5,9 @@ import {
 import { Box, Button, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styles } from './styles';
-import { NewStudyCreationStep } from '../../enums';
 import { useNewStudyStore } from '@/pages/new-study/new-study.store';
 import { ValueOf } from '@/libs/types';
+import { NewStudyCreationStep } from '../../libs/enums';
 
 type BottomNavigationProps = {
   activeStep: ValueOf<typeof NewStudyCreationStep>;

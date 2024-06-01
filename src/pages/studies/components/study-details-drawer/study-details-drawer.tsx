@@ -18,7 +18,7 @@ import { styles } from './styles';
 import { ConfidenceWidget } from '../confidence-widget';
 import { useAuthStore } from '@/packages/auth';
 import { useSavePdf } from '@/libs/hooks';
-import { StudyReportDocument } from '../../pdf-templates';
+import { StudyReportDocument } from '../../libs/pdf-templates';
 
 type StudyDetailsDrawerProps = {
   open: boolean;

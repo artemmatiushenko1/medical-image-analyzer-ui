@@ -1,8 +1,9 @@
 import { PercentCrop } from 'react-image-crop';
 import { create } from 'zustand';
-import { CropSettings } from './libs/components/image-crop-dialog';
-import { DEFAULT_CROP_SETTINGS } from './libs/components/image-crop-dialog';
+import { CropSettings } from './components/image-crop-dialog';
+import { DEFAULT_CROP_SETTINGS } from './components/image-crop-dialog';
 import { Model } from '@/packages/diagnostics';
+import { MOCK_MODELS } from '@/packages/diagnostics/mocks';
 
 type NewStudyState = {
   uploadedImageSrc: string | null;
@@ -35,26 +36,7 @@ const INITIAL_STATE: NewStudyState = {
   selectedDianosticIds: [],
   createStudyStatusDialogOpen: false,
   selectedModelIds: [],
-  availableModels: [
-    {
-      id: '1',
-      name: 'Feedforward Neural Networks (FNN)',
-      enabled: true,
-      version: 1,
-    },
-    {
-      id: '2',
-      name: 'Recurrent Neural Networks (RNN)',
-      enabled: true,
-      version: 1,
-    },
-    {
-      id: '3',
-      name: 'Generative Adversarial Networks (GAN)',
-      enabled: true,
-      version: 1,
-    },
-  ],
+  availableModels: MOCK_MODELS,
 };
 
 const useNewStudyStore = create<NewStudyState & NewStudyActions>()(

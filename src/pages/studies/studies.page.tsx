@@ -6,11 +6,7 @@ import {
   CheckCircleRounded,
 } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import {
-  StudiesFilter,
-  StudyCard,
-  StudyDetailsDrawer,
-} from './libs/components';
+import { StudiesFilter, StudyCard, StudyDetailsDrawer } from './components';
 import { Study, StudyStatus, useGetStudies } from '@/packages/studies';
 import { MAX_STUDY_LOADING_PREVIEWS } from './libs/constants';
 import { ValueOf } from '@/libs/types';

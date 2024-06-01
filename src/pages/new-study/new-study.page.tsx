@@ -8,7 +8,7 @@ import {
   Stepper,
   Typography,
 } from '@mui/material';
-import { BottomNavigation } from './libs/components/bottom-navigation';
+import { BottomNavigation } from './components/bottom-navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { NewStudyCreationStep } from './libs/enums';
 import { styles } from './styles';
@@ -17,7 +17,7 @@ import {
   ImageUpload,
   StudySummary,
   CreateStudyStatusDialog,
-} from './libs/components';
+} from './components';
 import { useTranslation } from 'react-i18next';
 import { ValueOf } from '@/libs/types';
 import { useNewStudyStore } from './new-study.store';

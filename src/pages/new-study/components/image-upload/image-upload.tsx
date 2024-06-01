@@ -87,7 +87,6 @@ const ImageUpload = () => {
               height="450px"
               icon={PhotoRounded}
               onUpload={handleFileUpload}
-              previewImageSrc={uploadedImageSrc}
               supportedFormats={[MimeType.JPEG, MimeType.PNG]}
               maxFileSizeMb={MAX_IMAGE_SIZE_MB}
             />
@@ -99,7 +98,6 @@ const ImageUpload = () => {
               height="450px"
               icon={PhotoRounded}
               onUpload={handleFileUpload}
-              previewImageSrc={currentImage}
               supportedFormats={[MimeType.JPEG, MimeType.PNG]}
               maxFileSizeMb={MAX_IMAGE_SIZE_MB}
             />

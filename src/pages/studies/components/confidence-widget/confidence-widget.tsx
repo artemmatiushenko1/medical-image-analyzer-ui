@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { toPercentString } from '@/libs/helpers';
-import { useConfidenceDescriptors } from '../../hooks';
+import { useConfidenceDescriptors } from '../../libs/hooks';
 
 const CONFIDENCE_PROGRESS_SIZE = '85px';
 const CONFIDENCE_PROGRESS_THICKNESS = 4.5;

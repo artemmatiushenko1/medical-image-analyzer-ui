@@ -6,7 +6,7 @@ import { StudyInfoFormSectionHeader } from '../study-info-form/study-info-form-s
 import { SelectedDiagnosticAccordion } from './selected-diagnostic-accordion';
 import { useNewStudyStore } from '@/pages/new-study/new-study.store';
 import { Diagnostic, useDiagnosticsStore } from '@/packages/diagnostics';
-import { MAX_SELECTED_DIAGNOSTICS } from '../../constants';
+import { MAX_SELECTED_DIAGNOSTICS } from '../../libs/constants';
 
 const ChooseDiagnostics = () => {
   const availableDiagnostics = useDiagnosticsStore(
