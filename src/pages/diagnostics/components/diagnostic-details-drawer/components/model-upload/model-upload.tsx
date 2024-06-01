@@ -1,4 +1,4 @@
-import { Button, Dialog } from '@/libs/components';
+import { Button, Dialog, FileUpload } from '@/libs/components';
 import { MimeType } from '@/libs/enums';
 import { CreateModelRequest, useCreateModel } from '@/packages/diagnostics';
 import { Box, Stack, TextField, Typography } from '@mui/material';
@@ -7,7 +7,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { ModelUploadSuccessBanner } from './model-upload-success-banner';
 import { motion } from 'framer-motion';
-import { FileUpload } from '../file-upload';
 
 const schema = Joi.object({
   name: Joi.string().required(),

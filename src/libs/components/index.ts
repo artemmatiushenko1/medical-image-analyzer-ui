@@ -7,3 +7,4 @@ export { Breadcrumbs } from './breadcrumbs';
 export { Dialog } from './dialog';
 export { DropArea } from './drop-area';
 export { SuccessCheckmark } from './success-checkmark';
+export { FileUpload } from './file-upload';
