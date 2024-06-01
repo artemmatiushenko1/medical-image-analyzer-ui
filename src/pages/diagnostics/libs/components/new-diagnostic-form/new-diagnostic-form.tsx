@@ -11,7 +11,7 @@ const NewDiagnosticForm = () => {
     defaultValues: { name: '' },
   });
 
-  const { mutate: createDiagnostic, isLoading } = useCreateDiagnostic();
+  const { mutate: createDiagnostic, isPending } = useCreateDiagnostic();
 
   const handleSubmit: SubmitHandler<CreateDiagnosticRequest> = (data) => {
     createDiagnostic(data);
@@ -36,7 +36,7 @@ const NewDiagnosticForm = () => {
       </Stack>
       <Button
         type="submit"
-        isLoading={isLoading}
+        isLoading={isPending}
         sx={{ alignSelf: 'flex-end' }}
         variant="contained"
       >

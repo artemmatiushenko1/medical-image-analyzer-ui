@@ -7,7 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ThemeConfig } from './libs/theme';
 import { initi18n } from './i18n';
 import { useAppStore } from './app';
-import { QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './libs/packages/react-query';
 import { BrowserRouter } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -18,6 +18,12 @@ import 'react-toastify/dist/ReactToastify.css';
 // TODO: load dynamically. See initDayJs helper
 import 'dayjs/locale/en';
 import 'dayjs/locale/uk';
+
+const ReactQueryDevtoolsProduction = React.lazy(() =>
+  import('@tanstack/react-query-devtools/production').then((d) => ({
+    default: d.ReactQueryDevtools,
+  })),
+);
 
 const renderApp = () => {
   const appLanguage = useAppStore.getState().language;
@@ -35,6 +41,7 @@ const renderApp = () => {
             </BrowserRouter>
           </ThemeConfig>
         </LocalizationProvider>
+        <ReactQueryDevtoolsProduction initialIsOpen={false} />
       </QueryClientProvider>
       <ToastContainer position="bottom-right" theme="colored" />
     </React.StrictMode>,

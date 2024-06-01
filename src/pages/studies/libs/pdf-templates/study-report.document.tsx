@@ -9,13 +9,14 @@ import {
 } from '@react-pdf/renderer';
 import logoImg from '@/assets/logo.png';
 import { Study } from '@/packages/studies';
-import { toDate, format } from 'date-fns';
 import { heather } from '@/libs/theme/colors';
 import { shape } from '@/libs/theme/shape';
 import RobotoRegular from '@/assets/fonts/Roboto-Regular.ttf';
 import RobotoMedium from '@/assets/fonts/Roboto-Medium.ttf';
 import { User } from '@/packages/users';
 import { useConfidenceDescriptors } from '../hooks';
+import dayjs from 'dayjs';
+import { DateFormat } from '@/libs/enums';
 
 Font.register({
   family: 'Roboto',
@@ -134,9 +135,6 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
   const { text: confidenceText, color: confidenceColor } =
     useConfidenceDescriptors(study.confidence ?? 0);
 
-  const currentDate = toDate(new Date());
-  const formattedDate = format(currentDate, 'yyyy-MM-dd');
-
   const labelColWidth = '32%';
 
   return (
@@ -144,7 +142,9 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <Image source={logoImg} style={styles.logo} />
-          <Text style={styles.generationTimestamp}>{formattedDate}</Text>
+          <Text style={styles.generationTimestamp}>
+            {dayjs().format(DateFormat.YEAR_MONTH_DAY_DASHES)}
+          </Text>
         </View>
         <Text style={styles.studyTitle}>Study #{study.id}</Text>
         <View style={styles.section}>

@@ -1,9 +1,12 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { StudyQueryKey } from '../enums';
 import { studiesApi } from '../studies.api';
 
 const useGetStudies = () => {
-  return useQuery(StudyQueryKey.GET_ALL_STUDIES, studiesApi.getAllStudies);
+  return useQuery({
+    queryKey: StudyQueryKey.GET_ALL_STUDIES,
+    queryFn: studiesApi.getAllStudies,
+  });
 };
 
 export { useGetStudies };

@@ -1,9 +1,12 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { usersApi } from '../users.api';
 import { UsersQueryKey } from '../enums';
 
 const useGetAllUsers = () => {
-  return useQuery(UsersQueryKey.GET_ALL_USERS, usersApi.getAllUsers);
+  return useQuery({
+    queryKey: UsersQueryKey.GET_ALL_USERS,
+    queryFn: usersApi.getAllUsers,
+  });
 };
 
 export { useGetAllUsers };

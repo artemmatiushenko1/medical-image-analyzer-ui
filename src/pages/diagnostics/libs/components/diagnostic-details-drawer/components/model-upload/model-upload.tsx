@@ -33,7 +33,7 @@ const ModelUpload = (props: ModelUploadProps) => {
     resolver: joiResolver(schema),
   });
 
-  const { mutate: createModel, isLoading, isSuccess } = useCreateModel();
+  const { mutate: createModel, isPending, isSuccess } = useCreateModel();
 
   const handleFormSubmit = sumbit((data) => {
     createModel({ diagnosticId, request: { ...data, file: '' } });
@@ -127,7 +127,7 @@ const ModelUpload = (props: ModelUploadProps) => {
           sx={{ padding: '20px 24px', justifyContent: 'end', display: 'flex' }}
         >
           <Button
-            isLoading={isLoading}
+            isLoading={isPending}
             variant="contained"
             color="success"
             onClick={handleFormSubmit}
