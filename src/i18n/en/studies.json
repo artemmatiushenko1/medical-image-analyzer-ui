@@ -1,0 +1,40 @@
+{
+  "PageTitle": "My studies",
+  "PageDescription": "All of the studies you've created are here. You can check their details from here.",
+  "StudiesFilter": {
+    "Title": "Filter",
+    "All": "All",
+    "Completed": "Completed",
+    "Pending": "Pending"
+  },
+  "PositiveStudies": "Positive studies",
+  "NegativeStudies": "Negative studies",
+  "StudyCard": {
+    "Diagnostic": "Diagnostic",
+    "ViewDetails": "View details"
+  },
+  "StatusChip": {
+    "Completed": "Completed",
+    "Pending": "Pending"
+  },
+  "StudyDetails": {
+    "Image": "Image",
+    "NoResult": "There's no result available yet. The image is still being examined by AI.",
+    "Confidence": "Confidence",
+    "Report": "Report"
+  },
+  "Confidence": {
+    "Negative": {
+      "Title": "- Negative",
+      "Caption": "Initial assessment indicates a failry low probability of the disease under study. Ongoing monitoring or additional tests may be necessary to confirm this conclusion"
+    },
+    "Uncertain": {
+      "Title": "Uncertain",
+      "Caption": "The current assessment suggests uncertainty regarding the presence of the disease under study. Further investigation is needed to confirm its absence or presence definitively."
+    },
+    "Positive": {
+      "Title": "+ Positive",
+      "Caption": "There's a high risk of a disease under study. Please contact a doctor as soon as possible for a furher examination."
+    }
+  }
+}

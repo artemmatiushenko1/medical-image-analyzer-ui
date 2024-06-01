@@ -18,10 +18,15 @@ import { ExpandMoreRounded } from '@mui/icons-material';
 import { Logo } from '../logo';
 import { ButtonsNavigation } from '../button-navigation';
 import { useAuthStore } from '@/packages/auth';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
+  const { t } = useTranslation('App');
+
   const navigate = useNavigate();
+
   const newStudyPageMatch = useMatch(AppRoute.NEW_STUDY);
+
   const [profileMenuAnchor, setprofileMenuAnchor] =
     useState<null | HTMLElement>(null);
 
@@ -64,7 +69,7 @@ const Header = () => {
                 startIcon={<AddOutlinedIcon />}
                 onClick={handleNewStudyClick}
               >
-                New Study
+                {t('Header.NewStudy')}
               </Button>
               <Divider orientation="vertical" flexItem />
             </>

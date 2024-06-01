@@ -9,20 +9,20 @@ import { AppRoute } from '@/app';
 import { useTranslation } from 'react-i18next';
 
 const AdminLayout = () => {
-  const { t } = useTranslation('App', { keyPrefix: 'Navigation' });
+  const { t } = useTranslation('App');
 
   const navItems = [
     {
       key: 'diagnostics',
       path: AppRoute.DIAGNOSTICS,
       icon: MonitorHeartRounded,
-      title: t('Diagnostics'),
+      title: t('Navigation.Diagnostics'),
     },
     {
       key: 'users',
       path: AppRoute.USERS,
       icon: ManageAccountsRounded,
-      title: t('Users'),
+      title: t('Navigation.Users'),
     },
   ];
 

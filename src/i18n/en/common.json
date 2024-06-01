@@ -9,5 +9,6 @@
   "FileUpload": {
     "ChooseFileLabel": "Choose file",
     "SelectedFileLabel": "Selected file"
-  }
+  },
+  "Minimise": "Minimise"
 }

@@ -1,4 +1,4 @@
-import { Box, Divider, Paper, Stack, Typography } from '@mui/material';
+import { Box, Card, Divider, Paper, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import {
   AccessTimeFilledRounded,
@@ -11,8 +11,11 @@ import { Study, StudyStatus, useGetStudies } from '@/packages/studies';
 import { MAX_STUDY_LOADING_PREVIEWS } from './libs/constants';
 import { ValueOf } from '@/libs/types';
 import { useClosable } from '@/libs/hooks';
+import { useTranslation } from 'react-i18next';
 
 const Studies = () => {
+  const { t } = useTranslation('Studies');
+
   const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<ValueOf<
     typeof StudyStatus
@@ -49,19 +52,19 @@ const Studies = () => {
     {
       icon: <AllInboxRounded />,
       count: studies?.length ?? 0,
-      title: 'All',
+      title: t('StudiesFilter.All'),
       key: null,
     },
     {
       icon: <CheckCircleRounded />,
       count: completedStudiesCount?.length ?? 0,
-      title: 'Completed',
+      title: t('StudiesFilter.Completed'),
       key: StudyStatus.COMPLETED,
     },
     {
       icon: <AccessTimeFilledRounded />,
       count: pendingStudiesCount?.length ?? 0,
-      title: 'Pending',
+      title: t('StudiesFilter.Pending'),
       key: StudyStatus.PENDING,
     },
   ];
@@ -86,20 +89,17 @@ const Studies = () => {
         <Stack>
           <Stack sx={{ p: 3 }}>
             <Typography variant="h6" fontSize="18px" fontWeight={600}>
-              My studies
+              {t('PageTitle')}
             </Typography>
-            <Typography variant="caption">
-              All of the studies you've created are here. You can check their
-              details from here.
-            </Typography>
+            <Typography variant="caption">{t('PageDescription')}</Typography>
           </Stack>
           <Divider />
           <Stack sx={{ py: 3, gap: 2 }}>
             <Typography
               variant="subtitle2"
-              sx={{ color: ({ palette }) => palette.neutral.main, pl: 3 }}
+              sx={{ color: ({ palette }) => palette.neutral.dark, pl: 3 }}
             >
-              Filter
+              {t('StudiesFilter.Title')}
             </Typography>
             <StudiesFilter
               tabs={tabs}
@@ -111,8 +111,14 @@ const Studies = () => {
         </Stack>
       </Paper>
       <Stack sx={{ flex: '78%', p: 3, gap: 3, overflow: 'scroll' }}>
-        <Paper>Positive scans: 23</Paper>
-        <Paper>Negative scans: 23</Paper>
+        <Stack direction="row" spacing={3} justifyContent="start">
+          <Card sx={{ p: 4 }}>
+            {t('PositiveStudies')} <span>23</span>
+          </Card>
+          <Card sx={{ p: 4 }}>
+            {t('NegativeStudies')} <span>23</span>
+          </Card>
+        </Stack>
         {isLoading &&
           Array(MAX_STUDY_LOADING_PREVIEWS)
             .fill(crypto.randomUUID)

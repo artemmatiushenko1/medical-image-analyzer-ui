@@ -15,6 +15,7 @@ import { StudyStatusChip } from '../study-status-chip';
 import { DetailItemText } from '../detail-item-text';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
+import { useTranslation } from 'react-i18next';
 
 type StudyCardProps = {
   id: string;
@@ -28,6 +29,8 @@ type StudyCardProps = {
 
 const StudyCard = (props: StudyCardProps) => {
   const { date, imageSrc, status, diagnostic, id, onViewDetails } = props;
+
+  const { t } = useTranslation('Studies');
 
   const handleViewDetails = () => {
     onViewDetails(id);
@@ -44,7 +47,7 @@ const StudyCard = (props: StudyCardProps) => {
         </Box>
       </Box>
       <Stack>
-        <Typography variant="caption">Diagnostic</Typography>
+        <Typography variant="caption">{t('StudyCard.Diagnostic')}</Typography>
         <Stack>
           <Typography variant="subtitle2" fontWeight={600}>
             {diagnostic}
@@ -58,7 +61,7 @@ const StudyCard = (props: StudyCardProps) => {
           onClick={handleViewDetails}
           startIcon={<VisibilityRounded />}
         >
-          View details
+          {t('StudyCard.ViewDetails')}
         </Button>
         <StudyStatusChip status={status} />
         <IconButton>

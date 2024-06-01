@@ -9,5 +9,6 @@
   "FileUpload": {
     "ChooseFileLabel": "Оберіть файл",
     "SelectedFileLabel": "Обраний файл"
-  }
+  },
+  "Minimise": "Згорнути"
 }

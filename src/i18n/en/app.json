@@ -10,5 +10,8 @@
     "DarkTheme": "Dark theme",
     "Language": "Language",
     "LogOut": "Log out"
+  },
+  "Header": {
+    "NewStudy": "New Study"
   }
 }

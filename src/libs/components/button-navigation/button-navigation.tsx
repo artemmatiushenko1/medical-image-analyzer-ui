@@ -15,7 +15,7 @@ const ButtonsNavigation = () => {
       key: 'studies',
       path: AppRoute.HOME,
       icon: DescriptionRounded,
-      title: t('Sidebar.Studies'),
+      title: t('Navigation.Studies'),
     },
   ];
 

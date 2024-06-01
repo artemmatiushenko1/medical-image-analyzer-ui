@@ -10,6 +10,7 @@ import {
   IconButton,
   Paper,
   Stack,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import { DetailItemText } from '../detail-item-text';
@@ -19,6 +20,9 @@ import { ConfidenceWidget } from '../confidence-widget';
 import { useAuthStore } from '@/packages/auth';
 import { useSavePdf } from '@/libs/hooks';
 import { StudyReportDocument } from '../../libs/pdf-templates';
+import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
+import { DateFormat } from '@/libs/enums';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -31,14 +35,17 @@ type StudyDetailsDrawerProps = {
 const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
   const { open, onClose, study, onCloseFinished } = props;
 
+  const { t } = useTranslation('Studies');
+
+  const { t: tCommon } = useTranslation('Common');
+
   const { savePdf, isLoading: isPdfLoading } = useSavePdf();
 
   const currentUser = useAuthStore((state) => state.user);
 
-  const reportFilename = `study_${study.id}_report_${study.date?.replaceAll(
-    ' ',
-    '_',
-  )}.pdf`;
+  const reportFilename = `study_${study.id}_report_${dayjs(study.date)
+    .format(DateFormat.YEAR_MONTH_DAY_DASHES)
+    ?.replaceAll(' ', '_')}.pdf`;
 
   const handleReportDownload = () => {
     if (!currentUser) return;
@@ -67,12 +74,14 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
               #{study.id}
             </Typography>
           </Box>
-          <IconButton
-            onClick={onClose}
-            sx={{ color: ({ palette }) => palette.neutral.dark }}
-          >
-            <NavigateNextRounded />
-          </IconButton>
+          <Tooltip title={tCommon('Minimise')}>
+            <IconButton
+              onClick={onClose}
+              sx={{ color: ({ palette }) => palette.neutral.dark }}
+            >
+              <NavigateNextRounded />
+            </IconButton>
+          </Tooltip>
         </Box>
       </DialogTitle>
       <Divider />
@@ -81,7 +90,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
           <Box sx={styles.meta}>
             <StudyStatusChip status={study.status} />
             <DetailItemText iconComponent={EventNote}>
-              {study.date}
+              {dayjs(study.date).format(DateFormat.YEAR_MONTH_DAY_DASHES)}
             </DetailItemText>
           </Box>
           <Stack gap={2}>
@@ -89,7 +98,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
               variant="subtitle2"
               sx={{ color: ({ palette }) => palette.neutral.dark }}
             >
-              Image
+              {t('StudyDetails.Image')}
             </Typography>
             <Box sx={styles.imageWrapper}>
               <Box component="img" sx={styles.image} src={study.imageSrc} />
@@ -109,8 +118,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                   sx={{ animationDuration: '550ms' }}
                 />
                 <Typography variant="caption">
-                  There's no result available yet.
-                  <br /> The image is still being examined by AI.
+                  {t('StudyDetails.NoResult')}
                 </Typography>
               </Stack>
             </Paper>
@@ -125,7 +133,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                       fontWeight={600}
                       sx={{ color: ({ palette }) => palette.neutral.dark }}
                     >
-                      Confidence
+                      {t('StudyDetails.Confidence')}
                     </Typography>
                     <ConfidenceWidget confidence={study.confidence} />
                   </>
@@ -137,7 +145,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                   fontWeight={600}
                   sx={{ color: ({ palette }) => palette.neutral.dark }}
                 >
-                  Report
+                  {t('StudyDetails.Report')}
                 </Typography>
                 <Paper sx={styles.reportArea}>
                   <Typography variant="subtitle2" sx={styles.reportName}>
