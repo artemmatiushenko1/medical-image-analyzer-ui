@@ -1,0 +1,28 @@
+{
+  "PageTitle": "Керування користувачами",
+  "PageDescription": "Переглядайте список всіх користувачів та додавайте нових до системи.",
+  "Breadcrumbs": {
+    "Home": "Головна",
+    "Users": "Користувачі"
+  },
+  "TotalUsersCard": {
+    "Title": "Всього Користувачів"
+  },
+  "UsersTable": {
+    "Columns": {
+      "FirstName": "Імʼя",
+      "LastName": "Прізвище",
+      "Email": "Електронна пошта"
+    }
+  },
+  "AddNewUserButton": "Додати нового користувача",
+  "AddNewUserDrawer": {
+    "Title": "Додати нового користувача",
+    "Caption": "Будь ласка, заповність форму нижче, щоб додати нового користувача до системи.",
+    "FirstNameLabel": "Імʼя",
+    "FirstNamePlaceholder": "Введіть імʼя",
+    "LastNameLabel": "Прізвище",
+    "LastNamePlaceholder": "Введіть прізвище",
+    "EmailAddressLabel": "Електронна пошта"
+  }
+}

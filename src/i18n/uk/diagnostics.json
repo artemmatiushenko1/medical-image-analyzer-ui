@@ -1,0 +1,60 @@
+{
+  "PageTitle": "Керування діагностиками",
+  "PageDescription": "Переглядайте та керуйте діагностиками разом з відповідними моделями ШІ для діагностики захворювань.",
+  "Breadcrumbs": {
+    "Home": "Головна",
+    "Diagnostics": "Діагностики"
+  },
+  "NewDiagnosticButton": "Нова діагностика",
+  "NewDiagnosticDialog": {
+    "Title": "Нова Діагностика",
+    "DiagnosticNameLabel": "Назва діагностики",
+    "DiagnosticNameHelperText": "Наприклад: Діагностика меланоми, Виявлення COVID-19..."
+  },
+  "DiagnosticsDrawer": {
+    "Stages": {
+      "DiagnosticDetails": {
+        "UploadModelButton": "Завантажити нову модель",
+        "Title": "Моделі",
+        "ModelCard": {
+          "NameLabel": "Назва",
+          "VersionLabel": "Версія",
+          "EnabledLabel": "Активувати",
+          "ViewDetailsItem": "Переглянути деталі"
+        },
+        "ViewAndManageRelatedAiModels": "Переглядайте та керуйте поделями ШІ обраної діагностики."
+      },
+      "NewVersion": {
+        "Title": "Нова версія",
+        "VersionNameLabel": "Назва версії",
+        "VersionNameCaption": "Введіть унікальне імʼя для цієї версії моделі ШІ.",
+        "VersionNamePlaceholder": "Введіть назву версії",
+        "ChangelogLabel": "Опис змін",
+        "ChangelogCaption": "Опишіть зміни або оновлення, внесені в цю версію",
+        "ChangelogPlaceholder": "Введість опис змін в даній версії (необовʼязково)",
+        "SuccessMessageTitle": "Нова версія моделі успішно додана!",
+        "SuccessMessageDescription": "Тепер ви можете переглядати або керувати новою <br /> версією моделі ШІ.",
+        "SuccessMessageOkButton": "Добре"
+      },
+      "NewModel": {
+        "Title": "Нова модель",
+        "ModelNameLabel": "Назва моделі",
+        "ModelNamePlaceholder": "Введіть назву моделі",
+        "SuccessMessageTitle": "Нова модель успішно додана!",
+        "SuccessMessageDescription": "Тепер ви можете керувати моделлю <br /> на  сторінці подробиць діагностики."
+      },
+      "ModelDetails": {
+        "VersionHistoryLabel": "Історія версій",
+        "VersionHistoryCaption": "Нижче відображено список всіх існуючих версії моделі.",
+        "CurrentVersionButton": "Поточна",
+        "RestoreVersionButton": "Відновити",
+        "UploadNewVersionButton": "Завантажити нову версію"
+      }
+    }
+  },
+  "DiagnosticsTable": {
+    "Columns": {
+      "Name": "Назва"
+    }
+  }
+}

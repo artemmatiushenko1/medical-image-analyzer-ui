@@ -22,7 +22,8 @@
           "VersionLabel": "Version",
           "EnabledLabel": "Enabled",
           "ViewDetailsItem": "View details"
-        }
+        },
+        "ViewAndManageRelatedAiModels": "View and manage related AI models"
       },
       "NewVersion": {
         "Title": "New version",
@@ -50,6 +51,11 @@
         "RestoreVersionButton": "Restore",
         "UploadNewVersionButton": "Upload new version"
       }
+    }
+  },
+  "DiagnosticsTable": {
+    "Columns": {
+      "Name": "Name"
     }
   }
 }

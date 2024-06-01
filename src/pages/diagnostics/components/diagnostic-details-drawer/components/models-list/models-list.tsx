@@ -6,8 +6,11 @@ import { Button, Dialog } from '@/libs/components';
 import { UploadIcon } from '@/libs/components/icons';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
+import { useTranslation } from 'react-i18next';
 
 const ModelsList = () => {
+  const { t } = useTranslation('Diagnostics');
+
   const selectedDiagnostic = useDiagnosticsStore(
     (state) => state.selectedDiagnostic,
   );
@@ -42,7 +45,7 @@ const ModelsList = () => {
           variant="contained"
           fullWidth
         >
-          Upload new model
+          {t('DiagnosticsDrawer.Stages.DiagnosticDetails.UploadModelButton')}
         </Button>
         <Stack
           direction="row"
@@ -51,10 +54,12 @@ const ModelsList = () => {
         >
           <Stack>
             <Typography fontSize="14px" variant="subtitle2">
-              Models
+              {t('DiagnosticsDrawer.Stages.DiagnosticDetails.Title')}
             </Typography>
             <Typography variant="caption">
-              View and manage related AI models
+              {t(
+                'DiagnosticsDrawer.Stages.DiagnosticDetails.ViewAndManageRelatedAiModels',
+              )}
             </Typography>
           </Stack>
         </Stack>

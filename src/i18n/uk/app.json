@@ -1,9 +1,10 @@
 {
-  "Sidebar": {
+  "Navigation": {
     "Main": "Головне",
-    "Overview": "Дашборд",
-    "Studies": "Мої Дослідження",
-    "NewStudy": "Нове дослідження"
+    "Studies": "Мої дослідження",
+    "NewStudy": "Нове дослідження",
+    "Diagnostics": "Діагностики",
+    "Users": "Користувачі"
   },
   "ProfileMenu": {
     "DarkTheme": "Темна тема",

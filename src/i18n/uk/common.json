@@ -3,5 +3,11 @@
   "Next": "Далі",
   "Cancel": "Відмінити",
   "Finish": "Завершити",
-  "Create": "Створити"
+  "Create": "Створити",
+  "Upload": "Завантажити",
+  "Add": "Додати",
+  "FileUpload": {
+    "ChooseFileLabel": "Оберіть файл",
+    "SelectedFileLabel": "Обраний файл"
+  }
 }
