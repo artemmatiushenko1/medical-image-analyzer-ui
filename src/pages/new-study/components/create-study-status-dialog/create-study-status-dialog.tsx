@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/app';
 import { useCreateStudy } from '@/packages/studies';
 import { Dialog, SuccessCheckmark } from '@/libs/components';
+import { useTranslation } from 'react-i18next';
 
 const CreateStudyStatusDialog = () => {
+  const { t } = useTranslation('NewStudy');
+
   const navigate = useNavigate();
 
   const { isLoading, isSuccess } = useCreateStudy();
@@ -17,8 +20,12 @@ const CreateStudyStatusDialog = () => {
   const getLoadingTypography = () => {
     return (
       <Stack textAlign="center">
-        <Typography variant="h6">Creating new study...</Typography>
-        <Typography variant="caption">It might take a moment.</Typography>
+        <Typography variant="h6">
+          {t('CreateStudyStatusDialog.CreatingNewStudy')}
+        </Typography>
+        <Typography variant="caption">
+          {t('CreateStudyStatusDialog.ItMightTakeAMoment')}
+        </Typography>
       </Stack>
     );
   };
@@ -26,9 +33,13 @@ const CreateStudyStatusDialog = () => {
   const getSuccessTypography = () => {
     return (
       <Stack textAlign="center">
-        <Typography variant="h6">Study was successully created!</Typography>
+        <Typography variant="h6">
+          {t('CreateStudyStatusDialog.StudyWasSuccessullyCreated')}
+        </Typography>
         <Typography variant="caption">
-          You can track the study status on the reports page.
+          {t(
+            'CreateStudyStatusDialog.YouCanTrackTheStudyStatusOnTheReportsPage',
+          )}
         </Typography>
       </Stack>
     );
@@ -49,7 +60,7 @@ const CreateStudyStatusDialog = () => {
               <SuccessCheckmark />
               {getSuccessTypography()}
               <Button variant="contained" onClick={handleOkClick}>
-                Ok
+                {t('Ok')}
               </Button>
             </>
           )}

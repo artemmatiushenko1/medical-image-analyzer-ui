@@ -29,6 +29,7 @@ import {
 } from './constants';
 import { CropPreview, CropPreviewRef } from './crop-preview';
 import { useNewStudyStore } from '@/pages/new-study/store';
+import { useTranslation } from 'react-i18next';
 
 type ImageCropDialogProps = {
   open: boolean;
@@ -40,6 +41,9 @@ type ImageCropDialogProps = {
 
 const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc, onCrop } = props;
+
+  const { t } = useTranslation('NewStudy');
+  const { t: tCommon } = useTranslation('Common');
 
   const completedCrop = useNewStudyStore((state) => state.currentCrop);
   const cropSettings = useNewStudyStore((state) => state.cropSettings);
@@ -114,7 +118,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
     <Dialog open={open} onClose={onClose} PaperProps={{ sx: styles.rootPaper }}>
       <DialogTitle>
         <Typography variant="body1" fontWeight={600}>
-          Crop image
+          {t('CropDialog.Title')}
         </Typography>
       </DialogTitle>
       <DialogContent>
@@ -143,7 +147,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
             <Stack sx={styles.rightPanel}>
               {imageRef.current && completedCrop && (
                 <CropSettingsSection
-                  title="Preview"
+                  title={t('CropDialog.Preview')}
                   content={
                     <CropPreview
                       ref={cropPreviewRef}
@@ -156,7 +160,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
               )}
               {crop && (
                 <CropSettingsSection
-                  title="Settings"
+                  title={t('CropDialog.Settings')}
                   content={
                     <CropSettingsForm
                       crop={crop}
@@ -173,7 +177,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
                 color="error"
                 onClick={handleCancelButtonClick}
               >
-                Cancel
+                {tCommon('Cancel')}
               </Button>
               <Button
                 variant="contained"
@@ -185,7 +189,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
                   )
                 }
               >
-                Save
+                {tCommon('Save')}
               </Button>
             </DialogActions>
           </Stack>

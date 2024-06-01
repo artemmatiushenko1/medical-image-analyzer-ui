@@ -7,8 +7,11 @@ import { SelectedDiagnosticAccordion } from './selected-diagnostic-accordion';
 import { useNewStudyStore } from '@/pages/new-study/store';
 import { Diagnostic, useDiagnosticsStore } from '@/packages/diagnostics';
 import { MAX_SELECTED_DIAGNOSTICS } from '../../libs/constants';
+import { useTranslation } from 'react-i18next';
 
 const ChooseDiagnostics = () => {
+  const { t } = useTranslation('NewStudy');
+
   const availableDiagnostics = useDiagnosticsStore(
     (state) => state.availableDiagnostics,
   );
@@ -63,8 +66,8 @@ const ChooseDiagnostics = () => {
         <Stack sx={styles.right}>
           <StudyInfoFormSectionHeader
             icon={<MonitorHeart color="primary" />}
-            description="Configure any available settings for each selected item."
-            title="Selected diagnostics"
+            title={t('SelectedDiagnosticsTitle')}
+            description={t('SelectedDiagnosticsCaption')}
           />
           <Box sx={{ marginTop: '20px', overflowY: 'scroll', pb: 2 }}>
             {selectedDiagnostics.map(({ id, name }) => (

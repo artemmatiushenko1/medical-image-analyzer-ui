@@ -18,8 +18,11 @@ import { validateImageDimensions } from './helpers';
 import { FAKE_IMAGE_UPLOADING_DURATION_MS } from './constants';
 import { useNewStudyStore } from '@/pages/new-study/store';
 import { MimeType } from '@/libs/enums';
+import { useTranslation } from 'react-i18next';
 
 const ImageUpload = () => {
+  const { t } = useTranslation('NewStudy');
+
   const uploadedImageSrc = useNewStudyStore((state) => state.uploadedImageSrc);
   const croppedImageSrc = useNewStudyStore((state) => state.croppedImageSrc);
 
@@ -117,7 +120,7 @@ const ImageUpload = () => {
       {uploadedImageSrc && (
         <Box display="flex" justifyContent="space-between">
           <Button startIcon={<CropRounded />} onClick={handleCropButtonClick}>
-            Crop image
+            {t('CropImage')}
           </Button>
           <Button
             color="error"
@@ -125,7 +128,7 @@ const ImageUpload = () => {
             startIcon={<DeleteOutlineRounded />}
             onClick={handleDeleteButtonClick}
           >
-            Delete image
+            {t('DeleteImage')}
           </Button>
         </Box>
       )}

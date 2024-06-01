@@ -20,7 +20,9 @@ type BottomNavigationProps = {
 const BottomNavigation = (props: BottomNavigationProps) => {
   const { onPreviousStep, onNextStep, activeStep, isFinalStep } = props;
 
-  const { t } = useTranslation('Common');
+  const { t } = useTranslation('NewStudy');
+
+  const { t: tCommon } = useTranslation('Common');
 
   const hasSelectedDiagnostics = useNewStudyStore(
     (state) => state.selectedDianosticIds.length > 0,
@@ -39,12 +41,11 @@ const BottomNavigation = (props: BottomNavigationProps) => {
   > = {
     [NewStudyCreationStep.CHOOSE_DIAGNOSTICS]: {
       disabled: !hasSelectedDiagnostics,
-      tooltip:
-        'Please choose at least one diagnostic to proceed with the next step.',
+      tooltip: t('ValidationsMessage.ChooseDiagnostics'),
     },
     [NewStudyCreationStep.UPLOAD_IMAGE]: {
       disabled: !hasUploadedImage,
-      tooltip: 'Please upload an image to proceed with the next step.',
+      tooltip: t('ValidationsMessage.UploadImage'),
     },
     [NewStudyCreationStep.CONFIRM]: null,
   };
@@ -62,10 +63,10 @@ const BottomNavigation = (props: BottomNavigationProps) => {
           disabled={activeStep <= 0}
           startIcon={<KeyboardBackspaceRounded />}
         >
-          {t('Back')}
+          {tCommon('Back')}
         </Button>
         <Button variant="text" color="error">
-          {t('Cancel')}
+          {tCommon('Cancel')}
         </Button>
       </Box>
       <Tooltip title={nextButtonDisabled && nextButtonTooltip}>
@@ -77,7 +78,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
             color={isFinalStep ? 'success' : 'primary'}
             startIcon={isFinalStep && <CheckCircleRounded />}
           >
-            {isFinalStep ? 'Create study' : t('Next')}
+            {isFinalStep ? t('CreateStudy') : tCommon('Next')}
           </Button>
         </span>
       </Tooltip>

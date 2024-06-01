@@ -10,5 +10,51 @@
     "MaximunSizeMB": "Maximum size: {{value}}MB"
   },
   "PageTitle": "New study",
-  "PageDescription": "Follow the following steps to submit an image for an AI-powered study."
+  "PageDescription": "Follow the following steps to submit an image for an AI-powered study.",
+  "Step": "Step",
+  "Instructions": {
+    "UploadAnImage": {
+      "Title": "Upload an image",
+      "Caption": "The better quality image has, the more precise the diagnostic result might be."
+    },
+    "ChooseDiagnostics": {
+      "Title": "Choose from available diagnostics",
+      "Caption": "Click on the card to select a diagnostic for an image."
+    },
+    "StudyOverview": {
+      "Title": "Study Overview",
+      "Caption": "Please review the study summary. Once the study is created it won't be able to edit it."
+    }
+  },
+  "CropDialog": {
+    "Title": "Crop image",
+    "Preview": "Preview",
+    "Settings": "Settings"
+  },
+  "CropSettings": {
+    "Scale": "Scale"
+  },
+  "CropImage": "Crop image",
+  "DeleteImage": "Delete image",
+  "SelectedDiagnosticsTitle": "Selected diagnostics",
+  "SelectedDiagnosticsCaption": "Configure any available settings for each selected item.",
+  "ChooseAiModel": "Choose AI model",
+  "ModelSelectTooltip": "Results of diagnostic may vary depending on which model you choose. It's recommended to choose multiple models if possible.",
+  "Summary": {
+    "Image": "Image",
+    "SelectedDiagnostics": "Selected diagnostics",
+    "AiModels": "AI Models:"
+  },
+  "CreateStudy": "Create study",
+  "ValidationsMessage": {
+    "ChooseDiagnostics": "Please choose at least one diagnostic to proceed with the next step.",
+    "UploadImage": "Please upload an image to proceed with the next step."
+  },
+  "CreateStudyStatusDialog": {
+    "CreatingNewStudy": "Creating new study...",
+    "ItMightTakeAMoment": "It might take a moment.",
+    "StudyWasSuccessullyCreated": "Study was successully created!",
+    "YouCanTrackTheStudyStatusOnTheReportsPage": "You can track the study status on the reports page."
+  },
+  "Ok": "Ok"
 }

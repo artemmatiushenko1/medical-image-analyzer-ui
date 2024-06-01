@@ -21,6 +21,7 @@ import { selectedDiagnosticAccordion as styles } from './styles';
 import { useId } from 'react';
 import { useNewStudyStore } from '@/pages/new-study/store';
 import { heather } from '@/libs/theme/colors';
+import { useTranslation } from 'react-i18next';
 
 type SelectedDiagnosticAccordionProps = {
   id: string;
@@ -33,6 +34,8 @@ const SelectedDiagnosticAccordion = (
   props: SelectedDiagnosticAccordionProps,
 ) => {
   const { title, onDelete, id } = props;
+
+  const { t } = useTranslation('NewStudy');
 
   const modelSelectId = useId();
 
@@ -94,9 +97,9 @@ const SelectedDiagnosticAccordion = (
               fontSize="13px"
               sx={{ marginBottom: 1, display: 'inline-block' }}
             >
-              Choose AI model
+              {t('ChooseAiModel')}
             </Typography>
-            <Tooltip title="Results of diagnostic may vary depending on which model you choose. It's recommended to choose multiple models if possible.">
+            <Tooltip title={t('ModelSelectTooltip')}>
               <InfoOutlined sx={styles.infoIcon} />
             </Tooltip>
           </Box>

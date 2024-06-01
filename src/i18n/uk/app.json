@@ -10,5 +10,8 @@
     "DarkTheme": "Темна тема",
     "Language": "Мова",
     "LogOut": "Вийти"
+  },
+  "Header": {
+    "NewStudy": "Нове дослідження"
   }
 }

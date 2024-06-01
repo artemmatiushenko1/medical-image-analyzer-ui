@@ -12,6 +12,7 @@ import {
 } from './constants';
 import { getScalePercentageString } from './helpers';
 import { Crop } from 'react-image-crop';
+import { useTranslation } from 'react-i18next';
 
 type CropSettingsFormProps = {
   crop: Crop;
@@ -22,6 +23,8 @@ type CropSettingsFormProps = {
 
 const CropSettingsForm = (props: CropSettingsFormProps) => {
   const { values, onChange, crop } = props;
+
+  const { t } = useTranslation('NewStudy');
 
   const { control, watch, setValue } = useForm<CropSettings>({
     defaultValues: { ...DEFAULT_CROP_SETTINGS, ...values },
@@ -66,7 +69,7 @@ const CropSettingsForm = (props: CropSettingsFormProps) => {
         <Box display="flex" justifyContent="space-between">
           <Box sx={styles.settingTitleRoot}>
             <ZoomInRounded sx={styles.settingIcon} />
-            <Typography variant="caption">Scale</Typography>
+            <Typography variant="caption">{t('CropSettings.Scale')}</Typography>
           </Box>
           <Typography variant="caption">
             {getScalePercentageString(scale)}

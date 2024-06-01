@@ -3,8 +3,11 @@ import { useNewStudyStore } from '@/pages/new-study/store';
 import { SettingsSuggestRounded } from '@mui/icons-material';
 import { Box, Chip, Paper, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
+import { useTranslation } from 'react-i18next';
 
 const StudySummary = () => {
+  const { t } = useTranslation('NewStudy');
+
   const availableDiagnostics = useDiagnosticsStore(
     (state) => state.availableDiagnostics,
   );
@@ -34,7 +37,7 @@ const StudySummary = () => {
       {studyImage && (
         <Box>
           <Typography variant="subtitle2" sx={styles.sectionTitle}>
-            Image
+            {t('Summary.Image')}
           </Typography>
           <Paper sx={styles.imageWrapperPaper}>
             <Box sx={styles.imageWrapper}>
@@ -45,7 +48,7 @@ const StudySummary = () => {
       )}
       <Box sx={{ flex: 1 }}>
         <Typography variant="subtitle2" sx={styles.sectionTitle}>
-          Selected diagnostics
+          {t('Summary.SelectedDiagnostics')}
         </Typography>
         <Stack gap={2}>
           {selectedDiagnostics.map((diagnostic) => (
@@ -57,7 +60,8 @@ const StudySummary = () => {
                 variant="caption"
                 sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}
               >
-                <SettingsSuggestRounded sx={{ fontSize: '18px' }} /> AI Models:
+                <SettingsSuggestRounded sx={{ fontSize: '18px' }} />{' '}
+                {t('Summary.AiModels')}
               </Typography>
               <Box display="flex" flexWrap="wrap" gap={1}>
                 {selectedModels.map((model) => {

@@ -89,18 +89,16 @@ const NewStudy = () => {
 
   const stepsMeta = {
     [NewStudyCreationStep.UPLOAD_IMAGE]: {
-      title: 'Upload an image',
-      description:
-        'The better quality image has, the more precise the diagnostic result might be.',
+      title: t('Instructions.UploadAnImage.Title'),
+      description: t('Instructions.UploadAnImage.Caption'),
     },
     [NewStudyCreationStep.CHOOSE_DIAGNOSTICS]: {
-      title: 'Choose from available diagnostics',
-      description: 'Click on the card to select a diagnostic for an image.',
+      title: t('Instructions.ChooseDiagnostics.Title'),
+      description: t('Instructions.ChooseDiagnostics.Caption'),
     },
     [NewStudyCreationStep.CONFIRM]: {
-      title: 'Study Overview',
-      description:
-        "Please review the study summary. Once the study is created it won't be able to edit it.",
+      title: t('Instructions.StudyOverview.Title'),
+      description: t('Instructions.StudyOverview.Caption'),
     },
   };
 
@@ -124,7 +122,9 @@ const NewStudy = () => {
           {steps.map(({ key, title }, index) => (
             <Step key={key}>
               <StepLabel>
-                <Typography variant="caption">Step {index + 1}</Typography>
+                <Typography variant="caption">
+                  {t('Step')} {index + 1}
+                </Typography>
                 <Typography variant="subtitle2">{title}</Typography>
               </StepLabel>
             </Step>
