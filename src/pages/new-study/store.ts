@@ -5,7 +5,7 @@ import { DEFAULT_CROP_SETTINGS } from './components/image-crop-dialog';
 import { Model } from '@/packages/diagnostics';
 import { MOCK_MODELS } from '@/packages/diagnostics/mocks';
 
-type NewStudyState = {
+type State = {
   uploadedImageSrc: string | null;
   croppedImageSrc: string | null;
   currentCrop: PercentCrop | undefined;
@@ -16,7 +16,7 @@ type NewStudyState = {
   availableModels: Model[];
 };
 
-type NewStudyActions = {
+type Actions = {
   setCurrentCrop: (currentCrop: PercentCrop) => void;
   setUploadedImageSrc: (uploadedImageSrc: string | null) => void;
   setCroppedImageSrc: (croppedImageSrc: string | null) => void;
@@ -28,7 +28,7 @@ type NewStudyActions = {
   updateSelectedModelIds: (ids: string[]) => void;
 };
 
-const INITIAL_STATE: NewStudyState = {
+const INITIAL_STATE: State = {
   currentCrop: undefined,
   uploadedImageSrc: null,
   croppedImageSrc: null,
@@ -39,39 +39,37 @@ const INITIAL_STATE: NewStudyState = {
   availableModels: MOCK_MODELS,
 };
 
-const useNewStudyStore = create<NewStudyState & NewStudyActions>()(
-  (set, get) => ({
-    ...INITIAL_STATE,
+const useNewStudyStore = create<State & Actions>()((set, get) => ({
+  ...INITIAL_STATE,
 
-    setCurrentCrop: (currentCrop: PercentCrop) => set({ currentCrop }),
-    setUploadedImageSrc: (uploadedImageSrc: string | null) =>
-      set({ uploadedImageSrc }),
-    setCroppedImageSrc: (croppedImageSrc: string | null) =>
-      set({ croppedImageSrc }),
-    setCropSettings: (cropSettings: CropSettings) => set({ cropSettings }),
-    resetCrop: () =>
-      set({ cropSettings: DEFAULT_CROP_SETTINGS, currentCrop: undefined }),
-    updateSelectedDiagnostictIds: (newId: string) => {
-      const prevIds = get().selectedDianosticIds;
+  setCurrentCrop: (currentCrop: PercentCrop) => set({ currentCrop }),
+  setUploadedImageSrc: (uploadedImageSrc: string | null) =>
+    set({ uploadedImageSrc }),
+  setCroppedImageSrc: (croppedImageSrc: string | null) =>
+    set({ croppedImageSrc }),
+  setCropSettings: (cropSettings: CropSettings) => set({ cropSettings }),
+  resetCrop: () =>
+    set({ cropSettings: DEFAULT_CROP_SETTINGS, currentCrop: undefined }),
+  updateSelectedDiagnostictIds: (newId: string) => {
+    const prevIds = get().selectedDianosticIds;
 
-      if (prevIds.indexOf(newId) !== -1) {
-        set({
-          selectedDianosticIds: prevIds.filter((item) => item !== newId),
-        });
-      } else {
-        set({ selectedDianosticIds: Array.from(new Set([...prevIds, newId])) });
-      }
-    },
-    updateSelectedModelIds: (newIds: string[]) => {
-      set({ selectedModelIds: newIds });
-    },
-    setCreateStudyStatusDialogOpen: (newOpen) => {
-      set({ createStudyStatusDialogOpen: newOpen });
-    },
-    reset: () => {
-      set(INITIAL_STATE);
-    },
-  }),
-);
+    if (prevIds.indexOf(newId) !== -1) {
+      set({
+        selectedDianosticIds: prevIds.filter((item) => item !== newId),
+      });
+    } else {
+      set({ selectedDianosticIds: Array.from(new Set([...prevIds, newId])) });
+    }
+  },
+  updateSelectedModelIds: (newIds: string[]) => {
+    set({ selectedModelIds: newIds });
+  },
+  setCreateStudyStatusDialogOpen: (newOpen) => {
+    set({ createStudyStatusDialogOpen: newOpen });
+  },
+  reset: () => {
+    set(INITIAL_STATE);
+  },
+}));
 
 export { useNewStudyStore };

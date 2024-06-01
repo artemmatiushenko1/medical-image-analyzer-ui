@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import { selectedDiagnosticAccordion as styles } from './styles';
 import { useId } from 'react';
-import { useNewStudyStore } from '@/pages/new-study/new-study.store';
+import { useNewStudyStore } from '@/pages/new-study/store';
 import { heather } from '@/libs/theme/colors';
 
 type SelectedDiagnosticAccordionProps = {

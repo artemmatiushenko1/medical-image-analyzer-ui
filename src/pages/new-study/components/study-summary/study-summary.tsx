@@ -1,5 +1,5 @@
 import { useDiagnosticsStore } from '@/packages/diagnostics';
-import { useNewStudyStore } from '@/pages/new-study/new-study.store';
+import { useNewStudyStore } from '@/pages/new-study/store';
 import { SettingsSuggestRounded } from '@mui/icons-material';
 import { Box, Chip, Paper, Stack, Typography } from '@mui/material';
 import { styles } from './styles';

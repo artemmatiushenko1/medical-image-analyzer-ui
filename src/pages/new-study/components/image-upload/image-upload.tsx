@@ -16,7 +16,7 @@ import {
 } from '@/pages/new-study/libs/constants';
 import { validateImageDimensions } from './helpers';
 import { FAKE_IMAGE_UPLOADING_DURATION_MS } from './constants';
-import { useNewStudyStore } from '@/pages/new-study/new-study.store';
+import { useNewStudyStore } from '@/pages/new-study/store';
 import { MimeType } from '@/libs/enums';
 
 const ImageUpload = () => {

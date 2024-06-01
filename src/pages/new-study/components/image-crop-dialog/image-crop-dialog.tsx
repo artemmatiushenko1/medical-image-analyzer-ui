@@ -28,7 +28,7 @@ import {
   MIN_CROP_WIDTH_PX,
 } from './constants';
 import { CropPreview, CropPreviewRef } from './crop-preview';
-import { useNewStudyStore } from '@/pages/new-study/new-study.store';
+import { useNewStudyStore } from '@/pages/new-study/store';
 
 type ImageCropDialogProps = {
   open: boolean;

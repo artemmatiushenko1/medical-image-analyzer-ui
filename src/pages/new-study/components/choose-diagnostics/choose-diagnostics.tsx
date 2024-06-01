@@ -4,7 +4,7 @@ import { DiagnosticCard } from './diagnostic-card';
 import { styles } from './styles';
 import { StudyInfoFormSectionHeader } from '../study-info-form/study-info-form-section-header';
 import { SelectedDiagnosticAccordion } from './selected-diagnostic-accordion';
-import { useNewStudyStore } from '@/pages/new-study/new-study.store';
+import { useNewStudyStore } from '@/pages/new-study/store';
 import { Diagnostic, useDiagnosticsStore } from '@/packages/diagnostics';
 import { MAX_SELECTED_DIAGNOSTICS } from '../../libs/constants';
 

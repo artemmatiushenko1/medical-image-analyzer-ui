@@ -20,7 +20,7 @@ import {
 } from './components';
 import { useTranslation } from 'react-i18next';
 import { ValueOf } from '@/libs/types';
-import { useNewStudyStore } from './new-study.store';
+import { useNewStudyStore } from './store';
 
 const NewStudy = () => {
   const { t } = useTranslation('NewStudy');
