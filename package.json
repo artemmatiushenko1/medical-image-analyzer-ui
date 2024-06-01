@@ -20,7 +20,7 @@
     "@mui/x-data-grid": "^6.20.0",
     "@mui/x-date-pickers": "^7.2.0",
     "@react-pdf/renderer": "^3.2.1",
-    "date-fns": "^3.6.0",
+    "dayjs": "^1.11.11",
     "file-saver": "^2.0.5",
     "framer-motion": "^11.2.9",
     "i18next": "^23.10.1",
