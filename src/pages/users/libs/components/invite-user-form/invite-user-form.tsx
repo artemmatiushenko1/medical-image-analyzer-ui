@@ -9,7 +9,7 @@ const InviteUserForm = () => {
     defaultValues: { firstName: '', lastName: '', email: '' },
   });
 
-  const { mutate: addUser, isLoading } = useAddUser();
+  const { mutate: addUser, isPending } = useAddUser();
 
   const handleSubmit: SubmitHandler<AddUserRequest> = (data) => {
     addUser(data);
@@ -58,7 +58,7 @@ const InviteUserForm = () => {
         />
       </FormControl>
       <Button
-        isLoading={isLoading}
+        isLoading={isPending}
         type="submit"
         sx={{ alignSelf: 'flex-end', marginTop: 'auto' }}
         variant="contained"

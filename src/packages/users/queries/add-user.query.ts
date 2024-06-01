@@ -8,9 +8,8 @@ const useAddUser = () => {
 
   return useMutation({
     mutationFn: (request: AddUserRequest) => usersApi.addUser(request),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: UsersQueryKey.GET_ALL_USERS });
-    },
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: UsersQueryKey.GET_ALL_USERS }),
   });
 };
 
