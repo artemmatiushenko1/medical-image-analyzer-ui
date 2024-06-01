@@ -21,11 +21,15 @@ import { FormEvent, useState } from 'react';
 import { MOCK_USER, useAuthStore } from '@/packages/auth';
 import { Link } from 'react-router-dom';
 import { palette } from '@/libs/theme/palette';
+import { Role } from '@/packages/users';
 
 const SignInForm = () => {
   const setUser = useAuthStore((state) => state.setUser);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  // TODO: use react hook form
+  const [email, setEmail] = useState('');
 
   const handlePasswordVisibilityToggle = () => {
     setIsPasswordVisible((prevIsVisible) => !prevIsVisible);
@@ -34,7 +38,10 @@ const SignInForm = () => {
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setUser(MOCK_USER);
+    setUser({
+      ...MOCK_USER,
+      role: email.includes('admin') ? Role.ADMIN : Role.USER,
+    });
   };
 
   return (
@@ -49,6 +56,8 @@ const SignInForm = () => {
             Email address
           </FormLabel>
           <TextField
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             sx={styles.input}
             id="email"
             placeholder="Your email address"
