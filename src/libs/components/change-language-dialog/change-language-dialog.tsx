@@ -16,6 +16,7 @@ import { mergeSx } from '@/libs/theme';
 import { HighlightedIcon } from '../highlighted-icon';
 import { LANGUAGE_DETAILS } from '@/i18n';
 import { Dialog } from '../dialog';
+import { useTranslation } from 'react-i18next';
 
 type ChangeLanguageDialogProps = {
   open: boolean;
@@ -24,6 +25,9 @@ type ChangeLanguageDialogProps = {
 
 const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
   const { open, onClose } = props;
+
+  const { t } = useTranslation('App');
+  const { t: tCommon } = useTranslation('Common');
 
   const currentLanguage = useAppStore((state) => state.language);
   const [language, setLanguage] = useState(currentLanguage);
@@ -53,7 +57,7 @@ const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
       <Dialog.Title>
         <Box sx={styles.title}>
           <HighlightedIcon iconElement={<LanguageRounded />} />
-          <Typography variant="h6">Language</Typography>
+          <Typography variant="h6">{t('Language')}</Typography>
         </Box>
       </Dialog.Title>
       <Dialog.Content>
@@ -90,10 +94,10 @@ const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
       </Dialog.Content>
       <Dialog.Actions sx={styles.actions}>
         <Button onClick={onClose} sx={styles.cancelButton}>
-          Cancel
+          {tCommon('Cancel')}
         </Button>
         <Button variant="contained" onClick={handleSaveClick}>
-          Save
+          {tCommon('Save')}
         </Button>
       </Dialog.Actions>
     </Dialog>
