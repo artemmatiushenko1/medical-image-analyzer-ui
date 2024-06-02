@@ -42,9 +42,15 @@ const StudiesFilter = (props: StudiesFilterProps) => {
             pl: 3,
             maxWidth: 'unset',
             textTransform: 'capitalize',
-            color: ({ palette }) => palette.neutral.main,
+            color: ({ palette }) =>
+              palette.mode === 'dark'
+                ? palette.neutral.dark
+                : palette.neutral.main,
             '&.Mui-selected': {
-              color: ({ palette }) => palette.neutral.dark,
+              color: ({ palette }) =>
+                palette.mode === 'dark'
+                  ? palette.neutral.light
+                  : palette.neutral.dark,
             },
           }}
           label={

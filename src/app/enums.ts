@@ -8,4 +8,9 @@ const AppRoute = {
   DIAGNOSTICS: '/management/diagnostics',
 } as const;
 
-export { AppRoute };
+const ThemeMode = {
+  LIGHT: 'light',
+  DARK: 'dark',
+};
+
+export { AppRoute, ThemeMode };

@@ -13,7 +13,7 @@ const UserLayout = () => {
           sx={{
             flex: '1',
             overflowY: 'auto',
-            background: '#f7f9ff',
+            background: ({ palette }) => palette.background.default,
             position: 'relative',
           }}
         >

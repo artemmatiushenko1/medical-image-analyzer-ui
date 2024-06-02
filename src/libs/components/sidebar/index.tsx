@@ -7,6 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
   ListSubheader,
+  Paper,
   Stack,
   Theme,
   Typography,
@@ -51,7 +52,7 @@ const Sidebar = (props: SidebarProps) => {
   };
 
   return (
-    <Stack sx={styles.wrapper}>
+    <Paper square sx={styles.wrapper}>
       <Box sx={styles.logoWrapper}>
         <Logo />
       </Box>
@@ -133,7 +134,7 @@ const Sidebar = (props: SidebarProps) => {
           />
         </Stack>
       </Stack>
-    </Stack>
+    </Paper>
   );
 };
 

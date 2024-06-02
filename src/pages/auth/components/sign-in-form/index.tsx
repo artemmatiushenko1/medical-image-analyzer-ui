@@ -20,7 +20,6 @@ import { Logo } from '@/libs/components';
 import { FormEvent, useState } from 'react';
 import { MOCK_USER, useAuthStore } from '@/packages/auth';
 import { Link } from 'react-router-dom';
-import { palette } from '@/libs/theme/palette';
 import { Role } from '@/packages/users';
 import { useTranslation } from 'react-i18next';
 
@@ -110,9 +109,13 @@ const SignInForm = () => {
         </Button>
         <Typography textAlign="center" variant="caption">
           {t('DontHaveAnAccount')}{' '}
-          <Link to="#" style={{ color: palette.primary.main }}>
+          <Box
+            component="a"
+            href="#"
+            sx={{ color: ({ palette }) => palette.primary.main }}
+          >
             {t('RequestAccess')}
-          </Link>
+          </Box>
         </Typography>
       </Stack>
     </Box>

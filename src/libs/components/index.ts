@@ -9,3 +9,4 @@ export { DropArea } from './drop-area';
 export { SuccessCheckmark } from './success-checkmark';
 export { FileUpload } from './file-upload';
 export { OperationStatusBanner } from './operation-status-banner';
+export { Table } from './table';

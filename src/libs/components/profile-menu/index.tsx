@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/packages/auth';
 import { LANGUAGE_DETAILS } from '@/i18n';
 import { useClosable } from '@/libs/hooks';
+import { ThemeMode } from '@/app/enums';
 
 type ProfileMenuProps = {
   open: boolean;
@@ -36,6 +37,8 @@ const ProfileMenu = (props: ProfileMenuProps) => {
   const { t } = useTranslation('App', { keyPrefix: 'ProfileMenu' });
 
   const appLanguage = useAppStore((state) => state.language);
+  const changeThemeMode = useAppStore((state) => state.changeThemeMode);
+  const themeMode = useAppStore((state) => state.themeMode);
   const currentUser = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
@@ -54,6 +57,13 @@ const ProfileMenu = (props: ProfileMenuProps) => {
     logout();
   };
 
+  const handleDarkThemeSwitchChange = (
+    _: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean,
+  ) => {
+    changeThemeMode(checked ? ThemeMode.DARK : ThemeMode.LIGHT);
+  };
+
   return (
     <>
       <Menu
@@ -65,10 +75,11 @@ const ProfileMenu = (props: ProfileMenuProps) => {
         anchorOrigin={anchorOrigin}
         slotProps={{
           paper: {
-            elevation: 0,
+            elevation: 4,
             sx: {
               mt: 1.5,
             },
+            variant: themeMode === ThemeMode.DARK ? 'elevation' : 'outlined',
           },
         }}
       >
@@ -95,7 +106,11 @@ const ProfileMenu = (props: ProfileMenuProps) => {
             </ListItemIcon>
             <Typography variant="body2">{t('DarkTheme')}</Typography>
           </Box>
-          <Switch size="small" />
+          <Switch
+            size="small"
+            checked={themeMode === ThemeMode.DARK ? true : false}
+            onChange={handleDarkThemeSwitchChange}
+          />
         </MenuItem>
         <MenuItem onClick={handleChangeLanguageClick}>
           <ListItemIcon>

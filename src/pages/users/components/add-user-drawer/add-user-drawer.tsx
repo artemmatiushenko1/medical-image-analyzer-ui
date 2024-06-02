@@ -24,7 +24,6 @@ const AddUserDrawer = (props: AddUserDrawerProps) => {
 
   return (
     <Drawer
-      variant="persistent"
       open={open}
       anchor="right"
       PaperProps={{ sx: styles.addUserDrawerPaper }}

@@ -30,7 +30,6 @@ const Users = () => {
       <Stack
         sx={{
           ...styles.contentWrapper,
-          marginRight: isDrawerOpen ? 0 : `-${ADD_USER_DRAWER_WIDTH_PX}px`,
         }}
       >
         <Breadcrumbs segments={breadcrumbs} />
@@ -41,15 +40,17 @@ const Users = () => {
             </Typography>
             <Typography variant="caption">{t('PageDescription')}</Typography>
           </Box>
-          <Box>
-            <Button
-              startIcon={<AddRounded />}
-              variant="contained"
-              onClick={openDrawer}
-            >
-              {t('AddNewUserButton')}
-            </Button>
-          </Box>
+          {!isDrawerOpen && (
+            <Box>
+              <Button
+                startIcon={<AddRounded />}
+                variant="contained"
+                onClick={openDrawer}
+              >
+                {t('AddNewUserButton')}
+              </Button>
+            </Box>
+          )}
         </Stack>
         <TotalUsersWidget loading={isLoading} count={users.length} />
         <UsersTable loading={isLoading} rows={users} />

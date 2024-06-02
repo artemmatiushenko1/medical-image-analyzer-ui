@@ -85,7 +85,15 @@ const Studies = () => {
 
   return (
     <Box sx={styles.root}>
-      <Paper square sx={{ borderTop: 'none', flex: '22%' }}>
+      <Paper
+        square
+        sx={{
+          borderTop: 'none',
+          borderLeft: 'none',
+          borderBottom: 'none',
+          flex: '22%',
+        }}
+      >
         <Stack>
           <Stack sx={{ p: 3 }}>
             <Typography variant="h6" fontSize="18px" fontWeight={600}>

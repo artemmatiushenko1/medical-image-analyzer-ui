@@ -1,5 +1,6 @@
 import createPalette from '@mui/material/styles/createPalette';
 import { amber, brandBlue, cinnabar, emerald, heather, sky } from './colors';
+import { alpha } from '@mui/material';
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -11,8 +12,11 @@ declare module '@mui/material/styles' {
   }
 }
 
-const palette = createPalette({
-  // mode: 'dark',
+const paletteLight = createPalette({
+  mode: 'light',
+  background: {
+    default: '#fcfcff',
+  },
   primary: {
     light: brandBlue[600],
     main: brandBlue[700],
@@ -30,9 +34,7 @@ const palette = createPalette({
     dark: heather[500],
   },
   text: {
-    // primary: '#000000',
     secondary: '#afb3bb',
-    // disabled: '#afb3bb',
   },
   success: {
     contrastText: '#fff',
@@ -40,7 +42,41 @@ const palette = createPalette({
     main: emerald[500],
     dark: emerald[600],
   },
-  // background: { paper: '#222e42', default: '#222e42' },
+  divider: alpha(heather[200], 1),
 });
 
-export { palette };
+const paletteDark = createPalette({
+  mode: 'dark',
+  background: {
+    default: '#151824',
+    paper: '#2a2c38',
+  },
+  primary: {
+    light: brandBlue[600],
+    main: brandBlue[700],
+    dark: brandBlue[800],
+  },
+  secondary: {
+    main: '#FF5858',
+  },
+  error: cinnabar,
+  warning: amber,
+  info: sky,
+  neutral: {
+    light: heather[50],
+    main: heather[300],
+    dark: heather[500],
+  },
+  text: {
+    secondary: '#afb3bb',
+  },
+  success: {
+    contrastText: '#fff',
+    light: emerald[100],
+    main: emerald[500],
+    dark: emerald[600],
+  },
+  divider: alpha(heather[50], 0.1),
+});
+
+export { paletteLight, paletteDark };

@@ -2,7 +2,7 @@ import {
   CheckCircleRounded,
   KeyboardBackspaceRounded,
 } from '@mui/icons-material';
-import { Box, Button, Tooltip } from '@mui/material';
+import { Box, Button, Paper, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styles } from './styles';
 import { useNewStudyStore } from '@/pages/new-study/store';
@@ -54,7 +54,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
     nextButtonDisabledByStep[activeStep] ?? {};
 
   return (
-    <Box sx={styles.root}>
+    <Paper sx={styles.root}>
       <Box gap={1} display="flex" alignItems="center">
         <Button
           variant="text"
@@ -82,7 +82,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
           </Button>
         </span>
       </Tooltip>
-    </Box>
+    </Paper>
   );
 };
 

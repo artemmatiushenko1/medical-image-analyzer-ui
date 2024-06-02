@@ -12,6 +12,8 @@ const styles = createStyleSheet({
   addUserDrawerPaper: {
     borderRadius: 0,
     borderTop: 'none',
+    borderRight: 'none',
+    borderBottom: 'none',
   },
 });
 

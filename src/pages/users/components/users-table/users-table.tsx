@@ -1,5 +1,5 @@
-import { Loader } from '@/libs/components';
-import { DataGrid, DataGridProps, GridColDef } from '@mui/x-data-grid';
+import { Loader, Table } from '@/libs/components';
+import { DataGridProps, GridColDef } from '@mui/x-data-grid';
 import { styles } from './styles';
 import { User } from '@/packages/users';
 import { Trans, useTranslation } from 'react-i18next';
@@ -36,7 +36,7 @@ const UsersTable = (props: UsersTableProps) => {
   ];
 
   return (
-    <DataGrid
+    <Table
       loading={loading}
       slots={{ loadingOverlay: Loader }}
       sx={styles.root}

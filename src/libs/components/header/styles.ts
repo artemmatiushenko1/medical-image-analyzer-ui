@@ -6,7 +6,10 @@ const styles = createStyleSheet({
     display: 'flex',
     justifyContent: 'center',
     borderLeft: 'none',
+    borderRight: 'none',
+    borderTop: 'none',
     px: 2,
+    backgroundColor: ({ palette }) => palette.background.paper,
   },
   innerContainer: {
     display: 'flex',

@@ -1,4 +1,5 @@
 import { createStyleSheet } from '@/libs/theme';
+import { alpha } from '@mui/material';
 
 const styles = createStyleSheet({
   root: {
@@ -8,7 +9,7 @@ const styles = createStyleSheet({
   },
   leftSide: {
     flex: 0.55,
-    backgroundColor: ({ palette }) => palette.primary.main,
+    backgroundColor: ({ palette }) => palette.primary.dark,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
