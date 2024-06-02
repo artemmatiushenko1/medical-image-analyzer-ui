@@ -7,7 +7,7 @@ class AuthApi {
     wait(2000).then(() => ({ accessToken: crypto.randomUUID() }));
 
   getProfile = (): Promise<GetProfileResponse> =>
-    wait(2000).then(() => MOCK_USER);
+    wait(500).then(() => MOCK_USER);
 }
 
 const authApi = new AuthApi();

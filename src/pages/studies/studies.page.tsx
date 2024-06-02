@@ -1,4 +1,4 @@
-import { Box, Card, Divider, Paper, Stack, Typography } from '@mui/material';
+import { Box, Divider, Paper, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import {
   AccessTimeFilledRounded,
@@ -119,14 +119,6 @@ const Studies = () => {
         </Stack>
       </Paper>
       <Stack sx={{ flex: '78%', p: 3, gap: 3, overflow: 'scroll' }}>
-        <Stack direction="row" spacing={3} justifyContent="start">
-          <Card sx={{ p: 4 }}>
-            {t('PositiveStudies')} <span>23</span>
-          </Card>
-          <Card sx={{ p: 4 }}>
-            {t('NegativeStudies')} <span>23</span>
-          </Card>
-        </Stack>
         {isLoading &&
           Array(MAX_STUDY_LOADING_PREVIEWS)
             .fill(crypto.randomUUID)
