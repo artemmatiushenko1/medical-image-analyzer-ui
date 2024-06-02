@@ -46,7 +46,7 @@ const StudiesFilter = (props: StudiesFilterProps) => {
               palette.mode === 'dark'
                 ? palette.neutral.dark
                 : palette.neutral.main,
-            '&.Mui-selected': {
+            '&.Mui-selected:not(.Mui-disabled)': {
               color: ({ palette }) =>
                 palette.mode === 'dark'
                   ? palette.neutral.light

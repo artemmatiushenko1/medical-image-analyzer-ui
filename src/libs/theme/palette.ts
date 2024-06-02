@@ -1,5 +1,13 @@
 import createPalette from '@mui/material/styles/createPalette';
-import { amber, brandBlue, cinnabar, emerald, heather, sky } from './colors';
+import {
+  amber,
+  brandBlue,
+  chicago,
+  cinnabar,
+  emerald,
+  heather,
+  sky,
+} from './colors';
 import { alpha } from '@mui/material';
 
 declare module '@mui/material/styles' {
@@ -30,10 +38,11 @@ const paletteLight = createPalette({
   info: sky,
   neutral: {
     light: heather[200],
-    main: heather[300],
-    dark: heather[500],
+    main: heather[400],
+    dark: heather[700],
   },
   text: {
+    disabled: chicago[200],
     secondary: '#afb3bb',
   },
   success: {
@@ -68,6 +77,7 @@ const paletteDark = createPalette({
     dark: heather[500],
   },
   text: {
+    disabled: chicago[400],
     secondary: '#afb3bb',
   },
   success: {
