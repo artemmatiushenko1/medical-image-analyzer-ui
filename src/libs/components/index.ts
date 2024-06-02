@@ -10,3 +10,4 @@ export { SuccessCheckmark } from './success-checkmark';
 export { FileUpload } from './file-upload';
 export { OperationStatusBanner } from './operation-status-banner';
 export { Table } from './table';
+export { SplashScreen } from './splash-screen';
