@@ -22,7 +22,6 @@ const useAppStore = create<AppState>()(
       changeLanguage: (newLanguage: ValueOf<typeof Language>) => {
         set({ language: newLanguage });
         i18next.changeLanguage(newLanguage);
-        window.location.reload();
       },
       changeThemeMode: (themeMode: ValueOf<typeof ThemeMode>) => {
         set({ themeMode });

@@ -25,12 +25,12 @@ const useAuthStore = create<AuthState & AuthActions>()(
 
       setAccessToken: (accessToken: string) => set({ accessToken }),
       setUser: (user: User) => set({ user }),
-      logout: () => set({ user: null }),
+      logout: () => set({ user: null, accessToken: null }),
     }),
     {
       name: 'auth-storage',
       storage: createJSONStorage(() => window.localStorage),
-      partialize: (state) => ({ user: state.user }),
+      partialize: (state) => ({ accessToken: state.accessToken }),
     },
   ),
 );

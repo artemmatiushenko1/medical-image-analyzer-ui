@@ -8,7 +8,7 @@ const styles = createStyleSheet({
   title: {
     display: 'flex',
     alignItems: 'center',
-    gap: 1,
+    gap: 2,
   },
   radioGroup: {
     gap: 1,
