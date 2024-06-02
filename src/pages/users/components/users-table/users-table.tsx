@@ -2,7 +2,7 @@ import { Loader } from '@/libs/components';
 import { DataGrid, DataGridProps, GridColDef } from '@mui/x-data-grid';
 import { styles } from './styles';
 import { User } from '@/packages/users';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 type UsersTableProps = Pick<DataGridProps, 'loading' | 'rows'>;
 
@@ -46,6 +46,18 @@ const UsersTable = (props: UsersTableProps) => {
       disableRowSelectionOnClick
       rows={rows}
       columns={columns}
+      localeText={{
+        MuiTablePagination: {
+          labelRowsPerPage: t('UsersTable.RowsPerPage'),
+          labelDisplayedRows: ({ from, to, count }) => (
+            <Trans
+              t={t}
+              i18nKey="UsersTable.LabelDisplayedRows"
+              values={{ from, to, count }}
+            />
+          ),
+        },
+      }}
     />
   );
 };

@@ -2,7 +2,7 @@ import { Loader } from '@/libs/components';
 import { DataGrid, DataGridProps, GridColDef } from '@mui/x-data-grid';
 import { styles } from './styles';
 import { Diagnostic } from '@/packages/diagnostics';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 type DiagnosticsTable = Pick<DataGridProps, 'rows' | 'loading' | 'onRowClick'>;
 
@@ -33,6 +33,18 @@ const DiagnosticsTable = (props: DiagnosticsTable) => {
       rows={rows}
       columns={columns}
       onRowClick={onRowClick}
+      localeText={{
+        MuiTablePagination: {
+          'labelRowsPerPage': t('DiagnosticsTable.RowsPerPage'),
+          labelDisplayedRows: ({ to, from, count }) => (
+            <Trans
+              t={t}
+              i18nKey="DiagnosticsTable.LabelDisplayedRows"
+              values={{ from, to, count }}
+            />
+          ),
+        },
+      }}
     />
   );
 };

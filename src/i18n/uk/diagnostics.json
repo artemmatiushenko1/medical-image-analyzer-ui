@@ -5,10 +5,10 @@
     "Home": "Головна",
     "Diagnostics": "Діагностики"
   },
-  "NewDiagnosticButton": "Нова діагностика",
+  "NewDiagnosticButton": "Додати діагностику",
   "NewDiagnosticDialog": {
     "Title": "Нова Діагностика",
-    "DiagnosticNameLabel": "Назва діагностики",
+    "DiagnosticNameLabel": "Введіть назву діагностики",
     "DiagnosticNameHelperText": "Наприклад: Діагностика меланоми, Виявлення COVID-19..."
   },
   "DiagnosticsDrawer": {
@@ -22,7 +22,7 @@
           "EnabledLabel": "Активувати",
           "ViewDetailsItem": "Переглянути деталі"
         },
-        "ViewAndManageRelatedAiModels": "Переглядайте та керуйте поделями ШІ обраної діагностики."
+        "ViewAndManageRelatedAiModels": "Переглядайте та керуйте моделями ШІ обраної діагностики."
       },
       "NewVersion": {
         "Title": "Нова версія",
@@ -55,6 +55,8 @@
   "DiagnosticsTable": {
     "Columns": {
       "Name": "Назва"
-    }
+    },
+    "RowsPerPage": "Рядків на сторінці",
+    "LabelDisplayedRows": "{{from}} - {{to}} з {{count}}"
   }
 }

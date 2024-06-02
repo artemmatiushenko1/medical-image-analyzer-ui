@@ -13,7 +13,9 @@
       "FirstName": "Імʼя",
       "LastName": "Прізвище",
       "Email": "Електронна пошта"
-    }
+    },
+    "RowsPerPage": "Рядків на сторінці",
+    "LabelDisplayedRows": "{{from}} - {{to}} з {{count}}"
   },
   "AddNewUserButton": "Додати нового користувача",
   "AddNewUserDrawer": {

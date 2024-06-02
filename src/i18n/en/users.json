@@ -13,7 +13,9 @@
       "FirstName": "First Name",
       "LastName": "Last Name",
       "Email": "Email"
-    }
+    },
+    "RowsPerPage": "Rows per page",
+    "LabelDisplayedRows": "{{from}} - {{to}} of {{count}}"
   },
   "AddNewUserButton": "Add new user",
   "AddNewUserDrawer": {
