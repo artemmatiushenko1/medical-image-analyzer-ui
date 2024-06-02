@@ -26,6 +26,7 @@ const AddUserDrawer = (props: AddUserDrawerProps) => {
     <Drawer
       open={open}
       anchor="right"
+      onClose={onClose}
       PaperProps={{ sx: styles.addUserDrawerPaper }}
       sx={styles.root}
     >
