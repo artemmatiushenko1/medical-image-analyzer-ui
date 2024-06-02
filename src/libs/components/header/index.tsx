@@ -6,7 +6,9 @@ import {
   Divider,
   ListItemButton,
   Stack,
+  Theme,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { styles } from './styles';
@@ -30,10 +32,14 @@ const Header = () => {
   const [profileMenuAnchor, setprofileMenuAnchor] =
     useState<null | HTMLElement>(null);
 
+  const currentUser = useAuthStore((state) => state.user);
+
+  const isDownToMediumScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.up('md'),
+  );
+
   const profileMenuOpen = Boolean(profileMenuAnchor);
   const isNewStudyPage = Boolean(newStudyPageMatch);
-
-  const currentUser = useAuthStore((state) => state.user);
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
     setprofileMenuAnchor(event.currentTarget);
@@ -57,7 +63,7 @@ const Header = () => {
       <Box sx={styles.innerContainer}>
         <Box sx={styles.logoWrapper}>
           <Link to={AppRoute.HOME}>
-            <Logo />
+            <Logo iconOnly={!isDownToMediumScreen} />
           </Link>
         </Box>
         <ButtonsNavigation />
@@ -92,21 +98,25 @@ const Header = () => {
                   width: '35px',
                 }}
               />
-              <Box sx={{ overflow: 'hidden', width: '100%' }}>
-                <Typography fontSize="12px" fontWeight={500}>
-                  {currentUser?.firstName} {currentUser?.lastName}
-                </Typography>
-                <Typography
-                  width="100%"
-                  textOverflow="ellipsis"
-                  variant="caption"
-                  display="block"
-                  overflow="hidden"
-                >
-                  {currentUser?.email}
-                </Typography>
-              </Box>
-              <ExpandMoreRounded color="primary" />
+              {isDownToMediumScreen && (
+                <>
+                  <Box sx={{ overflow: 'hidden', width: '100%' }}>
+                    <Typography fontSize="12px" fontWeight={500}>
+                      {currentUser?.firstName} {currentUser?.lastName}
+                    </Typography>
+                    <Typography
+                      width="100%"
+                      textOverflow="ellipsis"
+                      variant="caption"
+                      display="block"
+                      overflow="hidden"
+                    >
+                      {currentUser?.email}
+                    </Typography>
+                  </Box>
+                  <ExpandMoreRounded color="primary" />
+                </>
+              )}
             </Stack>
           </ListItemButton>
           <ProfileMenu
