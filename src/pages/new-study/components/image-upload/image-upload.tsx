@@ -82,31 +82,38 @@ const ImageUpload = () => {
 
   return (
     <Stack sx={styles.root}>
-      <Box>
-        {isImageUploading ? (
-          <Skeleton animation="wave" sx={{ transform: 'none' }}>
-            <DropArea
-              width="450px"
-              height="450px"
-              icon={PhotoRounded}
-              onUpload={handleFileUpload}
-              supportedFormats={[MimeType.JPEG, MimeType.PNG]}
-              maxFileSizeMb={MAX_IMAGE_SIZE_MB}
-            />
-          </Skeleton>
-        ) : (
-          !currentImage && (
-            <DropArea
-              width="450px"
-              height="450px"
-              icon={PhotoRounded}
-              onUpload={handleFileUpload}
-              supportedFormats={[MimeType.JPEG, MimeType.PNG]}
-              maxFileSizeMb={MAX_IMAGE_SIZE_MB}
-            />
-          )
-        )}
-      </Box>
+      {isImageUploading ? (
+        <Skeleton
+          variant="rounded"
+          animation="wave"
+          sx={{
+            transform: 'none',
+            aspectRatio: 1 / 1,
+            width: '100%',
+            maxWidth: '450px',
+          }}
+        >
+          <DropArea
+            width="450px"
+            height="450px"
+            icon={PhotoRounded}
+            onUpload={handleFileUpload}
+            supportedFormats={[MimeType.JPEG, MimeType.PNG]}
+            maxFileSizeMb={MAX_IMAGE_SIZE_MB}
+          />
+        </Skeleton>
+      ) : (
+        !currentImage && (
+          <DropArea
+            width="450px"
+            height="450px"
+            icon={PhotoRounded}
+            onUpload={handleFileUpload}
+            supportedFormats={[MimeType.JPEG, MimeType.PNG]}
+            maxFileSizeMb={MAX_IMAGE_SIZE_MB}
+          />
+        )
+      )}
       {currentImage && (
         <Box sx={styles.uploadedImgWrapper}>
           <Box

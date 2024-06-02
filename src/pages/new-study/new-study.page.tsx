@@ -6,7 +6,9 @@ import {
   Step,
   StepLabel,
   Stepper,
+  Theme,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 import { BottomNavigation } from './components/bottom-navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -38,6 +40,10 @@ const NewStudy = () => {
   const [activeStepIndex, setActiveStepIndex] = useState<
     ValueOf<typeof NewStudyCreationStep>
   >(NewStudyCreationStep.UPLOAD_IMAGE);
+
+  const isDownToMediumScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.up('md'),
+  );
 
   useEffect(() => resetNewStudyStore, [resetNewStudyStore]);
 
@@ -106,31 +112,33 @@ const NewStudy = () => {
 
   return (
     <Box sx={styles.root}>
-      <Paper square sx={styles.sidebar}>
-        <Stack sx={styles.sidebarHeader}>
-          <Typography variant="h6" sx={{ fontSize: '18px' }} fontWeight={600}>
-            {t('PageTitle')}
-          </Typography>
-          <Typography variant="caption">{t('PageDescription')}</Typography>
-        </Stack>
-        <Divider />
-        <Stepper
-          sx={styles.stepper}
-          orientation="vertical"
-          activeStep={activeStepIndex}
-        >
-          {steps.map(({ key, title }, index) => (
-            <Step key={key}>
-              <StepLabel>
-                <Typography variant="caption">
-                  {t('Step')} {index + 1}
-                </Typography>
-                <Typography variant="subtitle2">{title}</Typography>
-              </StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Paper>
+      {isDownToMediumScreen && (
+        <Paper square sx={styles.sidebar}>
+          <Stack sx={styles.sidebarHeader}>
+            <Typography variant="h6" sx={{ fontSize: '18px' }} fontWeight={600}>
+              {t('PageTitle')}
+            </Typography>
+            <Typography variant="caption">{t('PageDescription')}</Typography>
+          </Stack>
+          <Divider />
+          <Stepper
+            sx={styles.stepper}
+            orientation="vertical"
+            activeStep={activeStepIndex}
+          >
+            {steps.map(({ key, title }, index) => (
+              <Step key={key}>
+                <StepLabel>
+                  <Typography variant="caption">
+                    {t('Step')} {index + 1}
+                  </Typography>
+                  <Typography variant="subtitle2">{title}</Typography>
+                </StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </Paper>
+      )}
       <Stack sx={styles.main}>
         <Paper square sx={styles.stepHeader}>
           <Typography variant="subtitle2">{stepMeta.title}</Typography>

@@ -4,7 +4,9 @@ import {
   FormHelperText,
   Stack,
   SvgIconProps,
+  Theme,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { styles } from './styles';
@@ -40,11 +42,15 @@ const DropArea = (props: DropAreaProps) => {
     value,
   } = props;
 
+  const { t } = useTranslation('NewStudy', { keyPrefix: 'ImageUpload' });
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
-  const { t } = useTranslation('NewStudy', { keyPrefix: 'ImageUpload' });
+  const isDownToMediumScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.up('md'),
+  );
 
   useEffect(() => {
     if (!value && fileInputRef.current) {
@@ -75,13 +81,18 @@ const DropArea = (props: DropAreaProps) => {
           error && styles.error,
           {
             height,
-            width,
-            py: 4,
+            maxWidth: width,
+            width: '100%',
+            p: 4,
+          },
+          !isDownToMediumScreen && {
+            height: 'auto',
+            aspectRatio: '1 / 1',
           },
         )}
       >
         <Icon color="primary" sx={styles.imageIcon} />
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" textAlign="center">
           <Trans
             t={t}
             i18nKey="Title"
