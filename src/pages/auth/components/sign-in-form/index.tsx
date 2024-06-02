@@ -19,7 +19,6 @@ import { styles } from './styles';
 import { Logo } from '@/libs/components';
 import { FormEvent, useState } from 'react';
 import { MOCK_USER, useAuthStore } from '@/packages/auth';
-import { Link } from 'react-router-dom';
 import { Role } from '@/packages/users';
 import { useTranslation } from 'react-i18next';
 

@@ -1,10 +1,5 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
-import {
-  UsersTable,
-  TotalUsersWidget,
-  ADD_USER_DRAWER_WIDTH_PX,
-  AddUserDrawer,
-} from './components';
+import { UsersTable, TotalUsersWidget, AddUserDrawer } from './components';
 import { styles } from './styles';
 import { AddRounded } from '@mui/icons-material';
 import { useGetAllUsers } from '@/packages/users';
