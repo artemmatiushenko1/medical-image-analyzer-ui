@@ -114,6 +114,15 @@ const SelectedDiagnosticAccordion = (
                     : [availableModels[0].id]
                 }
                 onChange={handleModelSelectChange}
+                MenuProps={{
+                  sx: {
+                    '& .MuiList-root': {
+                      gap: 0.5,
+                      display: 'flex',
+                      flexDirection: 'column',
+                    },
+                  },
+                }}
                 renderValue={(selected) => (
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => {
