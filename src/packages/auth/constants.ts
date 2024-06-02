@@ -1,0 +1,3 @@
+const AUTH_QUERY_KEY_PREFIX = 'Auth';
+
+export { AUTH_QUERY_KEY_PREFIX };
