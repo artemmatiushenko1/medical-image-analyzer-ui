@@ -33,7 +33,7 @@ const ButtonsNavigation = () => {
         });
 
         const inactiveStyles = ({ palette }: Theme) => ({
-          color: palette.neutral.dark,
+          color: palette.neutral.main,
         });
 
         return (
@@ -43,7 +43,9 @@ const ButtonsNavigation = () => {
             startIcon={
               <Icon
                 sx={[
-                  !selected && { color: ({ palette }) => palette.neutral.main },
+                  !selected && {
+                    color: ({ palette }) => palette.neutral.main,
+                  },
                 ]}
               />
             }
