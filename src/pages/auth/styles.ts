@@ -17,13 +17,16 @@ const styles = createStyleSheet({
   leftSideImage: {
     width: '85%',
   },
-  rightSide: {
-    flex: 0.45,
+  rightSide: ({ breakpoints }) => ({
+    flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     px: '20px',
-  },
+    [breakpoints.up('md')]: {
+      flex: 0.45,
+    },
+  }),
   form: {
     maxWidth: '400px',
     width: '100%',
