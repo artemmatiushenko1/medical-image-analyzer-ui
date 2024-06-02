@@ -58,7 +58,7 @@ const paletteDark = createPalette({
   mode: 'dark',
   background: {
     default: '#151824',
-    paper: '#2a2c38',
+    paper: '#1d1f2c',
   },
   primary: {
     light: brandBlue[600],
