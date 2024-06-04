@@ -20,11 +20,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const paletteLight = createPalette({
-  mode: 'light',
-  background: {
-    default: '#fcfcff',
-  },
+const paletteCommon = {
   primary: {
     light: brandBlue[600],
     main: brandBlue[700],
@@ -36,6 +32,20 @@ const paletteLight = createPalette({
   error: cinnabar,
   warning: amber,
   info: sky,
+  success: {
+    contrastText: '#fff',
+    light: emerald[100],
+    main: emerald[500],
+    dark: emerald[600],
+  },
+};
+
+const paletteLight = createPalette({
+  mode: 'light',
+  ...paletteCommon,
+  background: {
+    default: '#fcfcff',
+  },
   neutral: {
     light: heather[200],
     main: heather[400],
@@ -45,32 +55,16 @@ const paletteLight = createPalette({
     disabled: chicago[200],
     secondary: '#afb3bb',
   },
-  success: {
-    contrastText: '#fff',
-    light: emerald[100],
-    main: emerald[500],
-    dark: emerald[600],
-  },
   divider: alpha(heather[200], 1),
 });
 
 const paletteDark = createPalette({
   mode: 'dark',
+  ...paletteCommon,
   background: {
     default: '#151824',
     paper: '#1d1f2c',
   },
-  primary: {
-    light: brandBlue[600],
-    main: brandBlue[700],
-    dark: brandBlue[800],
-  },
-  secondary: {
-    main: '#FF5858',
-  },
-  error: cinnabar,
-  warning: amber,
-  info: sky,
   neutral: {
     light: heather[50],
     main: heather[300],
@@ -79,12 +73,6 @@ const paletteDark = createPalette({
   text: {
     disabled: chicago[400],
     secondary: '#afb3bb',
-  },
-  success: {
-    contrastText: '#fff',
-    light: emerald[100],
-    main: emerald[500],
-    dark: emerald[600],
   },
   divider: alpha(heather[50], 0.1),
 });
