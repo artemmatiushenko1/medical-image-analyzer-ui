@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/packages/auth';
 import { LANGUAGE_DETAILS } from '@/i18n';
 import { useClosable } from '@/libs/hooks';
-import { ThemeMode } from '@/app/enums';
+import { ThemeMode } from '@/libs/theme';
 
 type ProfileMenuProps = {
   open: boolean;

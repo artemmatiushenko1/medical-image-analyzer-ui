@@ -7,7 +7,7 @@ import { ThemeOptions, createTheme } from '@mui/material/styles';
 import { getComponentsOverrides } from './components';
 import { shape } from './shape';
 import { useAppStore } from '@/app';
-import { ThemeMode } from '@/app/enums';
+import { ThemeMode } from './enums';
 
 type ThemeConfigProps = {
   children: React.ReactNode;

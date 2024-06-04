@@ -1,9 +1,9 @@
 import { Language } from '@/libs/enums';
+import { ThemeMode } from '@/libs/theme';
 import { ValueOf } from '@/libs/types';
 import i18next from 'i18next';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { ThemeMode } from './enums';
 
 type AppState = {
   language: ValueOf<typeof Language>;
