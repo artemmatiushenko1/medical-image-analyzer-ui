@@ -22,6 +22,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', '@tanstack/query'],
   rules: {
+    '@typescript-eslint/consistent-type-definitions': 'off',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
