@@ -1,7 +1,6 @@
 import { Language } from '@/libs/enums';
 import { ThemeMode } from '@/libs/theme';
 import { ValueOf } from '@/libs/types';
-import i18next from 'i18next';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -21,7 +20,7 @@ const useAppStore = create<AppState>()(
 
       changeLanguage: (newLanguage: ValueOf<typeof Language>) => {
         set({ language: newLanguage });
-        i18next.changeLanguage(newLanguage);
+        window.location.reload();
       },
       changeThemeMode: (themeMode: ValueOf<typeof ThemeMode>) => {
         set({ themeMode });
