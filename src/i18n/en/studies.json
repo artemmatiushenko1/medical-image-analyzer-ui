@@ -12,7 +12,8 @@
   "UncertainStudies": "Uncertain studies",
   "StudyCard": {
     "Diagnostic": "Diagnostic",
-    "ViewDetails": "View details"
+    "ViewDetails": "View details",
+    "Model": "AI Model"
   },
   "StatusChip": {
     "Completed": "Completed",
@@ -22,7 +23,8 @@
     "Image": "Image",
     "NoResult": "There's no result available yet. The image is still being examined by AI.",
     "Confidence": "Confidence",
-    "Report": "Report"
+    "Report": "Report",
+    "AiModel": "AI Model"
   },
   "Confidence": {
     "Negative": {

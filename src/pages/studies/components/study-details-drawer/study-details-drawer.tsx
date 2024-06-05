@@ -23,6 +23,9 @@ import { StudyReportDocument } from '../../libs/pdf-templates';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
+import { AiModelIcon } from '@/libs/components/icons';
+import { HighlightedIcon } from '@/libs/components';
+import { formatVersionString } from '@/libs/helpers';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -104,6 +107,39 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
               <Box component="img" sx={styles.image} src={study.imageSrc} />
             </Box>
           </Stack>
+          <Stack gap={2}>
+            <Typography
+              variant="subtitle2"
+              sx={{ color: ({ palette }) => palette.neutral.dark }}
+            >
+              {t('StudyDetails.AiModel')}
+            </Typography>
+            <Paper sx={{ p: 2 }}>
+              <Stack>
+                <Stack direction="row" gap={3} alignItems="center">
+                  <Box>
+                    <HighlightedIcon rounded iconElement={<AiModelIcon />} />
+                  </Box>
+                  <Stack>
+                    <Typography variant="body2">{study.model?.name}</Typography>
+                    <Typography variant="caption">Name</Typography>
+                  </Stack>
+                  <Stack sx={{ marginLeft: 'auto' }}>
+                    <Typography variant="body2" textAlign="right">
+                      {study.model &&
+                        formatVersionString(
+                          study.model.currentVersion.revision,
+                        )}
+                    </Typography>
+                    <Typography variant="caption">Version</Typography>
+                  </Stack>
+                  {/* <Stack sx={{ marginLeft: 'auto' }}>
+                    <Button>See Result</Button>
+                  </Stack> */}
+                </Stack>
+              </Stack>
+            </Paper>
+          </Stack>
           {study.status === StudyStatus.PENDING && (
             <Paper
               sx={{
@@ -129,8 +165,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                 {study.confidence && (
                   <>
                     <Typography
-                      fontSize="14px"
-                      fontWeight={600}
+                      variant="subtitle2"
                       sx={{ color: ({ palette }) => palette.neutral.dark }}
                     >
                       {t('StudyDetails.Confidence')}
@@ -141,8 +176,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
               </Stack>
               <Stack gap={2}>
                 <Typography
-                  fontSize="14px"
-                  fontWeight={600}
+                  variant="subtitle2"
                   sx={{ color: ({ palette }) => palette.neutral.dark }}
                 >
                   {t('StudyDetails.Report')}
@@ -172,9 +206,9 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                         width="20px"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
                       </svg>
                     )}
                   </IconButton>

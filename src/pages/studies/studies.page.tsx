@@ -8,7 +8,6 @@ import {
 import { useEffect, useState } from 'react';
 import { StudiesFilter, StudyCard, StudyDetailsDrawer } from './components';
 import { Study, StudyStatus, useGetStudies } from '@/packages/studies';
-import { MAX_STUDY_LOADING_PREVIEWS } from './libs/constants';
 import { ValueOf } from '@/libs/types';
 import { useClosable } from '@/libs/hooks';
 import { useTranslation } from 'react-i18next';
@@ -119,10 +118,16 @@ const Studies = () => {
         </Stack>
       </Paper>
       <Stack sx={{ flex: '78%', p: 3, gap: 3, overflow: 'scroll' }}>
-        {isLoading &&
-          Array(MAX_STUDY_LOADING_PREVIEWS)
-            .fill(crypto.randomUUID)
-            .map((_, index) => <StudyCard.Skeleton key={index} />)}
+        {isLoading && (
+          <>
+            <StudyCard.Skeleton />
+            <StudyCard.Skeleton />
+            <StudyCard.Skeleton />
+            <StudyCard.Skeleton />
+            <StudyCard.Skeleton />
+            <StudyCard.Skeleton />
+          </>
+        )}
         {filteredStudies?.map((study) => (
           <StudyCard
             key={study.id}
@@ -132,6 +137,7 @@ const Studies = () => {
             imageSrc={study.imageSrc}
             diagnostic={study.diagnostic}
             onViewDetails={handleViewStudyDetails}
+            model={study.model}
           />
         ))}
       </Stack>

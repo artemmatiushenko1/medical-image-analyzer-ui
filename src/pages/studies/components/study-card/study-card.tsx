@@ -16,20 +16,22 @@ import { DetailItemText } from '../detail-item-text';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { useTranslation } from 'react-i18next';
-import { Diagnostic } from '@/packages/diagnostics';
+import { Diagnostic, Model } from '@/packages/diagnostics';
 
 type StudyCardProps = {
   id: string;
   date: string;
   imageSrc: string;
   diagnostic: Diagnostic;
+  model: Model;
   status: ValueOf<typeof StudyStatus>;
 
   onViewDetails: (id: string) => void;
 };
 
 const StudyCard = (props: StudyCardProps) => {
-  const { date, imageSrc, status, diagnostic, id, onViewDetails } = props;
+  const { date, imageSrc, status, diagnostic, id, onViewDetails, model } =
+    props;
 
   const { t } = useTranslation('Studies');
 
@@ -47,11 +49,17 @@ const StudyCard = (props: StudyCardProps) => {
           <Box src={imageSrc} component="img" sx={styles.image} />
         </Box>
       </Box>
-      <Stack>
+      <Stack maxWidth={200} width={'100%'}>
         <Typography variant="caption">{t('StudyCard.Diagnostic')}</Typography>
+        <Typography noWrap variant="subtitle2" fontWeight={600}>
+          {diagnostic.name}
+        </Typography>
+      </Stack>
+      <Stack>
+        <Typography variant="caption">{t('StudyCard.Model')}</Typography>
         <Stack>
           <Typography variant="subtitle2" fontWeight={600}>
-            {diagnostic.name}
+            {model.name}
           </Typography>
         </Stack>
       </Stack>
@@ -73,7 +81,7 @@ const StudyCard = (props: StudyCardProps) => {
   );
 };
 
-StudyCard.Skeleton = () => {
+const StudyCardSkeleton = () => {
   return (
     <Paper sx={styles.root}>
       <Skeleton width="100px" height={20} />
@@ -85,12 +93,14 @@ StudyCard.Skeleton = () => {
           sx={{ borderRadius: ({ shape }) => shape.borderRadius }}
         />
       </Box>
-      <Box>
-        <Stack>
-          <Skeleton width="100px" height={20} />
-          <Skeleton width="140px" height={20} />
-        </Stack>
-      </Box>
+      <Stack maxWidth={200} width={'100%'}>
+        <Skeleton width="100px" height={20} />
+        <Skeleton width="140px" height={20} />
+      </Stack>
+      <Stack>
+        <Skeleton width="100px" height={20} />
+        <Skeleton width="140px" height={20} />
+      </Stack>
       <Box sx={styles.rightPart}>
         <Skeleton
           variant="rounded"
@@ -103,5 +113,7 @@ StudyCard.Skeleton = () => {
     </Paper>
   );
 };
+
+StudyCard.Skeleton = StudyCardSkeleton;
 
 export { StudyCard };

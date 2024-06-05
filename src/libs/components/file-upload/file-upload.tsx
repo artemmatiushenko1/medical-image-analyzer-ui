@@ -26,6 +26,8 @@ const FileUpload = <T extends FieldValues>(props: FileUploadProps<T>) => {
     fieldState: { error },
   } = useController(controlProps);
 
+  const selectedFile = value as File;
+
   return (
     <>
       <Stack spacing={1}>
@@ -42,14 +44,14 @@ const FileUpload = <T extends FieldValues>(props: FileUploadProps<T>) => {
           helperText={error?.message}
         />
       </Stack>
-      {value && (
+      {selectedFile && (
         <Stack spacing={1}>
           <Typography variant="subtitle2">
             {t('FileUpload.SelectedFileLabel')}
           </Typography>
           <SelectedFileCard
-            sizeBytes={value.size}
-            name={value.name}
+            sizeBytes={selectedFile.size}
+            name={selectedFile.name}
             onRemoveFile={() => onChange(undefined)}
           />
         </Stack>

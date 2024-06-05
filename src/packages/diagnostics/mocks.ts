@@ -3,14 +3,9 @@ import { Diagnostic, Model, ModelVersion } from './types';
 
 const MOCK_DIAGNOSTICS: Diagnostic[] = [
   {
-    id: '1',
-    previewImg: 'https://med.comsys.kpi.ua/images/services/1.jpg',
-    name: 'Класифікація аномалій в легенях',
-  },
-  {
     id: '2',
     previewImg: 'https://med.comsys.kpi.ua/images/services/2.jpg',
-    name: 'Детекція аномалій в легенях',
+    name: 'Детекція пневмнонії',
   },
   {
     id: '3',
@@ -26,11 +21,6 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
     id: '5',
     previewImg: 'https://med.comsys.kpi.ua/images/services/5.jpg',
     name: 'Діагностування хвороби Лайма',
-  },
-  {
-    id: '6',
-    previewImg: 'https://med.comsys.kpi.ua/images/services/6.jpg',
-    name: 'Класифікація аномалій в клітинах (гістологія)',
   },
 ];
 
@@ -63,19 +53,19 @@ const MOCK_MODEL_VERSIONS: ModelVersion[] = [
 
 const MOCK_MODELS: Model[] = [
   {
-    name: 'CoviScanNet',
+    name: 'MelaDiagnose',
     id: '1',
-    currentVersion: MOCK_MODEL_VERSIONS[0],
+    currentVersion: MOCK_MODEL_VERSIONS[1],
     enabled: true,
   },
   {
-    name: 'SARS-CoV-2Analyzer',
+    name: 'PneumoCheck',
     id: '2',
     currentVersion: MOCK_MODEL_VERSIONS[0],
     enabled: true,
   },
   {
-    name: 'CovidVisionAI',
+    name: 'LymeXpert',
     id: '3',
     currentVersion: MOCK_MODEL_VERSIONS[0],
     enabled: false,
