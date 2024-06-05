@@ -19,12 +19,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'dayjs/locale/en';
 import 'dayjs/locale/uk';
 
-const ReactQueryDevtoolsProduction = React.lazy(() =>
-  import('@tanstack/react-query-devtools/production').then((d) => ({
-    default: d.ReactQueryDevtools,
-  })),
-);
-
 const renderApp = () => {
   const appLanguage = useAppStore.getState().language;
 
@@ -41,7 +35,6 @@ const renderApp = () => {
             </BrowserRouter>
           </ThemeConfig>
         </LocalizationProvider>
-        <ReactQueryDevtoolsProduction initialIsOpen={false} />
       </QueryClientProvider>
       <ToastContainer position="bottom-right" theme="colored" />
     </React.StrictMode>,
