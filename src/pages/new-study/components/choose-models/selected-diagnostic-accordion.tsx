@@ -17,7 +17,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { selectedDiagnosticAccordion as styles } from './styles';
+import { selectedDiagnosticAccordion as styles } from '../choose-diagnostics/styles';
 import { useId } from 'react';
 import { useNewStudyStore } from '@/pages/new-study/store';
 import { heather } from '@/libs/theme/colors';
@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 type SelectedDiagnosticAccordionProps = {
   id: string;
   title: string;
+  deleteDisabled: boolean;
 
   onDelete: (id: string) => void;
 };
@@ -33,7 +34,7 @@ type SelectedDiagnosticAccordionProps = {
 const SelectedDiagnosticAccordion = (
   props: SelectedDiagnosticAccordionProps,
 ) => {
-  const { title, onDelete, id } = props;
+  const { title, onDelete, id, deleteDisabled = false } = props;
 
   const { t } = useTranslation('NewStudy');
 
@@ -80,14 +81,23 @@ const SelectedDiagnosticAccordion = (
             <Typography variant="body2" fontWeight={500}>
               {title}
             </Typography>
-            <IconButton
-              size="small"
-              className="delete-icon"
-              sx={{ color: ({ palette }) => palette.neutral.main }}
-              onClick={handleDeleteButtonClick}
+            <Tooltip
+              title={
+                deleteDisabled ? t('StudyMustContainAtLeastOneDiagnostic') : ''
+              }
             >
-              <CloseRounded />
-            </IconButton>
+              <span>
+                <IconButton
+                  size="small"
+                  disabled={deleteDisabled}
+                  className="delete-icon"
+                  sx={{ color: ({ palette }) => palette.neutral.main }}
+                  onClick={handleDeleteButtonClick}
+                >
+                  <CloseRounded />
+                </IconButton>
+              </span>
+            </Tooltip>
           </Box>
         </AccordionSummary>
         <AccordionDetails>

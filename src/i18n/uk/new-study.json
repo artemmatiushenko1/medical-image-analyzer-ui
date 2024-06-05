@@ -2,7 +2,8 @@
   "SubmissionSteps": {
     "UploadImage": "Завантажте зображення",
     "ChooseDiagnostics": "Оберіть діагностику",
-    "CreateStudy": "Створіть дослідження"
+    "CreateStudy": "Створіть дослідження",
+    "ChooseModels": "Оберіть модель ШІ"
   },
   "ImageUpload": {
     "Title": "Перетягність файл сюди або <bold><underlined>Оберіть файл</underlined></bold>",
@@ -24,6 +25,10 @@
     "StudyOverview": {
       "Title": "Огляд дослідження",
       "Caption": "Перегляньте основну інформацію про дослідження. Створене дослідження не можна буде редагувати."
+    },
+    "ChooseModels": {
+      "Title": "Оберіть моделі штучного інтелекту",
+      "Caption": "Ви можете обрати декілька моделей для кожної діагностики."
     }
   },
   "CropDialog": {
@@ -56,5 +61,6 @@
     "StudyWasSuccessullyCreated": "Дослідження було успішно створено!",
     "YouCanTrackTheStudyStatusOnTheReportsPage": "Відстежувати статус дослідження можна на сторінці ваших дослідженнь."
   },
-  "Ok": "Добре"
+  "Ok": "Добре",
+  "StudyMustContainAtLeastOneDiagnostic": "Дослідження має містити прийнамні одну діагностику."
 }

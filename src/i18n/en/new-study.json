@@ -2,7 +2,8 @@
   "SubmissionSteps": {
     "UploadImage": "Upload an image",
     "ChooseDiagnostics": "Choose diagnostics",
-    "CreateStudy": "Overview"
+    "CreateStudy": "Overview",
+    "ChooseModels": "Choose AI model"
   },
   "ImageUpload": {
     "Title": "Drag & Drop file here or <bold><underlined>Choose a file</underlined></bold>",
@@ -24,6 +25,10 @@
     "StudyOverview": {
       "Title": "Study Overview",
       "Caption": "Please review the study summary. Once the study is created it won't be able to edit it."
+    },
+    "ChooseModels": {
+      "Title": "Choose AI model",
+      "Caption": "You can select multiple models per diagnostic."
     }
   },
   "CropDialog": {
@@ -56,5 +61,6 @@
     "StudyWasSuccessullyCreated": "Study was successully created!",
     "YouCanTrackTheStudyStatusOnTheReportsPage": "You can track the study status on the reports page."
   },
-  "Ok": "Ok"
+  "Ok": "Ok",
+  "StudyMustContainAtLeastOneDiagnostic": "Study must contain at least one diagnostic."
 }

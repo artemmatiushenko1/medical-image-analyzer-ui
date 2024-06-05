@@ -19,6 +19,7 @@ import {
   ImageUpload,
   StudySummary,
   CreateStudyStatusDialog,
+  ChooseModels,
 } from './components';
 import { useTranslation } from 'react-i18next';
 import { ValueOf } from '@/libs/types';
@@ -64,6 +65,11 @@ const NewStudy = () => {
         component: <ChooseDiagnostics />,
       },
       {
+        key: NewStudyCreationStep.CHOOSE_MODELS,
+        title: t('SubmissionSteps.ChooseModels'),
+        component: <ChooseModels />,
+      },
+      {
         key: NewStudyCreationStep.CONFIRM,
         title: t('SubmissionSteps.CreateStudy'),
         component: <StudySummary />,
@@ -101,6 +107,10 @@ const NewStudy = () => {
     [NewStudyCreationStep.CHOOSE_DIAGNOSTICS]: {
       title: t('Instructions.ChooseDiagnostics.Title'),
       description: t('Instructions.ChooseDiagnostics.Caption'),
+    },
+    [NewStudyCreationStep.CHOOSE_MODELS]: {
+      title: t('Instructions.ChooseModels.Title'),
+      description: t('Instructions.ChooseModels.Caption'),
     },
     [NewStudyCreationStep.CONFIRM]: {
       title: t('Instructions.StudyOverview.Title'),

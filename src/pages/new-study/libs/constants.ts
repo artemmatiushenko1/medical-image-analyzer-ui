@@ -3,7 +3,7 @@ const MAX_IMAGE_SIZE_MB = 5;
 
 const NEW_STUDY_QUERY_KEY_PREFIX = 'NewStudy';
 
-const MAX_SELECTED_DIAGNOSTICS = 1;
+const MAX_SELECTED_DIAGNOSTICS = Infinity;
 
 export {
   MIN_IMAGE_DIMENSIONS_PX,
