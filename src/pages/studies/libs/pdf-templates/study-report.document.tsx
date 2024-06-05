@@ -17,6 +17,8 @@ import { User } from '@/packages/users';
 import { useConfidenceDescriptors } from '../hooks';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
+import { useTranslation } from 'react-i18next';
+import { formatVersionString } from '@/libs/helpers';
 
 Font.register({
   family: 'Roboto',
@@ -128,9 +130,10 @@ const TableRow = (props: TableRowProps) => {
   );
 };
 
-// TOOD: use translations
 const StudyReportDocument = (props: StudyReportDocumentProps) => {
   const { study, issuer } = props;
+
+  const { t } = useTranslation('Studies');
 
   const { text: confidenceText, color: confidenceColor } =
     useConfidenceDescriptors(study.confidence ?? 0);
@@ -146,44 +149,55 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
             {dayjs(study.date).format(DateFormat.YEAR_MONTH_DAY_DASHES)}
           </Text>
         </View>
-        <Text style={styles.studyTitle}>Study #{study.id}</Text>
+        <Text style={styles.studyTitle}>
+          {t('StudyReport.Study')} #{study.id}
+        </Text>
         <View style={styles.section}>
-          <Text style={styles.subtitle}>Image</Text>
+          <Text style={styles.subtitle}>{t('StudyReport.Image')}</Text>
           <Image style={styles.image} source={study.imageSrc}></Image>
         </View>
         <View style={styles.section}>
-          <Text style={styles.subtitle}>Summary</Text>
+          <Text style={styles.subtitle}>{t('StudyReport.Summary')}</Text>
           <View style={styles.table}>
             <TableRow
               labelColWidth={labelColWidth}
-              label="Diagnostic type"
-              value={study.diagnostic}
+              label={t('StudyReport.DiagnosticType')}
+              value={study.diagnostic.name}
             />
             <TableRow
               labelColWidth={labelColWidth}
-              label="Issued at"
+              label={t('StudyReport.AiModel')}
+              value={`${study.model.name} - ${formatVersionString(
+                study.model.currentVersion.revision,
+              )}`}
+            />
+            <TableRow
+              labelColWidth={labelColWidth}
+              label={t('StudyReport.CompletedAt')}
               value={study.date}
             />
             <TableRow
               labelColWidth={labelColWidth}
-              label="Issuer"
+              label={t('StudyReport.Requester')}
               value={`${issuer.firstName} ${issuer.lastName}; ${issuer.email}`}
             />
             <TableRow
               last
               labelColWidth={labelColWidth}
-              label="Disease availability confidence"
+              label={t('StudyReport.DiseaseAvailabilityConfidence')}
               backgroundColor={confidenceColor.light}
               value={
                 <Text style={styles.confidence}>
-                  {study.confidence ?? 0 * 100}% ({confidenceText.title})
+                  {(study.confidence ?? 0 * 100).toFixed(2)}% (
+                  {confidenceText.title})
                 </Text>
               }
             />
           </View>
           <View style={styles.noteWrapper}>
             <Text style={styles.noteText}>
-              <Text style={styles.noteBold}>Note:{'  '}</Text>
+              <Text style={styles.noteBold}>{t('StudyReport.Note')}:</Text>
+              {'  '}
               {confidenceText.description}
             </Text>
           </View>

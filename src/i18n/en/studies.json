@@ -37,5 +37,16 @@
       "Title": "+ Positive",
       "Caption": "There's a high risk of a disease under study. Please contact a doctor as soon as possible for a furher examination."
     }
+  },
+  "StudyReport": {
+    "DiagnosticType": "Diagnostic Type",
+    "CompletedAt": "Completed At",
+    "Requester": "Requester",
+    "DiseaseAvailabilityConfidence": "Disease availability confidence",
+    "Note": "Note",
+    "Summary": "Summary",
+    "Image": "Image",
+    "Study": "Study",
+    "AiModel": "AI Model"
   }
 }

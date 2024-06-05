@@ -16,12 +16,13 @@ import { DetailItemText } from '../detail-item-text';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { useTranslation } from 'react-i18next';
+import { Diagnostic } from '@/packages/diagnostics';
 
 type StudyCardProps = {
   id: string;
   date: string;
   imageSrc: string;
-  diagnostic: string;
+  diagnostic: Diagnostic;
   status: ValueOf<typeof StudyStatus>;
 
   onViewDetails: (id: string) => void;
@@ -50,7 +51,7 @@ const StudyCard = (props: StudyCardProps) => {
         <Typography variant="caption">{t('StudyCard.Diagnostic')}</Typography>
         <Stack>
           <Typography variant="subtitle2" fontWeight={600}>
-            {diagnostic}
+            {diagnostic.name}
           </Typography>
         </Stack>
       </Stack>

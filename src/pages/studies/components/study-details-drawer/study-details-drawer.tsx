@@ -47,10 +47,10 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
     .format(DateFormat.YEAR_MONTH_DAY_DASHES)
     ?.replaceAll(' ', '_')}.pdf`;
 
-  const handleReportDownload = () => {
+  const handleReportDownload = async () => {
     if (!currentUser) return;
 
-    savePdf(
+    await savePdf(
       <StudyReportDocument study={study} issuer={currentUser} />,
       reportFilename,
     );
@@ -68,7 +68,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
         <Box sx={styles.titleInner}>
           <Box>
             <Typography display="inline-block" fontSize="18px" fontWeight={600}>
-              {study.diagnostic}
+              {study.diagnostic?.name}
             </Typography>
             <Typography variant="caption" fontSize="14px" display="block">
               #{study.id}

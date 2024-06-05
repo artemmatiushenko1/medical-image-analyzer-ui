@@ -16,7 +16,7 @@ import {
 import { styles } from './styles';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
-import { formatVersionString } from '@/pages/diagnostics/libs/helpers';
+import { formatVersionString } from '@/libs/helpers';
 import { useTranslation } from 'react-i18next';
 
 type ModelVersionHistoryProps = {
@@ -88,7 +88,7 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
   );
 };
 
-ModelVersionHistory.Skeleton = () => {
+const ModelVersionHistorySkeleton = () => {
   return (
     <Stack direction="row" alignItems="center" gap="16px">
       <Skeleton
@@ -111,5 +111,7 @@ ModelVersionHistory.Skeleton = () => {
     </Stack>
   );
 };
+
+ModelVersionHistory.Skeleton = ModelVersionHistorySkeleton;
 
 export { ModelVersionHistory };

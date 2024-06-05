@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { styles } from './styles';
 import { useMenuPopover } from '@/libs/hooks';
-import { formatVersionString } from '@/pages/diagnostics/libs/helpers';
+import { formatVersionString } from '@/libs/helpers';
 import { useTranslation } from 'react-i18next';
 
 type ModelCardProps = {
@@ -92,7 +92,7 @@ const ModelCard = (props: ModelCardProps) => {
   );
 };
 
-ModelCard.Skeleton = () => {
+const ModelCardSkeleton = () => {
   const spacing = 0.35;
 
   return (
@@ -133,5 +133,7 @@ ModelCard.Skeleton = () => {
     </Card>
   );
 };
+
+ModelCard.Skeleton = ModelCardSkeleton;
 
 export { ModelCard };
