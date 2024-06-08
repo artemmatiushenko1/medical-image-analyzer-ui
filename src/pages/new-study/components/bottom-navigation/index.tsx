@@ -48,6 +48,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
       tooltip: t('ValidationsMessage.UploadImage'),
     },
     [NewStudyCreationStep.CONFIRM]: null,
+    [NewStudyCreationStep.CHOOSE_MODELS]: null,
   };
 
   const { disabled: nextButtonDisabled, tooltip: nextButtonTooltip } =
