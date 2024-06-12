@@ -5,22 +5,27 @@ import { initReactI18next } from 'react-i18next';
 import { resources } from './resources';
 import dayjs from 'dayjs';
 
-const initi18n = (initialLanguage: ValueOf<typeof Language>) => {
-  i18n.use(initReactI18next).init({
+const initi18n = (language: ValueOf<typeof Language>) => {
+  return i18n.use(initReactI18next).init({
     resources,
-    lng: initialLanguage,
+    lng: language,
     interpolation: {
       escapeValue: false,
     },
   });
 };
 
-const initDayJs = async (initialLanguage: ValueOf<typeof Language>) => {
+const initDayJs = async (language: ValueOf<typeof Language>) => {
   try {
-    await import(`dayjs/locale/${initialLanguage}`);
-    dayjs.locale(initialLanguage);
+    const locales = {
+      [Language.ENGLISH]: () => import('dayjs/locale/en.js'),
+      [Language.UKRAINIAN]: () => import('dayjs/locale/uk.js'),
+    };
+
+    await locales[language]?.();
+    dayjs.locale(language);
   } catch (error) {
-    console.error(`Error loading locale ${initialLanguage}`, error);
+    console.error(`Error loading locale ${language}`, error);
   }
 };
 
