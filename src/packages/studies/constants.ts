@@ -1,3 +1,0 @@
-const STUDIES_QUERY_KEY_PREFIX = 'Studies';
-
-export { STUDIES_QUERY_KEY_PREFIX };

@@ -7,10 +7,11 @@ import {
 } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { StudiesFilter, StudyCard, StudyDetailsDrawer } from './components';
-import { Study, StudyStatus, useGetStudies } from '@/packages/studies';
+import { Study, StudyStatus } from '@/packages/studies';
 import { ValueOf } from '@/libs/types';
 import { useClosable } from '@/libs/hooks';
 import { useTranslation } from 'react-i18next';
+import { useGetStudies } from './libs/queries';
 
 const Studies = () => {
   const { t } = useTranslation('Studies');

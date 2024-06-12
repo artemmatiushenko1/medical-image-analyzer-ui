@@ -1,3 +1,3 @@
-export { StudyStatus, StudyQueryKey } from './enums';
+export { StudyStatus } from './enums';
 export { type Study } from './types';
-export { useCreateStudy, useGetStudies } from './queries';
+export { studiesApi } from './studies.api';

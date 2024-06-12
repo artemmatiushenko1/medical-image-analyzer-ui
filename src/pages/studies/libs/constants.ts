@@ -2,6 +2,8 @@ import { cinnabar, emerald } from '@/libs/theme/colors';
 import { ConfidenceThreshold } from './enums';
 import { amber } from '@mui/material/colors';
 
+const STUDIES_QUERY_KEY_PREFIX = 'Studies';
+
 const MAX_STUDY_LOADING_PREVIEWS = 6;
 
 const COLOR_BY_CONFIDENCE_THRESHOLD = {
@@ -19,4 +21,8 @@ const COLOR_BY_CONFIDENCE_THRESHOLD = {
   },
 };
 
-export { MAX_STUDY_LOADING_PREVIEWS, COLOR_BY_CONFIDENCE_THRESHOLD };
+export {
+  MAX_STUDY_LOADING_PREVIEWS,
+  COLOR_BY_CONFIDENCE_THRESHOLD,
+  STUDIES_QUERY_KEY_PREFIX,
+};

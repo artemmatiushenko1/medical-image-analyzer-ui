@@ -2,9 +2,9 @@ import { Button, CircularProgress, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/app';
-import { useCreateStudy } from '@/packages/studies';
 import { Dialog, SuccessCheckmark } from '@/libs/components';
 import { useTranslation } from 'react-i18next';
+import { useCreateStudy } from '@/pages/studies/libs/queries';
 
 const CreateStudyStatusDialog = () => {
   const { t } = useTranslation('NewStudy');
