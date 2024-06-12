@@ -84,7 +84,7 @@ const StudyCard = (props: StudyCardProps) => {
 const StudyCardSkeleton = () => {
   return (
     <Paper sx={styles.root}>
-      <Skeleton width="100px" height={20} />
+      <Skeleton width="94px" height={20} />
       <Box>
         <Skeleton
           height={65}
