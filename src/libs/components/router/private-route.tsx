@@ -1,5 +1,4 @@
-import { AppRoute } from '@/app';
-import { useAuthStore } from '@/packages/auth';
+import { AppRoute, useAuthStore } from '@/app';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Role } from '@/packages/users';
 import { ValueOf } from '@/libs/types';

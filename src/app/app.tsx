@@ -1,4 +1,4 @@
-import { useGetProfile } from '@/packages/auth';
+import { useGetProfile } from './queries';
 import { Router } from './router';
 import { SplashScreen } from '@/libs/components';
 

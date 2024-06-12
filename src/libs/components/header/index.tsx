@@ -15,11 +15,10 @@ import { styles } from './styles';
 import { useState } from 'react';
 import { ProfileMenu } from '../profile-menu';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
-import { AppRoute } from '@/app';
+import { AppRoute, useAuthStore } from '@/app';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { Logo } from '../logo';
 import { ButtonsNavigation } from '../button-navigation';
-import { useAuthStore } from '@/packages/auth';
 import { useTranslation } from 'react-i18next';
 
 const Header = () => {

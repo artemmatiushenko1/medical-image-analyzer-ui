@@ -17,7 +17,6 @@ import { DetailItemText } from '../detail-item-text';
 import { StudyStatusChip } from '../study-status-chip';
 import { styles } from './styles';
 import { ConfidenceWidget } from '../confidence-widget';
-import { useAuthStore } from '@/packages/auth';
 import { useSavePdf } from '@/libs/hooks';
 import { StudyReportDocument } from '../../libs/pdf-templates';
 import { useTranslation } from 'react-i18next';
@@ -26,6 +25,7 @@ import { DateFormat } from '@/libs/enums';
 import { AiModelIcon } from '@/libs/components/icons';
 import { HighlightedIcon } from '@/libs/components';
 import { formatVersionString } from '@/libs/helpers';
+import { useAuthStore } from '@/app';
 
 type StudyDetailsDrawerProps = {
   open: boolean;

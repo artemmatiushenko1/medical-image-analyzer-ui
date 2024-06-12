@@ -16,9 +16,8 @@ import {
   Typography,
 } from '@mui/material';
 import { ChangeLanguageDialog } from '../change-language-dialog';
-import { useAppStore } from '@/app';
+import { useAppStore, useAuthStore } from '@/app';
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '@/packages/auth';
 import { LANGUAGE_DETAILS } from '@/i18n';
 import { useClosable } from '@/libs/hooks';
 import { ThemeMode } from '@/libs/theme';

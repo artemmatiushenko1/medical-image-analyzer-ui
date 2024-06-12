@@ -16,10 +16,11 @@ import {
 import { styles } from './styles';
 import { Button, Logo } from '@/libs/components';
 import { useState } from 'react';
-import { SignInRequest, signInSchema, useSignIn } from '@/packages/auth';
+import { SignInRequest, signInSchema } from '@/packages/auth';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
+import { useSignIn } from '../../queries';
 
 const SignInForm = () => {
   const { t } = useTranslation('Auth');

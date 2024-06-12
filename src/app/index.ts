@@ -1,3 +1,3 @@
 export { AppRoute } from './enums';
 export { App } from './app';
-export { useAppStore } from './app.store';
+export { useAppStore, useAuthStore } from './stores';

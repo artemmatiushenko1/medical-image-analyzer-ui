@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { AuthQueryKey } from '../enums';
-import { authApi } from '../auth.api';
-import { useAuthStore } from '../auth.store';
+import { useAuthStore } from '../stores/auth.store';
+import { authApi } from '@/packages/auth';
+import { AppQueryKey } from '../enums';
 
 const useGetProfile = () => {
   const user = useAuthStore((state) => state.user);
@@ -10,7 +10,7 @@ const useGetProfile = () => {
 
   return useQuery({
     enabled: Boolean(accessToken) && !user,
-    queryKey: AuthQueryKey.GET_PROFILE,
+    queryKey: AppQueryKey.GET_PROFILE,
     queryFn: async () => {
       const response = await authApi.getProfile();
       setUser(response);
