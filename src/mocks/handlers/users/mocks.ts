@@ -1,7 +1,6 @@
-import { Role } from './enums';
-import { User } from './types';
+import { Role, User } from '@/packages/users';
 
-const mockUsers: User[] = [
+const MOCK_USERS: User[] = [
   {
     id: '1',
     firstName: 'Artem',
@@ -39,4 +38,4 @@ const mockUsers: User[] = [
   },
 ];
 
-export { mockUsers };
+export { MOCK_USERS };

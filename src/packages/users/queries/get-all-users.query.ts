@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { usersApi } from '../users.api';
+import { usersApi } from '..';
 import { UsersQueryKey } from '../enums';
 
 const useGetAllUsers = () => {

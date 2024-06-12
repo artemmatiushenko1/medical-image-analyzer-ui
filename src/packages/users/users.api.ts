@@ -1,25 +1,25 @@
-import { Role } from '@/packages/users';
-import { wait } from '@/libs/helpers';
 import { AddUserRequest, AddUserResponse, GetAllUsersResponse } from './types';
-import { mockUsers } from './mocks';
+import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
 
-class UsersApi {
-  users = [...mockUsers];
-
+class UsersApi extends HttpApi {
   addUser = async (request: AddUserRequest): Promise<AddUserResponse> => {
-    const user = await wait(2000).then(() => ({
-      ...request,
-      id: crypto.randomUUID(),
-      role: Role.ADMIN,
-    }));
-    this.users = [...this.users, user];
-    return user;
+    const options = new HttpRequestOptionsBuilder()
+      .post('/users')
+      .body(JSON.stringify(request))
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
   };
 
-  getAllUsers = (): Promise<GetAllUsersResponse> =>
-    wait(2000).then(() => this.users);
+  getAllUsers = (): Promise<GetAllUsersResponse> => {
+    const options = new HttpRequestOptionsBuilder()
+      .get('/users')
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
 }
 
-const usersApi = new UsersApi();
-
-export { usersApi };
+export { UsersApi };
