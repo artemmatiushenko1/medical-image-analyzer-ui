@@ -1,12 +1,25 @@
-import { wait } from '@/libs/helpers';
-import { MOCK_STUDIES } from './mocks';
+import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
+import { Study } from './types';
 
-class StudiesApi {
-  getAllStudies = () => wait(2000).then(() => MOCK_STUDIES);
+class StudiesApi extends HttpApi {
+  getAllStudies = (): Promise<Study[]> => {
+    const options = new HttpRequestOptionsBuilder()
+      .get('/studies')
+      .authorized()
+      .build();
 
-  createStudy = () => wait(2000).then(() => MOCK_STUDIES[0]);
+    return this.httpClient.request(options);
+  };
+
+  createStudy = () => {
+    const options = new HttpRequestOptionsBuilder()
+      .post('/studies')
+      .body(JSON.stringify({})) // TODO: Add type
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
 }
 
-const studiesApi = new StudiesApi();
-
-export { studiesApi };
+export { StudiesApi };

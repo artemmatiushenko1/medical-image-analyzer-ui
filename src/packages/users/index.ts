@@ -5,5 +5,4 @@ const usersApi = new UsersApi(httpClient);
 
 export { type User, type AddUserRequest } from './types';
 export { Role } from './enums';
-export { useAddUser, useGetAllUsers } from '../../pages/users/libs/queries';
 export { usersApi };

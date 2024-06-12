@@ -2,10 +2,10 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import { UsersTable, TotalUsersWidget, AddUserDrawer } from './components';
 import { styles } from './styles';
 import { AddRounded } from '@mui/icons-material';
-import { useGetAllUsers } from '@/packages/users';
 import { Breadcrumbs } from '@/libs/components';
 import { useClosable } from '@/libs/hooks';
 import { useTranslation } from 'react-i18next';
+import { useGetAllUsers } from './libs/queries';
 
 const Users = () => {
   const { t } = useTranslation('Users');
