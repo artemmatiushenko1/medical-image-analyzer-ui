@@ -1,5 +1,8 @@
+import { ValueOf } from '@/libs/types';
+import { HttpError } from './exceptions';
 import { HttpFetchOptions } from './http-fetch-options';
 import { IHttpClient } from './interfaces';
+import { HttpStatus } from './enums';
 
 type Constructor = {
   getAuthToken?: () => string;
@@ -18,6 +21,13 @@ class HttpClient implements IHttpClient {
       ...(options.body ? { body: options.body } : {}),
       headers: new Headers(Object.entries(options.headers)),
     });
+
+    if (!response.ok) {
+      throw new HttpError(
+        response.status as ValueOf<typeof HttpStatus>,
+        response.statusText,
+      );
+    }
 
     const responseJson = await (response.json() as Promise<T>);
 
