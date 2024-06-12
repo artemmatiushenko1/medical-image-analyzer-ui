@@ -32,7 +32,6 @@ const useAuthStore = create<AuthState & AuthActions>()(
       storage: createJSONStorage(() => window.localStorage),
       partialize: (state) => ({
         accessToken: state.accessToken,
-        user: state.user, // TODO: remove
       }),
     },
   ),
