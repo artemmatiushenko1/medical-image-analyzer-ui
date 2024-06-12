@@ -4,8 +4,7 @@ import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
 class AuthApi extends HttpApi {
   signIn = (request: SignInRequest): Promise<SignInResponse> => {
     const options = new HttpRequestOptionsBuilder()
-      .post()
-      .url('/auth/sign-in')
+      .post('/auth/sign-in')
       .body(JSON.stringify(request))
       .build();
 
@@ -14,8 +13,7 @@ class AuthApi extends HttpApi {
 
   getProfile = (): Promise<GetProfileResponse> => {
     const options = new HttpRequestOptionsBuilder()
-      .get()
-      .url('/profile')
+      .get('/profile')
       .authorized()
       .build();
 

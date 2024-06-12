@@ -3,8 +3,16 @@ import { HttpMethod } from './enums';
 import { HttpFetchOptions } from './http-fetch-options';
 import { MimeType } from '@/libs/enums';
 
+type HttpMethodSetter = (url: string) => HttpRequestOptionsBuilder;
+
 class HttpRequestOptionsBuilder {
   private fetchOptions!: HttpFetchOptions;
+
+  get: HttpMethodSetter;
+  put: HttpMethodSetter;
+  post: HttpMethodSetter;
+  patch: HttpMethodSetter;
+  delete: HttpMethodSetter;
 
   constructor() {
     this.reset();
@@ -16,19 +24,8 @@ class HttpRequestOptionsBuilder {
     this.delete = this.method.bind(this, HttpMethod.DELETE);
   }
 
-  get: () => typeof this;
-  put: () => typeof this;
-  post: () => typeof this;
-  patch: () => typeof this;
-  delete: () => typeof this;
-
   private reset = () => {
     this.fetchOptions = new HttpFetchOptions();
-  };
-
-  url = (url: string) => {
-    this.fetchOptions.url = url;
-    return this;
   };
 
   body = (body: BodyInit) => {
@@ -36,8 +33,9 @@ class HttpRequestOptionsBuilder {
     return this;
   };
 
-  method = (method: ValueOf<typeof HttpMethod>) => {
+  method = (method: ValueOf<typeof HttpMethod>, url: string) => {
     this.fetchOptions.method = method;
+    this.fetchOptions.url = url;
     return this;
   };
 
