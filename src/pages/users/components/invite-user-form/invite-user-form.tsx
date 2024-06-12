@@ -1,6 +1,6 @@
 import { Button } from '@/libs/components';
 import { AddUserRequest } from '@/packages/users';
-import { useAddUser } from '@/packages/users/queries';
+import { useAddUser } from '@/pages/users/libs/queries';
 import { Box, FormControl, FormLabel, TextField } from '@mui/material';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

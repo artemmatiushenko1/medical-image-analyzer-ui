@@ -1,7 +1,6 @@
+import { AddUserRequest, usersApi } from '@/packages/users';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AddUserRequest } from '../types';
 import { UsersQueryKey } from '../enums';
-import { usersApi } from '..';
 
 const useAddUser = () => {
   const queryClient = useQueryClient();
