@@ -1,15 +1,26 @@
-import { wait } from '@/libs/helpers';
 import { GetProfileResponse, SignInRequest, SignInResponse } from './types';
-import { MOCK_USER } from './mocks';
+import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
 
-class AuthApi {
-  signIn = (_request: SignInRequest): Promise<SignInResponse> =>
-    wait(2000).then(() => ({ accessToken: crypto.randomUUID() }));
+class AuthApi extends HttpApi {
+  signIn = (request: SignInRequest): Promise<SignInResponse> => {
+    const options = new HttpRequestOptionsBuilder()
+      .post()
+      .url('/auth/sign-in')
+      .body(JSON.stringify(request))
+      .build();
 
-  getProfile = (): Promise<GetProfileResponse> =>
-    wait(500).then(() => MOCK_USER);
+    return this.httpClient.request(options);
+  };
+
+  getProfile = (): Promise<GetProfileResponse> => {
+    const options = new HttpRequestOptionsBuilder()
+      .get()
+      .url('/profile')
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
 }
 
-const authApi = new AuthApi();
-
-export { authApi };
+export { AuthApi };
