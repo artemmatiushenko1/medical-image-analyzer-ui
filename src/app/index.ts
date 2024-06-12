@@ -1,3 +1,3 @@
-export { AppRoute } from './enums';
+export { AppRoute } from './libs/enums';
 export { App } from './app';
-export { useAppStore, useAuthStore } from './stores';
+export { useAppStore, useAuthStore } from './libs/stores';

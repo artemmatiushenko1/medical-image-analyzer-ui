@@ -1,5 +1,5 @@
-import { useGetProfile } from './queries';
-import { Router } from './router/router';
+import { useGetProfile } from './libs/queries';
+import { Router } from './libs/router/router';
 import { SplashScreen } from '@/libs/components';
 
 const App = () => {
