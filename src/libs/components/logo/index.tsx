@@ -28,7 +28,7 @@ const Logo = (props: LogoProps) => {
         width="100%"
         height="100%"
         component="img"
-        sx={{ alignSelf: 'center', objectFit: 'cover' }}
+        sx={{ alignSelf: 'center', objectFit: 'contain' }}
       />
     </Box>
   );
