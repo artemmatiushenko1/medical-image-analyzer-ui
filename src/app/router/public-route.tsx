@@ -13,7 +13,7 @@ const PublicRoute = (props: PublicRouteProps) => {
   const isAuthenticated = Boolean(user);
 
   const location = useLocation();
-  const from = location.state?.from?.pathname || AppRoute.HOME;
+  const from = (location.state?.from?.pathname as string) || AppRoute.HOME;
 
   return isAuthenticated ? <Navigate to={from} replace /> : children;
 };
