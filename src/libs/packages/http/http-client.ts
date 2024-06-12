@@ -4,22 +4,32 @@ import { HttpFetchOptions } from './http-fetch-options';
 import { IHttpClient } from './interfaces';
 import { HttpStatus } from './enums';
 
-type Constructor = {
-  getAuthToken?: () => string;
-};
-
 class HttpClient implements IHttpClient {
-  getAuthToken?: () => string;
+  private getAuthToken?: () => string | null;
 
-  constructor({ getAuthToken }: Constructor) {
-    this.getAuthToken = getAuthToken;
-  }
+  setAuthTokenGetter = (getter: typeof this.getAuthToken) => {
+    this.getAuthToken = getter;
+  };
 
   request = async <T>(options: HttpFetchOptions): Promise<T> => {
+    const headers = new Headers(Object.entries(options.headers));
+
+    if (options.authorized) {
+      const accessToken = this.getAuthToken?.();
+
+      console.log({ accessToken });
+
+      if (!accessToken) {
+        throw Error('Access token is required for authorized request!');
+      }
+
+      headers.append('Authorization', accessToken);
+    }
+
     const response = await window.fetch(options.url, {
+      headers,
       method: options.method,
       ...(options.body ? { body: options.body } : {}),
-      headers: new Headers(Object.entries(options.headers)),
     });
 
     if (!response.ok) {

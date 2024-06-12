@@ -6,6 +6,7 @@ class HttpFetchOptions {
   body?: BodyInit;
   url!: string;
   headers: Record<string, string> = {};
+  authorized = false;
 }
 
 export { HttpFetchOptions };

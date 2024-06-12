@@ -6,7 +6,7 @@ import { MimeType } from '@/libs/enums';
 class HttpRequestOptionsBuilder {
   private fetchOptions!: HttpFetchOptions;
 
-  constructor(private accessToken?: string) {
+  constructor() {
     this.reset();
 
     this.get = this.method.bind(this, HttpMethod.GET);
@@ -22,7 +22,7 @@ class HttpRequestOptionsBuilder {
   patch: () => typeof this;
   delete: () => typeof this;
 
-  reset = () => {
+  private reset = () => {
     this.fetchOptions = new HttpFetchOptions();
   };
 
@@ -51,15 +51,7 @@ class HttpRequestOptionsBuilder {
   };
 
   authorized = () => {
-    if (!this.accessToken) {
-      throw Error('Access token is required for authorized request!');
-    }
-
-    this.fetchOptions.headers = {
-      ...this.fetchOptions.headers,
-      Authorization: this.accessToken,
-    };
-
+    this.fetchOptions.authorized = true;
     return this;
   };
 
