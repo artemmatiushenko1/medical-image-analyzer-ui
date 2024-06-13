@@ -4,7 +4,7 @@ import { StyledMaterialDesignContent } from './styles';
 const NotificationsProvider = () => {
   return (
     <SnackbarProvider
-      autoHideDuration={1000}
+      autoHideDuration={2000}
       Components={{
         success: StyledMaterialDesignContent,
         error: StyledMaterialDesignContent,
