@@ -14,5 +14,6 @@ export {
 export {
   createModelSchema,
   createModelVersionSchema,
+  createDiagnosticSchema,
 } from './validation-schemas';
 export { diagnosticsApi };
