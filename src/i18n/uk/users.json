@@ -17,9 +17,9 @@
     "RowsPerPage": "Рядків на сторінці",
     "LabelDisplayedRows": "{{from}} - {{to}} з {{count}}"
   },
-  "AddNewUserButton": "Новий користувач",
+  "AddNewUserButton": "Додати користувача",
   "AddNewUserDrawer": {
-    "Title": "Новий користувач",
+    "Title": "Додати користувача",
     "Caption": "Будь ласка, заповність форму нижче, щоб додати нового користувача до системи.",
     "FirstNameLabel": "Імʼя",
     "FirstNamePlaceholder": "Введіть імʼя",
