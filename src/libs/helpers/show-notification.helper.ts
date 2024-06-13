@@ -1,10 +1,10 @@
-import { toast } from 'react-toastify';
+import { enqueueSnackbar } from 'notistack';
 
 const showNotification = (
   message: string,
   type: 'success' | 'error' | 'info' | 'warning',
 ) => {
-  toast(message, { type });
+  enqueueSnackbar(message, { variant: type });
 };
 
 export { showNotification };

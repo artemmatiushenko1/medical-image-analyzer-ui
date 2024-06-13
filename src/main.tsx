@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { httpClient } from './libs/packages/http';
 import { initDayJs } from './i18n/helpers';
 import { config } from './libs/packages/config';
+import { NotificationsProvider } from './libs/components';
 
 const enableMockApi = async () => {
   if (!config.ENABLE_MOCK_API) {
@@ -44,6 +45,7 @@ const renderApp = () => {
       <QueryClientProvider client={queryClient}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <ThemeConfig>
+            <NotificationsProvider />
             <BrowserRouter>
               <App />
             </BrowserRouter>
