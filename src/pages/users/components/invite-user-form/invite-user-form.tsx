@@ -16,6 +16,7 @@ const InviteUserForm = () => {
     control,
     handleSubmit: submit,
     formState: { errors, isDirty, isValid, isSubmitted },
+    reset,
   } = useForm<AddUserRequest>({
     defaultValues: { firstName: '', lastName: '', email: '' },
     resolver: joiResolver(addUserSchema),
@@ -29,6 +30,8 @@ const InviteUserForm = () => {
         `User ${data.firstName} ${data.lastName} was successfully added to the system!`,
         'success',
       );
+
+      reset();
     });
   };
 
