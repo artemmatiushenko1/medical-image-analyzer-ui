@@ -32,7 +32,7 @@ const VersionUpload = () => {
 
   const {
     control,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid, isDirty, isSubmitted },
     handleSubmit: sumbit,
   } = useForm<Omit<CreateModelVersionRequest, 'file'> & { file?: File }>({
     defaultValues: { name: '', changelog: '', file: undefined },
@@ -149,7 +149,7 @@ const VersionUpload = () => {
             isLoading={isPending}
             variant="contained"
             color="success"
-            disabled={isDirty && !isValid}
+            disabled={isDirty && !isValid && isSubmitted}
             onClick={handleFormSubmit}
           >
             {tCommon('Upload')}

@@ -30,7 +30,7 @@ const ModelUpload = () => {
 
   const {
     control,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isDirty, isValid, isSubmitted },
     handleSubmit: sumbit,
   } = useForm<Omit<CreateModelRequest, 'file'> & { file: File }>({
     defaultValues: { name: '' },
@@ -111,7 +111,7 @@ const ModelUpload = () => {
             isLoading={isPending}
             variant="contained"
             color="success"
-            disabled={isDirty && !isValid}
+            disabled={isDirty && !isValid && isSubmitted}
             onClick={handleFormSubmit}
           >
             {tCommon('Upload')}
