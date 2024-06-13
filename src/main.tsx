@@ -16,9 +16,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { httpClient } from './libs/packages/http';
 import { initDayJs } from './i18n/helpers';
+import { config } from './libs/packages/config';
 
 const enableMockApi = async () => {
-  if (process.env.NODE_ENV !== 'development') {
+  if (!config.ENABLE_MOCK_API) {
     return;
   }
 
