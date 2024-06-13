@@ -50,5 +50,9 @@
     "Image": "Image",
     "Study": "Study",
     "AiModel": "AI Model"
+  },
+  "NoStudies": {
+    "Title": "No studies",
+    "Description": "Looks like it's your first time using Healthsens, <br />click on the button above to create one."
   }
 }

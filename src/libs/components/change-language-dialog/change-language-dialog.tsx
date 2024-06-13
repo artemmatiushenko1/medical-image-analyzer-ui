@@ -77,7 +77,7 @@ const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
                   item === language && styles.languageItemSelected,
                 )}
                 value={item}
-                control={<Radio />}
+                control={<Radio size="small" />}
                 labelPlacement="start"
                 label={
                   <Box>

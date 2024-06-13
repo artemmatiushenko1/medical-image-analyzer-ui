@@ -18,8 +18,7 @@ const Logo = (props: LogoProps) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        maxWidth: '125px',
-        width: '100%',
+        width: '125px',
         height: '23px',
       }}
     >

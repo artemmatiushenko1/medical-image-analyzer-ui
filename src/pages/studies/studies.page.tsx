@@ -10,8 +10,9 @@ import { StudiesFilter, StudyCard, StudyDetailsDrawer } from './components';
 import { Study, StudyStatus } from '@/packages/studies';
 import { ValueOf } from '@/libs/types';
 import { useClosable } from '@/libs/hooks';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useGetStudies } from './libs/queries';
+import { NoResults } from '@/libs/components/no-results';
 
 const Studies = () => {
   const { t } = useTranslation('Studies');
@@ -141,6 +142,13 @@ const Studies = () => {
             model={study.model}
           />
         ))}
+        {studies?.length === 0 && !isLoading ? (
+          <NoResults
+            fullHeight
+            title={t('NoStudies.Title')}
+            description={<Trans t={t} i18nKey={'NoStudies.Description'} />}
+          />
+        ) : null}
       </Stack>
       <StudyDetailsDrawer
         open={isDetailsDrawerOpen}
