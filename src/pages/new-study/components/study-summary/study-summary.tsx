@@ -1,4 +1,3 @@
-import { useDiagnosticsStore } from '@/packages/diagnostics';
 import { useNewStudyStore } from '@/pages/new-study/store';
 import { SettingsSuggestRounded } from '@mui/icons-material';
 import { Box, Chip, Paper, Stack, Typography } from '@mui/material';
@@ -8,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 const StudySummary = () => {
   const { t } = useTranslation('NewStudy');
 
-  const availableDiagnostics = useDiagnosticsStore(
+  const availableDiagnostics = useNewStudyStore(
     (state) => state.availableDiagnostics,
   );
 
@@ -52,7 +51,7 @@ const StudySummary = () => {
         </Typography>
         <Stack gap={2}>
           {selectedDiagnostics.map((diagnostic) => (
-            <Paper sx={styles.diagnosticsWrapper}>
+            <Paper key={diagnostic?.id} sx={styles.diagnosticsWrapper}>
               <Typography variant="body2" fontWeight={500}>
                 {diagnostic?.name}
               </Typography>

@@ -1,11 +1,11 @@
 import { Box, Stack } from '@mui/material';
 import { SelectedDiagnosticAccordion } from './selected-diagnostic-accordion';
 import { useNewStudyStore } from '../../store';
-import { Diagnostic, useDiagnosticsStore } from '@/packages/diagnostics';
+import { Diagnostic } from '@/packages/diagnostics';
 import { styles } from './styles';
 
 const ChooseModels = () => {
-  const availableDiagnostics = useDiagnosticsStore(
+  const availableDiagnostics = useNewStudyStore(
     (state) => state.availableDiagnostics,
   );
   const selectedDiagnosticIds = useNewStudyStore(

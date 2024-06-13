@@ -6,7 +6,6 @@ export {
   type ModelVersion,
   type CreateModelVersionRequest,
 } from './types';
-export { useDiagnosticsStore } from './diagnostics.store';
 export {
   createModelSchema,
   createModelVersionSchema,

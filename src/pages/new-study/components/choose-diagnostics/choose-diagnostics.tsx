@@ -2,11 +2,10 @@ import { Box, Stack } from '@mui/material';
 import { DiagnosticCard } from './diagnostic-card';
 import { styles } from './styles';
 import { useNewStudyStore } from '@/pages/new-study/store';
-import { useDiagnosticsStore } from '@/packages/diagnostics';
 import { MAX_SELECTED_DIAGNOSTICS } from '../../libs/constants';
 
 const ChooseDiagnostics = () => {
-  const availableDiagnostics = useDiagnosticsStore(
+  const availableDiagnostics = useNewStudyStore(
     (state) => state.availableDiagnostics,
   );
   const selectedDiagnosticIds = useNewStudyStore(

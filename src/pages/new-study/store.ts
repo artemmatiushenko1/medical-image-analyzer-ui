@@ -2,8 +2,8 @@ import { PercentCrop } from 'react-image-crop';
 import { create } from 'zustand';
 import { CropSettings } from './components/image-crop-dialog';
 import { DEFAULT_CROP_SETTINGS } from './components/image-crop-dialog';
-import { Model } from '@/packages/diagnostics';
-import { MOCK_MODELS } from '@/packages/diagnostics/mocks';
+import { Diagnostic, Model } from '@/packages/diagnostics';
+import { MOCK_DIAGNOSTICS, MOCK_MODELS } from '@/packages/diagnostics/mocks';
 
 type State = {
   uploadedImageSrc: string | null;
@@ -14,6 +14,7 @@ type State = {
   createStudyStatusDialogOpen: boolean;
   selectedModelIds: string[];
   availableModels: Model[];
+  availableDiagnostics: Diagnostic[];
 };
 
 type Actions = {
@@ -37,6 +38,7 @@ const INITIAL_STATE: State = {
   createStudyStatusDialogOpen: false,
   selectedModelIds: [],
   availableModels: MOCK_MODELS,
+  availableDiagnostics: MOCK_DIAGNOSTICS,
 };
 
 const useNewStudyStore = create<State & Actions>()((set, get) => ({
