@@ -17,8 +17,6 @@ class HttpClient implements IHttpClient {
     if (options.authorized) {
       const accessToken = this.getAuthToken?.();
 
-      console.log({ accessToken });
-
       if (!accessToken) {
         throw Error('Access token is required for authorized request!');
       }
