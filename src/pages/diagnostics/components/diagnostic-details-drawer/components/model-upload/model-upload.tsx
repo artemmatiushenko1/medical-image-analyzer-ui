@@ -5,17 +5,14 @@ import {
   OperationStatusBanner,
 } from '@/libs/components';
 import { MimeType } from '@/libs/enums';
-import {
-  CreateModelRequest,
-  createModelSchema,
-  useCreateModel,
-} from '@/packages/diagnostics';
+import { CreateModelRequest, createModelSchema } from '@/packages/diagnostics';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { motion } from 'framer-motion';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { useTranslation } from 'react-i18next';
+import { useCreateModel } from '@/pages/diagnostics/libs/queries';
 
 const ModelUpload = () => {
   const { t } = useTranslation('Diagnostics', {

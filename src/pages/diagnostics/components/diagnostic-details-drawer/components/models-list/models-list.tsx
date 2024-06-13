@@ -1,4 +1,4 @@
-import { Model, useGetDiagnosticModels } from '@/packages/diagnostics';
+import { Model } from '@/packages/diagnostics';
 import { Stack, Typography } from '@mui/material';
 import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
 import { ModelCard } from '../model-card';
@@ -7,6 +7,7 @@ import { UploadIcon } from '@/libs/components/icons';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 import { useTranslation } from 'react-i18next';
+import { useGetDiagnosticModels } from '@/pages/diagnostics/libs/queries';
 
 const ModelsList = () => {
   const { t } = useTranslation('Diagnostics');
@@ -36,6 +37,10 @@ const ModelsList = () => {
     setSelectedModel(model);
   };
 
+  const loadingPreviews = Array.from<React.FC>({
+    length: MAX_MODELS_LOADING_PREVIEWS,
+  }).fill(ModelCard.Skeleton);
+
   return (
     <Dialog.Content sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Stack spacing={2}>
@@ -64,9 +69,7 @@ const ModelsList = () => {
           </Stack>
         </Stack>
         {isLoading &&
-          Array(MAX_MODELS_LOADING_PREVIEWS)
-            .fill(crypto.randomUUID)
-            .map((_, index) => <ModelCard.Skeleton key={index} />)}
+          loadingPreviews.map((Preview, index) => <Preview key={index} />)}
         {diagnosticModels.map((model) => (
           <ModelCard
             name={model.name}

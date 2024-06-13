@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CreateModelVersionRequest } from '../types';
-import { diagnosticsApi } from '../diagnostics.api';
 import { DiagnosticQueryKey } from '../enums';
+import {
+  CreateModelVersionRequest,
+  diagnosticsApi,
+} from '@/packages/diagnostics';
 
 const useCreateModelVersion = () => {
   const queryClient = useQueryClient();

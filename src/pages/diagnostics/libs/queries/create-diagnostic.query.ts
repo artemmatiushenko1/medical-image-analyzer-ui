@@ -1,6 +1,8 @@
+import {
+  CreateDiagnosticRequest,
+  diagnosticsApi,
+} from '@/packages/diagnostics';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CreateDiagnosticRequest } from '../types';
-import { diagnosticsApi } from '../diagnostics.api';
 import { DiagnosticQueryKey } from '../enums';
 
 const useCreateDiagnostic = () => {

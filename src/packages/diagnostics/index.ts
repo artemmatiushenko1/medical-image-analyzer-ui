@@ -8,14 +8,7 @@ export {
 } from './types';
 export { useDiagnosticsStore } from './diagnostics.store';
 export {
-  useCreateDiagnostic,
-  useGetAllDiagnostics,
-  useGetDiagnosticModels,
-  useCreateModel,
-  useGetModelVersions,
-  useCreateModelVersion,
-} from './queries';
-export {
   createModelSchema,
   createModelVersionSchema,
 } from './validation-schemas';
+export { diagnosticsApi } from './diagnostics.api';

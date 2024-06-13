@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { DiagnosticQueryKey } from '../enums';
-import { diagnosticsApi } from '../diagnostics.api';
+import { diagnosticsApi } from '@/packages/diagnostics';
 
 const useGetDiagnosticModels = (diagnosticId?: string) => {
   return useQuery({

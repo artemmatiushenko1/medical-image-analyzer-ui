@@ -2,10 +2,10 @@ import { Button, Dialog } from '@/libs/components';
 import { UploadIcon } from '@/libs/components/icons';
 import { Stack, Typography } from '@mui/material';
 import { ModelVersionHistory } from '../model-version-history';
-import { useGetModelVersions } from '@/packages/diagnostics';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 import { useTranslation } from 'react-i18next';
+import { useGetModelVersions } from '@/pages/diagnostics/libs/queries';
 
 const ModelDetails = () => {
   const { t } = useTranslation('Diagnostics', {

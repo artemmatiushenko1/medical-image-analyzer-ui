@@ -8,7 +8,6 @@ import { MimeType } from '@/libs/enums';
 import {
   CreateModelVersionRequest,
   createModelVersionSchema,
-  useCreateModelVersion,
 } from '@/packages/diagnostics';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -16,6 +15,7 @@ import { Box, Stack, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useCreateModelVersion } from '@/pages/diagnostics/libs/queries';
 
 const VersionUpload = () => {
   const { t } = useTranslation('Diagnostics', {

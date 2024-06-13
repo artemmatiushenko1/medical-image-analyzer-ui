@@ -1,11 +1,9 @@
 import { Button } from '@/libs/components';
-import {
-  CreateDiagnosticRequest,
-  useCreateDiagnostic,
-} from '@/packages/diagnostics';
+import { CreateDiagnosticRequest } from '@/packages/diagnostics';
 import { Stack, TextField } from '@mui/material';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useCreateDiagnostic } from '../../libs/queries';
 
 type NewDiagnosticFormProps = {
   onSuccess: () => void;
@@ -27,7 +25,7 @@ const NewDiagnosticForm = (props: NewDiagnosticFormProps) => {
   const { mutateAsync: createDiagnostic, isPending } = useCreateDiagnostic();
 
   const handleSubmit: SubmitHandler<CreateDiagnosticRequest> = (data) => {
-    createDiagnostic(data).then(onSuccess);
+    void createDiagnostic(data).then(onSuccess);
   };
 
   return (

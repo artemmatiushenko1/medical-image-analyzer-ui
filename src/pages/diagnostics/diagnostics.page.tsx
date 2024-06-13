@@ -8,10 +8,11 @@ import {
   DiagnosticsTable,
   NewDiagnosticDialog,
 } from './components';
-import { Diagnostic, useGetAllDiagnostics } from '@/packages/diagnostics';
+import { Diagnostic } from '@/packages/diagnostics';
 import { GridRowParams } from '@mui/x-data-grid';
 import { useDiagnosticsStore } from './store';
 import { useTranslation } from 'react-i18next';
+import { useGetAllDiagnostics } from './libs/queries';
 
 const Diagnostics = () => {
   const { t } = useTranslation('Diagnostics');
