@@ -6,10 +6,9 @@ import {
 import { Box, Button, Skeleton, Stack } from '@mui/material';
 import { styles } from './styles';
 import { useState } from 'react';
-import { readFileAsBase64 } from '@/libs/helpers';
+import { readFileAsBase64, showNotification } from '@/libs/helpers';
 import { DropArea } from '@/libs/components/drop-area';
 import { ImageCropDialog } from '../image-crop-dialog';
-import { toast } from 'react-toastify';
 import {
   MAX_IMAGE_SIZE_MB,
   MIN_IMAGE_DIMENSIONS_PX,
@@ -50,8 +49,9 @@ const ImageUpload = () => {
     if (!areImageDimensionsValid) {
       setIsImageUploading(false);
 
-      return toast.error(
+      return showNotification(
         `An image size should be at least ${MIN_IMAGE_DIMENSIONS_PX}px x ${MIN_IMAGE_DIMENSIONS_PX}px.`,
+        'error',
       );
     }
 

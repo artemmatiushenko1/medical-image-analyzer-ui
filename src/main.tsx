@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App, useAuthStore } from './app';
-import { ToastContainer } from 'react-toastify';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ThemeConfig } from './libs/theme';
@@ -12,7 +11,6 @@ import { queryClient } from './libs/packages/react-query';
 import { BrowserRouter } from 'react-router-dom';
 
 import '@fontsource/inter';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { httpClient } from './libs/packages/http';
 import { initDayJs } from './i18n/helpers';
@@ -52,7 +50,6 @@ const renderApp = () => {
           </ThemeConfig>
         </LocalizationProvider>
       </QueryClientProvider>
-      <ToastContainer position="bottom-right" theme="colored" />
     </React.StrictMode>,
   );
 };

@@ -13,8 +13,7 @@ import { styles } from './styles';
 import { CSSProperties, useEffect, useRef, useState } from 'react';
 import { MimeType } from '@/libs/enums';
 import { ValueOf } from '@/libs/types';
-import { bytesToMb, parseMimeType } from '@/libs/helpers';
-import { toast } from 'react-toastify';
+import { bytesToMb, parseMimeType, showNotification } from '@/libs/helpers';
 
 type DropAreaProps = {
   width?: CSSProperties['width'];
@@ -64,8 +63,9 @@ const DropArea = (props: DropAreaProps) => {
     if (!file) return;
 
     if (bytesToMb(file.size) > maxFileSizeMb) {
-      return toast.error(
+      return showNotification(
         `File is too large. Maximum file size is ${maxFileSizeMb}MB.`,
+        'error',
       );
     }
 
