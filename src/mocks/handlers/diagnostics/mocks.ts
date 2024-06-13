@@ -1,5 +1,9 @@
 import dayjs from 'dayjs';
-import { Diagnostic, Model, ModelVersion } from './types';
+import {
+  Diagnostic,
+  Model,
+  ModelVersion,
+} from '../../../packages/diagnostics/types';
 
 const MOCK_DIAGNOSTICS: Diagnostic[] = [
   {

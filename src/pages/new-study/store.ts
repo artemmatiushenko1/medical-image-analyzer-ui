@@ -3,7 +3,10 @@ import { create } from 'zustand';
 import { CropSettings } from './components/image-crop-dialog';
 import { DEFAULT_CROP_SETTINGS } from './components/image-crop-dialog';
 import { Diagnostic, Model } from '@/packages/diagnostics';
-import { MOCK_DIAGNOSTICS, MOCK_MODELS } from '@/packages/diagnostics/mocks';
+import {
+  MOCK_DIAGNOSTICS,
+  MOCK_MODELS,
+} from '@/mocks/handlers/diagnostics/mocks';
 
 type State = {
   uploadedImageSrc: string | null;

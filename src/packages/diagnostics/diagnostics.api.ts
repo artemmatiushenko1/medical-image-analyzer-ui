@@ -1,4 +1,3 @@
-import { wait } from '@/libs/helpers';
 import {
   CreateDiagnosticRequest,
   CreateDiagnosticResponse,
@@ -6,83 +5,79 @@ import {
   CreateModelResponse,
   CreateModelVersionRequest,
   CreateModelVersionResponse,
-  Diagnostic,
   GetAllDiagnosticsResponse,
   GetDiagnosticModelsResponse,
   GetModelVersionsResponse,
-  Model,
-  ModelVersion,
 } from './types';
-import { MOCK_DIAGNOSTICS, MOCK_MODELS, MOCK_MODEL_VERSIONS } from './mocks';
-import dayjs from 'dayjs';
+import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
 
-class DiagnosticsApi {
-  diagnostics = [...MOCK_DIAGNOSTICS];
-  models = [...MOCK_MODELS];
-  modelVersions = [...MOCK_MODEL_VERSIONS];
+class DiagnosticsApi extends HttpApi {
+  getAllDiagnostics = (): Promise<GetAllDiagnosticsResponse> => {
+    const options = new HttpRequestOptionsBuilder()
+      .get('/diagnostics')
+      .authorized()
+      .build();
 
-  getAllDiagnostics = (): Promise<GetAllDiagnosticsResponse> =>
-    wait(2000).then(() => this.diagnostics);
+    return this.httpClient.request(options);
+  };
+
+  getDiagnosticModels = (
+    diagnosticId: string,
+  ): Promise<GetDiagnosticModelsResponse> => {
+    const options = new HttpRequestOptionsBuilder()
+      .get(`/diagnostics/${diagnosticId}/models`)
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
+
+  getModelVersions = (modelId: string): Promise<GetModelVersionsResponse> => {
+    const options = new HttpRequestOptionsBuilder()
+      .get(`/models/${modelId}/versions`)
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
 
   createDiagnostic = (
     request: CreateDiagnosticRequest,
-  ): Promise<CreateDiagnosticResponse> =>
-    wait(2000).then(() => {
-      const newDiagnostic: Diagnostic = {
-        id: crypto.randomUUID(),
-        previewImg: '',
-        name: request.name,
-      };
+  ): Promise<CreateDiagnosticResponse> => {
+    const options = new HttpRequestOptionsBuilder()
+      .post(`/diagnostics`)
+      .body(JSON.stringify(request))
+      .authorized()
+      .build();
 
-      this.diagnostics = [...this.diagnostics, newDiagnostic];
-
-      return newDiagnostic;
-    });
-
-  getDiagnosticModels = (
-    _diagnosticId: string,
-  ): Promise<GetDiagnosticModelsResponse> => wait(2000).then(() => this.models);
+    return this.httpClient.request(options);
+  };
 
   createModel = (
-    _diagnosticId: string,
+    diagnosticId: string,
     request: CreateModelRequest,
-  ): Promise<CreateModelResponse> =>
-    wait(2000).then(() => {
-      const newModel: Model = {
-        id: crypto.randomUUID(),
-        name: request.name,
-        enabled: true,
-        currentVersion: this.modelVersions[0],
-      };
+  ): Promise<CreateModelResponse> => {
+    const options = new HttpRequestOptionsBuilder()
+      .post(`/diagnostics/${diagnosticId}/models`)
+      .body(JSON.stringify(request))
+      .authorized()
+      .build();
 
-      this.models = [...this.models, newModel];
-
-      return newModel;
-    });
-
-  getModelVersions = (_modelId: string): Promise<GetModelVersionsResponse> => {
-    return wait(2000).then(() => this.modelVersions);
+    return this.httpClient.request(options);
   };
 
   createModelVersion = (
-    _modelId: string,
+    modelId: string,
     request: CreateModelVersionRequest,
   ): Promise<CreateModelVersionResponse> => {
-    const newVersion: ModelVersion = {
-      ...request,
-      id: crypto.randomUUID(),
-      createdAt: dayjs().toISOString(),
-      revision: 5,
-    };
+    const options = new HttpRequestOptionsBuilder()
+      .post(`/models/${modelId}/versions`)
+      .body(JSON.stringify(request))
+      .authorized()
+      .build();
 
-    this.modelVersions = [newVersion, ...this.modelVersions];
-
-    return wait(2000).then(() => newVersion);
+    return this.httpClient.request(options);
   };
-
-  // restoreModelVersion = (_modelId: string) => {};
 }
 
-const diagnosticsApi = new DiagnosticsApi();
-
-export { diagnosticsApi };
+export { DiagnosticsApi };

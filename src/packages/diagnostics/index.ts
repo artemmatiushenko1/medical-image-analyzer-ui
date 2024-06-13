@@ -1,3 +1,8 @@
+import { httpClient } from '@/libs/packages/http';
+import { DiagnosticsApi } from './diagnostics.api';
+
+const diagnosticsApi = new DiagnosticsApi(httpClient);
+
 export {
   type Diagnostic,
   type CreateDiagnosticRequest,
@@ -10,4 +15,4 @@ export {
   createModelSchema,
   createModelVersionSchema,
 } from './validation-schemas';
-export { diagnosticsApi } from './diagnostics.api';
+export { diagnosticsApi };

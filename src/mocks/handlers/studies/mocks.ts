@@ -1,6 +1,6 @@
-import { MOCK_DIAGNOSTICS, MOCK_MODELS } from '@/packages/diagnostics/mocks';
 import { Study, StudyStatus } from '@/packages/studies';
 import dayjs from 'dayjs';
+import { MOCK_DIAGNOSTICS, MOCK_MODELS } from '../diagnostics/mocks';
 
 const MOCK_STUDIES: Study[] = [
   {
