@@ -15,6 +15,16 @@ const handlers = [
 
     return HttpResponse.json(studies);
   }),
+
+  http.get('/studies/:id', async ({ params }) => {
+    await delay('real');
+
+    const study = studies.find((study) => study.id === params.id);
+
+    console.log({ params, study });
+
+    return HttpResponse.json(study);
+  }),
 ];
 
 export default handlers;

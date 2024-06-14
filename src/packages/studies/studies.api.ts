@@ -11,6 +11,15 @@ class StudiesApi extends HttpApi {
     return this.httpClient.request(options);
   };
 
+  getStudy = (id: string) => {
+    const options = new HttpRequestOptionsBuilder()
+      .get(`/studies/${id}`)
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
+
   createStudy = () => {
     const options = new HttpRequestOptionsBuilder()
       .post('/studies')
