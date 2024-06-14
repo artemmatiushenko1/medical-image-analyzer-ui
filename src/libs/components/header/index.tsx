@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { styles } from './styles';
-import { useState } from 'react';
 import { ProfileMenu } from '../profile-menu';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
 import { AppRoute, useAuthStore } from '@/app';
@@ -20,6 +19,7 @@ import { ExpandMoreRounded } from '@mui/icons-material';
 import { Logo } from '../logo';
 import { ButtonsNavigation } from '../button-navigation';
 import { useTranslation } from 'react-i18next';
+import { useMenuPopover } from '@/libs/hooks';
 
 const Header = () => {
   const { t } = useTranslation('App');
@@ -27,9 +27,12 @@ const Header = () => {
   const navigate = useNavigate();
 
   const newStudyPageMatch = useMatch(AppRoute.NEW_STUDY);
-
-  const [profileMenuAnchor, setprofileMenuAnchor] =
-    useState<null | HTMLElement>(null);
+  const {
+    open: menuOpen,
+    closeMenu,
+    openMenu,
+    anchorEl: menuAnchorEl,
+  } = useMenuPopover();
 
   const currentUser = useAuthStore((state) => state.user);
 
@@ -37,16 +40,7 @@ const Header = () => {
     theme.breakpoints.up('md'),
   );
 
-  const profileMenuOpen = Boolean(profileMenuAnchor);
   const isNewStudyPage = Boolean(newStudyPageMatch);
-
-  const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
-    setprofileMenuAnchor(event.currentTarget);
-  };
-
-  const handleProfileMenuClose = () => {
-    setprofileMenuAnchor(null);
-  };
 
   const handleNewStudyClick = () => {
     navigate(AppRoute.NEW_STUDY);
@@ -80,9 +74,9 @@ const Header = () => {
             </>
           )}
           <ListItemButton
-            sx={{ flexGrow: 0, padding: '12px', margin: '-14px' }}
             disableRipple
-            onClick={handleProfileClick}
+            onClick={openMenu}
+            sx={{ flexGrow: 0, padding: '12px', margin: '-14px' }}
           >
             <Stack
               direction="row"
@@ -119,11 +113,9 @@ const Header = () => {
             </Stack>
           </ListItemButton>
           <ProfileMenu
-            open={profileMenuOpen}
-            anchorEl={profileMenuAnchor}
-            onClose={handleProfileMenuClose}
-            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            open={menuOpen}
+            anchorEl={menuAnchorEl}
+            onClose={closeMenu}
           />
         </Stack>
       </Box>
