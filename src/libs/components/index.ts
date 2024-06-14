@@ -12,3 +12,4 @@ export { OperationStatusBanner } from './operation-status-banner';
 export { Table } from './table';
 export { SplashScreen } from './splash-screen';
 export { NotificationsProvider } from './notification';
+export { Menu } from './menu';
