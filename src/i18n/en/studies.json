@@ -9,11 +9,12 @@
   },
   "PositiveStudies": "Positive studies",
   "NegativeStudies": "Negative studies",
-  "UncertainStudies": "Uncertain studies",
   "StudyCard": {
     "Diagnostic": "Diagnostic",
     "ViewDetails": "View details",
-    "Model": "AI Model"
+    "Model": "AI Model",
+    "Actions": "Actions",
+    "DownloadReport": "Download report"
   },
   "StatusChip": {
     "Completed": "Completed",

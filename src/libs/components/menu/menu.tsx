@@ -8,6 +8,7 @@ import {
   Typography,
   SvgIconProps,
   Divider,
+  Stack,
 } from '@mui/material';
 import { CSSProperties } from 'react';
 import { MenuPosition } from './enums';
@@ -55,10 +56,10 @@ const Menu = (props: MenuProps) => {
     }
 
     return (
-      <>
+      <Stack direction="row" sx={{ justifyContent: item.justify }}>
         <ListItemIcon>{Icon && <Icon fontSize="small" />}</ListItemIcon>
         <Typography variant="body2">{item.name}</Typography>
-      </>
+      </Stack>
     );
   };
 
@@ -81,25 +82,23 @@ const Menu = (props: MenuProps) => {
       }}
     >
       {header}
-      {items.map((item) => {
-        const { justify, onClick, name, injectDividerAfter, loading } = item;
+      {items.map((item, index) => {
+        const { onClick, injectDividerAfter, loading } = item;
 
-        return (
-          <>
-            <MenuItem
-              key={name}
-              onClick={onClick}
-              disabled={loading}
-              sx={{ justifyContent: justify }}
-            >
-              {getMenuItemContent(item)}
-              {loading ? (
-                <Loader sx={{ marginLeft: 'auto' }} size="18px" />
-              ) : null}
-            </MenuItem>
-            {injectDividerAfter && <Divider flexItem />}
-          </>
-        );
+        return [
+          <MenuItem
+            key={index}
+            onClick={onClick}
+            disabled={loading}
+            sx={{ width: '100%' }}
+          >
+            {getMenuItemContent(item)}
+            {loading ? (
+              <Loader sx={{ marginLeft: 'auto' }} size="18px" />
+            ) : null}
+          </MenuItem>,
+          injectDividerAfter && <Divider flexItem />,
+        ];
       })}
     </MuiMenu>
   );

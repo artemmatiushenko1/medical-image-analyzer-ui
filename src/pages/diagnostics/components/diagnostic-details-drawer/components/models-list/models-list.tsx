@@ -62,9 +62,7 @@ const ModelsList = () => {
               {t('DiagnosticsDrawer.Stages.DiagnosticDetails.Title')}
             </Typography>
             <Typography variant="caption">
-              {t(
-                'DiagnosticsDrawer.Stages.DiagnosticDetails.ViewAndManageRelatedAiModels',
-              )}
+              {t('DiagnosticsDrawer.Stages.DiagnosticDetails.Caption')}
             </Typography>
           </Stack>
         </Stack>

@@ -17,15 +17,13 @@ import { DetailItemText } from '../detail-item-text';
 import { StudyStatusChip } from '../study-status-chip';
 import { styles } from './styles';
 import { ConfidenceWidget } from '../confidence-widget';
-import { useSavePdf } from '@/libs/hooks';
-import { StudyReportDocument } from '../../libs/pdf-templates';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { AiModelIcon } from '@/libs/components/icons';
 import { HighlightedIcon } from '@/libs/components';
 import { formatVersionString } from '@/libs/helpers';
-import { useAuthStore } from '@/app';
+import { useSaveStudyReport } from '../../libs/hooks';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -42,22 +40,13 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
 
   const { t: tCommon } = useTranslation('Common');
 
-  const { savePdf, isLoading: isPdfLoading } = useSavePdf();
+  const {
+    isLoading: isReportLoading,
+    saveReport,
+    getReportFilename,
+  } = useSaveStudyReport(study.id);
 
-  const currentUser = useAuthStore((state) => state.user);
-
-  const reportFilename = `study_${study.id}_report_${dayjs(study.date)
-    .format(DateFormat.YEAR_MONTH_DAY_DASHES)
-    ?.replaceAll(' ', '_')}.pdf`;
-
-  const handleReportDownload = async () => {
-    if (!currentUser) return;
-
-    await savePdf(
-      <StudyReportDocument study={study} issuer={currentUser} />,
-      reportFilename,
-    );
-  };
+  const reportFilename = getReportFilename(study);
 
   return (
     <Drawer
@@ -186,13 +175,13 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                     {reportFilename}
                   </Typography>
                   <IconButton
-                    disabled={isPdfLoading}
-                    onClick={handleReportDownload}
+                    disabled={isReportLoading}
+                    onClick={saveReport}
                     sx={{
                       color: ({ palette }) => palette.primary.contrastText,
                     }}
                   >
-                    {isPdfLoading ? (
+                    {isReportLoading ? (
                       <CircularProgress size="20px" sx={{ color: '#fff' }} />
                     ) : (
                       <svg

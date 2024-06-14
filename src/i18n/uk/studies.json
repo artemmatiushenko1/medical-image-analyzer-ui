@@ -12,7 +12,9 @@
   "StudyCard": {
     "Diagnostic": "Діагностика",
     "ViewDetails": "Переглянути деталі",
-    "Model": "Модель ШІ"
+    "Model": "Модель ШІ",
+    "Actions": "Дії",
+    "DownloadReport": "Завантажити звіт"
   },
   "StatusChip": {
     "Completed": "Завершено",

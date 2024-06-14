@@ -8,6 +8,7 @@ import {
   Paper,
   Skeleton,
   Stack,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import { styles } from './styles';
@@ -17,6 +18,8 @@ import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { useTranslation } from 'react-i18next';
 import { Diagnostic, Model } from '@/packages/diagnostics';
+import { StudyCardActions } from '../study-card-actions';
+import { useMenuPopover } from '@/libs/hooks';
 
 type StudyCardProps = {
   id: string;
@@ -32,6 +35,13 @@ type StudyCardProps = {
 const StudyCard = (props: StudyCardProps) => {
   const { date, imageSrc, status, diagnostic, id, onViewDetails, model } =
     props;
+
+  const {
+    anchorEl: menuAchorEl,
+    open: menuOpen,
+    openMenu,
+    closeMenu,
+  } = useMenuPopover();
 
   const { t } = useTranslation('Studies');
 
@@ -73,10 +83,18 @@ const StudyCard = (props: StudyCardProps) => {
           {t('StudyCard.ViewDetails')}
         </Button>
         <StudyStatusChip status={status} />
-        <IconButton>
-          <MoreHoriz />
-        </IconButton>
+        <Tooltip title={t('StudyCard.Actions')}>
+          <IconButton onClick={openMenu}>
+            <MoreHoriz />
+          </IconButton>
+        </Tooltip>
       </Box>
+      <StudyCardActions
+        studyId={id}
+        anchorEl={menuAchorEl}
+        open={menuOpen}
+        onClose={closeMenu}
+      />
     </Paper>
   );
 };

@@ -7,7 +7,6 @@ import {
   Avatar,
   Box,
   ListItemIcon,
-  PopoverOrigin,
   Stack,
   Switch,
   Typography,
@@ -18,18 +17,12 @@ import { useTranslation } from 'react-i18next';
 import { LANGUAGE_DETAILS } from '@/i18n';
 import { useClosable } from '@/libs/hooks';
 import { ThemeMode } from '@/libs/theme';
-import { Menu, MenuItem } from '../menu';
+import { Menu, MenuItem, MenuProps } from '../menu';
 
-type ProfileMenuProps = {
-  open: boolean;
-  anchorEl: HTMLElement | null;
-  onClose: () => void;
-  transformOrigin?: PopoverOrigin;
-  anchorOrigin?: PopoverOrigin;
-};
+type ProfileMenuProps = Omit<MenuProps, 'items'>;
 
 const ProfileMenu = (props: ProfileMenuProps) => {
-  const { open, anchorEl, onClose, transformOrigin, anchorOrigin } = props;
+  const { open, anchorEl, onClose } = props;
 
   const { t } = useTranslation('App', { keyPrefix: 'ProfileMenu' });
 
@@ -66,7 +59,12 @@ const ProfileMenu = (props: ProfileMenuProps) => {
       justify: 'space-between',
       customRender: () => {
         return (
-          <>
+          <Stack
+            width="100%"
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Box display="flex">
               <ListItemIcon>
                 <DarkModeRounded fontSize="small" />
@@ -78,7 +76,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
               checked={themeMode === ThemeMode.DARK ? true : false}
               onChange={handleDarkThemeSwitchChange}
             />
-          </>
+          </Stack>
         );
       },
     },
@@ -99,8 +97,6 @@ const ProfileMenu = (props: ProfileMenuProps) => {
     <>
       <Menu
         anchorEl={anchorEl}
-        anchorOrigin={anchorOrigin}
-        transformOrigin={transformOrigin}
         onClose={onClose}
         open={open}
         items={menuItems}

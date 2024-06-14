@@ -16,13 +16,13 @@
       "DiagnosticDetails": {
         "UploadModelButton": "Завантажити нову модель",
         "Title": "Моделі",
+        "Caption": "Переглядайте та керуйте моделями ШІ обраної діагностики.",
         "ModelCard": {
           "NameLabel": "Назва",
           "VersionLabel": "Версія",
           "EnabledLabel": "Активувати",
           "ViewDetailsItem": "Переглянути деталі"
-        },
-        "ViewAndManageRelatedAiModels": "Переглядайте та керуйте моделями ШІ обраної діагностики."
+        }
       },
       "NewVersion": {
         "Title": "Нова версія",

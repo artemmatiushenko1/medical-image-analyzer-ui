@@ -22,8 +22,7 @@
           "VersionLabel": "Version",
           "EnabledLabel": "Enabled",
           "ViewDetailsItem": "View details"
-        },
-        "ViewAndManageRelatedAiModels": "View and manage related AI models"
+        }
       },
       "NewVersion": {
         "Title": "New version",
