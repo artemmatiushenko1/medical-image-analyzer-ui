@@ -9,7 +9,7 @@ const handlers = [
   }),
 
   http.get('/profile', async () => {
-    await delay('real');
+    await delay(1000);
 
     return HttpResponse.json(MOCK_USER);
   }),

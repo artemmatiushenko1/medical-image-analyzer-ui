@@ -13,6 +13,7 @@ import { useClosable } from '@/libs/hooks';
 import { Trans, useTranslation } from 'react-i18next';
 import { useGetStudies } from './libs/queries';
 import { NoResults } from '@/libs/components/no-results';
+import { motion } from 'framer-motion';
 
 const Studies = () => {
   const { t } = useTranslation('Studies');
@@ -28,7 +29,7 @@ const Studies = () => {
     open: openDetailsDrawer,
   } = useClosable(Boolean(selectedStudyId));
 
-  const { isLoading, data: studies } = useGetStudies();
+  const { isLoading, data: studies = [] } = useGetStudies();
 
   const selectedStudy =
     studies?.find((study) => study.id === selectedStudyId) ?? ({} as Study);
@@ -73,7 +74,7 @@ const Studies = () => {
   const filteredStudies =
     statusFilter === null
       ? studies
-      : studies?.filter((study) => study.status === statusFilter);
+      : studies.filter((study) => study.status === statusFilter);
 
   const handleViewStudyDetails = (id: string) => {
     setSelectedStudyId(id);
@@ -119,29 +120,47 @@ const Studies = () => {
           </Stack>
         </Stack>
       </Paper>
-      <Stack sx={{ flex: '78%', p: 3, gap: 3, overflow: 'scroll' }}>
+      <Stack sx={{ flex: '78%', p: 3, overflow: 'scroll' }}>
         {isLoading && (
-          <>
+          <Stack gap={3}>
             <StudyCard.Skeleton />
             <StudyCard.Skeleton />
             <StudyCard.Skeleton />
             <StudyCard.Skeleton />
             <StudyCard.Skeleton />
             <StudyCard.Skeleton />
-          </>
+          </Stack>
         )}
-        {filteredStudies?.map((study) => (
-          <StudyCard
-            key={study.id}
-            id={study.id}
-            date={study.date}
-            status={study.status}
-            imageSrc={study.imageSrc}
-            diagnostic={study.diagnostic}
-            onViewDetails={handleViewStudyDetails}
-            model={study.model}
-          />
-        ))}
+        {filteredStudies.length >= 1 && (
+          <Stack
+            gap={3}
+            component={motion.div}
+            initial="initial"
+            animate="animated"
+            transition={{ staggerChildren: 0.1, duration: 0.3, type: 'just' }}
+          >
+            {filteredStudies?.map((study) => (
+              <Box
+                component={motion.div}
+                key={study.id}
+                variants={{
+                  initial: { opacity: 0, y: 5 },
+                  animated: { opacity: 1, y: 0 },
+                }}
+              >
+                <StudyCard
+                  id={study.id}
+                  date={study.date}
+                  status={study.status}
+                  imageSrc={study.imageSrc}
+                  diagnostic={study.diagnostic}
+                  onViewDetails={handleViewStudyDetails}
+                  model={study.model}
+                />
+              </Box>
+            ))}
+          </Stack>
+        )}
         {studies?.length === 0 && !isLoading ? (
           <NoResults
             fullHeight
