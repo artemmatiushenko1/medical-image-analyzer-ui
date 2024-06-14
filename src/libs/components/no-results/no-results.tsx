@@ -82,7 +82,9 @@ const NoResults = (props: NoResultsProps) => {
           />
         </motion.g>
       </svg>
-      <Typography fontWeight={500}>{title}</Typography>
+      <Typography fontWeight={500} gutterBottom>
+        {title}
+      </Typography>
       <Typography variant="caption">{description}</Typography>
       {action}
     </Stack>
