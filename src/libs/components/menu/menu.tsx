@@ -1,7 +1,7 @@
 import { useAppStore } from '@/app';
 import { ThemeMode } from '@/libs/theme';
+import { ValueOf } from '@/libs/types';
 import {
-  PopoverOrigin,
   Menu as MuiMenu,
   MenuItem,
   ListItemIcon,
@@ -10,6 +10,9 @@ import {
   Divider,
 } from '@mui/material';
 import { CSSProperties } from 'react';
+import { MenuPosition } from './enums';
+import { getMenuPosition } from './helpers';
+import { Loader } from '../loader';
 
 export type MenuItem = {
   icon?: React.FC<SvgIconProps>;
@@ -18,6 +21,7 @@ export type MenuItem = {
   customRender?: () => React.ReactNode;
   justify?: CSSProperties['justifyContent'];
   injectDividerAfter?: boolean;
+  loading?: boolean;
 };
 
 export type MenuProps = {
@@ -25,9 +29,8 @@ export type MenuProps = {
   open: boolean;
   anchorEl: HTMLElement | null;
   onClose: () => void;
-  transformOrigin?: PopoverOrigin;
-  anchorOrigin?: PopoverOrigin;
   header?: React.ReactNode;
+  position?: ValueOf<typeof MenuPosition>;
 };
 
 const Menu = (props: MenuProps) => {
@@ -35,11 +38,12 @@ const Menu = (props: MenuProps) => {
     open,
     onClose,
     anchorEl,
-    anchorOrigin,
-    transformOrigin,
     items = [],
     header,
+    position = MenuPosition.BOTTOM_RIGHT,
   } = props;
+
+  const { transformOrigin, anchorOrigin } = getMenuPosition(position);
 
   const themeMode = useAppStore((state) => state.themeMode);
 
@@ -70,6 +74,7 @@ const Menu = (props: MenuProps) => {
           elevation: 4,
           sx: {
             mt: 1.5,
+            minWidth: '240px',
           },
           variant: themeMode === ThemeMode.DARK ? 'elevation' : 'outlined',
         },
@@ -77,16 +82,20 @@ const Menu = (props: MenuProps) => {
     >
       {header}
       {items.map((item) => {
-        const { justify, onClick, name, injectDividerAfter } = item;
+        const { justify, onClick, name, injectDividerAfter, loading } = item;
 
         return (
           <>
             <MenuItem
               key={name}
-              sx={{ justifyContent: justify }}
               onClick={onClick}
+              disabled={loading}
+              sx={{ justifyContent: justify }}
             >
               {getMenuItemContent(item)}
+              {loading ? (
+                <Loader sx={{ marginLeft: 'auto' }} size="18px" />
+              ) : null}
             </MenuItem>
             {injectDividerAfter && <Divider flexItem />}
           </>
