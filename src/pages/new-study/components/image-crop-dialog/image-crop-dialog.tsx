@@ -44,9 +44,9 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { t } = useTranslation('NewStudy');
   const { t: tCommon } = useTranslation('Common');
 
-  const cropSettings = useNewStudyStore((state) => state.cropSettings);
+  const currentCrop = useNewStudyStore((state) => state.currentCrop);
 
-  const setCropSettings = useNewStudyStore((state) => state.setCropSettings);
+  const setCurrentCrop = useNewStudyStore((state) => state.setCurrentCrop);
 
   const cropperRef = useRef<CropperRef>(null);
 
@@ -72,7 +72,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
       return;
     }
 
-    setCropSettings(coords);
+    setCurrentCrop(coords);
   };
 
   const handleCropSave = () => {
@@ -100,7 +100,7 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
               className={'cropper'}
               ref={cropperRef}
               onUpdate={onUpdate}
-              defaultCoordinates={cropSettings}
+              defaultCoordinates={currentCrop}
               minWidth={MIN_CROP_WIDTH_PX}
               minHeight={MIN_CROP_WIDTH_PX}
             />

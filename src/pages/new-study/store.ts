@@ -1,4 +1,3 @@
-import { PercentCrop } from 'react-image-crop';
 import { create } from 'zustand';
 import { Diagnostic, Model } from '@/packages/diagnostics';
 import {
@@ -6,12 +5,13 @@ import {
   MOCK_MODELS,
 } from '@/mocks/handlers/diagnostics/mocks';
 import { Coordinates } from 'react-advanced-cropper';
+import { CropSettings } from './components/image-crop-dialog';
 
 type State = {
   uploadedImageSrc: string | null;
   croppedImageSrc: string | null;
-  currentCrop: PercentCrop | undefined;
-  cropSettings?: Coordinates;
+  currentCrop?: Coordinates;
+  cropSettings?: CropSettings;
   selectedDianosticIds: string[];
   createStudyStatusDialogOpen: boolean;
   selectedModelIds: string[];
@@ -20,10 +20,10 @@ type State = {
 };
 
 type Actions = {
-  setCurrentCrop: (currentCrop: PercentCrop) => void;
+  setCurrentCrop: (currentCrop: Coordinates) => void;
   setUploadedImageSrc: (uploadedImageSrc: string | null) => void;
   setCroppedImageSrc: (croppedImageSrc: string | null) => void;
-  setCropSettings: (cropSettings: Coordinates) => void;
+  setCropSettings: (cropSettings: CropSettings) => void;
   resetCrop: () => void;
   updateSelectedDiagnostictIds: (newId: string) => void;
   setCreateStudyStatusDialogOpen: (newOpen: boolean) => void;
@@ -46,13 +46,12 @@ const INITIAL_STATE: State = {
 const useNewStudyStore = create<State & Actions>()((set, get) => ({
   ...INITIAL_STATE,
 
-  setCurrentCrop: (currentCrop: PercentCrop) => set({ currentCrop }),
+  setCurrentCrop: (currentCrop: Coordinates) => set({ currentCrop }),
   setUploadedImageSrc: (uploadedImageSrc: string | null) =>
     set({ uploadedImageSrc }),
   setCroppedImageSrc: (croppedImageSrc: string | null) =>
     set({ croppedImageSrc }),
-  setCropSettings: (coordinates: Coordinates) =>
-    set({ cropSettings: coordinates }),
+  setCropSettings: (cropSettings: CropSettings) => set({ cropSettings }),
   resetCrop: () => set({ cropSettings: undefined, currentCrop: undefined }),
   updateSelectedDiagnostictIds: (newId: string) => {
     const prevIds = get().selectedDianosticIds;
