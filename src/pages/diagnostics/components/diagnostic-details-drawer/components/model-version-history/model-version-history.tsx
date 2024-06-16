@@ -40,7 +40,7 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
 
         return (
           <Step
-            key={version.revision}
+            key={version.id}
             sx={mergeSx(styles.step, isActive && styles.stepActive)}
           >
             <StepLabel
@@ -58,7 +58,7 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
                     <Stack direction="row" alignItems="center" gap={1}>
                       <Box sx={styles.versionChipLabel} />
                       <Typography fontSize="inherit" color="text.primary">
-                        {formatVersionString(version.revision)}
+                        {formatVersionString(version.version)}
                       </Typography>
                     </Stack>
                   }

@@ -34,8 +34,8 @@ const VersionUpload = () => {
     control,
     formState: { errors, isValid, isSubmitted },
     handleSubmit: sumbit,
-  } = useForm<Omit<CreateModelVersionRequest, 'file'> & { file?: File }>({
-    defaultValues: { name: '', changelog: '', file: undefined },
+  } = useForm<CreateModelVersionRequest>({
+    defaultValues: { name: '', description: '', file: undefined },
     resolver: joiResolver(createModelVersionSchema),
     reValidateMode: 'onChange',
   });
@@ -51,7 +51,7 @@ const VersionUpload = () => {
 
     createModelVersion({
       modelId: selectedModel.id,
-      request: { ...data, file: '' },
+      request: { ...data, file: new File([], 'sf') },
     });
   });
 
@@ -98,14 +98,14 @@ const VersionUpload = () => {
             </Stack>
             <Controller
               control={control}
-              name="changelog"
+              name="description"
               render={({ field }) => (
                 <TextField
                   multiline
                   rows={4}
-                  error={Boolean(errors.changelog)}
+                  error={Boolean(errors.description)}
                   helperText={
-                    errors.changelog ? errors.changelog.message : undefined
+                    errors.description ? errors.description.message : undefined
                   }
                   variant="outlined"
                   fullWidth

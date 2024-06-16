@@ -167,9 +167,11 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
             <TableRow
               labelColWidth={labelColWidth}
               label={t('StudyReport.AiModel')}
-              value={`${study.model.name} - ${formatVersionString(
-                study.model.currentVersion.revision,
-              )}`}
+              value={`${study.model.name} - ${
+                study.model.currentVersion?.version
+                  ? formatVersionString(study.model.currentVersion?.version)
+                  : ''
+              }`}
             />
             <TableRow
               labelColWidth={labelColWidth}

@@ -53,7 +53,7 @@ const ModelDetails = () => {
             <ModelVersionHistory.Skeleton />
           </Stack>
         ) : null}
-        {selectedModel && (
+        {selectedModel?.currentVersion && (
           <ModelVersionHistory
             currentVersionId={selectedModel.currentVersion.id}
             history={versionHistory}

@@ -115,10 +115,8 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                   </Stack>
                   <Stack sx={{ marginLeft: 'auto' }}>
                     <Typography variant="body2" textAlign="right">
-                      {study.model &&
-                        formatVersionString(
-                          study.model.currentVersion.revision,
-                        )}
+                      {study.model.currentVersion?.version &&
+                        formatVersionString(study.model.currentVersion.version)}
                     </Typography>
                     <Typography variant="caption">Version</Typography>
                   </Stack>

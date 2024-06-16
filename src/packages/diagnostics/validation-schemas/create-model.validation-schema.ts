@@ -1,8 +1,7 @@
 import Joi from 'joi';
-import { CreateModelRequest } from '../types';
 
-const createModelSchema = Joi.object<CreateModelRequest>({
-  name: Joi.string().required(),
+const createModelSchema = Joi.object({
+  name: Joi.string().required().max(128),
   file: Joi.required(),
 });
 

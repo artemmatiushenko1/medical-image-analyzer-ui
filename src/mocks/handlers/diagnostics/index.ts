@@ -6,6 +6,7 @@ import {
   Diagnostic,
   ModelStatus,
   ModelVersion,
+  ModelVersionStatus,
 } from '@/packages/diagnostics';
 import { CreateModelRequest, Model } from '@/packages/diagnostics';
 import dayjs from 'dayjs';
@@ -15,13 +16,13 @@ const models = [...MOCK_MODELS];
 const modelVersions = [...MOCK_MODEL_VERSIONS];
 
 const handlers = [
-  http.get('/diagnostics', async () => {
+  http.get('/diagnostic-types', async () => {
     await delay('real');
 
     return HttpResponse.json(diagnostics);
   }),
 
-  http.get('/diagnostics/:id/models', async () => {
+  http.get('/diagnostic-models', async () => {
     await delay('real');
 
     return HttpResponse.json(models);
@@ -52,22 +53,27 @@ const handlers = [
     return HttpResponse.json(newDiagnostic);
   }),
 
-  http.post('/diagnostics/:id/models', async ({ request }) => {
+  http.post('/diagnostic-models', async ({ request }) => {
     await delay('real');
 
     const data = (await request.json()) as CreateModelRequest;
 
     const newModel: Model = {
+      ...data,
       id: crypto.randomUUID(),
-      enabled: true,
-      currentVersion: modelVersions[0],
-      typeId: crypto.randomUUID(),
-      description: null,
+      type: {
+        id: data.type.id,
+        name: '',
+        description: '',
+        createdAt: dayjs().format(),
+        updatedAt: dayjs().format(),
+        previewImg: '',
+      },
       createdAt: dayjs().format(),
       updatedAt: dayjs().format(),
       status: ModelStatus.ENABLED,
-      queueName: crypto.randomUUID(),
-      ...data,
+      versions: MOCK_MODEL_VERSIONS,
+      currentVersion: MOCK_MODEL_VERSIONS[0],
     };
 
     models.push(newModel);
@@ -84,7 +90,9 @@ const handlers = [
       ...data,
       id: crypto.randomUUID(),
       createdAt: dayjs().toISOString(),
-      revision: 5,
+      version: 5,
+      status: ModelVersionStatus.ENABLED,
+      updatedAt: dayjs().toISOString(),
     };
 
     modelVersions.unshift(newVersion);

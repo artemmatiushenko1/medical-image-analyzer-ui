@@ -1,5 +1,5 @@
-import { Model } from '@/packages/diagnostics';
-import { Stack, Typography } from '@mui/material';
+import { Model, ModelStatus } from '@/packages/diagnostics';
+import { Box, Stack, Typography } from '@mui/material';
 import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
 import { ModelCard } from '../model-card';
 import { Button, Dialog, EmptyState } from '@/libs/components';
@@ -43,7 +43,7 @@ const ModelsList = () => {
 
   return (
     <Dialog.Content sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-      <Stack spacing={2}>
+      <Stack spacing={2} sx={{ height: '100%' }}>
         <Button
           onClick={handleUploadNewModelClick}
           startIcon={<UploadIcon />}
@@ -68,22 +68,27 @@ const ModelsList = () => {
         </Stack>
         {isLoading &&
           loadingPreviews.map((Preview, index) => <Preview key={index} />)}
-        {diagnosticModels.map((model) => (
-          <ModelCard
-            name={model.name}
-            key={model.id}
-            version={model.currentVersion.revision}
-            enabled={model.enabled}
-            onViewDetails={() => handleViewModelDetails(model)}
-          />
-        ))}
+        {diagnosticModels.map(
+          (model) =>
+            model.currentVersion && (
+              <ModelCard
+                name={model.name}
+                key={model.id}
+                version={model.currentVersion?.version}
+                enabled={model.status === ModelStatus.ENABLED}
+                onViewDetails={() => handleViewModelDetails(model)}
+              />
+            ),
+        )}
         {diagnosticModels.length === 0 && !isLoading && (
-          <EmptyState
-            fullHeight
-            title={t('NoModels')}
-            icon={<NoModelsIcon />}
-            description={<Trans t={t} i18nKey={'NoModelsDescription'} />}
-          />
+          <Box sx={{ flex: 1, mt: '-100px' }}>
+            <EmptyState
+              fullHeight
+              title={t('NoModels')}
+              icon={<NoModelsIcon />}
+              description={<Trans t={t} i18nKey={'NoModelsDescription'} />}
+            />
+          </Box>
         )}
       </Stack>
     </Dialog.Content>

@@ -1,7 +1,7 @@
 type CreateModelVersionRequest = {
   name: string;
-  changelog?: string;
-  file: string;
+  description?: string;
+  file: File;
 };
 
 export { type CreateModelVersionRequest };

@@ -17,4 +17,5 @@ export {
   createDiagnosticSchema,
 } from './validation-schemas';
 export { diagnosticsApi };
-export { ModelStatus } from './enums';
+export { ModelStatus, ModelVersionStatus } from './enums';
+export { ModelExtended } from './model-extended';

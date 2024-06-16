@@ -34,7 +34,7 @@ class DiagnosticsApi extends HttpApi {
       options,
     );
 
-    return response.filter((item) => item.typeId === diagnosticId);
+    return response.filter((item) => item.type.id === diagnosticId);
   };
 
   getModelVersions = (modelId: string): Promise<GetModelVersionsResponse> => {
@@ -59,13 +59,11 @@ class DiagnosticsApi extends HttpApi {
     return this.httpClient.request(options);
   };
 
-  createModel = (
-    diagnosticId: string,
-    request: CreateModelRequest,
-  ): Promise<CreateModelResponse> => {
+  createModel = (request: CreateModelRequest): Promise<CreateModelResponse> => {
     const options = new HttpRequestOptionsBuilder()
-      .post(`/diagnostics/${diagnosticId}/models`)
+      .post('/diagnostic-models')
       .body(JSON.stringify(request))
+      .contentType(MimeType.JSON)
       .authorized()
       .build();
 
@@ -76,9 +74,18 @@ class DiagnosticsApi extends HttpApi {
     modelId: string,
     request: CreateModelVersionRequest,
   ): Promise<CreateModelVersionResponse> => {
+    const form = new FormData();
+
+    form.append('file', request.file);
+    form.append('name', request.name);
+
+    if (request.description) {
+      form.append('description', request.description);
+    }
+
     const options = new HttpRequestOptionsBuilder()
-      .post(`/models/${modelId}/versions`)
-      .body(JSON.stringify(request))
+      .post(`/diagnostic-models/${modelId}/versions`)
+      .body(form)
       .authorized()
       .build();
 

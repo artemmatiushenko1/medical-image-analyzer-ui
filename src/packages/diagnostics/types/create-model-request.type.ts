@@ -1,6 +1,8 @@
 type CreateModelRequest = {
   name: string;
-  file: string;
+  description: string;
+  queueName: string;
+  type: { id: string };
 };
 
 export { type CreateModelRequest };

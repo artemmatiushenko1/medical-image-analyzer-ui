@@ -11,7 +11,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { motion } from 'framer-motion';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useCreateModel } from '@/pages/diagnostics/libs/queries';
 
 const ModelUpload = () => {
@@ -32,7 +32,7 @@ const ModelUpload = () => {
     control,
     formState: { errors, isDirty, isValid, isSubmitted },
     handleSubmit: sumbit,
-  } = useForm<Omit<CreateModelRequest, 'file'> & { file: File }>({
+  } = useForm<Omit<CreateModelRequest, 'type' | 'queueName'> & { file: File }>({
     defaultValues: { name: '' },
     resolver: joiResolver(createModelSchema),
   });
@@ -42,9 +42,13 @@ const ModelUpload = () => {
   const handleFormSubmit = sumbit((data) => {
     if (!selectedDiagnostic) return;
 
+    const { file, ...createModelPayload } = data;
+
     createModel({
-      diagnosticId: selectedDiagnostic?.id,
-      request: { ...data, file: '' },
+      ...createModelPayload,
+      type: { id: selectedDiagnostic.id },
+      queueName: crypto.randomUUID(),
+      file,
     });
   });
 
@@ -97,7 +101,9 @@ const ModelUpload = () => {
             <OperationStatusBanner
               status="success"
               title={t('SuccessMessageTitle')}
-              description={t('SuccessMessageDescription')}
+              description={
+                <Trans t={t} i18nKey={'SuccessMessageDescription'} />
+              }
               onOkClick={() => navigateToPreviousStage()}
             />
           </motion.div>

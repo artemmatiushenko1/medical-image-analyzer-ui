@@ -1,9 +1,14 @@
+import { ValueOf } from '@/libs/types';
+import { ModelVersionStatus } from '../enums';
+
 type ModelVersion = {
   id: string;
-  revision: number;
   createdAt: string;
   name: string;
-  changelog?: string;
+  description?: string;
+  status: ValueOf<typeof ModelVersionStatus>;
+  updatedAt: string;
+  version: number;
 };
 
 export { type ModelVersion };

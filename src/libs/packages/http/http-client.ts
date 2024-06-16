@@ -41,9 +41,17 @@ class HttpClient implements IHttpClient {
     });
 
     if (!response.ok) {
+      const error = (await response.json()) as {
+        type: string;
+        message: string | string[];
+        statusCode: number;
+      };
+
       throw new HttpError(
         response.status as ValueOf<typeof HttpStatus>,
-        response.statusText,
+        (Array.isArray(error.message)
+          ? error.message.join(',')
+          : error.message) || response.statusText,
       );
     }
 

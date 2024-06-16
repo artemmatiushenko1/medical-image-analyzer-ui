@@ -1,18 +1,19 @@
 import { ValueOf } from '@/libs/types';
 import { ModelVersion } from './model-version.type';
 import { ModelStatus } from '../enums';
+import { Diagnostic } from './diagnostic.type';
 
-type Model = {
+interface Model {
   id: string;
-  enabled: boolean;
   name: string;
-  currentVersion: ModelVersion;
-  typeId: string;
   createdAt: string;
   updatedAt: string;
   queueName: string;
   description: string | null;
   status: ValueOf<typeof ModelStatus>;
-};
+  type: Diagnostic;
+  versions: ModelVersion[];
+  currentVersion: ModelVersion | null;
+}
 
 export { type Model };
