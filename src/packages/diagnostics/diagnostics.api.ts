@@ -22,15 +22,19 @@ class DiagnosticsApi extends HttpApi {
     return this.httpClient.request(options);
   };
 
-  getDiagnosticModels = (
+  getDiagnosticModels = async (
     diagnosticId: string,
   ): Promise<GetDiagnosticModelsResponse> => {
     const options = new HttpRequestOptionsBuilder()
-      .get(`/diagnostics/${diagnosticId}/models`)
+      .get('/diagnostic-models')
       .authorized()
       .build();
 
-    return this.httpClient.request(options);
+    const response = await this.httpClient.request<GetDiagnosticModelsResponse>(
+      options,
+    );
+
+    return response.filter((item) => item.typeId === diagnosticId);
   };
 
   getModelVersions = (modelId: string): Promise<GetModelVersionsResponse> => {
