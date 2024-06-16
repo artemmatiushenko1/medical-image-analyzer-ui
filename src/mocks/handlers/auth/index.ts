@@ -8,7 +8,7 @@ const handlers = [
     return HttpResponse.json({ accessToken: crypto.randomUUID() });
   }),
 
-  http.get('/profile', async () => {
+  http.get('/auth/profile', async () => {
     await delay(1000);
 
     return HttpResponse.json(MOCK_USER);
