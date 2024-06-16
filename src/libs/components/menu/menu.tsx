@@ -75,7 +75,7 @@ const Menu = (props: MenuProps) => {
           elevation: 4,
           sx: {
             mt: 1.5,
-            minWidth: '240px',
+            minWidth: '260px',
           },
           variant: themeMode === ThemeMode.DARK ? 'elevation' : 'outlined',
         },

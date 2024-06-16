@@ -22,7 +22,7 @@ import { Menu, MenuItem, MenuProps } from '../menu';
 type ProfileMenuProps = Omit<MenuProps, 'items'>;
 
 const ProfileMenu = (props: ProfileMenuProps) => {
-  const { open, anchorEl, onClose } = props;
+  const { open, anchorEl, onClose, position } = props;
 
   const { t } = useTranslation('App', { keyPrefix: 'ProfileMenu' });
 
@@ -100,6 +100,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
         onClose={onClose}
         open={open}
         items={menuItems}
+        position={position}
         header={
           <Stack
             gap={1}

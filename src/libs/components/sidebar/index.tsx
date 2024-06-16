@@ -22,6 +22,7 @@ import { ProfileMenu } from '../profile-menu';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { useState } from 'react';
 import { useAuthStore } from '@/app';
+import { MenuPosition } from '../menu/enums';
 
 type SidebarProps = {
   navItems: {
@@ -132,6 +133,7 @@ const Sidebar = (props: SidebarProps) => {
             open={profileMenuOpen}
             anchorEl={profileMenuAnchor}
             onClose={handleProfileMenuClose}
+            position={MenuPosition.TOP_RIGHT}
           />
         </Stack>
       </Stack>
