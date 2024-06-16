@@ -1,5 +1,4 @@
 import { createStyleSheet } from '@/libs/theme';
-import { styled } from '@mui/material';
 
 const IMAGE_PREVIEW_ASPECT_RATIO = 16 / 9;
 
