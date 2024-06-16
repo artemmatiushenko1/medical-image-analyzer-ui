@@ -1,6 +1,5 @@
 import { createStyleSheet } from '@/libs/theme';
 import { styled } from '@mui/material';
-import ReactCrop from 'react-image-crop';
 
 const IMAGE_PREVIEW_ASPECT_RATIO = 16 / 9;
 
@@ -47,13 +46,4 @@ const styles = createStyleSheet({
   },
 });
 
-const StyledReactCrop = styled(ReactCrop)(({ theme: { shape } }) => ({
-  alignSelf: 'self-start',
-  borderRadius: shape.borderRadius * 3,
-  overflow: 'hidden',
-  // TODO: fix issues with crop when image is larger than 600px
-  maxHeight: 600,
-  height: '100%',
-}));
-
-export { styles, StyledReactCrop };
+export { styles };
