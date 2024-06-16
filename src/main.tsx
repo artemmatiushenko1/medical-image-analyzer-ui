@@ -35,6 +35,7 @@ const initLocalization = async () => {
 
 const initHttpClient = () => {
   httpClient.setAuthTokenGetter(() => useAuthStore.getState().accessToken);
+  httpClient.setBaseUrl(config.BASE_API_URL);
 };
 
 const renderApp = () => {

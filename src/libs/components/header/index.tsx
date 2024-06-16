@@ -95,7 +95,7 @@ const Header = () => {
                 <>
                   <Box sx={{ overflow: 'hidden', width: '100%' }}>
                     <Typography fontSize="12px" fontWeight={500}>
-                      {currentUser?.firstName} {currentUser?.lastName}
+                      {currentUser?.name}
                     </Typography>
                     <Typography
                       width="100%"

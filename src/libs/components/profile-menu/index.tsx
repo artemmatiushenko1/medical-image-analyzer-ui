@@ -110,7 +110,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
             <Avatar sx={{ height: '35px', width: '35px' }} alt="User avatar" />
             <Stack>
               <Typography variant="body2" fontWeight={500}>
-                {currentUser?.firstName} {currentUser?.lastName}
+                {currentUser?.name}
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 {currentUser?.email}

@@ -18,7 +18,7 @@ const InviteUserForm = () => {
     formState: { errors, isDirty, isValid, isSubmitted },
     reset,
   } = useForm<AddUserRequest>({
-    defaultValues: { firstName: '', lastName: '', email: '' },
+    defaultValues: { name: '', email: '' },
     resolver: joiResolver(addUserSchema),
   });
 
@@ -27,7 +27,7 @@ const InviteUserForm = () => {
   const handleSubmit: SubmitHandler<AddUserRequest> = (data) => {
     void addUser(data).then(() => {
       showNotification(
-        `User ${data.firstName} ${data.lastName} was successfully added to the system!`,
+        `User ${data.name} was successfully added to the system!`,
         'success',
       );
 
@@ -53,18 +53,19 @@ const InviteUserForm = () => {
         </FormLabel>
         <Controller
           control={control}
-          name="firstName"
+          name="name"
           render={({ field }) => (
             <TextField
               placeholder={t('AddNewUserDrawer.FirstNamePlaceholder')}
               {...field}
-              error={Boolean(errors.firstName)}
-              helperText={errors.firstName?.message}
+              error={Boolean(errors.name)}
+              helperText={errors.name?.message}
             />
           )}
         />
       </FormControl>
-      <FormControl fullWidth>
+      {/*TODO: split name by two fields*/}
+      {/* <FormControl fullWidth>
         <FormLabel sx={{ mb: 1 }}>
           {t('AddNewUserDrawer.LastNameLabel')}
         </FormLabel>
@@ -80,7 +81,7 @@ const InviteUserForm = () => {
             />
           )}
         />
-      </FormControl>
+      </FormControl> */}
       <FormControl fullWidth>
         <FormLabel sx={{ mb: 1 }}>
           {t('AddNewUserDrawer.EmailAddressLabel')}

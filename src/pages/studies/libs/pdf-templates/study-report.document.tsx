@@ -179,7 +179,7 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
             <TableRow
               labelColWidth={labelColWidth}
               label={t('StudyReport.Requester')}
-              value={`${issuer.firstName} ${issuer.lastName}; ${issuer.email}`}
+              value={`${issuer.name}; ${issuer.email}`}
             />
             <TableRow
               last

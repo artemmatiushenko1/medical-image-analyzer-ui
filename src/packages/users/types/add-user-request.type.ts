@@ -1,6 +1,5 @@
 type AddUserRequest = {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
 };
 

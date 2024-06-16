@@ -12,7 +12,8 @@
     "Columns": {
       "FirstName": "First Name",
       "LastName": "Last Name",
-      "Email": "Email"
+      "Email": "Email",
+      "Name": "Name"
     },
     "RowsPerPage": "Rows per page",
     "LabelDisplayedRows": "{{from}} - {{to}} of {{count}}"

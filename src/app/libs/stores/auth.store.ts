@@ -1,4 +1,4 @@
-import { User } from '@/packages/users';
+import { Role, User } from '@/packages/users';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
@@ -24,7 +24,14 @@ const useAuthStore = create<AuthState & AuthActions>()(
       ...INITIAL_STATE,
 
       setAccessToken: (accessToken: string) => set({ accessToken }),
-      setUser: (user: User) => set({ user }),
+      setUser: (user: User) => {
+        set({
+          user: {
+            ...user,
+            name: user.role === Role.ADMIN ? 'HealthLens Admin' : user.name,
+          },
+        });
+      },
       logout: () => set({ user: null, accessToken: null }),
     }),
     {

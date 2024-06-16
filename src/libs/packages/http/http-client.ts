@@ -7,11 +7,21 @@ import { HttpStatus } from './enums';
 class HttpClient implements IHttpClient {
   private getAuthToken?: () => string | null;
 
+  private baseUrl!: string;
+
   setAuthTokenGetter = (getter: typeof this.getAuthToken) => {
     this.getAuthToken = getter;
   };
 
+  setBaseUrl = (baseUrl: string) => {
+    this.baseUrl = baseUrl;
+  };
+
   request = async <T>(options: HttpFetchOptions): Promise<T> => {
+    if (!this.baseUrl) {
+      throw Error('Base url is not set!');
+    }
+
     const headers = new Headers(Object.entries(options.headers));
 
     if (options.authorized) {
@@ -21,10 +31,10 @@ class HttpClient implements IHttpClient {
         throw Error('Access token is required for authorized request!');
       }
 
-      headers.append('Authorization', accessToken);
+      headers.append('Authorization', `Bearer ${accessToken}`);
     }
 
-    const response = await window.fetch(options.url, {
+    const response = await window.fetch(this.baseUrl + options.url, {
       headers,
       method: options.method,
       ...(options.body ? { body: options.body } : {}),

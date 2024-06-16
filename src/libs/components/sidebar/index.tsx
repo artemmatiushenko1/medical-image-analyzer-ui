@@ -21,6 +21,7 @@ import { mergeSx } from '@/libs/theme';
 import { ProfileMenu } from '../profile-menu';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { useState } from 'react';
+import { useAuthStore } from '@/app';
 
 type SidebarProps = {
   navItems: {
@@ -40,6 +41,8 @@ const Sidebar = (props: SidebarProps) => {
 
   const [profileMenuAnchor, setprofileMenuAnchor] =
     useState<null | HTMLElement>(null);
+
+  const currentUser = useAuthStore((state) => state.user);
 
   const profileMenuOpen = Boolean(profileMenuAnchor);
 
@@ -110,7 +113,7 @@ const Sidebar = (props: SidebarProps) => {
               />
               <Box sx={{ overflow: 'hidden', width: '100%' }}>
                 <Typography fontSize="12px" fontWeight={500}>
-                  Artem Matiushenko
+                  {currentUser?.name}
                 </Typography>
                 <Typography
                   width="100%"
@@ -119,7 +122,7 @@ const Sidebar = (props: SidebarProps) => {
                   display="block"
                   overflow="hidden"
                 >
-                  artom.matyushenko@gmail.com
+                  {currentUser?.email}
                 </Typography>
               </Box>
               <ExpandMoreRounded color="primary" />

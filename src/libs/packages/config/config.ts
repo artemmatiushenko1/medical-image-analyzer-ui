@@ -17,11 +17,12 @@ class Config {
   }
 
   get BASE_API_URL() {
-    return this.getEnvVariable('BASE_API_URL');
+    return this.getEnvVariable<string>('BASE_API_URL');
   }
 
-  get ENABLE_MOCK_API() {
-    return this.getEnvVariable('ENABLE_MOCK_API');
+  get ENABLE_MOCK_API(): boolean {
+    const value = this.getEnvVariable('ENABLE_MOCK_API');
+    return value === 'true';
   }
 }
 

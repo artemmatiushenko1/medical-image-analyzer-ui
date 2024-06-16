@@ -1,3 +1,4 @@
+import { MimeType } from '@/libs/enums';
 import { GetProfileResponse, SignInRequest, SignInResponse } from './types';
 import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
 
@@ -6,6 +7,7 @@ class AuthApi extends HttpApi {
     const options = new HttpRequestOptionsBuilder()
       .post('/auth/sign-in')
       .body(JSON.stringify(request))
+      .contentType(MimeType.JSON)
       .build();
 
     return this.httpClient.request(options);
@@ -13,7 +15,7 @@ class AuthApi extends HttpApi {
 
   getProfile = (): Promise<GetProfileResponse> => {
     const options = new HttpRequestOptionsBuilder()
-      .get('/profile')
+      .get('/auth/profile')
       .authorized()
       .build();
 

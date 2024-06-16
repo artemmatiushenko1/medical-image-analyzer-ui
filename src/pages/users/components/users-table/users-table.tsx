@@ -13,15 +13,8 @@ const UsersTable = (props: UsersTableProps) => {
 
   const columns: GridColDef<User>[] = [
     {
-      field: 'firstName',
-      headerName: t('UsersTable.Columns.FirstName'),
-      sortable: false,
-      resizable: false,
-      flex: 1,
-    },
-    {
-      field: 'lastName',
-      headerName: t('UsersTable.Columns.LastName'),
+      field: 'name',
+      headerName: t('UsersTable.Columns.Name'),
       sortable: false,
       resizable: false,
       flex: 1,

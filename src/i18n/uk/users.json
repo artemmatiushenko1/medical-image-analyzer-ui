@@ -12,7 +12,8 @@
     "Columns": {
       "FirstName": "Імʼя",
       "LastName": "Прізвище",
-      "Email": "Електронна пошта"
+      "Email": "Електронна пошта",
+      "Name": "Імʼя"
     },
     "RowsPerPage": "Рядків на сторінці",
     "LabelDisplayedRows": "{{from}} - {{to}} з {{count}}"
