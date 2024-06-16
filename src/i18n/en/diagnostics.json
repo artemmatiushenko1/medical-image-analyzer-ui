@@ -58,5 +58,7 @@
     },
     "RowsPerPage": "Rows per page",
     "LabelDisplayedRows": "{{from}} - {{to}} of {{count}}"
-  }
+  },
+  "NoModels": "No models",
+  "NoModelsDescription": "This diagnostic doesn't have any AI models. <br/>Please, upload the first one by clicking on the button above."
 }

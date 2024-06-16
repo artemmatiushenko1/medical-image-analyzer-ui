@@ -12,8 +12,9 @@ import { ValueOf } from '@/libs/types';
 import { useClosable } from '@/libs/hooks';
 import { Trans, useTranslation } from 'react-i18next';
 import { useGetStudies } from './libs/queries';
-import { NoResults } from '@/libs/components/no-results';
+import { EmptyState } from '@/libs/components';
 import { motion } from 'framer-motion';
+import { NoResultsIcon } from '@/libs/components/icons';
 
 const Studies = () => {
   const { t } = useTranslation('Studies');
@@ -162,7 +163,8 @@ const Studies = () => {
           </Stack>
         )}
         {studies?.length === 0 && !isLoading ? (
-          <NoResults
+          <EmptyState
+            icon={<NoResultsIcon />}
             fullHeight
             title={t('NoStudies.Title')}
             description={<Trans t={t} i18nKey={'NoStudies.Description'} />}

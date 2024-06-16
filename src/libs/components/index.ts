@@ -13,3 +13,4 @@ export { Table } from './table';
 export { SplashScreen } from './splash-screen';
 export { NotificationsProvider } from './notification';
 export { Menu, type MenuItem, type MenuProps } from './menu';
+export { EmptyState } from './empty-state';

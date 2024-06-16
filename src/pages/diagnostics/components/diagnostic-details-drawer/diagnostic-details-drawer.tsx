@@ -130,7 +130,7 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
           />
         </Box>
       )}
-      {currentStageDetails && currentStageDetails.component}
+      {currentStageDetails?.component}
     </Drawer>
   );
 };

@@ -2,11 +2,11 @@ import { Model } from '@/packages/diagnostics';
 import { Stack, Typography } from '@mui/material';
 import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
 import { ModelCard } from '../model-card';
-import { Button, Dialog } from '@/libs/components';
-import { UploadIcon } from '@/libs/components/icons';
+import { Button, Dialog, EmptyState } from '@/libs/components';
+import { NoModelsIcon, UploadIcon } from '@/libs/components/icons';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useGetDiagnosticModels } from '@/pages/diagnostics/libs/queries';
 
 const ModelsList = () => {
@@ -77,6 +77,14 @@ const ModelsList = () => {
             onViewDetails={() => handleViewModelDetails(model)}
           />
         ))}
+        {diagnosticModels.length === 0 && !isLoading && (
+          <EmptyState
+            fullHeight
+            title={t('NoModels')}
+            icon={<NoModelsIcon />}
+            description={<Trans t={t} i18nKey={'NoModelsDescription'} />}
+          />
+        )}
       </Stack>
     </Dialog.Content>
   );
