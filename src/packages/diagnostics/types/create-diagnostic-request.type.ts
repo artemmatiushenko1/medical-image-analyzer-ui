@@ -1,6 +1,6 @@
 type CreateDiagnosticRequest = {
   name: string;
-  description?: string;
+  description: string | null;
 };
 
 export { type CreateDiagnosticRequest };

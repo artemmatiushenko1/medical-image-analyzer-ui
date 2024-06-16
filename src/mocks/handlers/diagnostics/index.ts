@@ -41,6 +41,9 @@ const handlers = [
       id: crypto.randomUUID(),
       previewImg: '',
       ...data,
+      createdAt: dayjs().format(),
+      updatedAt: dayjs().format(),
+      description: null,
     };
 
     diagnostics.push(newDiagnostic);
