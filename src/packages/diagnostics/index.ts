@@ -17,3 +17,4 @@ export {
   createDiagnosticSchema,
 } from './validation-schemas';
 export { diagnosticsApi };
+export { ModelStatus } from './enums';

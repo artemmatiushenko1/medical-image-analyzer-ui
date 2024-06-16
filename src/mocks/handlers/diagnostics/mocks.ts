@@ -1,9 +1,10 @@
 import dayjs from 'dayjs';
 import {
+  ModelStatus,
   Diagnostic,
   Model,
   ModelVersion,
-} from '../../../packages/diagnostics/types';
+} from '@/packages/diagnostics';
 
 const MOCK_DIAGNOSTICS: Diagnostic[] = [
   {
@@ -73,24 +74,48 @@ const MOCK_MODELS: Model[] = [
     id: '1',
     currentVersion: MOCK_MODEL_VERSIONS[1],
     enabled: true,
+    createdAt: dayjs().format(),
+    updatedAt: dayjs().format(),
+    status: ModelStatus.ENABLED,
+    description: null,
+    queueName: crypto.randomUUID(),
+    typeId: crypto.randomUUID(),
   },
   {
     name: 'PneumoCheck',
     id: '2',
     currentVersion: MOCK_MODEL_VERSIONS[0],
     enabled: true,
+    createdAt: dayjs().format(),
+    updatedAt: dayjs().format(),
+    status: ModelStatus.ENABLED,
+    description: null,
+    queueName: crypto.randomUUID(),
+    typeId: crypto.randomUUID(),
   },
   {
     name: 'LymeXpert',
     id: '3',
     currentVersion: MOCK_MODEL_VERSIONS[0],
     enabled: false,
+    createdAt: dayjs().format(),
+    updatedAt: dayjs().format(),
+    status: ModelStatus.ENABLED,
+    description: null,
+    queueName: crypto.randomUUID(),
+    typeId: crypto.randomUUID(),
   },
   {
     name: 'CoviScanNet-2',
     id: '4',
     currentVersion: MOCK_MODEL_VERSIONS[0],
     enabled: true,
+    createdAt: dayjs().format(),
+    updatedAt: dayjs().format(),
+    status: ModelStatus.ENABLED,
+    description: null,
+    queueName: crypto.randomUUID(),
+    typeId: crypto.randomUUID(),
   },
 ];
 

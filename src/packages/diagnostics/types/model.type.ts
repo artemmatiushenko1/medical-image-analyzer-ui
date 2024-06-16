@@ -11,7 +11,7 @@ type Model = {
   createdAt: string;
   updatedAt: string;
   queueName: string;
-  description: string;
+  description: string | null;
   status: ValueOf<typeof ModelStatus>;
 };
 

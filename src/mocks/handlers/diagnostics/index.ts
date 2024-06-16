@@ -4,6 +4,7 @@ import {
   CreateDiagnosticRequest,
   CreateModelVersionRequest,
   Diagnostic,
+  ModelStatus,
   ModelVersion,
 } from '@/packages/diagnostics';
 import { CreateModelRequest, Model } from '@/packages/diagnostics';
@@ -60,6 +61,12 @@ const handlers = [
       id: crypto.randomUUID(),
       enabled: true,
       currentVersion: modelVersions[0],
+      typeId: crypto.randomUUID(),
+      description: null,
+      createdAt: dayjs().format(),
+      updatedAt: dayjs().format(),
+      status: ModelStatus.ENABLED,
+      queueName: crypto.randomUUID(),
       ...data,
     };
 
