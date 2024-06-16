@@ -1,3 +1,4 @@
+import { MimeType } from '@/libs/enums';
 import {
   CreateDiagnosticRequest,
   CreateDiagnosticResponse,
@@ -14,7 +15,7 @@ import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
 class DiagnosticsApi extends HttpApi {
   getAllDiagnostics = (): Promise<GetAllDiagnosticsResponse> => {
     const options = new HttpRequestOptionsBuilder()
-      .get('/diagnostics')
+      .get('/diagnostic-types')
       .authorized()
       .build();
 
@@ -45,8 +46,9 @@ class DiagnosticsApi extends HttpApi {
     request: CreateDiagnosticRequest,
   ): Promise<CreateDiagnosticResponse> => {
     const options = new HttpRequestOptionsBuilder()
-      .post(`/diagnostics`)
+      .post(`/diagnostic-types`)
       .body(JSON.stringify(request))
+      .contentType(MimeType.JSON)
       .authorized()
       .build();
 
