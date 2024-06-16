@@ -17,9 +17,7 @@ const ModelDetails = () => {
   const navigateToNextStage = useDiagnosticsStore(
     (state) => state.navigateToNextStage,
   );
-  const { isLoading, data: versionHistory = [] } = useGetModelVersions(
-    selectedModel?.id,
-  );
+  const { isLoading } = useGetModelVersions(selectedModel?.id);
 
   const handleUploadNewVersionClick = () => {
     navigateToNextStage(DiagnosticDrawerStage.UPLOAD_MODEL_VERSION);
@@ -53,10 +51,10 @@ const ModelDetails = () => {
             <ModelVersionHistory.Skeleton />
           </Stack>
         ) : null}
-        {selectedModel?.currentVersion && (
+        {selectedModel?.currentVersion && !isLoading && (
           <ModelVersionHistory
             currentVersionId={selectedModel.currentVersion.id}
-            history={versionHistory}
+            history={selectedModel.versions}
           />
         )}
       </Stack>

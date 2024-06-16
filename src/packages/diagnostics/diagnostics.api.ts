@@ -37,13 +37,15 @@ class DiagnosticsApi extends HttpApi {
     return response.filter((item) => item.type.id === diagnosticId);
   };
 
-  getModelVersions = (modelId: string): Promise<GetModelVersionsResponse> => {
+  getModelVersions = async (
+    _modelId: string,
+  ): Promise<GetModelVersionsResponse> => {
     const options = new HttpRequestOptionsBuilder()
-      .get(`/models/${modelId}/versions`)
+      .get('/diagnostic-models-versions')
       .authorized()
       .build();
 
-    return this.httpClient.request(options);
+    return this.httpClient.request<GetModelVersionsResponse>(options);
   };
 
   createDiagnostic = (
