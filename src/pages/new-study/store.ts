@@ -1,18 +1,17 @@
 import { PercentCrop } from 'react-image-crop';
 import { create } from 'zustand';
-import { CropSettings } from './components/image-crop-dialog';
-import { DEFAULT_CROP_SETTINGS } from './components/image-crop-dialog';
 import { Diagnostic, Model } from '@/packages/diagnostics';
 import {
   MOCK_DIAGNOSTICS,
   MOCK_MODELS,
 } from '@/mocks/handlers/diagnostics/mocks';
+import { Coordinates } from 'react-advanced-cropper';
 
 type State = {
   uploadedImageSrc: string | null;
   croppedImageSrc: string | null;
   currentCrop: PercentCrop | undefined;
-  cropSettings: CropSettings;
+  cropSettings?: Coordinates;
   selectedDianosticIds: string[];
   createStudyStatusDialogOpen: boolean;
   selectedModelIds: string[];
@@ -24,7 +23,7 @@ type Actions = {
   setCurrentCrop: (currentCrop: PercentCrop) => void;
   setUploadedImageSrc: (uploadedImageSrc: string | null) => void;
   setCroppedImageSrc: (croppedImageSrc: string | null) => void;
-  setCropSettings: (cropSettings: CropSettings) => void;
+  setCropSettings: (cropSettings: Coordinates) => void;
   resetCrop: () => void;
   updateSelectedDiagnostictIds: (newId: string) => void;
   setCreateStudyStatusDialogOpen: (newOpen: boolean) => void;
@@ -36,7 +35,7 @@ const INITIAL_STATE: State = {
   currentCrop: undefined,
   uploadedImageSrc: null,
   croppedImageSrc: null,
-  cropSettings: DEFAULT_CROP_SETTINGS,
+  cropSettings: undefined,
   selectedDianosticIds: [],
   createStudyStatusDialogOpen: false,
   selectedModelIds: [],
@@ -52,9 +51,9 @@ const useNewStudyStore = create<State & Actions>()((set, get) => ({
     set({ uploadedImageSrc }),
   setCroppedImageSrc: (croppedImageSrc: string | null) =>
     set({ croppedImageSrc }),
-  setCropSettings: (cropSettings: CropSettings) => set({ cropSettings }),
-  resetCrop: () =>
-    set({ cropSettings: DEFAULT_CROP_SETTINGS, currentCrop: undefined }),
+  setCropSettings: (coordinates: Coordinates) =>
+    set({ cropSettings: coordinates }),
+  resetCrop: () => set({ cropSettings: undefined, currentCrop: undefined }),
   updateSelectedDiagnostictIds: (newId: string) => {
     const prevIds = get().selectedDianosticIds;
 

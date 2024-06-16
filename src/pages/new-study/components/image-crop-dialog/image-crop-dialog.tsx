@@ -1,35 +1,29 @@
 import {
   Box,
   Button,
-  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Stack,
   Typography,
+  styled,
 } from '@mui/material';
-import { SyntheticEvent, useCallback, useRef, useState } from 'react';
-import { StyledReactCrop, styles } from './styles';
-
-import {
-  PercentCrop,
-  PixelCrop,
-  centerCrop,
-  makeAspectCrop,
-} from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
-import { CropSettingsForm } from './crop-settings-form';
+import { useRef } from 'react';
+import { styles } from './styles';
+// import { CropSettingsForm } from './crop-settings-form';
 import { CropSettingsSection } from './crop-settings-section';
-import { CropSettings } from './types';
-import {
-  DEFAULT_ASPECT_RATIO,
-  INITIAL_CROP_WIDTH_PERCENTAGE,
-  MIN_CROP_WIDTH_PX,
-} from './constants';
-import { CropPreview, CropPreviewRef } from './crop-preview';
 import { useNewStudyStore } from '@/pages/new-study/store';
 import { useTranslation } from 'react-i18next';
+
+import {
+  Cropper,
+  CropperPreview,
+  CropperPreviewRef,
+  CropperRef,
+} from 'react-advanced-cropper';
+import 'react-advanced-cropper/dist/style.css';
+import { MIN_CROP_WIDTH_PX } from './constants';
 
 type ImageCropDialogProps = {
   open: boolean;
@@ -39,79 +33,56 @@ type ImageCropDialogProps = {
   onCrop: (imgUrl: string) => void;
 };
 
+const StyledCropPreview = styled(CropperPreview)(() => ({
+  width: '100%',
+  height: '100%',
+}));
+
 const ImageCropDialog = (props: ImageCropDialogProps) => {
   const { open, onClose, imgSrc, onCrop } = props;
 
   const { t } = useTranslation('NewStudy');
   const { t: tCommon } = useTranslation('Common');
 
-  const completedCrop = useNewStudyStore((state) => state.currentCrop);
   const cropSettings = useNewStudyStore((state) => state.cropSettings);
 
-  const setCompletedCrop = useNewStudyStore((state) => state.setCurrentCrop);
   const setCropSettings = useNewStudyStore((state) => state.setCropSettings);
 
-  const [crop, setCrop] = useState(completedCrop);
-  const [isSavingCrop, setIsSavingCrop] = useState(false);
+  const cropperRef = useRef<CropperRef>(null);
 
-  const imageRef = useRef<HTMLImageElement | null>(null);
-  const cropPreviewRef = useRef<CropPreviewRef | null>(null);
-
-  const handleCropChange = (_: PixelCrop, percentCrop: PercentCrop) => {
-    setCrop(percentCrop);
-  };
-
-  const handleCropComplete = (_: PixelCrop, percentCrop: PercentCrop) => {
-    setCompletedCrop(percentCrop);
-  };
+  const previewRef = useRef<CropperPreviewRef>(null);
 
   const handleCancelButtonClick = () => {
     onClose();
   };
 
-  const handleCropSettingsChange = useCallback(
-    (value: CropSettings) => {
-      setCropSettings(value);
-    },
-    [setCropSettings],
-  );
+  // const handleCropSettingsChange = useCallback(
+  //   (value: CropSettings) => {
+  //     setCropSettings(value);
+  //   },
+  //   [setCropSettings],
+  // );
 
-  const handleImageLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    const { width, height } = e.currentTarget;
+  const onUpdate = (cropper: CropperRef) => {
+    previewRef.current?.update(cropper);
 
-    if (completedCrop) {
+    const coords = cropper.getCoordinates();
+
+    if (!coords) {
       return;
     }
 
-    // sets the initial crop area to min crop width
-    // if image's width is <= min crop width, otherwise to 90% of the image's width
-    const cropWidthPercentage = Math.max(
-      Math.min((MIN_CROP_WIDTH_PX / width) * 100, 100),
-      INITIAL_CROP_WIDTH_PERCENTAGE,
-    );
-
-    const crop = makeAspectCrop(
-      { unit: '%', width: cropWidthPercentage },
-      DEFAULT_ASPECT_RATIO,
-      width,
-      height,
-    );
-
-    const centeredCrop = centerCrop(crop, width, height);
-    setCrop(centeredCrop);
-    setCompletedCrop(centeredCrop);
+    setCropSettings(coords);
   };
 
-  const handleCropSave = async () => {
-    if (!cropPreviewRef.current) return;
+  const handleCropSave = () => {
+    const croppedImg = cropperRef.current?.getCanvas()?.toDataURL();
 
-    setIsSavingCrop(true);
-    const croppedImg = await cropPreviewRef.current.exportImage();
-    setIsSavingCrop(false);
-
-    if (croppedImg) {
-      onCrop(croppedImg);
+    if (!croppedImg) {
+      return null;
     }
+
+    onCrop(croppedImg);
   };
 
   return (
@@ -123,72 +94,42 @@ const ImageCropDialog = (props: ImageCropDialogProps) => {
       </DialogTitle>
       <DialogContent>
         <Box sx={styles.dialogContentWrapper}>
-          <StyledReactCrop
-            keepSelection
-            crop={crop}
-            onChange={handleCropChange}
-            minWidth={MIN_CROP_WIDTH_PX}
-            minHeight={MIN_CROP_WIDTH_PX}
-            aspect={DEFAULT_ASPECT_RATIO}
-            onComplete={handleCropComplete}
-          >
-            <img
+          <Box sx={{ maxHeight: '500px', maxWidth: '500px', width: '100%' }}>
+            <Cropper
               src={imgSrc}
-              width={526}
-              ref={imageRef}
-              onLoad={handleImageLoad}
-              style={{
-                transform: `scale(${cropSettings.scale})`,
-                objectFit: 'cover',
-              }}
+              className={'cropper'}
+              ref={cropperRef}
+              onUpdate={onUpdate}
+              defaultCoordinates={cropSettings}
+              minWidth={MIN_CROP_WIDTH_PX}
+              minHeight={MIN_CROP_WIDTH_PX}
             />
-          </StyledReactCrop>
+          </Box>
           <Stack sx={styles.rightPanelRoot}>
             <Stack sx={styles.rightPanel}>
-              {imageRef.current && completedCrop && (
-                <CropSettingsSection
-                  title={t('CropDialog.Preview')}
-                  content={
-                    <CropPreview
-                      ref={cropPreviewRef}
-                      imgElement={imageRef.current}
-                      cropSettings={cropSettings}
-                      crop={completedCrop}
-                    />
-                  }
-                />
-              )}
-              {crop && (
-                <CropSettingsSection
-                  title={t('CropDialog.Settings')}
-                  content={
-                    <CropSettingsForm
-                      crop={crop}
-                      values={cropSettings}
-                      onChange={handleCropSettingsChange}
-                    />
-                  }
-                />
-              )}
+              <CropSettingsSection
+                title={t('CropDialog.Preview')}
+                content={
+                  <Box sx={styles.cropPreviewRoot}>
+                    <StyledCropPreview ref={previewRef} />
+                  </Box>
+                }
+              />
+              {/* <CropSettingsSection
+                title={t('CropDialog.Settings')}
+                content={
+                  <CropSettingsForm
+                    values={cropSettings}
+                    onChange={handleCropSettingsChange}
+                  />
+                }
+              /> */}
             </Stack>
             <DialogActions>
-              <Button
-                disabled={isSavingCrop}
-                color="error"
-                onClick={handleCancelButtonClick}
-              >
+              <Button color="error" onClick={handleCancelButtonClick}>
                 {tCommon('Cancel')}
               </Button>
-              <Button
-                variant="contained"
-                disabled={isSavingCrop}
-                onClick={handleCropSave}
-                startIcon={
-                  isSavingCrop && (
-                    <CircularProgress color="inherit" size="12px" />
-                  )
-                }
-              >
+              <Button variant="contained" onClick={handleCropSave}>
                 {tCommon('Save')}
               </Button>
             </DialogActions>

@@ -23,6 +23,7 @@ const styles = createStyleSheet({
     aspectRatio: IMAGE_PREVIEW_ASPECT_RATIO,
     border: `1px solid ${palette.divider}`,
     padding: 1,
+    textAlign: 'center',
   }),
   rightPanelRoot: { gap: 2 },
   rightPanel: {

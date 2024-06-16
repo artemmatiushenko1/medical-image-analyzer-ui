@@ -11,22 +11,20 @@ import {
   SCALE_STEP,
 } from './constants';
 import { getScalePercentageString } from './helpers';
-import { Crop } from 'react-image-crop';
 import { useTranslation } from 'react-i18next';
 
 type CropSettingsFormProps = {
-  crop: Crop;
   values: CropSettings;
 
   onChange: (values: CropSettings) => void;
 };
 
 const CropSettingsForm = (props: CropSettingsFormProps) => {
-  const { values, onChange, crop } = props;
+  const { values, onChange } = props;
 
   const { t } = useTranslation('NewStudy');
 
-  const { control, watch, setValue } = useForm<CropSettings>({
+  const { control, watch } = useForm<CropSettings>({
     defaultValues: { ...DEFAULT_CROP_SETTINGS, ...values },
     mode: 'onChange',
   });
@@ -39,15 +37,6 @@ const CropSettingsForm = (props: CropSettingsFormProps) => {
   useEffect(() => {
     onChange({ rotation, scale, preserveAspectRatio, aspectRatio });
   }, [rotation, scale, preserveAspectRatio, onChange, aspectRatio]);
-
-  useEffect(() => {
-    if (!preserveAspectRatio) {
-      setValue('aspectRatio', undefined);
-    } else {
-      setValue('aspectRatio', crop.width / crop.height);
-      // calculate aspect ration based on current crop width and height
-    }
-  }, [preserveAspectRatio, setValue, crop.width, crop.height]);
 
   return (
     <>
