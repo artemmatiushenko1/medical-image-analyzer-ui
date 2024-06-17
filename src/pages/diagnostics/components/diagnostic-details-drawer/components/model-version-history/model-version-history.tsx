@@ -106,13 +106,16 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
                   onClick={() => handleEnableVersion(version.id)}
                   isLoading={isPending}
                 >
-                  Enable
+                  {t(
+                    'DiagnosticsDrawer.Stages.ModelDetails.RestoreVersionButton',
+                  )}
                 </Button>
               )}
               {version.version === currentVersion.version && (
                 <Button
+                  color="error"
                   onClick={() => handleDisableVersion(version.id)}
-                  isLoading={isPending}
+                  isLoading={isPending && version.id === currentVersion.id}
                 >
                   {t('Disable', { ns: 'Common' })}
                 </Button>
