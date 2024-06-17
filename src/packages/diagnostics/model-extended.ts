@@ -18,6 +18,20 @@ class ModelExtended implements Model {
     public versions: ModelVersion[],
   ) {}
 
+  static fromPlainObject(model: Model): ModelExtended {
+    return new ModelExtended(
+      model.id,
+      model.name,
+      model.createdAt,
+      model.updatedAt,
+      model.queueName,
+      model.description,
+      model.status,
+      model.type,
+      model.versions,
+    );
+  }
+
   get currentVersion(): ModelVersion | null {
     const enabledModels = this.versions.filter(
       (version) => version.status === ModelVersionStatus.ENABLED,

@@ -14,7 +14,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useCreateModelVersion } from '@/pages/diagnostics/libs/queries';
 
 const VersionUpload = () => {
@@ -51,7 +51,7 @@ const VersionUpload = () => {
 
     createModelVersion({
       modelId: selectedModel.id,
-      request: { ...data, file: new File([], 'sf') },
+      request: data,
     });
   });
 
@@ -133,7 +133,9 @@ const VersionUpload = () => {
           >
             <OperationStatusBanner
               title={t('SuccessMessageTitle')}
-              description={t('SuccessMessageDescription')}
+              description={
+                <Trans t={t} i18nKey={'SuccessMessageDescription'} />
+              }
               status="success"
               okText={t('SuccessMessageOkButton')}
               onOkClick={() => navigateToPreviousStage()}

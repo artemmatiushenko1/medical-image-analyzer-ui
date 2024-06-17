@@ -5,7 +5,7 @@ import { ModelVersionHistory } from '../model-version-history';
 import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 import { DiagnosticDrawerStage } from '@/pages/diagnostics/libs/enums';
 import { useTranslation } from 'react-i18next';
-import { useGetModelVersions } from '@/pages/diagnostics/libs/queries';
+import { useGetModel } from '@/pages/diagnostics/libs/queries';
 
 const ModelDetails = () => {
   const { t } = useTranslation('Diagnostics', {
@@ -17,7 +17,9 @@ const ModelDetails = () => {
   const navigateToNextStage = useDiagnosticsStore(
     (state) => state.navigateToNextStage,
   );
-  const { isLoading } = useGetModelVersions(selectedModel?.id);
+  const { isLoading, data } = useGetModel(selectedModel?.id);
+
+  const { versions = [] } = data ?? {};
 
   const handleUploadNewVersionClick = () => {
     navigateToNextStage(DiagnosticDrawerStage.UPLOAD_MODEL_VERSION);
@@ -51,10 +53,10 @@ const ModelDetails = () => {
             <ModelVersionHistory.Skeleton />
           </Stack>
         ) : null}
-        {selectedModel?.currentVersion && !isLoading && (
+        {selectedModel?.currentVersion && (
           <ModelVersionHistory
             currentVersionId={selectedModel.currentVersion.id}
-            history={selectedModel.versions}
+            history={versions}
           />
         )}
       </Stack>

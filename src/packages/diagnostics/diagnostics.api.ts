@@ -8,7 +8,7 @@ import {
   CreateModelVersionResponse,
   GetAllDiagnosticsResponse,
   GetDiagnosticModelsResponse,
-  GetModelVersionsResponse,
+  GetModelResponse,
 } from './types';
 import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
 
@@ -37,15 +37,13 @@ class DiagnosticsApi extends HttpApi {
     return response.filter((item) => item.type.id === diagnosticId);
   };
 
-  getModelVersions = async (
-    _modelId: string,
-  ): Promise<GetModelVersionsResponse> => {
+  getModel = async (modelId: string): Promise<GetModelResponse> => {
     const options = new HttpRequestOptionsBuilder()
-      .get('/diagnostic-models-versions')
+      .get(`/diagnostic-models/${modelId}`)
       .authorized()
       .build();
 
-    return this.httpClient.request<GetModelVersionsResponse>(options);
+    return this.httpClient.request(options);
   };
 
   createDiagnostic = (

@@ -3,13 +3,12 @@ import { DiagnosticQueryKey } from '../enums';
 import { diagnosticsApi } from '@/packages/diagnostics';
 
 // TODO: remove, unusued
-const useGetModelVersions = (modelId?: string) => {
+const useGetModel = (modelId?: string) => {
   return useQuery({
-    queryKey: [...DiagnosticQueryKey.GET_MODEL_VERSIONS, modelId],
-    queryFn: () =>
-      modelId ? diagnosticsApi.getModelVersions(modelId) : undefined,
+    queryKey: [...DiagnosticQueryKey.GET_MODEL, modelId],
+    queryFn: () => (modelId ? diagnosticsApi.getModel(modelId) : undefined),
     enabled: Boolean(modelId),
   });
 };
 
-export { useGetModelVersions };
+export { useGetModel };

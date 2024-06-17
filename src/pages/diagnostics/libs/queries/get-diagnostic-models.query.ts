@@ -10,20 +10,7 @@ const useGetDiagnosticModels = (diagnosticId?: string) => {
 
       const response = await diagnosticsApi.getDiagnosticModels(diagnosticId);
 
-      return response.map(
-        (model) =>
-          new ModelExtended(
-            model.id,
-            model.name,
-            model.createdAt,
-            model.updatedAt,
-            model.queueName,
-            model.description,
-            model.status,
-            model.type,
-            model.versions,
-          ),
-      );
+      return response.map((model) => ModelExtended.fromPlainObject(model));
     },
     enabled: Boolean(diagnosticId),
   });

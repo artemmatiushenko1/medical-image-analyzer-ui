@@ -1,5 +1,5 @@
-import { ModelVersion } from './model-version.type';
+import { Model } from './model.type';
 
-type CreateModelVersionResponse = ModelVersion;
+type CreateModelVersionResponse = Model;
 
 export { type CreateModelVersionResponse };
