@@ -1,8 +1,7 @@
 import { mergeSx } from '@/libs/theme';
-import { ModelVersion } from '@/packages/diagnostics';
+import { ModelVersion, ModelVersionStatus } from '@/packages/diagnostics';
 import {
   Box,
-  Button,
   Chip,
   Skeleton,
   Stack,
@@ -18,23 +17,43 @@ import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { formatVersionString } from '@/libs/helpers';
 import { useTranslation } from 'react-i18next';
+import { useChangeModelVersionStatus } from '@/pages/diagnostics/libs/queries';
+import { Button } from '@/libs/components';
 
 type ModelVersionHistoryProps = {
-  currentVersionId: string;
+  modelId: string;
+  currentVersion: ModelVersion;
   history: ModelVersion[];
 };
 
 const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
-  const { currentVersionId, history } = props;
+  const { currentVersion, history, modelId } = props;
 
-  const { t } = useTranslation('Diagnostics', {
-    keyPrefix: 'DiagnosticsDrawer.Stages.ModelDetails',
-  });
+  const { t } = useTranslation(['Diagnostics', 'Common']);
+
+  const { mutate: changeModelVersionStatus, isPending } =
+    useChangeModelVersionStatus();
+
+  const handleDisableVersion = (versionId: string) => {
+    changeModelVersionStatus({
+      versionId,
+      modelId: modelId,
+      status: ModelVersionStatus.DISABLED,
+    });
+  };
+
+  const handleEnableVersion = (versionId: string) => {
+    changeModelVersionStatus({
+      versionId,
+      modelId: modelId,
+      status: ModelVersionStatus.ENABLED,
+    });
+  };
 
   return (
     <Stepper orientation="vertical" sx={styles.root}>
       {history.map((version) => {
-        const isActive = version.id === currentVersionId;
+        const isActive = version.id === currentVersion.id;
         const getColor = ({ palette }: Theme) =>
           isActive ? palette?.primary.main : palette.neutral.dark;
 
@@ -75,11 +94,29 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
               {version.name}
             </StepLabel>
             <Box sx={styles.extraButton}>
-              <Button disabled={isActive}>
-                {isActive
-                  ? t('CurrentVersionButton')
-                  : t('RestoreVersionButton')}
-              </Button>
+              {isActive && (
+                <Button disabled={isActive}>
+                  {t(
+                    'DiagnosticsDrawer.Stages.ModelDetails.CurrentVersionButton',
+                  )}
+                </Button>
+              )}
+              {version.version > currentVersion.version && (
+                <Button
+                  onClick={() => handleEnableVersion(version.id)}
+                  isLoading={isPending}
+                >
+                  Enable
+                </Button>
+              )}
+              {version.version === currentVersion.version && (
+                <Button
+                  onClick={() => handleDisableVersion(version.id)}
+                  isLoading={isPending}
+                >
+                  {t('Disable', { ns: 'Common' })}
+                </Button>
+              )}
             </Box>
           </Step>
         );

@@ -53,6 +53,12 @@ const handlers = [
     return HttpResponse.json(newDiagnostic);
   }),
 
+  http.get('/diagnostic-models/:id', async () => {
+    await delay('real');
+
+    return HttpResponse.json(MOCK_MODELS[0]);
+  }),
+
   http.post('/diagnostic-models', async ({ request }) => {
     await delay('real');
 

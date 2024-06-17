@@ -7,6 +7,7 @@
   "Upload": "Upload",
   "Add": "Add",
   "Save": "Save",
+  "Disable": "Disable",
   "FileUpload": {
     "ChooseFileLabel": "Choose file",
     "SelectedFileLabel": "Selected file"

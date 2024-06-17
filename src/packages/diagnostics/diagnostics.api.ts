@@ -1,6 +1,7 @@
 import { MimeType } from '@/libs/enums';
 import {
   ChangeModelStatusRequest,
+  ChangeModelVersionStatusRequest,
   CreateDiagnosticRequest,
   CreateDiagnosticResponse,
   CreateModelRequest,
@@ -95,8 +96,23 @@ class DiagnosticsApi extends HttpApi {
 
   changeModelStatus = (modelId: string, request: ChangeModelStatusRequest) => {
     const options = new HttpRequestOptionsBuilder()
-      .patch(`/diagnostic-models/${modelId}`)
+      .patch(`/diagnostic-models/${modelId}/status`)
       .body(JSON.stringify(request))
+      .contentType(MimeType.JSON)
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
+
+  changeModelVersionStatus = (
+    versionId: string,
+    request: ChangeModelVersionStatusRequest,
+  ) => {
+    const options = new HttpRequestOptionsBuilder()
+      .patch(`/diagnostic-models/versions/${versionId}/status`)
+      .body(JSON.stringify(request))
+      .contentType(MimeType.JSON)
       .authorized()
       .build();
 

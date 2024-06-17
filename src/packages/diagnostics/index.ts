@@ -11,6 +11,7 @@ export {
   type ModelVersion,
   type CreateModelVersionRequest,
   type ChangeModelStatusRequest,
+  type ChangeModelVersionStatusRequest,
 } from './types';
 export {
   createModelSchema,

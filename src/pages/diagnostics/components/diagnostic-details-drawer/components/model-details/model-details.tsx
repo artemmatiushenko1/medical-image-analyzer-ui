@@ -14,6 +14,10 @@ const ModelDetails = () => {
 
   const selectedModel = useDiagnosticsStore((state) => state.selectedModel);
 
+  if (!selectedModel) {
+    throw new Error('Selected model must be set!');
+  }
+
   const navigateToNextStage = useDiagnosticsStore(
     (state) => state.navigateToNextStage,
   );
@@ -53,10 +57,11 @@ const ModelDetails = () => {
             <ModelVersionHistory.Skeleton />
           </Stack>
         ) : null}
-        {selectedModel?.currentVersion && (
+        {data?.currentVersion && (
           <ModelVersionHistory
-            currentVersionId={selectedModel.currentVersion.id}
             history={versions}
+            modelId={selectedModel.id}
+            currentVersion={data.currentVersion}
           />
         )}
       </Stack>

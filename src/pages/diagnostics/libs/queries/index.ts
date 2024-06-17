@@ -5,3 +5,4 @@ export { useCreateModel } from './create-model.query';
 export { useGetModel } from './get-model.query';
 export { useCreateModelVersion } from './create-model-version.query';
 export { useChangeModelStatus } from './change-model-status.query';
+export { useChangeModelVersionStatus } from './change-model-version-status.query';
