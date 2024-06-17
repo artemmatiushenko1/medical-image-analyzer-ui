@@ -10,3 +10,4 @@ export { type ModelVersion } from './model-version.type';
 export { type GetModelResponse } from './get-model-response.type';
 export { type CreateModelVersionRequest } from './create-model-version-request.type';
 export { type CreateModelVersionResponse } from './create-model-version-response.type';
+export { type ChangeModelStatusRequest } from './change-model-status.request.type';

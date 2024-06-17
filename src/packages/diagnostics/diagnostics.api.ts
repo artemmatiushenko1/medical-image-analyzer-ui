@@ -1,5 +1,6 @@
 import { MimeType } from '@/libs/enums';
 import {
+  ChangeModelStatusRequest,
   CreateDiagnosticRequest,
   CreateDiagnosticResponse,
   CreateModelRequest,
@@ -86,6 +87,16 @@ class DiagnosticsApi extends HttpApi {
     const options = new HttpRequestOptionsBuilder()
       .post(`/diagnostic-models/${modelId}/versions`)
       .body(form)
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
+
+  changeModelStatus = (modelId: string, request: ChangeModelStatusRequest) => {
+    const options = new HttpRequestOptionsBuilder()
+      .patch(`/diagnostic-models/${modelId}`)
+      .body(JSON.stringify(request))
       .authorized()
       .build();
 

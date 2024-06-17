@@ -3,9 +3,6 @@ import {
   Card,
   CardContent,
   IconButton,
-  ListItemIcon,
-  Menu,
-  MenuItem,
   Skeleton,
   Stack,
   Switch,
@@ -15,24 +12,52 @@ import { styles } from './styles';
 import { useMenuPopover } from '@/libs/hooks';
 import { formatVersionString } from '@/libs/helpers';
 import { useTranslation } from 'react-i18next';
+import { Menu, MenuItem } from '@/libs/components';
+import { useChangeModelStatus } from '@/pages/diagnostics/libs/queries';
+import { ValueOf } from '@/libs/types';
+import { ModelStatus } from '@/packages/diagnostics';
 
 type ModelCardProps = {
+  id: string;
   name: string;
   version: number;
-  enabled: boolean;
+  status: ValueOf<typeof ModelStatus>;
 
   onViewDetails: () => void;
 };
 
 const ModelCard = (props: ModelCardProps) => {
-  const { name, version, enabled, onViewDetails } = props;
+  const { id, name, version, status, onViewDetails } = props;
 
   const { t } = useTranslation('Diagnostics', {
     keyPrefix: 'DiagnosticsDrawer.Stages.DiagnosticDetails',
   });
 
+  const {
+    mutate: changeModelStatus,
+    isPending,
+    variables,
+  } = useChangeModelStatus(id);
+
   const { open, openMenu, closeMenu, anchorEl } =
     useMenuPopover<HTMLButtonElement>();
+
+  const menuItems: MenuItem[] = [
+    {
+      icon: ManageHistoryRounded,
+      name: t('ModelCard.ViewDetailsItem'),
+      onClick: onViewDetails,
+    },
+  ];
+
+  const handleEnabledChange = (
+    _: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean,
+  ) => {
+    changeModelStatus({
+      status: checked ? ModelStatus.ENABLED : ModelStatus.DISABLED,
+    });
+  };
 
   return (
     <Card sx={styles.root}>
@@ -59,7 +84,16 @@ const ModelCard = (props: ModelCardProps) => {
         </Stack>
         <Stack direction="row" alignItems="center" spacing={2} flex={0.33}>
           <Stack spacing={0.5}>
-            <Switch color="success" size="small" checked={enabled} />
+            <Switch
+              color="success"
+              size="small"
+              checked={
+                isPending
+                  ? variables.status === ModelStatus.ENABLED
+                  : status === ModelStatus.ENABLED
+              }
+              onChange={handleEnabledChange}
+            />
             <Typography variant="caption">
               {t('ModelCard.EnabledLabel')}
             </Typography>
@@ -75,18 +109,8 @@ const ModelCard = (props: ModelCardProps) => {
           open={open}
           anchorEl={anchorEl}
           onClose={closeMenu}
-          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-        >
-          <MenuItem onClick={onViewDetails}>
-            <ListItemIcon>
-              <ManageHistoryRounded fontSize="small" />
-            </ListItemIcon>
-            <Typography variant="body2">
-              {t('ModelCard.ViewDetailsItem')}
-            </Typography>
-          </MenuItem>
-        </Menu>
+          items={menuItems}
+        />
       </CardContent>
     </Card>
   );

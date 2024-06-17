@@ -4,6 +4,7 @@ const DiagnosticQueryKey = {
   GET_ALL_DIAGNOSTICS: [DIAGNOSTICS_QUERY_KEY_PREFIX, 'getAllDiagnostics'],
   GET_DIAGNOSTIC_MODELS: [DIAGNOSTICS_QUERY_KEY_PREFIX, 'getDiagnosticModels'],
   GET_MODEL: [DIAGNOSTICS_QUERY_KEY_PREFIX, 'getModel'],
+  CHANGE_MODEL_STATUS: [DIAGNOSTICS_QUERY_KEY_PREFIX, 'changeModelStatus'],
 } as const;
 
 export { DiagnosticQueryKey };

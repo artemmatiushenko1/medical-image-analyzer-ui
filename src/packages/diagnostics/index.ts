@@ -10,6 +10,7 @@ export {
   type CreateModelRequest,
   type ModelVersion,
   type CreateModelVersionRequest,
+  type ChangeModelStatusRequest,
 } from './types';
 export {
   createModelSchema,

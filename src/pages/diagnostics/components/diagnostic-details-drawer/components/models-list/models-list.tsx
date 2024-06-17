@@ -1,4 +1,4 @@
-import { Model, ModelStatus } from '@/packages/diagnostics';
+import { Model } from '@/packages/diagnostics';
 import { Box, Stack, Typography } from '@mui/material';
 import { MAX_MODELS_LOADING_PREVIEWS } from './constants';
 import { ModelCard } from '../model-card';
@@ -74,8 +74,9 @@ const ModelsList = () => {
               <ModelCard
                 name={model.name}
                 key={model.id}
+                id={model.id}
                 version={model.currentVersion?.version}
-                enabled={model.status === ModelStatus.ENABLED}
+                status={model.status}
                 onViewDetails={() => handleViewModelDetails(model)}
               />
             ),
