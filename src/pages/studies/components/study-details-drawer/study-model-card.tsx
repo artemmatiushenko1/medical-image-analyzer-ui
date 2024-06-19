@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 type StudyModelCardProps = {
   modelName: string;
-  version: number;
+  version?: number;
 };
 
 const StudyModelCard = (props: StudyModelCardProps) => {
@@ -27,14 +27,16 @@ const StudyModelCard = (props: StudyModelCardProps) => {
               {t('StudyModelCard.Name')}
             </Typography>
           </Stack>
-          <Stack sx={{ marginLeft: 'auto' }}>
-            <Typography variant="body2" textAlign="right">
-              {formatVersionString(version)}
-            </Typography>
-            <Typography variant="caption">
-              {t('StudyModelCard.Version')}
-            </Typography>
-          </Stack>
+          {version && (
+            <Stack sx={{ marginLeft: 'auto' }}>
+              <Typography variant="body2" textAlign="right">
+                {formatVersionString(version)}
+              </Typography>
+              <Typography variant="caption">
+                {t('StudyModelCard.Version')}
+              </Typography>
+            </Stack>
+          )}
         </Stack>
       </Stack>
     </Paper>

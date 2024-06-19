@@ -23,6 +23,7 @@ export type MenuItem = {
   justify?: CSSProperties['justifyContent'];
   injectDividerAfter?: boolean;
   loading?: boolean;
+  disabled?: boolean;
 };
 
 export type MenuProps = {
@@ -83,13 +84,13 @@ const Menu = (props: MenuProps) => {
     >
       {header}
       {items.map((item, index) => {
-        const { onClick, injectDividerAfter, loading } = item;
+        const { onClick, injectDividerAfter, loading, disabled } = item;
 
         return [
           <MenuItem
             key={index}
             onClick={onClick}
-            disabled={loading}
+            disabled={loading || disabled}
             sx={{ width: '100%' }}
           >
             {getMenuItemContent(item)}

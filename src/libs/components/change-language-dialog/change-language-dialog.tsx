@@ -56,7 +56,7 @@ const ChangeLanguageDialog = (props: ChangeLanguageDialogProps) => {
     >
       <Dialog.Title>
         <Box sx={styles.title}>
-          <HighlightedIcon iconElement={<LanguageRounded />} />
+          <HighlightedIcon iconElement={<LanguageRounded />} rounded />
           <Typography variant="h6">{t('Language')}</Typography>
         </Box>
       </Dialog.Title>

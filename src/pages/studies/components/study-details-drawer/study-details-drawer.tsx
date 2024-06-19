@@ -158,11 +158,14 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
               <Stack gap={3}>
                 <Stack gap={2}>
                   <Typography variant="subtitle2">Diagnostic</Typography>
-                  <StudyDiagnosticCard name="Lime disease detection" />
+                  <StudyDiagnosticCard name={study.type.name} />
                   <Typography variant="subtitle2">
                     {t('StudyDetails.AiModel')}
                   </Typography>
-                  <StudyModelCard modelName={'Model name'} version={2} />
+                  <StudyModelCard
+                    modelName={study.model.name}
+                    version={study.model.currentVersion?.version}
+                  />
                 </Stack>
                 <Stack gap={2}>
                   {study?.confidence && (

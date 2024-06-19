@@ -92,6 +92,7 @@ const StudyCard = (props: StudyCardProps) => {
       </Box>
       <StudyCardActions
         studyId={id}
+        status={status}
         anchorEl={menuAchorEl}
         open={menuOpen}
         onClose={closeMenu}
