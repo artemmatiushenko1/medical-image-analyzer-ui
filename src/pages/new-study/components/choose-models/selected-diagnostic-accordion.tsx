@@ -14,8 +14,10 @@ import {
   MenuItem,
   Select,
   SelectProps,
+  Stack,
   Tooltip,
   Typography,
+  alpha,
 } from '@mui/material';
 import { selectedDiagnosticAccordion as styles } from '../choose-diagnostics/styles';
 import { useId } from 'react';
@@ -23,6 +25,7 @@ import { useNewStudyStore } from '@/pages/new-study/store';
 import { heather } from '@/libs/theme/colors';
 import { useTranslation } from 'react-i18next';
 import { Model } from '@/packages/diagnostics';
+import { formatVersionString } from '@/libs/helpers';
 
 type SelectedDiagnosticAccordionProps = {
   id: string;
@@ -163,11 +166,63 @@ const SelectedDiagnosticAccordion = (
                   </Box>
                 )}
               >
-                {availableModels.map(({ id, name }) => (
-                  <MenuItem key={id} value={id}>
-                    <Typography variant="body2">{name}</Typography>
-                  </MenuItem>
-                ))}
+                {availableModels.map(
+                  ({ id, name, description, currentVersion }) => (
+                    <MenuItem key={id} value={id}>
+                      <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        width="100%"
+                        alignItems="center"
+                      >
+                        <Stack>
+                          <Typography variant="body2">{name}</Typography>
+                          <Typography variant="caption">
+                            {description}
+                          </Typography>
+                        </Stack>
+                        <Box>
+                          <Chip
+                            sx={{
+                              color: ({ palette }) => palette.primary.main,
+                              backgroundColor: ({ palette }) =>
+                                alpha(palette.primary.main, 0.1),
+                              border: ({ palette }) =>
+                                `1px solid ${palette.primary.main}`,
+                            }}
+                            color="primary"
+                            label={
+                              <Stack
+                                direction="row"
+                                alignItems="center"
+                                gap={1}
+                              >
+                                <Box
+                                  sx={{
+                                    width: '6px',
+                                    height: '6px',
+                                    backgroundColor: 'currentColor',
+                                    borderRadius: '100px',
+                                  }}
+                                />
+                                {currentVersion && (
+                                  <Typography
+                                    fontSize="inherit"
+                                    color="text.primary"
+                                  >
+                                    {formatVersionString(
+                                      currentVersion.version,
+                                    )}
+                                  </Typography>
+                                )}
+                              </Stack>
+                            }
+                          />
+                        </Box>
+                      </Stack>
+                    </MenuItem>
+                  ),
+                )}
               </Select>
             </FormControl>
           </Box>

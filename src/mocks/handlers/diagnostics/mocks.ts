@@ -84,7 +84,7 @@ const MOCK_MODELS: Model[] = [
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
     status: ModelStatus.ENABLED,
-    description: null,
+    description: 'Tensorflow Custom model for Melanoma',
     queueName: crypto.randomUUID(),
     type: MOCK_DIAGNOSTICS[2],
     versions: MOCK_MODEL_VERSIONS,

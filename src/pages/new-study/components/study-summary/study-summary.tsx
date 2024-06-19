@@ -4,6 +4,7 @@ import { Box, Chip, Paper, Stack, TextField, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useTranslation } from 'react-i18next';
 import { Diagnostic, Model } from '@/packages/diagnostics';
+import { formatVersionString } from '@/libs/helpers';
 
 type StudySummaryProps = {
   diagnosticsById: Record<string, Diagnostic>;
@@ -104,11 +105,15 @@ const StudySummary = (props: StudySummaryProps) => {
                   {selectedModelIds[diagnostic.id]?.map((modelId) => {
                     const model = modelsById[modelId];
 
+                    if (!model) return;
+
                     return (
                       <Chip
                         key={model?.id}
                         sx={styles.modelSettingChip}
-                        label={model?.name}
+                        label={`${model?.name} - ${formatVersionString(
+                          model.currentVersion?.version ?? 0,
+                        )}`}
                       />
                     );
                   })}
