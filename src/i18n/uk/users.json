@@ -22,10 +22,10 @@
   "AddNewUserDrawer": {
     "Title": "Додати користувача",
     "Caption": "Будь ласка, заповність форму нижче, щоб додати нового користувача до системи.",
-    "FirstNameLabel": "Імʼя",
-    "FirstNamePlaceholder": "Введіть імʼя",
     "LastNameLabel": "Прізвище",
     "LastNamePlaceholder": "Введіть прізвище",
-    "EmailAddressLabel": "Електронна пошта"
+    "EmailAddressLabel": "Електронна пошта",
+    "NameLabel": "Імʼя",
+    "NamePlaceholder": "Введіть імʼя (наприклад Петро Петрович)"
   }
 }

@@ -48,15 +48,13 @@ const InviteUserForm = () => {
       }}
     >
       <FormControl fullWidth>
-        <FormLabel sx={{ mb: 1 }}>
-          {t('AddNewUserDrawer.FirstNameLabel')}
-        </FormLabel>
+        <FormLabel sx={{ mb: 1 }}>{t('AddNewUserDrawer.NameLabel')}</FormLabel>
         <Controller
           control={control}
           name="name"
           render={({ field }) => (
             <TextField
-              placeholder={t('AddNewUserDrawer.FirstNamePlaceholder')}
+              placeholder={t('AddNewUserDrawer.NamePlaceholder')}
               {...field}
               error={Boolean(errors.name)}
               helperText={errors.name?.message}
@@ -64,24 +62,6 @@ const InviteUserForm = () => {
           )}
         />
       </FormControl>
-      {/*TODO: split name by two fields*/}
-      {/* <FormControl fullWidth>
-        <FormLabel sx={{ mb: 1 }}>
-          {t('AddNewUserDrawer.LastNameLabel')}
-        </FormLabel>
-        <Controller
-          control={control}
-          name="lastName"
-          render={({ field }) => (
-            <TextField
-              placeholder={t('AddNewUserDrawer.LastNamePlaceholder')}
-              {...field}
-              error={Boolean(errors.lastName)}
-              helperText={errors.lastName?.message}
-            />
-          )}
-        />
-      </FormControl> */}
       <FormControl fullWidth>
         <FormLabel sx={{ mb: 1 }}>
           {t('AddNewUserDrawer.EmailAddressLabel')}

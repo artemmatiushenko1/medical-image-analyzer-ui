@@ -22,8 +22,8 @@
   "AddNewUserDrawer": {
     "Title": "Add a new user",
     "Caption": "Please fill out the form below to add a new user to the system.",
-    "FirstNameLabel": "First name",
-    "FirstNamePlaceholder": "Enter first name",
+    "NameLabel": "Name",
+    "NamePlaceholder": "Enter name (e.g. John Doe)",
     "LastNameLabel": "Last name",
     "LastNamePlaceholder": "Enter last name",
     "EmailAddressLabel": "Email address"
