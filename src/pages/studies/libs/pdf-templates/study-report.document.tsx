@@ -18,6 +18,7 @@ import { useConfidenceDescriptors } from '../hooks';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { useTranslation } from 'react-i18next';
+import { formatVersionString } from '@/libs/helpers';
 
 Font.register({
   family: 'Roboto',
@@ -158,10 +159,10 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
         <View style={styles.section}>
           <Text style={styles.subtitle}>{t('StudyReport.Summary')}</Text>
           <View style={styles.table}>
-            {/* <TableRow
+            <TableRow
               labelColWidth={labelColWidth}
               label={t('StudyReport.DiagnosticType')}
-              value={study.diagnostic.name}
+              value={study.type.name}
             />
             <TableRow
               labelColWidth={labelColWidth}
@@ -171,7 +172,7 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
                   ? formatVersionString(study.model.currentVersion?.version)
                   : ''
               }`}
-            /> */}
+            />
             <TableRow
               labelColWidth={labelColWidth}
               label={t('StudyReport.CompletedAt')}

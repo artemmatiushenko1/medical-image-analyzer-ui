@@ -157,7 +157,9 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
             {study?.status === StudyStatus.COMPLETED && (
               <Stack gap={3}>
                 <Stack gap={2}>
-                  <Typography variant="subtitle2">Diagnostic</Typography>
+                  <Typography variant="subtitle2">
+                    {t('StudyDetails.Diagnostic')}
+                  </Typography>
                   <StudyDiagnosticCard name={study.type.name} />
                   <Typography variant="subtitle2">
                     {t('StudyDetails.AiModel')}

@@ -32,7 +32,8 @@
     "Description": "Опис",
     "Status": "Стан",
     "NoResultsYet": "Результати поки відсутні",
-    "Results": "Результати"
+    "Results": "Результати",
+    "Diagnostic": "Діагностика"
   },
   "Confidence": {
     "Negative": {

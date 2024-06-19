@@ -32,7 +32,8 @@
     "Description": "Description",
     "Status": "Status",
     "NoResultsYet": "No results yet",
-    "Results": "Results"
+    "Results": "Results",
+    "Diagnostic": "Diagnostic"
   },
   "Confidence": {
     "Negative": {
