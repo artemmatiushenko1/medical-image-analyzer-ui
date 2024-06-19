@@ -148,10 +148,10 @@ const getComponentsOverrides = (palette: Theme['palette']) =>
         root: {
           fontSize: '14px',
           color: palette.neutral.dark,
-          '&:not(.MuiInputLabel-shrink)': {
-            opacity: 0.5,
-            color: palette.mode === 'dark' ? heather[400] : heather[700],
-          },
+          // '&:not(.MuiInputLabel-shrink)': {
+          //   opacity: 0.5,
+          //   color: palette.mode === 'dark' ? heather[400] : heather[700],
+          // },
         },
       },
     },

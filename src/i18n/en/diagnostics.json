@@ -42,14 +42,22 @@
         "ModelNameLabel": "Model name",
         "ModelNamePlaceholder": "Enter model name",
         "SuccessMessageTitle": "New model was successfully uploaded!",
-        "SuccessMessageDescription": "You can now manage it through <br />diagnostic details view."
+        "SuccessMessageDescription": "You can now manage it through <br />diagnostic details view.",
+        "DescriptionLabel": "Description",
+        "DescriptionHelperText": "Provide any additional information about AI model being uploaded",
+        "Description": {
+          "Placeholder": "Enter description (optional)"
+        }
       },
       "ModelDetails": {
         "VersionHistoryLabel": "Version history",
         "VersionHistoryCaption": "All the existing model versions listed below.",
         "CurrentVersionButton": "Current",
         "RestoreVersionButton": "Restore",
-        "UploadNewVersionButton": "Upload new version"
+        "UploadNewVersionButton": "Upload new version",
+        "QueueNameCopiedMessage": "Model queue name copied to clipboard",
+        "Queue": "Queue",
+        "QueueDescription": "Name of the queue that server this model"
       }
     }
   },

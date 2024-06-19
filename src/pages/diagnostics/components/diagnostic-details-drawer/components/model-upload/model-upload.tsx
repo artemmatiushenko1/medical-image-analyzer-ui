@@ -32,8 +32,8 @@ const ModelUpload = () => {
     control,
     formState: { errors, isDirty, isValid, isSubmitted },
     handleSubmit: sumbit,
-  } = useForm<Omit<CreateModelRequest, 'type' | 'queueName'> & { file: File }>({
-    defaultValues: { name: '' },
+  } = useForm<Omit<CreateModelRequest, 'type'> & { file: File }>({
+    defaultValues: { name: '', description: '' },
     resolver: joiResolver(createModelSchema),
   });
 
@@ -77,6 +77,32 @@ const ModelUpload = () => {
                   variant="outlined"
                   fullWidth
                   placeholder={t('ModelNamePlaceholder')}
+                  {...field}
+                />
+              )}
+            />
+          </Stack>
+          <Stack spacing={1}>
+            <Stack>
+              <Typography variant="subtitle2">
+                {t('DescriptionLabel')}
+              </Typography>
+              <Typography variant="caption">
+                {t('DescriptionHelperText')}
+              </Typography>
+            </Stack>
+            <Controller
+              control={control}
+              name="description"
+              render={({ field }) => (
+                <TextField
+                  error={Boolean(errors.description)}
+                  helperText={
+                    errors.description ? errors.description.message : undefined
+                  }
+                  variant="outlined"
+                  fullWidth
+                  placeholder={t('Description.Placeholder')}
                   {...field}
                 />
               )}

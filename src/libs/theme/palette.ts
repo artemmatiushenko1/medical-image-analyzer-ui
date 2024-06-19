@@ -6,7 +6,6 @@ import {
   cinnabar,
   emerald,
   heather,
-  sky,
 } from './colors';
 import { alpha } from '@mui/material';
 

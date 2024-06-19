@@ -2,7 +2,6 @@ import { HttpResponse, delay, http } from 'msw';
 import { MOCK_DIAGNOSTICS, MOCK_MODELS, MOCK_MODEL_VERSIONS } from './mocks';
 import {
   CreateDiagnosticRequest,
-  CreateModelVersionRequest,
   Diagnostic,
   ModelStatus,
   ModelVersion,
@@ -92,19 +91,20 @@ const handlers = [
     return HttpResponse.json(newModel);
   }),
 
-  http.post('/models/:id/versions', async ({ request }) => {
+  http.post('/diagnostic-models/:id/versions', async ({ request }) => {
     await delay('real');
 
-    const data = (await request.json()) as CreateModelVersionRequest;
+    const data = await request.formData();
 
-    const newVersion: ModelVersion = {
-      ...data,
+    const newVersion = {
+      name: data.get('name'),
+      description: data.get('description'),
       id: crypto.randomUUID(),
       createdAt: dayjs().toISOString(),
       version: 5,
       status: ModelVersionStatus.ENABLED,
       updatedAt: dayjs().toISOString(),
-    };
+    } as ModelVersion;
 
     modelVersions.unshift(newVersion);
 

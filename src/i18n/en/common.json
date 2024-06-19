@@ -12,5 +12,6 @@
     "ChooseFileLabel": "Choose file",
     "SelectedFileLabel": "Selected file"
   },
-  "Minimise": "Minimise"
+  "Minimise": "Minimise",
+  "CopyToClipboard": "Copy to clipboard"
 }

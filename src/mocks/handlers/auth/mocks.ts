@@ -5,7 +5,7 @@ const MOCK_USER: User = {
   id: '1',
   email: 'artom.matyushenko@gmail.com',
   name: 'Artem Matiushenko',
-  role: Role.USER,
+  role: Role.ADMIN,
   createdAt: dayjs().format(),
   updatedAt: dayjs().format(),
   sexAtBirth: null,
