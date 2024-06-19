@@ -168,14 +168,12 @@ const Studies = () => {
           />
         ) : null}
       </Stack>
-      {/* {selectedStudyId && ( */}
       <StudyDetailsDrawer
         open={isDetailsDrawerOpen}
         onClose={closeDetailsDrawer}
         studyId={selectedStudyId}
         onCloseFinished={handleDetailsDrawerCloseFinised}
       />
-      {/* )} */}
     </Box>
   );
 };
