@@ -40,7 +40,7 @@ const handlers = [
     return HttpResponse.json(modelVersions);
   }),
 
-  http.post('/diagnostics', async ({ request }) => {
+  http.post('/diagnostic-types', async ({ request }) => {
     await delay('real');
 
     const data = (await request.json()) as CreateDiagnosticRequest;
@@ -51,7 +51,6 @@ const handlers = [
       ...data,
       createdAt: dayjs().format(),
       updatedAt: dayjs().format(),
-      description: null,
     };
 
     diagnostics.push(newDiagnostic);

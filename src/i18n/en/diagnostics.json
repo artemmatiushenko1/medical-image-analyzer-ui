@@ -8,8 +8,9 @@
   "NewDiagnosticButton": "Add New Diagnostic",
   "NewDiagnosticDialog": {
     "Title": "New Diagnostic",
-    "DiagnosticNameLabel": "Enter diagnostic name",
-    "DiagnosticNameHelperText": "E.g. Melanoma diagnosis, COVID-19 detection"
+    "DiagnosticNameLabel": "Name",
+    "DiagnosticNameHelperText": "E.g. Melanoma diagnosis, COVID-19 detection",
+    "DiagnosticDescriptionLabel": "Description"
   },
   "DiagnosticsDrawer": {
     "Stages": {
@@ -54,7 +55,8 @@
   },
   "DiagnosticsTable": {
     "Columns": {
-      "Name": "Name"
+      "Name": "Name",
+      "Description": "Description"
     },
     "RowsPerPage": "Rows per page",
     "LabelDisplayedRows": "{{from}} - {{to}} of {{count}}"

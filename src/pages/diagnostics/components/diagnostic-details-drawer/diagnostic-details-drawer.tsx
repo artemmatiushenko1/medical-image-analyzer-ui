@@ -7,6 +7,7 @@ import {
   IconButton,
   Stack,
   Tooltip,
+  Typography,
 } from '@mui/material';
 import { ModelDetails, ModelUpload, ModelsList } from './components';
 import { ValueOf } from '@/libs/types';
@@ -121,6 +122,13 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
         </Dialog.Title>
       </Stack>
       <Divider />
+      {selectedDiagnostic?.description && stagesStack.length <= 1 && (
+        <Stack sx={{ padding: '15px 24px' }}>
+          <Typography variant="caption">
+            {selectedDiagnostic.description}
+          </Typography>
+        </Stack>
+      )}
       {stagesStack.length > 1 && (
         <Box sx={{ padding: '15px 24px' }}>
           <Breadcrumbs

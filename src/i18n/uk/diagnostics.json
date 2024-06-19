@@ -9,7 +9,8 @@
   "NewDiagnosticDialog": {
     "Title": "Нова Діагностика",
     "DiagnosticNameLabel": "Введіть назву діагностики",
-    "DiagnosticNameHelperText": "Наприклад: Діагностика меланоми, Виявлення COVID-19..."
+    "DiagnosticNameHelperText": "Наприклад: Діагностика меланоми, Виявлення COVID-19...",
+    "DiagnosticDescriptionLabel": "Опис"
   },
   "DiagnosticsDrawer": {
     "Stages": {
@@ -54,9 +55,12 @@
   },
   "DiagnosticsTable": {
     "Columns": {
-      "Name": "Назва"
+      "Name": "Назва",
+      "Description": "Опис"
     },
     "RowsPerPage": "Рядків на сторінці",
     "LabelDisplayedRows": "{{from}} - {{to}} з {{count}}"
-  }
+  },
+  "NoModels": "Моделі відсутні",
+  "NoModelsDescription": "Будь ласка, завантажте першу модель, щоб зробити цю діагностику загальнодоступною."
 }

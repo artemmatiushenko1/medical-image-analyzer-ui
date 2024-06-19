@@ -3,7 +3,7 @@ import {
   CreateDiagnosticRequest,
   createDiagnosticSchema,
 } from '@/packages/diagnostics';
-import { Stack, TextField } from '@mui/material';
+import { Stack, TextField, Typography } from '@mui/material';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useCreateDiagnostic } from '../../libs/queries';
@@ -27,7 +27,7 @@ const NewDiagnosticForm = (props: NewDiagnosticFormProps) => {
     handleSubmit: submit,
     formState: { errors, isValid, isSubmitted },
   } = useForm<CreateDiagnosticRequest>({
-    defaultValues: { name: '' },
+    defaultValues: { name: '', description: '' },
     resolver: joiResolver(createDiagnosticSchema),
   });
 
@@ -39,7 +39,10 @@ const NewDiagnosticForm = (props: NewDiagnosticFormProps) => {
 
   return (
     <Stack component="form" spacing={2} onSubmit={submit(handleSubmit)}>
-      <Stack direction="row">
+      <Typography variant="caption">
+        Please fill in this form to create new diagnostic type
+      </Typography>
+      <Stack gap={2}>
         <Controller
           name="name"
           control={control}
@@ -48,6 +51,7 @@ const NewDiagnosticForm = (props: NewDiagnosticFormProps) => {
               fullWidth
               label={t('DiagnosticNameLabel')}
               variant="outlined"
+              placeholder="Enter name"
               helperText={
                 errors.name
                   ? errors.name.message
@@ -55,6 +59,25 @@ const NewDiagnosticForm = (props: NewDiagnosticFormProps) => {
               }
               {...field}
               error={Boolean(errors.name)}
+            />
+          )}
+        />
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              fullWidth
+              multiline
+              rows={3}
+              label="Description"
+              placeholder="Enter description (optional)"
+              variant="outlined"
+              helperText={
+                errors.description ? errors.description.message : null
+              }
+              {...field}
+              error={Boolean(errors.description)}
             />
           )}
         />
