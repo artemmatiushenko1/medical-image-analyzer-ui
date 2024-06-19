@@ -63,18 +63,14 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
       <>
         <DialogTitle>
           <Box sx={styles.titleInner}>
-            <Box>
-              <Typography
-                display="inline-block"
-                fontSize="18px"
-                fontWeight={600}
-              >
-                {study.name}
-              </Typography>
-              <Typography variant="caption" fontSize="14px" display="block">
-                {study.description ?? 'Study Description'}
-              </Typography>
-            </Box>
+            <Typography
+              display="inline-block"
+              fontSize="18px"
+              fontWeight={600}
+              gutterBottom
+            >
+              {study.name}
+            </Typography>
             <Tooltip title={tCommon('Minimise')}>
               <IconButton
                 onClick={onClose}
@@ -89,18 +85,35 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
         <DialogContent>
           <Stack gap={3}>
             <Box sx={styles.meta}>
-              <StudyStatusChip status={study.status} />
-              <DetailItemText iconComponent={EventNote}>
-                {dayjs(study?.createdAt).format(
-                  DateFormat.YEAR_MONTH_DAY_DASHES,
-                )}
-              </DetailItemText>
+              <Stack>
+                <Typography variant="caption" fontWeight={500} textAlign="left">
+                  {t('StudyDetails.Status')}
+                </Typography>
+                <StudyStatusChip status={study.status} />
+              </Stack>
+              <Stack>
+                <Typography
+                  variant="caption"
+                  fontWeight={500}
+                  textAlign="right"
+                >
+                  {t('StudyDetails.DateOfCreation')}
+                </Typography>
+                <DetailItemText iconComponent={EventNote}>
+                  {dayjs(study?.createdAt).format(
+                    DateFormat.DAY_ABBREV_MONTH_YEAR,
+                  )}
+                </DetailItemText>
+              </Stack>
             </Box>
+            <Stack gap={1}>
+              <Typography variant="subtitle2">
+                {t('StudyDetails.Description')}
+              </Typography>
+              <Typography variant="caption">{study.description}</Typography>
+            </Stack>
             <Stack gap={2}>
-              <Typography
-                variant="subtitle2"
-                sx={{ color: ({ palette }) => palette.neutral.dark }}
-              >
+              <Typography variant="subtitle2">
                 {t('StudyDetails.Image')}
               </Typography>
               <Box sx={styles.imageWrapper}>
@@ -165,10 +178,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                 <Stack gap={2}>
                   {study?.confidence && (
                     <>
-                      <Typography
-                        variant="subtitle2"
-                        sx={{ color: ({ palette }) => palette.neutral.dark }}
-                      >
+                      <Typography variant="subtitle2">
                         {t('StudyDetails.Confidence')}
                       </Typography>
                       <ConfidenceWidget confidence={study?.confidence} />
@@ -176,10 +186,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                   )}
                 </Stack>
                 <Stack gap={2}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{ color: ({ palette }) => palette.neutral.dark }}
-                  >
+                  <Typography variant="subtitle2">
                     {t('StudyDetails.Report')}
                   </Typography>
                   <Paper sx={styles.reportArea}>

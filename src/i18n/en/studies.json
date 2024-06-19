@@ -27,7 +27,10 @@
     "NoResult": "There's no result available yet. The image is still being examined by AI.",
     "Confidence": "Confidence",
     "Report": "Report",
-    "AiModel": "AI Model"
+    "AiModel": "AI Model",
+    "DateOfCreation": "Date of creation",
+    "Description": "Description",
+    "Status": "Status"
   },
   "Confidence": {
     "Negative": {

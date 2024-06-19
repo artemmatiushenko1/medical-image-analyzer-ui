@@ -12,6 +12,7 @@ const styles = createStyleSheet({
     justifyContent: 'space-between',
   },
   meta: {
+    width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
   },
