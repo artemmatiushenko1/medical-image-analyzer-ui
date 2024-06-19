@@ -31,8 +31,11 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
 
   const { t } = useTranslation(['Diagnostics', 'Common']);
 
-  const { mutate: changeModelVersionStatus, isPending } =
-    useChangeModelVersionStatus();
+  const {
+    mutate: changeModelVersionStatus,
+    isPending,
+    variables,
+  } = useChangeModelVersionStatus();
 
   const handleDisableVersion = (versionId: string) => {
     changeModelVersionStatus({
@@ -104,7 +107,11 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
               {version.version > currentVersion.version && (
                 <Button
                   onClick={() => handleEnableVersion(version.id)}
-                  isLoading={isPending}
+                  isLoading={
+                    isPending &&
+                    variables.versionId === version.id &&
+                    variables.status === ModelVersionStatus.ENABLED
+                  }
                 >
                   {t(
                     'DiagnosticsDrawer.Stages.ModelDetails.RestoreVersionButton',
@@ -115,7 +122,11 @@ const ModelVersionHistory = (props: ModelVersionHistoryProps) => {
                 <Button
                   color="error"
                   onClick={() => handleDisableVersion(version.id)}
-                  isLoading={isPending && version.id === currentVersion.id}
+                  isLoading={
+                    isPending &&
+                    version.id === variables.versionId &&
+                    variables.status === ModelVersionStatus.DISABLED
+                  }
                 >
                   {t('Disable', { ns: 'Common' })}
                 </Button>
