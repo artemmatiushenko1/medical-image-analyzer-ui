@@ -4,3 +4,4 @@ export { DownloadIcon } from './donwload.icon';
 export { NoResultsIcon } from './no-results.icon';
 export { NoModelsIcon } from './no-models.icon';
 export { CopyIcon } from './copy.icon';
+export { NoStudyResultsIcon } from './no-study-results.icon';

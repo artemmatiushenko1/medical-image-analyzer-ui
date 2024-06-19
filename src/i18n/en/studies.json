@@ -30,7 +30,9 @@
     "AiModel": "AI Model",
     "DateOfCreation": "Date of creation",
     "Description": "Description",
-    "Status": "Status"
+    "Status": "Status",
+    "NoResultsYet": "No results yet",
+    "Results": "Results"
   },
   "Confidence": {
     "Negative": {

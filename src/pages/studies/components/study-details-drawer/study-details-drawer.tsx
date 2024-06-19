@@ -23,6 +23,8 @@ import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { useSaveStudyReport } from '../../libs/hooks';
 import { useGetStudy } from '../../libs/queries';
+import { EmptyState } from '@/libs/components';
+import { NoStudyResultsIcon } from '@/libs/components/icons';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -155,25 +157,32 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
             </Paper> */}
             </Stack>
             {study?.status === StudyStatus.PENDING && (
-              <Paper
-                sx={{
-                  p: 2,
-                  borderRadius: ({ shape }) => shape.borderRadius,
-                }}
-              >
-                <Stack
-                  sx={{ textAlign: 'center', alignItems: 'center', gap: 2 }}
+              <Stack gap={2}>
+                <Typography variant="subtitle2">
+                  {t('StudyDetails.Results')}
+                </Typography>
+                <Paper
+                  sx={{
+                    p: 2,
+                    borderRadius: ({ shape }) => shape.borderRadius,
+                  }}
                 >
-                  <CircularProgress
-                    disableShrink
-                    size={20}
-                    sx={{ animationDuration: '550ms' }}
-                  />
-                  <Typography variant="caption">
-                    {t('StudyDetails.NoResult')}
-                  </Typography>
-                </Stack>
-              </Paper>
+                  <Stack
+                    sx={{ textAlign: 'center', alignItems: 'center', gap: 2 }}
+                  >
+                    <EmptyState
+                      icon={<NoStudyResultsIcon />}
+                      title={t('StudyDetails.NoResultsYet')}
+                      description={t('StudyDetails.NoResult')}
+                    />
+                    <CircularProgress
+                      disableShrink
+                      size={20}
+                      sx={{ animationDuration: '550ms' }}
+                    />
+                  </Stack>
+                </Paper>
+              </Stack>
             )}
             {study?.status === StudyStatus.COMPLETED && (
               <Stack gap={3}>
