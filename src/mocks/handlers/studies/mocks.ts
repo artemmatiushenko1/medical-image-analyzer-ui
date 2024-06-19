@@ -1,10 +1,11 @@
 import { Study, StudyStatus } from '@/packages/studies';
 import dayjs from 'dayjs';
+import { MOCK_DIAGNOSTICS, MOCK_MODELS } from '../diagnostics/mocks';
 
 const MOCK_STUDY_SUMMARIES: Study[] = [
   {
     id: '3465',
-    name: 'Детекція пневмнонії',
+    name: 'Детекція пневмонії',
     description:
       'Дослідження після захворювання. Дослідження після захворювання. Дослідження після захворювання',
     status: StudyStatus.COMPLETED,
@@ -14,6 +15,8 @@ const MOCK_STUDY_SUMMARIES: Study[] = [
     createdAt: dayjs().toISOString(),
     updatedAt: dayjs().toISOString(),
     confidence: 0.856,
+    type: MOCK_DIAGNOSTICS[0],
+    model: MOCK_MODELS[1],
   },
   {
     id: '3467',
@@ -25,6 +28,8 @@ const MOCK_STUDY_SUMMARIES: Study[] = [
     updatedAt: dayjs().toISOString(),
     status: StudyStatus.COMPLETED,
     confidence: 0.1,
+    type: MOCK_DIAGNOSTICS[3],
+    model: MOCK_MODELS[2],
   },
   {
     id: '3466',
@@ -35,6 +40,8 @@ const MOCK_STUDY_SUMMARIES: Study[] = [
     },
     createdAt: dayjs().toISOString(),
     updatedAt: dayjs().toISOString(),
+    type: MOCK_DIAGNOSTICS[1],
+    model: MOCK_MODELS[3],
   },
   {
     id: '3468',
@@ -46,6 +53,8 @@ const MOCK_STUDY_SUMMARIES: Study[] = [
     createdAt: dayjs().toISOString(),
     updatedAt: dayjs().toISOString(),
     confidence: 0.4,
+    type: MOCK_DIAGNOSTICS[2],
+    model: MOCK_MODELS[0],
   },
 ];
 

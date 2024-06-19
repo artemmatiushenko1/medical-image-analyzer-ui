@@ -1,5 +1,6 @@
 import { ValueOf } from '@/libs/types';
 import { StudyStatus } from '../enums';
+import { Diagnostic, Model } from '@/packages/diagnostics';
 
 type File = {
   src: string;
@@ -17,6 +18,8 @@ type StudySummary = {
 
 type Study = StudySummary & {
   confidence?: number;
+  type: Diagnostic;
+  model: Model;
 };
 
 export { type Study, type StudySummary };

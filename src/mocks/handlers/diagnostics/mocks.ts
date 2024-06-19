@@ -10,7 +10,7 @@ import {
 const MOCK_DIAGNOSTICS: Diagnostic[] = [
   {
     id: '2',
-    name: 'Детекція пневмнонії',
+    name: 'Детекція пневмонії',
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
     description: 'Some description of diagnostic',
