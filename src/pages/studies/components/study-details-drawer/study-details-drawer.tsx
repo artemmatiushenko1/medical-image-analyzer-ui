@@ -25,6 +25,8 @@ import { useSaveStudyReport } from '../../libs/hooks';
 import { useGetStudy } from '../../libs/queries';
 import { EmptyState } from '@/libs/components';
 import { NoStudyResultsIcon } from '@/libs/components/icons';
+import { StudyModelCard } from './study-model-card';
+import { StudyDiagnosticCard } from './study-diagnostic-card';
 
 type StudyDetailsDrawerProps = {
   open: boolean;
@@ -124,38 +126,6 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                 <Box component="img" sx={styles.image} src={study.image.src} />
               </Box>
             </Stack>
-            <Stack gap={2}>
-              {/* <Paper sx={{ p: 2 }}>
-              <Typography
-                variant="subtitle2"
-                sx={{ color: ({ palette }) => palette.neutral.dark }}
-              >
-                {t('StudyDetails.AiModel')}
-              </Typography>
-              <Stack>
-                <Stack direction="row" gap={3} alignItems="center">
-                  <Box>
-                    <HighlightedIcon rounded iconElement={<AiModelIcon />} />
-                  </Box>
-                  <Stack>
-                    <Typography variant="body2">
-                      {study?.model?.name}
-                    </Typography>
-                    <Typography variant="caption">Name</Typography>
-                  </Stack>
-                  <Stack sx={{ marginLeft: 'auto' }}>
-                    <Typography variant="body2" textAlign="right">
-                      {study?.model.currentVersion?.version &&
-                        formatVersionString(
-                          study?.model.currentVersion.version,
-                        )}
-                    </Typography>
-                    <Typography variant="caption">Version</Typography>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Paper> */}
-            </Stack>
             {study?.status === StudyStatus.PENDING && (
               <Stack gap={2}>
                 <Typography variant="subtitle2">
@@ -186,6 +156,14 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
             )}
             {study?.status === StudyStatus.COMPLETED && (
               <Stack gap={3}>
+                <Stack gap={2}>
+                  <Typography variant="subtitle2">Diagnostic</Typography>
+                  <StudyDiagnosticCard name="Lime disease detection" />
+                  <Typography variant="subtitle2">
+                    {t('StudyDetails.AiModel')}
+                  </Typography>
+                  <StudyModelCard modelName={'Model name'} version={2} />
+                </Stack>
                 <Stack gap={2}>
                   {study?.confidence && (
                     <>

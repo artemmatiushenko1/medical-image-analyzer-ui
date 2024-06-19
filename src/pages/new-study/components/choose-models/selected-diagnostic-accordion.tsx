@@ -176,8 +176,18 @@ const SelectedDiagnosticAccordion = (
                         alignItems="center"
                       >
                         <Stack>
-                          <Typography variant="body2">{name}</Typography>
-                          <Typography variant="caption">
+                          <Typography
+                            variant="body2"
+                            maxWidth={350}
+                            sx={{ whiteSpace: 'wrap' }}
+                          >
+                            {name}
+                          </Typography>
+                          <Typography
+                            variant="caption"
+                            maxWidth={350}
+                            sx={{ whiteSpace: 'wrap' }}
+                          >
                             {description}
                           </Typography>
                         </Stack>

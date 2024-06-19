@@ -62,5 +62,12 @@
   "NoStudies": {
     "Title": "Немає досліджень",
     "Description": "Схоже ви вперше використовуєте HealthLens, <br />натисніть на кнопку зверху, щоб створити <br/>перше дослідження."
+  },
+  "StudyModelCard": {
+    "Name": "Назва",
+    "Version": "Версія"
+  },
+  "StudyDiagnosticCard": {
+    "Name": "Назва"
   }
 }

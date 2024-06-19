@@ -14,6 +14,7 @@ import {
   GetModelResponse,
 } from './types';
 import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
+import { ModelExtended } from './model-extended';
 
 class DiagnosticsApi extends HttpApi {
   getAllDiagnostics = (): Promise<GetAllDiagnosticsResponse> => {
@@ -120,13 +121,17 @@ class DiagnosticsApi extends HttpApi {
     return this.httpClient.request(options);
   };
 
-  getAvailableModels = (): Promise<GetAvailableModelsResponse> => {
+  getAvailableModels = async (): Promise<GetAvailableModelsResponse> => {
     const options = new HttpRequestOptionsBuilder()
       .get('/diagnostic-models/available')
       .authorized()
       .build();
 
-    return this.httpClient.request(options);
+    const response = await this.httpClient.request<GetAvailableModelsResponse>(
+      options,
+    );
+
+    return response.map((model) => ModelExtended.fromPlainObject(model));
   };
 }
 

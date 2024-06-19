@@ -77,10 +77,9 @@ const styles = createStyleSheet({
     pt: 3,
   },
   diagnosticsList: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gridAutoRows: 'max-content',
-    gap: 1.5,
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 3,
     overflow: 'scroll',
     padding: '2px',
     overscrollBehavior: 'contain',

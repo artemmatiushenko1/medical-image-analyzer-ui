@@ -62,5 +62,12 @@
   "NoStudies": {
     "Title": "No studies",
     "Description": "Looks like it's your first time using HealthLens, <br />click on the button above to create one."
+  },
+  "StudyModelCard": {
+    "Name": "Name",
+    "Version": "Version"
+  },
+  "StudyDiagnosticCard": {
+    "Name": "Name"
   }
 }
