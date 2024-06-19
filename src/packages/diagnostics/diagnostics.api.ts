@@ -142,6 +142,15 @@ class DiagnosticsApi extends HttpApi {
 
     return this.httpClient.request(options);
   };
+
+  deleteDiagnostic = (diagnosticId: string) => {
+    const options = new HttpRequestOptionsBuilder()
+      .delete(`/diagnostic-types/${diagnosticId}`)
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
 }
 
 export { DiagnosticsApi };

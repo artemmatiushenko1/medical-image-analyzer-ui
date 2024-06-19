@@ -1,9 +1,16 @@
 import { Loader, Table } from '@/libs/components';
-import { DataGridProps, GridColDef } from '@mui/x-data-grid';
+import {
+  DataGridProps,
+  GridActionsCellItem,
+  GridColDef,
+  GridRowParams,
+} from '@mui/x-data-grid';
 import { styles } from './styles';
 import { Diagnostic } from '@/packages/diagnostics';
 import { Trans, useTranslation } from 'react-i18next';
 import { Typography } from '@mui/material';
+import { DeleteRounded } from '@mui/icons-material';
+import { useDeleteDiagnostic } from '../../libs/queries';
 
 type DiagnosticsTable = Pick<DataGridProps, 'rows' | 'loading' | 'onRowClick'>;
 
@@ -11,6 +18,12 @@ const DiagnosticsTable = (props: DiagnosticsTable) => {
   const { loading, rows, onRowClick } = props;
 
   const { t } = useTranslation('Diagnostics');
+
+  const {
+    mutate: deleteDiagnostic,
+    isPending: isDeleteDiagnosticLoading,
+    variables: deleteDiagnosticVariables,
+  } = useDeleteDiagnostic();
 
   const columns: GridColDef<Diagnostic>[] = [
     {
@@ -31,6 +44,27 @@ const DiagnosticsTable = (props: DiagnosticsTable) => {
           {value.row.description ? value.row.description : '-'}
         </Typography>
       ),
+    },
+    {
+      type: 'actions',
+      field: 'actions',
+      getActions: (params: GridRowParams<Diagnostic>) => [
+        <GridActionsCellItem
+          key="delete"
+          className="delete-button"
+          disabled={isDeleteDiagnosticLoading}
+          icon={
+            isDeleteDiagnosticLoading &&
+            deleteDiagnosticVariables === params.row.id ? (
+              <Loader size="14px" />
+            ) : (
+              <DeleteRounded />
+            )
+          }
+          label="Delete"
+          onClick={() => deleteDiagnostic(params.row.id)}
+        />,
+      ],
     },
   ];
 

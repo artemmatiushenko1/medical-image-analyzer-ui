@@ -13,6 +13,16 @@ const styles = createStyleSheet({
     '.MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
       px: 3,
     },
+    '.MuiDataGrid-row': {
+      '.delete-button': {
+        opacity: 0,
+      },
+      '&:hover': {
+        '.delete-button': {
+          opacity: 1,
+        },
+      },
+    },
   },
 });
 
