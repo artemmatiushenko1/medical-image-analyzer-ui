@@ -106,12 +106,14 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
                 </DetailItemText>
               </Stack>
             </Box>
-            <Stack gap={1}>
-              <Typography variant="subtitle2">
-                {t('StudyDetails.Description')}
-              </Typography>
-              <Typography variant="caption">{study.description}</Typography>
-            </Stack>
+            {study.description && (
+              <Stack gap={1}>
+                <Typography variant="subtitle2">
+                  {t('StudyDetails.Description')}
+                </Typography>
+                <Typography variant="caption">{study.description}</Typography>
+              </Stack>
+            )}
             <Stack gap={2}>
               <Typography variant="subtitle2">
                 {t('StudyDetails.Image')}
