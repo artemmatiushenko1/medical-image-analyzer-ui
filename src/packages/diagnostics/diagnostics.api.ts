@@ -133,6 +133,15 @@ class DiagnosticsApi extends HttpApi {
 
     return response.map((model) => ModelExtended.fromPlainObject(model));
   };
+
+  deleteModel = (modelId: string) => {
+    const options = new HttpRequestOptionsBuilder()
+      .delete(`/diagnostic-models/${modelId}`)
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
 }
 
 export { DiagnosticsApi };

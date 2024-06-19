@@ -1,4 +1,8 @@
-import { ManageHistoryRounded, MoreVertRounded } from '@mui/icons-material';
+import {
+  DeleteRounded,
+  ManageHistoryRounded,
+  MoreVertRounded,
+} from '@mui/icons-material';
 import {
   Card,
   CardContent,
@@ -13,9 +17,13 @@ import { useMenuPopover } from '@/libs/hooks';
 import { formatVersionString } from '@/libs/helpers';
 import { useTranslation } from 'react-i18next';
 import { Menu, MenuItem } from '@/libs/components';
-import { useChangeModelStatus } from '@/pages/diagnostics/libs/queries';
+import {
+  useChangeModelStatus,
+  useDeleteModel,
+} from '@/pages/diagnostics/libs/queries';
 import { ValueOf } from '@/libs/types';
 import { ModelStatus } from '@/packages/diagnostics';
+import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 
 type ModelCardProps = {
   id: string;
@@ -29,6 +37,14 @@ type ModelCardProps = {
 const ModelCard = (props: ModelCardProps) => {
   const { id, name, version, status, onViewDetails } = props;
 
+  const selectedDiagnostic = useDiagnosticsStore(
+    (state) => state.selectedDiagnostic,
+  );
+
+  if (!selectedDiagnostic) {
+    throw new Error('Diagnostic must be set!');
+  }
+
   const { t } = useTranslation('Diagnostics', {
     keyPrefix: 'DiagnosticsDrawer.Stages.DiagnosticDetails',
   });
@@ -39,6 +55,9 @@ const ModelCard = (props: ModelCardProps) => {
     variables,
   } = useChangeModelStatus(id);
 
+  const { mutate: deleteModel, isPending: isDeleteModelLoading } =
+    useDeleteModel(selectedDiagnostic.id);
+
   const { open, openMenu, closeMenu, anchorEl } =
     useMenuPopover<HTMLButtonElement>();
 
@@ -47,6 +66,12 @@ const ModelCard = (props: ModelCardProps) => {
       icon: ManageHistoryRounded,
       name: t('ModelCard.ViewDetailsItem'),
       onClick: onViewDetails,
+    },
+    {
+      icon: DeleteRounded,
+      name: 'Delete',
+      onClick: () => deleteModel(id),
+      loading: isDeleteModelLoading,
     },
   ];
 
