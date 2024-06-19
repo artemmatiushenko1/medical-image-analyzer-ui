@@ -68,19 +68,16 @@ const ModelsList = () => {
         </Stack>
         {isLoading &&
           loadingPreviews.map((Preview, index) => <Preview key={index} />)}
-        {diagnosticModels.map(
-          (model) =>
-            model.currentVersion && (
-              <ModelCard
-                name={model.name}
-                key={model.id}
-                id={model.id}
-                version={model.currentVersion?.version}
-                status={model.status}
-                onViewDetails={() => handleViewModelDetails(model)}
-              />
-            ),
-        )}
+        {diagnosticModels.map((model) => (
+          <ModelCard
+            name={model.name}
+            key={model.id}
+            id={model.id}
+            version={model.currentVersion?.version}
+            status={model.status}
+            onViewDetails={() => handleViewModelDetails(model)}
+          />
+        ))}
         {diagnosticModels.length === 0 && !isLoading && (
           <Box sx={{ flex: 1, mt: '-100px' }}>
             <EmptyState

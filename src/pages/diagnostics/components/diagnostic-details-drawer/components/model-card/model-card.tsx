@@ -28,7 +28,7 @@ import { useDiagnosticsStore } from '@/pages/diagnostics/store';
 type ModelCardProps = {
   id: string;
   name: string;
-  version: number;
+  version?: number;
   status: ValueOf<typeof ModelStatus>;
 
   onViewDetails: () => void;
@@ -99,14 +99,16 @@ const ModelCard = (props: ModelCardProps) => {
           </Typography>
           <Typography variant="caption">{t('ModelCard.NameLabel')}</Typography>
         </Stack>
-        <Stack flex={0.33}>
-          <Typography component="div" fontWeight={500} fontSize={16}>
-            {formatVersionString(version)}
-          </Typography>
-          <Typography variant="caption">
-            {t('ModelCard.VersionLabel')}
-          </Typography>
-        </Stack>
+        {version && (
+          <Stack flex={0.33}>
+            <Typography component="div" fontWeight={500} fontSize={16}>
+              {formatVersionString(version)}
+            </Typography>
+            <Typography variant="caption">
+              {t('ModelCard.VersionLabel')}
+            </Typography>
+          </Stack>
+        )}
         <Stack direction="row" alignItems="center" spacing={2} flex={0.33}>
           <Stack spacing={0.5}>
             <Switch
