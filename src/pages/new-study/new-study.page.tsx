@@ -26,8 +26,6 @@ import { ValueOf } from '@/libs/types';
 import { useNewStudyStore } from './store';
 import { useCreateStudy, useGetAvailableModels } from './libs/queries';
 import { SplashScreen } from '@/libs/components';
-import { base64ToFile } from '@/libs/helpers';
-import dayjs from 'dayjs';
 
 const NewStudy = () => {
   const { t } = useTranslation('NewStudy');
@@ -42,12 +40,8 @@ const NewStudy = () => {
 
   const resetNewStudyStore = useNewStudyStore((state) => state.reset);
 
-  const selectedModelIds = useNewStudyStore((state) =>
-    Object.values(state.selectedModelIds).flatMap((item) => item),
-  );
-
-  const studyImage = useNewStudyStore(
-    (state) => state.croppedImageSrc ?? state.uploadedImageSrc,
+  const getCreateStudyPayload = useNewStudyStore(
+    (state) => state.getCreateStudyPayload,
   );
 
   const {
@@ -116,23 +110,7 @@ const NewStudy = () => {
   const handleNextStep = () => {
     if (isOnFinalStep) {
       setCreateStudyStatusDialogOpen(true);
-
-      if (!studyImage) {
-        throw new Error('Study image is required!');
-      }
-
-      const studyName = 'Study-1';
-
-      createStudy({
-        modelIds: selectedModelIds,
-        name: studyName,
-        description: '1',
-        file: base64ToFile(
-          studyImage,
-          `${studyName.toLowerCase()}_${dayjs().format()}`,
-        ),
-      });
-
+      createStudy(getCreateStudyPayload());
       return;
     }
 

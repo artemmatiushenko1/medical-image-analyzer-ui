@@ -48,7 +48,13 @@
   "Summary": {
     "Image": "Image",
     "SelectedDiagnostics": "Selected diagnostics",
-    "AiModels": "AI Models:"
+    "AiModels": "AI Models:",
+    "NameLabel": "Name",
+    "NameDescription": "Enter descriptive study name",
+    "NamePlaceholder": "Enter name",
+    "DescriptionLabel": "Description",
+    "DescriptionCaption": "Enter any additional information about study that might be helpful",
+    "DescriptionPlaceholder": "Enter description (optional)"
   },
   "CreateStudy": "Create study",
   "ValidationsMessage": {

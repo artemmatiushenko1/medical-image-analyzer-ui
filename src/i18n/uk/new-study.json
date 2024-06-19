@@ -48,7 +48,13 @@
   "Summary": {
     "Image": "Зображеня",
     "SelectedDiagnostics": "Вибрані діагностики",
-    "AiModels": "ШІ Моделі:"
+    "AiModels": "ШІ Моделі:",
+    "NamePlaceholder": "Введіть назву",
+    "NameLabel": "Назва",
+    "NameDescription": "Введіть описову назву дослідження",
+    "DescriptionPlaceholder": "Введіть опис (необовʼязково)",
+    "DescriptionLabel": "Опис",
+    "DescriptionCaption": "Введіть будь-яку додаткову інформацію про дослідження, яка може бути корисною"
   },
   "CreateStudy": "Створити дослідження",
   "ValidationsMessage": {
