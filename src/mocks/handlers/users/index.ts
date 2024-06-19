@@ -24,7 +24,10 @@ const handlers = [
 
     users.push(newUser);
 
-    return HttpResponse.json(newUser);
+    return HttpResponse.json({
+      user: newUser,
+      password: crypto.randomUUID().split('-').shift(),
+    });
   }),
 ];
 

@@ -5,6 +5,7 @@ import {
   Model,
   ModelVersion,
   ModelVersionStatus,
+  ModelExtended,
 } from '@/packages/diagnostics';
 
 const MOCK_DIAGNOSTICS: Diagnostic[] = [
@@ -84,7 +85,7 @@ const MOCK_MODELS: Model[] = [
     queueName: crypto.randomUUID(),
     type: MOCK_DIAGNOSTICS[2],
     versions: MOCK_MODEL_VERSIONS,
-    currentVersion: MOCK_MODEL_VERSIONS[0],
+    // currentVersion: MOCK_MODEL_VERSIONS[0],
   },
   {
     name: 'PneumoCheck',
@@ -96,7 +97,7 @@ const MOCK_MODELS: Model[] = [
     queueName: crypto.randomUUID(),
     type: MOCK_DIAGNOSTICS[0],
     versions: MOCK_MODEL_VERSIONS,
-    currentVersion: MOCK_MODEL_VERSIONS[0],
+    // currentVersion: MOCK_MODEL_VERSIONS[0],
   },
   {
     name: 'LymeXpert',
@@ -108,7 +109,7 @@ const MOCK_MODELS: Model[] = [
     queueName: crypto.randomUUID(),
     type: MOCK_DIAGNOSTICS[3],
     versions: MOCK_MODEL_VERSIONS,
-    currentVersion: MOCK_MODEL_VERSIONS[0],
+    // currentVersion: MOCK_MODEL_VERSIONS[0],
   },
   {
     name: 'CoviScanNet-2',
@@ -120,8 +121,8 @@ const MOCK_MODELS: Model[] = [
     queueName: crypto.randomUUID(),
     type: MOCK_DIAGNOSTICS[1],
     versions: MOCK_MODEL_VERSIONS,
-    currentVersion: MOCK_MODEL_VERSIONS[0],
+    // currentVersion: MOCK_MODEL_VERSIONS[0],
   },
-];
+].map((item) => ModelExtended.fromPlainObject(item as Model));
 
 export { MOCK_DIAGNOSTICS, MOCK_MODELS, MOCK_MODEL_VERSIONS };
