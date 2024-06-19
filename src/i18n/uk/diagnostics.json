@@ -42,14 +42,22 @@
         "ModelNameLabel": "Назва моделі",
         "ModelNamePlaceholder": "Введіть назву моделі",
         "SuccessMessageTitle": "Нова модель успішно додана!",
-        "SuccessMessageDescription": "Тепер ви можете керувати моделлю <br /> на  сторінці подробиць діагностики."
+        "SuccessMessageDescription": "Тепер ви можете керувати моделлю <br /> на  сторінці подробиць діагностики.",
+        "Description": {
+          "Placeholder": "Введіть опис (необовʼязково)"
+        },
+        "DescriptionHelperText": "Надайте будь-яку додаткову інформацію про модель ШІ, що завантажується",
+        "DescriptionLabel": "Опис"
       },
       "ModelDetails": {
         "VersionHistoryLabel": "Історія версій",
         "VersionHistoryCaption": "Нижче відображено список всіх існуючих версії моделі.",
         "CurrentVersionButton": "Поточна",
         "RestoreVersionButton": "Відновити",
-        "UploadNewVersionButton": "Завантажити нову версію"
+        "UploadNewVersionButton": "Завантажити нову версію",
+        "Queue": "Черга",
+        "QueueDescription": "Назва черги, яка обслуговує дану модель",
+        "QueueNameCopiedMessage": "Назву черги моделі скопійовано до буферу обміну"
       }
     }
   },
