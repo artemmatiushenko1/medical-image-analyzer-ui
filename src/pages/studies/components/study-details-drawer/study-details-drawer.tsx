@@ -9,6 +9,7 @@ import {
   Drawer,
   IconButton,
   Paper,
+  Skeleton,
   Stack,
   Tooltip,
   Typography,
@@ -53,8 +54,7 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
 
   const renderDrawerContent = () => {
     if (isStudyLoading) {
-      //   // TODO: use skeletons
-      return <CircularProgress size="30px" />;
+      return <LoadingSkeleton />;
     }
 
     if (!study) return null;
@@ -243,6 +243,64 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
     >
       {renderDrawerContent()}
     </Drawer>
+  );
+};
+
+const LoadingSkeleton = () => {
+  return (
+    <>
+      <DialogTitle>
+        <Box sx={styles.titleInner}>
+          <Typography
+            display="inline-block"
+            // fontSize="18px"
+            variant="h5"
+            fontWeight={600}
+            gutterBottom
+            sx={{ flex: 0.5 }}
+          >
+            <Skeleton component="div" animation="wave" />
+          </Typography>
+          <Skeleton component="div" animation="wave" variant="circular">
+            <IconButton>
+              <NavigateNextRounded />
+            </IconButton>
+          </Skeleton>
+        </Box>
+      </DialogTitle>
+      <Divider />
+      <DialogContent>
+        <Stack gap={3}>
+          <Box sx={styles.meta}>
+            <Stack>
+              <Skeleton variant="rounded" sx={{ borderRadius: '100px' }}>
+                <StudyStatusChip status={StudyStatus.COMPLETED} />
+              </Skeleton>
+            </Stack>
+            <Stack>
+              <Typography variant="caption" fontWeight={500} textAlign="right">
+                <Skeleton />
+              </Typography>
+              <Skeleton>
+                <DetailItemText iconComponent={EventNote}>
+                  {dayjs().format(DateFormat.DAY_ABBREV_MONTH_YEAR)}
+                </DetailItemText>
+              </Skeleton>
+            </Stack>
+          </Box>
+          <Stack gap={2}>
+            <Typography variant="subtitle2" maxWidth={100}>
+              <Skeleton />
+            </Typography>
+            <Skeleton variant="rounded">
+              <Box sx={styles.imageWrapper}>
+                <Box component="img" width={450} height={450} />
+              </Box>
+            </Skeleton>
+          </Stack>
+        </Stack>
+      </DialogContent>
+    </>
   );
 };
 
