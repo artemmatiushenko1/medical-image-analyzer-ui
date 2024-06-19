@@ -5,13 +5,13 @@ import { MOCK_USERS } from './mocks';
 const users = [...MOCK_USERS];
 
 const handlers = [
-  http.get('/users', async () => {
+  http.get('/users/profiles', async () => {
     await delay('real');
 
     return HttpResponse.json(users);
   }),
 
-  http.post('/users', async ({ request }) => {
+  http.post('/auth/patients', async ({ request }) => {
     await delay('real');
 
     const data = (await request.json()) as User;
@@ -19,7 +19,7 @@ const handlers = [
     const newUser = {
       ...data,
       id: crypto.randomUUID(),
-      role: Role.ADMIN,
+      role: Role.USER,
     };
 
     users.push(newUser);
