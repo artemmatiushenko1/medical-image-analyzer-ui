@@ -11,7 +11,6 @@ const styles = createStyleSheet({
       '.view-study-button': {
         opacity: 1,
       },
-      boxShadow: '0 1px 15px rgba(0, 0, 0, 0.05)',
     },
   },
   viewStudyButton: {
