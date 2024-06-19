@@ -27,5 +27,12 @@
     "LastNameLabel": "Last name",
     "LastNamePlaceholder": "Enter last name",
     "EmailAddressLabel": "Email address"
+  },
+  "Password": "Password",
+  "User": "User",
+  "HandInPassword": {
+    "Description": "Copy the password and hand it in to the user using other communication methods",
+    "Title": "Hand in password",
+    "PasswordWasCopiedToClipboard": "Password was copied to clipboard!"
   }
 }

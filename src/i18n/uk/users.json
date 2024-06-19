@@ -6,7 +6,7 @@
     "Users": "Користувачі"
   },
   "TotalUsersCard": {
-    "Title": "Всього Користувачів"
+    "Title": "Всього користувачів"
   },
   "UsersTable": {
     "Columns": {
@@ -27,5 +27,12 @@
     "EmailAddressLabel": "Електронна пошта",
     "NameLabel": "Імʼя",
     "NamePlaceholder": "Введіть імʼя (наприклад Петро Петрович)"
+  },
+  "User": "Користувач",
+  "Password": "Пароль",
+  "HandInPassword": {
+    "Title": "Передайте пароль",
+    "Description": "Скопіюйте пароль та передайте його користувачу іншими методами комунікації",
+    "PasswordWasCopiedToClipboard": "Пароль було скопійовано"
   }
 }
