@@ -84,7 +84,7 @@ const HandInPasswordModal = (props: HandInPasswordModalProps) => {
               {t('Password')}
             </Typography>
             <TextField
-              value={'12345678'}
+              value={password}
               variant="outlined"
               type="password"
               fullWidth

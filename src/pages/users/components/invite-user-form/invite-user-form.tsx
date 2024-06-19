@@ -24,10 +24,14 @@ const InviteUserForm = () => {
     resolver: joiResolver(addUserSchema),
   });
 
-  const { mutateAsync: addUser, isPending, data: newUser } = useAddUser();
+  const {
+    mutateAsync: addUser,
+    isPending,
+    data: createUserResponse,
+  } = useAddUser();
 
   const { isOpen: handInPasswordModalOpen, close: closeHandInPasswordModal } =
-    useClosable(Boolean(newUser));
+    useClosable(Boolean(createUserResponse));
 
   const handleSubmit: SubmitHandler<AddUserRequest> = (data) => {
     void addUser(data).then(() => {
@@ -97,10 +101,10 @@ const InviteUserForm = () => {
           {tCommon('Add')}
         </Button>
       </Box>
-      {newUser && (
+      {createUserResponse && (
         <HandInPasswordModal
-          user={newUser}
-          password={'12345678'}
+          user={createUserResponse.user}
+          password={createUserResponse.password}
           open={handInPasswordModalOpen}
           onClose={closeHandInPasswordModal}
         />

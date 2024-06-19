@@ -3,7 +3,9 @@ import { AddUserRequest, AddUserResponse, GetAllUsersResponse } from './types';
 import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
 
 class UsersApi extends HttpApi {
-  addUser = async (request: AddUserRequest): Promise<AddUserResponse> => {
+  addUser = async (
+    request: AddUserRequest,
+  ): Promise<{ user: AddUserResponse } & { password: string }> => {
     const options = new HttpRequestOptionsBuilder()
       .post('/auth/patients')
       .body(JSON.stringify(request))
