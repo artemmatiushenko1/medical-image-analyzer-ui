@@ -1,13 +1,13 @@
 import { Breadcrumbs, Dialog } from '@/libs/components';
-import { NavigateBeforeRounded } from '@mui/icons-material';
+import { InfoRounded, NavigateBeforeRounded } from '@mui/icons-material';
 import {
+  Alert,
   Box,
   Divider,
   Drawer,
   IconButton,
   Stack,
   Tooltip,
-  Typography,
 } from '@mui/material';
 import { ModelDetails, ModelUpload, ModelsList } from './components';
 import { ValueOf } from '@/libs/types';
@@ -123,10 +123,14 @@ const DiagnosticDetailDrawer = (props: DiagnosticDetailsDrawer) => {
       </Stack>
       <Divider />
       {selectedDiagnostic?.description && stagesStack.length <= 1 && (
-        <Stack sx={{ padding: '15px 24px' }}>
-          <Typography variant="caption">
+        <Stack sx={{ padding: '24px 24px 0 24px' }}>
+          <Alert
+            color="info"
+            icon={<InfoRounded color="inherit" />}
+            sx={{ fontSize: '13px' }}
+          >
             {selectedDiagnostic.description}
-          </Typography>
+          </Alert>
         </Stack>
       )}
       {stagesStack.length > 1 && (

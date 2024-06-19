@@ -31,7 +31,7 @@ const paletteCommon = {
   },
   error: cinnabar,
   warning: amber,
-  info: sky,
+  info: brandBlue,
   success: {
     contrastText: '#fff',
     light: emerald[100],
