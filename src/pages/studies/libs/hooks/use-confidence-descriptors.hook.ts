@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { COLOR_BY_CONFIDENCE_THRESHOLD } from '../constants';
 import { ConfidenceThreshold } from '../enums';
 import { getConfidenceThreshold } from '../helpers';
+import { cinnabar, emerald } from '@/libs/theme/colors';
+import { amber } from '@mui/material/colors';
 
 const useConfidenceDescriptors = (confidence: number) => {
   const { t } = useTranslation('Studies');
@@ -18,6 +19,21 @@ const useConfidenceDescriptors = (confidence: number) => {
     [ConfidenceThreshold.HIGH]: {
       title: t('Confidence.Positive.Title'),
       description: t('Confidence.Positive.Caption'),
+    },
+  };
+
+  const COLOR_BY_CONFIDENCE_THRESHOLD = {
+    [ConfidenceThreshold.LOW]: {
+      dark: emerald[400],
+      light: emerald[200],
+    },
+    [ConfidenceThreshold.MEDIUM]: {
+      dark: amber[400],
+      light: amber[200],
+    },
+    [ConfidenceThreshold.HIGH]: {
+      dark: cinnabar[400],
+      light: cinnabar[200],
     },
   };
 
