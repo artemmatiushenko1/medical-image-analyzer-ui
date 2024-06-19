@@ -46,7 +46,6 @@ const handlers = [
 
     const newDiagnostic: Diagnostic = {
       id: crypto.randomUUID(),
-      previewImg: '',
       ...data,
       createdAt: dayjs().format(),
       updatedAt: dayjs().format(),
@@ -77,7 +76,6 @@ const handlers = [
         description: '',
         createdAt: dayjs().format(),
         updatedAt: dayjs().format(),
-        previewImg: '',
       },
       createdAt: dayjs().format(),
       updatedAt: dayjs().format(),

@@ -10,7 +10,6 @@ import {
 const MOCK_DIAGNOSTICS: Diagnostic[] = [
   {
     id: '2',
-    previewImg: 'https://med.comsys.kpi.ua/images/services/2.jpg',
     name: 'Детекція пневмнонії',
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
@@ -18,7 +17,6 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
   },
   {
     id: '3',
-    previewImg: 'https://med.comsys.kpi.ua/images/services/3.jpg',
     name: 'Діагностування COVID-19',
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
@@ -26,7 +24,6 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
   },
   {
     id: '4',
-    previewImg: 'https://med.comsys.kpi.ua/images/services/4.jpg',
     name: 'Діагностування меланоми',
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
@@ -34,7 +31,6 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
   },
   {
     id: '5',
-    previewImg: 'https://med.comsys.kpi.ua/images/services/5.jpg',
     name: 'Діагностування хвороби Лайма',
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),

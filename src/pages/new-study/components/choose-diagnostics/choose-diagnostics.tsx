@@ -42,7 +42,6 @@ const ChooseDiagnostics = (props: ChooseDiagnosticsProps) => {
               description={item.description}
               key={item.id}
               title={item.name}
-              imgSrc={item.previewImg}
               selected={selectedDiagnosticIds.indexOf(item.id) !== -1}
               onClick={() => handleDiagnosticCardClick(item.id)}
             />

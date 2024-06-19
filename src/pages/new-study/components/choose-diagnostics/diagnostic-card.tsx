@@ -1,12 +1,16 @@
-import { CheckRounded, InfoOutlined } from '@mui/icons-material';
+import {
+  CheckRounded,
+  InfoOutlined,
+  MonitorHeartOutlined,
+} from '@mui/icons-material';
 import { Box, Stack, Tooltip, Typography } from '@mui/material';
 
 import { cardStyles as styles } from './styles';
 import { mergeSx } from '@/libs/theme';
+import { HighlightedIcon } from '@/libs/components';
 
 type DiagnosticCardProps = {
   title: string;
-  imgSrc: string;
   onClick: () => void;
   selected?: boolean;
   disabled: boolean;
@@ -18,7 +22,6 @@ const DiagnosticCard = (props: DiagnosticCardProps) => {
     selected = false,
     disabled = false,
     title,
-    imgSrc,
     onClick,
     description,
   } = props;
@@ -32,7 +35,9 @@ const DiagnosticCard = (props: DiagnosticCardProps) => {
         disabled && styles.disabled,
       )}
     >
-      <Box component="img" sx={styles.image} src={imgSrc} alt={title} />
+      <Box sx={styles.image}>
+        <HighlightedIcon color="#fff" iconElement={<MonitorHeartOutlined />} />
+      </Box>
       {selected && (
         <Box sx={styles.selectedIconWrapperAbsolute}>
           <Box sx={styles.selectedIconWrapper}>

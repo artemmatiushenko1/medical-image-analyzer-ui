@@ -1,3 +1,4 @@
+import { alpha } from '@mui/material';
 import { createStyleSheet } from '@/libs/theme';
 
 const cardStyles = createStyleSheet({
@@ -10,6 +11,7 @@ const cardStyles = createStyleSheet({
     transition: 'transform 0.2s ease',
     aspectRatio: 3 / 2,
     maxWidth: '270px',
+    width: '100%',
     '.info-icon': {
       opacity: 0,
     },
@@ -19,6 +21,7 @@ const cardStyles = createStyleSheet({
         opacity: 1,
       },
     },
+    backgroundColor: ({ palette }) => alpha(palette.primary.light, 0.8),
   },
   selected: {
     outline: ({ palette }) => `2px solid ${palette.success.main}`,
@@ -31,6 +34,7 @@ const cardStyles = createStyleSheet({
     width: '100%',
     height: '100%',
     objectFit: 'cover',
+    padding: 2,
   },
   selectedIconWrapperAbsolute: {
     position: 'absolute',
@@ -57,7 +61,7 @@ const cardStyles = createStyleSheet({
     padding: '15px',
     inset: 0,
     backgroundImage:
-      'linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))',
+      'linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0))',
     display: 'flex',
     alignItems: 'end',
   },

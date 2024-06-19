@@ -1,21 +1,26 @@
-import { Box, alpha } from '@mui/material';
+import { Box, alpha, useTheme } from '@mui/material';
 
 type HighlightedIcon = {
   iconElement: React.ReactNode;
   rounded?: boolean;
+  color?: string;
 };
 
 const HighlightedIcon = (props: HighlightedIcon) => {
   const { iconElement, rounded } = props;
+
+  const { palette } = useTheme();
+
+  const color = props.color ?? palette.primary.main;
 
   return (
     <Box
       sx={{
         width: '40px',
         height: '40px',
-        color: ({ palette }) => palette.primary.main,
+        color,
         background: ({ palette }) =>
-          alpha(palette.primary.main, palette.action.selectedOpacity),
+          alpha(color, palette.action.selectedOpacity),
         borderRadius: ({ shape }) => (rounded ? '100px' : shape.borderRadius),
         display: 'flex',
         alignItems: 'center',
