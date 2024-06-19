@@ -1,6 +1,7 @@
 import {
   DarkModeRounded,
   LanguageRounded,
+  LockRounded,
   LogoutRounded,
 } from '@mui/icons-material';
 import {
@@ -18,6 +19,7 @@ import { LANGUAGE_DETAILS } from '@/i18n';
 import { useClosable } from '@/libs/hooks';
 import { ThemeMode } from '@/libs/theme';
 import { Menu, MenuItem, MenuProps } from '../menu';
+import { ChangePasswordDialog } from '../change-password-dialog';
 
 type ProfileMenuProps = Omit<MenuProps, 'items'>;
 
@@ -38,6 +40,12 @@ const ProfileMenu = (props: ProfileMenuProps) => {
     open: openChangeLanguageDialog,
   } = useClosable(false);
 
+  const {
+    isOpen: isChangePasswordDialogOpen,
+    close: closeChangePasswordDialog,
+    open: openChangePasswordDialog,
+  } = useClosable(false);
+
   const handleChangeLanguageClick = () => {
     openChangeLanguageDialog();
     onClose();
@@ -52,6 +60,10 @@ const ProfileMenu = (props: ProfileMenuProps) => {
     checked: boolean,
   ) => {
     changeThemeMode(checked ? ThemeMode.DARK : ThemeMode.LIGHT);
+  };
+
+  const handleChangePasswordClick = () => {
+    openChangePasswordDialog();
   };
 
   const menuItems: MenuItem[] = [
@@ -84,6 +96,11 @@ const ProfileMenu = (props: ProfileMenuProps) => {
       name: `${t('Language')}: ${LANGUAGE_DETAILS[appLanguage].nativeVariant}`,
       icon: LanguageRounded,
       onClick: handleChangeLanguageClick,
+    },
+    {
+      name: 'Change password',
+      icon: LockRounded,
+      onClick: handleChangePasswordClick,
       injectDividerAfter: true,
     },
     {
@@ -123,6 +140,10 @@ const ProfileMenu = (props: ProfileMenuProps) => {
       <ChangeLanguageDialog
         open={isChangeLanguageDialogOpen}
         onClose={closeChangeLanguageDialog}
+      />
+      <ChangePasswordDialog
+        open={isChangePasswordDialogOpen}
+        onClose={closeChangePasswordDialog}
       />
     </>
   );

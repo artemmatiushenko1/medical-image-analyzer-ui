@@ -13,6 +13,12 @@ const handlers = [
 
     return HttpResponse.json(MOCK_USER);
   }),
+
+  http.patch('/auth/password', async () => {
+    await delay('real');
+
+    return HttpResponse.json({});
+  }),
 ];
 
 export default handlers;

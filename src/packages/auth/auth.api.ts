@@ -21,6 +21,16 @@ class AuthApi extends HttpApi {
 
     return this.httpClient.request(options);
   };
+
+  changePassword = (password: string) => {
+    const options = new HttpRequestOptionsBuilder()
+      .patch('/auth/password')
+      .body(JSON.stringify({ password }))
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
 }
 
 export { AuthApi };
