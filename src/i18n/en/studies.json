@@ -11,10 +11,12 @@
   "NegativeStudies": "Negative studies",
   "StudyCard": {
     "Diagnostic": "Diagnostic",
-    "ViewDetails": "View details",
+    "ViewDetails": "View",
     "Model": "AI Model",
     "Actions": "Actions",
-    "DownloadReport": "Download report"
+    "DownloadReport": "Download report",
+    "Name": "Name",
+    "Description": "Description"
   },
   "StatusChip": {
     "Completed": "Completed",

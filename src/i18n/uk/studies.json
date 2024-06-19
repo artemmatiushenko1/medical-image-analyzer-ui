@@ -11,10 +11,12 @@
   "NegativeStudies": "Досліджень з негативними результатами",
   "StudyCard": {
     "Diagnostic": "Діагностика",
-    "ViewDetails": "Переглянути деталі",
+    "ViewDetails": "Переглянути",
     "Model": "Модель ШІ",
     "Actions": "Дії",
-    "DownloadReport": "Завантажити звіт"
+    "DownloadReport": "Завантажити звіт",
+    "Description": "Опис",
+    "Name": "Назва"
   },
   "StatusChip": {
     "Completed": "Завершено",

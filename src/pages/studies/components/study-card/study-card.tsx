@@ -58,20 +58,20 @@ const StudyCard = (props: StudyCardProps) => {
           <Box src={imageSrc} component="img" sx={styles.image} />
         </Box>
       </Box>
-      <Stack maxWidth={200} width={'100%'}>
-        <Typography variant="caption">Name</Typography>
+      <Stack maxWidth={200} width="100%">
+        <Typography variant="caption">{t('StudyCard.Name')}</Typography>
         <Typography noWrap variant="subtitle2" fontWeight={600}>
           {name}
         </Typography>
       </Stack>
       {description && (
-        <Stack>
-          <Typography variant="caption">Description</Typography>
-          <Stack>
-            <Typography variant="subtitle2" fontWeight={600}>
-              {description}
-            </Typography>
-          </Stack>
+        <Stack maxWidth={200} width="100%">
+          <Typography variant="caption">
+            {t('StudyCard.Description')}
+          </Typography>
+          <Typography variant="subtitle2" fontWeight={600} noWrap>
+            {description}
+          </Typography>
         </Stack>
       )}
       <Box sx={styles.rightPart}>

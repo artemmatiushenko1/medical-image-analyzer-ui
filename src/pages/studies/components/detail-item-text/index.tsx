@@ -12,7 +12,9 @@ const DetailItemText = (props: DetailItemText) => {
   return (
     <Box sx={styles.root}>
       {IconComponent && <IconComponent fontSize="inherit" />}
-      <Typography variant="caption">{children}</Typography>
+      <Typography variant="caption" noWrap>
+        {children}
+      </Typography>
     </Box>
   );
 };

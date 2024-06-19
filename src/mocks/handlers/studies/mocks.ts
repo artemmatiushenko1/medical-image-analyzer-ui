@@ -5,6 +5,8 @@ const MOCK_STUDY_SUMMARIES: Study[] = [
   {
     id: '3465',
     name: 'Детекція пневмнонії',
+    description:
+      'Дослідження після захворювання. Дослідження після захворювання. Дослідження після захворювання',
     status: StudyStatus.COMPLETED,
     image: {
       src: 'https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg',
