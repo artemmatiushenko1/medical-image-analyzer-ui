@@ -5,7 +5,7 @@ type Diagnostic = {
    */
   previewImg: string;
   name: string;
-  description: string | null;
+  description?: string;
   createdAt: string;
   updatedAt: string;
 };

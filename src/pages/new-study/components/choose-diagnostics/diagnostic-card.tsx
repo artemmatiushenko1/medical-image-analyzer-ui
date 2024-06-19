@@ -1,5 +1,5 @@
-import { CheckRounded } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
+import { CheckRounded, InfoOutlined } from '@mui/icons-material';
+import { Box, Stack, Tooltip, Typography } from '@mui/material';
 
 import { cardStyles as styles } from './styles';
 import { mergeSx } from '@/libs/theme';
@@ -10,10 +10,18 @@ type DiagnosticCardProps = {
   onClick: () => void;
   selected?: boolean;
   disabled: boolean;
+  description?: string;
 };
 
 const DiagnosticCard = (props: DiagnosticCardProps) => {
-  const { selected = false, disabled = false, title, imgSrc, onClick } = props;
+  const {
+    selected = false,
+    disabled = false,
+    title,
+    imgSrc,
+    onClick,
+    description,
+  } = props;
 
   return (
     <Box
@@ -33,7 +41,23 @@ const DiagnosticCard = (props: DiagnosticCardProps) => {
         </Box>
       )}
       <Box sx={styles.infoOverlay}>
-        <Typography sx={styles.title}>{title}</Typography>
+        <Stack>
+          <Typography sx={styles.title}>{title}</Typography>
+          {description && (
+            <Typography variant="caption" maxWidth={170} noWrap>
+              {description}
+            </Typography>
+          )}
+        </Stack>
+        {description && (
+          <Tooltip title={description}>
+            <InfoOutlined
+              color="inherit"
+              className="info-icon"
+              sx={{ color: '#fff', fontSize: '16px', marginLeft: 'auto' }}
+            />
+          </Tooltip>
+        )}
       </Box>
     </Box>
   );

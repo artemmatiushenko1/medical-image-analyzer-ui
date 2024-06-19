@@ -39,6 +39,7 @@ const ChooseDiagnostics = (props: ChooseDiagnosticsProps) => {
                 selectedDiagnosticIds.length >= MAX_SELECTED_DIAGNOSTICS &&
                 !selectedDiagnosticIds.includes(item.id)
               }
+              description={item.description}
               key={item.id}
               title={item.name}
               imgSrc={item.previewImg}

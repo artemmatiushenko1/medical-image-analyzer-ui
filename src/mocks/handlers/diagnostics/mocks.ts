@@ -14,7 +14,7 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
     name: 'Детекція пневмнонії',
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
-    description: null,
+    description: 'Some description of diagnostic',
   },
   {
     id: '3',
@@ -22,7 +22,7 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
     name: 'Діагностування COVID-19',
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
-    description: null,
+    description: 'Diagnostic description',
   },
   {
     id: '4',
@@ -30,7 +30,7 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
     name: 'Діагностування меланоми',
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
-    description: null,
+    description: 'Diagnostic description',
   },
   {
     id: '5',
@@ -38,7 +38,7 @@ const MOCK_DIAGNOSTICS: Diagnostic[] = [
     name: 'Діагностування хвороби Лайма',
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
-    description: null,
+    description: 'Diagnostic description',
   },
 ];
 

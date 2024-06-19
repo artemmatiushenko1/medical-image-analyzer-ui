@@ -7,12 +7,18 @@ const cardStyles = createStyleSheet({
     cursor: 'pointer',
     position: 'relative',
     outline: ({ palette }) => `1px solid ${palette.divider}`,
-    ':hover': {
-      transform: 'scale(0.99)',
-    },
     transition: 'transform 0.2s ease',
     aspectRatio: 3 / 2,
     maxWidth: '270px',
+    '.info-icon': {
+      opacity: 0,
+    },
+    ':hover': {
+      transform: 'scale(0.99)',
+      '.info-icon': {
+        opacity: 1,
+      },
+    },
   },
   selected: {
     outline: ({ palette }) => `2px solid ${palette.success.main}`,
