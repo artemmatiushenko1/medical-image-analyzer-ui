@@ -12,6 +12,7 @@ const cardStyles = createStyleSheet({
     },
     transition: 'transform 0.2s ease',
     aspectRatio: 3 / 2,
+    maxWidth: '250px',
   },
   selected: {
     outline: ({ palette }) => `2px solid ${palette.success.main}`,

@@ -1,27 +1,25 @@
 import { HttpResponse, delay, http } from 'msw';
-import { MOCK_STUDIES } from './mocks';
+import { MOCK_STUDY_SUMMARIES } from './mocks';
 
-const studies = [...MOCK_STUDIES];
+const studySummaries = [...MOCK_STUDY_SUMMARIES];
 
 const handlers = [
-  http.post('/studies', async () => {
+  http.post('/diagnostics', async () => {
     await delay('real');
 
-    return HttpResponse.json(studies[0]);
+    return HttpResponse.json(studySummaries[0]);
   }),
 
-  http.get('/studies', async () => {
+  http.get('/diagnostics', async () => {
     await delay('real');
 
-    return HttpResponse.json(studies);
+    return HttpResponse.json(studySummaries);
   }),
 
-  http.get('/studies/:id', async ({ params }) => {
+  http.get('/diagnostics/:id', async ({ params }) => {
     await delay('real');
 
-    const study = studies.find((study) => study.id === params.id);
-
-    console.log({ params, study });
+    const study = studySummaries.find((study) => study.id === params.id);
 
     return HttpResponse.json(study);
   }),

@@ -3,18 +3,20 @@ import { SettingsSuggestRounded } from '@mui/icons-material';
 import { Box, Chip, Paper, Stack, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useTranslation } from 'react-i18next';
+import { Diagnostic, Model } from '@/packages/diagnostics';
 
-const StudySummary = () => {
+type StudySummaryProps = {
+  diagnosticsById: Record<string, Diagnostic>;
+  modelsById: Record<string, Model>;
+};
+
+const StudySummary = (props: StudySummaryProps) => {
+  const { diagnosticsById, modelsById } = props;
+
   const { t } = useTranslation('NewStudy');
 
-  const availableDiagnostics = useNewStudyStore(
-    (state) => state.availableDiagnostics,
-  );
-
-  const availableModels = useNewStudyStore((state) => state.availableModels);
-
   const studyImage = useNewStudyStore(
-    (state) => state.croppedImageSrc || state.uploadedImageSrc,
+    (state) => state.croppedImageSrc ?? state.uploadedImageSrc,
   );
 
   const selectedDiagnosticIds = useNewStudyStore(
@@ -23,12 +25,8 @@ const StudySummary = () => {
 
   const selectedModelIds = useNewStudyStore((state) => state.selectedModelIds);
 
-  const selectedModels = selectedModelIds.map((id) =>
-    availableModels.find((model) => model.id === id),
-  );
-
-  const selectedDiagnostics = selectedDiagnosticIds.map((id) =>
-    availableDiagnostics.find((diagnostic) => diagnostic.id === id),
+  const selectedDiagnostics = selectedDiagnosticIds.map(
+    (id) => diagnosticsById[id],
   );
 
   return (
@@ -63,7 +61,9 @@ const StudySummary = () => {
                 {t('Summary.AiModels')}
               </Typography>
               <Box display="flex" flexWrap="wrap" gap={1}>
-                {selectedModels.map((model) => {
+                {selectedModelIds[diagnostic.id]?.map((modelId) => {
+                  const model = modelsById[modelId];
+
                   return (
                     <Chip
                       key={model?.id}

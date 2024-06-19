@@ -8,7 +8,7 @@ const styles = createStyleSheet({
   },
   leftSide: {
     flex: 0.55,
-    backgroundColor: ({ palette }) => palette.primary.dark,
+    backgroundColor: ({ palette }) => palette.primary.main,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

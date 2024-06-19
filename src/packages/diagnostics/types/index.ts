@@ -12,3 +12,4 @@ export { type CreateModelVersionRequest } from './create-model-version-request.t
 export { type CreateModelVersionResponse } from './create-model-version-response.type';
 export { type ChangeModelStatusRequest } from './change-model-status.request.type';
 export { type ChangeModelVersionStatusRequest } from './change-model-version-status-request.type';
+export { type GetAvailableModelsResponse } from './get-available-models-response.type';

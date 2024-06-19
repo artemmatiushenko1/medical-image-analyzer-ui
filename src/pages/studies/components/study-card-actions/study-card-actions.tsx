@@ -10,14 +10,14 @@ const StudyCardActions = (props: StudyCardActionsProps) => {
 
   const { t } = useTranslation('Studies');
 
-  const { isLoading, saveReport } = useSaveStudyReport(studyId);
+  const { isLoading, saveReport } = useSaveStudyReport();
 
   const menuItems: MenuItem[] = [
     {
       name: t('StudyCard.DownloadReport'),
       icon: DownloadIcon,
       loading: isLoading,
-      onClick: () => void saveReport(),
+      onClick: () => void saveReport(studyId),
     },
   ];
 

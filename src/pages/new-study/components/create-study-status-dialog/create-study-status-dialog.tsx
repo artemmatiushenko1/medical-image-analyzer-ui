@@ -4,14 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '@/app';
 import { Dialog, SuccessCheckmark } from '@/libs/components';
 import { useTranslation } from 'react-i18next';
-import { useCreateStudy } from '@/pages/studies/libs/queries';
 
-const CreateStudyStatusDialog = () => {
+type CreateStudyStatusDialogProps = {
+  isLoading: boolean;
+  isSuccess: boolean;
+};
+
+const CreateStudyStatusDialog = (props: CreateStudyStatusDialogProps) => {
+  const { isLoading, isSuccess } = props;
+
   const { t } = useTranslation('NewStudy');
 
   const navigate = useNavigate();
-
-  const { isLoading, isSuccess } = useCreateStudy();
 
   const handleOkClick = () => {
     navigate(AppRoute.HOME);

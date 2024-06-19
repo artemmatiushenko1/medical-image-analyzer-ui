@@ -1,6 +1,6 @@
 const StudyStatus = {
-  PENDING: 1,
-  COMPLETED: 2,
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
 } as const;
 
 export { StudyStatus };

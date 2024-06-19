@@ -1,13 +1,20 @@
 import { studiesApi } from '@/packages/studies';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { StudyQueryKey } from '../enums';
 
-const useGetStudy = (studyId: string, enabled = true) => {
+const useGetStudy = (studyId: string | null, enabled = true) => {
   return useQuery({
-    enabled,
     queryKey: [...StudyQueryKey.GET_STUDY, studyId],
-    queryFn: () => studiesApi.getStudy(studyId),
+    queryFn: () => (studyId ? studiesApi.getStudy(studyId) : undefined),
+    enabled,
   });
 };
 
-export { useGetStudy };
+const useGetStudyMutation = () => {
+  return useMutation({
+    mutationKey: StudyQueryKey.GET_STUDY,
+    mutationFn: (studyId: string) => studiesApi.getStudy(studyId),
+  });
+};
+
+export { useGetStudy, useGetStudyMutation };

@@ -9,6 +9,7 @@ import {
   CreateModelVersionRequest,
   CreateModelVersionResponse,
   GetAllDiagnosticsResponse,
+  GetAvailableModelsResponse,
   GetDiagnosticModelsResponse,
   GetModelResponse,
 } from './types';
@@ -113,6 +114,15 @@ class DiagnosticsApi extends HttpApi {
       .patch(`/diagnostic-models/versions/${versionId}/status`)
       .body(JSON.stringify(request))
       .contentType(MimeType.JSON)
+      .authorized()
+      .build();
+
+    return this.httpClient.request(options);
+  };
+
+  getAvailableModels = (): Promise<GetAvailableModelsResponse> => {
+    const options = new HttpRequestOptionsBuilder()
+      .get('/diagnostic-models/available')
       .authorized()
       .build();
 

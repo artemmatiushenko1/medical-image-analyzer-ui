@@ -1,13 +1,17 @@
 import { Box, Stack } from '@mui/material';
 import { SelectedDiagnosticAccordion } from './selected-diagnostic-accordion';
 import { useNewStudyStore } from '../../store';
-import { Diagnostic } from '@/packages/diagnostics';
+import { Diagnostic, Model } from '@/packages/diagnostics';
 import { styles } from './styles';
 
-const ChooseModels = () => {
-  const availableDiagnostics = useNewStudyStore(
-    (state) => state.availableDiagnostics,
-  );
+type ChooseModelsProps = {
+  modelsByDiagnosticId: Record<string, Model[]>;
+  diagnosticsById: Record<string, Diagnostic>;
+};
+
+const ChooseModels = (props: ChooseModelsProps) => {
+  const { modelsByDiagnosticId, diagnosticsById } = props;
+
   const selectedDiagnosticIds = useNewStudyStore(
     (state) => state.selectedDianosticIds,
   );
@@ -15,11 +19,9 @@ const ChooseModels = () => {
     (state) => state.updateSelectedDiagnostictIds,
   );
 
-  const selectedDiagnostics = selectedDiagnosticIds
-    .map((id) =>
-      availableDiagnostics.find((diagnostic) => diagnostic.id === id),
-    )
-    .filter((diagnostic): diagnostic is Diagnostic => Boolean(diagnostic));
+  const selectedDiagnostics = selectedDiagnosticIds.map(
+    (id) => diagnosticsById[id],
+  );
 
   const removeSelectedDiagnostic = (idToRemove: string) => {
     updateSelectedDiagnostictIds(idToRemove);
@@ -35,8 +37,10 @@ const ChooseModels = () => {
                 key={id}
                 id={id}
                 title={name}
+                diagnosticId={id}
                 deleteDisabled={selectedDiagnostics.length <= 1}
                 onDelete={removeSelectedDiagnostic}
+                models={modelsByDiagnosticId[id]}
               />
             ))}
           </Box>

@@ -18,7 +18,6 @@ import { useConfidenceDescriptors } from '../hooks';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { useTranslation } from 'react-i18next';
-import { formatVersionString } from '@/libs/helpers';
 
 Font.register({
   family: 'Roboto',
@@ -146,7 +145,7 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
         <View style={styles.header}>
           <Image source={logoImg} style={styles.logo} />
           <Text style={styles.generationTimestamp}>
-            {dayjs(study.date).format(DateFormat.YEAR_MONTH_DAY_DASHES)}
+            {dayjs(study.createdAt).format(DateFormat.YEAR_MONTH_DAY_DASHES)}
           </Text>
         </View>
         <Text style={styles.studyTitle}>
@@ -154,12 +153,12 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
         </Text>
         <View style={styles.section}>
           <Text style={styles.subtitle}>{t('StudyReport.Image')}</Text>
-          <Image style={styles.image} source={study.imageSrc}></Image>
+          <Image style={styles.image} source={study.image.src}></Image>
         </View>
         <View style={styles.section}>
           <Text style={styles.subtitle}>{t('StudyReport.Summary')}</Text>
           <View style={styles.table}>
-            <TableRow
+            {/* <TableRow
               labelColWidth={labelColWidth}
               label={t('StudyReport.DiagnosticType')}
               value={study.diagnostic.name}
@@ -172,11 +171,11 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
                   ? formatVersionString(study.model.currentVersion?.version)
                   : ''
               }`}
-            />
+            /> */}
             <TableRow
               labelColWidth={labelColWidth}
               label={t('StudyReport.CompletedAt')}
-              value={study.date}
+              value={study.createdAt}
             />
             <TableRow
               labelColWidth={labelColWidth}

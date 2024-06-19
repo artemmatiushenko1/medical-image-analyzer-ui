@@ -28,6 +28,12 @@ const handlers = [
     return HttpResponse.json(models);
   }),
 
+  http.get('/diagnostic-models/available', async () => {
+    await delay('real');
+
+    return HttpResponse.json(models);
+  }),
+
   http.get('/models/:id/versions', async () => {
     await delay('real');
 

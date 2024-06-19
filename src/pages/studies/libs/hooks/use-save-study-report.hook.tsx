@@ -1,30 +1,28 @@
 import { useSavePdf } from '@/libs/hooks';
-import { useGetStudy } from '../queries';
+import { useGetStudyMutation } from '../queries';
 import { StudyReportDocument } from '../pdf-templates';
 import { useAuthStore } from '@/app';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { Study } from '@/packages/studies';
 
-const useSaveStudyReport = (studyId: string) => {
+const useSaveStudyReport = () => {
   const currentUser = useAuthStore((state) => state.user);
 
-  const { isLoading, refetch: getStudy } = useGetStudy(studyId, false);
+  const { isPending, mutateAsync: getStudy } = useGetStudyMutation();
 
   const { savePdf, isLoading: isSavingPdf } = useSavePdf();
 
   const getReportFilename = (study: Study) => {
-    return `study_${study.id}_report_${dayjs(study.date)
+    return `study_${study.id}_report_${dayjs(study.createdAt)
       .format(DateFormat.YEAR_MONTH_DAY_DASHES)
       ?.replaceAll(' ', '_')}.pdf`;
   };
 
-  const saveReport = async () => {
+  const saveReport = async (studyId: string) => {
     if (!currentUser) return;
 
-    const { data } = await getStudy();
-
-    const study = data as Study;
+    const study = await getStudy(studyId);
 
     const reportFilename = getReportFilename(study);
 
@@ -34,7 +32,7 @@ const useSaveStudyReport = (studyId: string) => {
     );
   };
 
-  return { isLoading: isLoading || isSavingPdf, saveReport, getReportFilename };
+  return { isLoading: isPending || isSavingPdf, saveReport, getReportFilename };
 };
 
 export { useSaveStudyReport };

@@ -17,7 +17,6 @@ import { DetailItemText } from '../detail-item-text';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { useTranslation } from 'react-i18next';
-import { Diagnostic, Model } from '@/packages/diagnostics';
 import { StudyCardActions } from '../study-card-actions';
 import { useMenuPopover } from '@/libs/hooks';
 
@@ -25,15 +24,15 @@ type StudyCardProps = {
   id: string;
   date: string;
   imageSrc: string;
-  diagnostic: Diagnostic;
-  model: Model;
+  name: string;
+  description?: string;
   status: ValueOf<typeof StudyStatus>;
 
   onViewDetails: (id: string) => void;
 };
 
 const StudyCard = (props: StudyCardProps) => {
-  const { date, imageSrc, status, diagnostic, id, onViewDetails, model } =
+  const { date, imageSrc, status, name, id, onViewDetails, description } =
     props;
 
   const {
@@ -60,19 +59,21 @@ const StudyCard = (props: StudyCardProps) => {
         </Box>
       </Box>
       <Stack maxWidth={200} width={'100%'}>
-        <Typography variant="caption">{t('StudyCard.Diagnostic')}</Typography>
+        <Typography variant="caption">Name</Typography>
         <Typography noWrap variant="subtitle2" fontWeight={600}>
-          {diagnostic.name}
+          {name}
         </Typography>
       </Stack>
-      <Stack>
-        <Typography variant="caption">{t('StudyCard.Model')}</Typography>
+      {description && (
         <Stack>
-          <Typography variant="subtitle2" fontWeight={600}>
-            {model.name}
-          </Typography>
+          <Typography variant="caption">Description</Typography>
+          <Stack>
+            <Typography variant="subtitle2" fontWeight={600}>
+              {description}
+            </Typography>
+          </Stack>
         </Stack>
-      </Stack>
+      )}
       <Box sx={styles.rightPart}>
         <Button
           sx={styles.viewStudyButton}

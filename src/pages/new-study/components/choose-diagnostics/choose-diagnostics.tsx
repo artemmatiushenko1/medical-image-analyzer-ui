@@ -3,11 +3,14 @@ import { DiagnosticCard } from './diagnostic-card';
 import { styles } from './styles';
 import { useNewStudyStore } from '@/pages/new-study/store';
 import { MAX_SELECTED_DIAGNOSTICS } from '../../libs/constants';
+import { Diagnostic } from '@/packages/diagnostics';
 
-const ChooseDiagnostics = () => {
-  const availableDiagnostics = useNewStudyStore(
-    (state) => state.availableDiagnostics,
-  );
+type ChooseDiagnosticsProps = {
+  diagnostics: Diagnostic[];
+};
+
+const ChooseDiagnostics = (props: ChooseDiagnosticsProps) => {
+  const { diagnostics: availableDiagnostics } = props;
   const selectedDiagnosticIds = useNewStudyStore(
     (state) => state.selectedDianosticIds,
   );

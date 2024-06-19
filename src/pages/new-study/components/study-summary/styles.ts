@@ -36,7 +36,6 @@ const styles = createStyleSheet({
     width: '200px',
     height: '200px',
     backgroundColor: ({ palette }) => palette.grey[200],
-    border: ({ palette }) => `1px solid ${palette.divider}`,
     borderRadius: ({ shape }) => shape.borderRadius,
     display: 'flex',
     alignItems: 'center',

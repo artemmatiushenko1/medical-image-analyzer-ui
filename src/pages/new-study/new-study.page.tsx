@@ -11,7 +11,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { BottomNavigation } from './components/bottom-navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NewStudyCreationStep } from './libs/enums';
 import { styles } from './styles';
 import {
@@ -24,6 +24,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import { ValueOf } from '@/libs/types';
 import { useNewStudyStore } from './store';
+import { useCreateStudy, useGetAvailableModels } from './libs/queries';
+import { SplashScreen } from '@/libs/components';
+import { base64ToFile } from '@/libs/helpers';
+import dayjs from 'dayjs';
 
 const NewStudy = () => {
   const { t } = useTranslation('NewStudy');
@@ -38,9 +42,31 @@ const NewStudy = () => {
 
   const resetNewStudyStore = useNewStudyStore((state) => state.reset);
 
+  const selectedModelIds = useNewStudyStore((state) =>
+    Object.values(state.selectedModelIds).flatMap((item) => item),
+  );
+
+  const studyImage = useNewStudyStore(
+    (state) => state.croppedImageSrc ?? state.uploadedImageSrc,
+  );
+
+  const {
+    isPending: isCreateStudyPending,
+    isSuccess: isCreateStudySuccess,
+    mutate: createStudy,
+  } = useCreateStudy();
+
   const [activeStepIndex, setActiveStepIndex] = useState<
     ValueOf<typeof NewStudyCreationStep>
   >(NewStudyCreationStep.UPLOAD_IMAGE);
+
+  const {
+    diagnostics,
+    modelsByDiagnosticId,
+    diagnosticById,
+    modelsById,
+    isLoading,
+  } = useGetAvailableModels();
 
   const isDownToMediumScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.up('md'),
@@ -48,41 +74,65 @@ const NewStudy = () => {
 
   useEffect(() => resetNewStudyStore, [resetNewStudyStore]);
 
-  const steps = useMemo(
-    () => [
-      {
-        key: NewStudyCreationStep.UPLOAD_IMAGE,
-        title: t('SubmissionSteps.UploadImage'),
-        component: (
-          <Box sx={styles.imageUploadWrapper}>
-            <ImageUpload />
-          </Box>
-        ),
-      },
-      {
-        key: NewStudyCreationStep.CHOOSE_DIAGNOSTICS,
-        title: t('SubmissionSteps.ChooseDiagnostics'),
-        component: <ChooseDiagnostics />,
-      },
-      {
-        key: NewStudyCreationStep.CHOOSE_MODELS,
-        title: t('SubmissionSteps.ChooseModels'),
-        component: <ChooseModels />,
-      },
-      {
-        key: NewStudyCreationStep.CONFIRM,
-        title: t('SubmissionSteps.CreateStudy'),
-        component: <StudySummary />,
-      },
-    ],
-    [t],
-  );
+  const steps = [
+    {
+      key: NewStudyCreationStep.UPLOAD_IMAGE,
+      title: t('SubmissionSteps.UploadImage'),
+      component: (
+        <Box sx={styles.imageUploadWrapper}>
+          <ImageUpload />
+        </Box>
+      ),
+    },
+    {
+      key: NewStudyCreationStep.CHOOSE_DIAGNOSTICS,
+      title: t('SubmissionSteps.ChooseDiagnostics'),
+      component: <ChooseDiagnostics diagnostics={diagnostics} />,
+    },
+    {
+      key: NewStudyCreationStep.CHOOSE_MODELS,
+      title: t('SubmissionSteps.ChooseModels'),
+      component: (
+        <ChooseModels
+          modelsByDiagnosticId={modelsByDiagnosticId}
+          diagnosticsById={diagnosticById}
+        />
+      ),
+    },
+    {
+      key: NewStudyCreationStep.CONFIRM,
+      title: t('SubmissionSteps.CreateStudy'),
+      component: (
+        <StudySummary
+          diagnosticsById={diagnosticById}
+          modelsById={modelsById}
+        />
+      ),
+    },
+  ];
 
   const isOnFinalStep = activeStepIndex === steps.length - 1;
 
   const handleNextStep = () => {
     if (isOnFinalStep) {
       setCreateStudyStatusDialogOpen(true);
+
+      if (!studyImage) {
+        throw new Error('Study image is required!');
+      }
+
+      const studyName = 'Study-1';
+
+      createStudy({
+        modelIds: selectedModelIds,
+        name: studyName,
+        description: '1',
+        file: base64ToFile(
+          studyImage,
+          `${studyName.toLowerCase()}_${dayjs().format()}`,
+        ),
+      });
+
       return;
     }
 
@@ -119,6 +169,8 @@ const NewStudy = () => {
   };
 
   const stepMeta = stepsMeta[activeStepIndex];
+
+  if (isLoading) return <SplashScreen />;
 
   return (
     <Box sx={styles.root}>
@@ -162,7 +214,12 @@ const NewStudy = () => {
           onPreviousStep={handlePreviousStep}
         />
       </Stack>
-      {createStudyStatusDialogOpen && <CreateStudyStatusDialog />}
+      {createStudyStatusDialogOpen && (
+        <CreateStudyStatusDialog
+          isLoading={isCreateStudyPending}
+          isSuccess={isCreateStudySuccess}
+        />
+      )}
     </Box>
   );
 };

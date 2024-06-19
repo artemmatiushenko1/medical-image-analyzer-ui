@@ -1,9 +1,4 @@
 import { create } from 'zustand';
-import { Diagnostic, Model } from '@/packages/diagnostics';
-import {
-  MOCK_DIAGNOSTICS,
-  MOCK_MODELS,
-} from '@/mocks/handlers/diagnostics/mocks';
 import { Coordinates } from 'react-advanced-cropper';
 import { CropSettings } from './components/image-crop-dialog';
 
@@ -14,9 +9,7 @@ type State = {
   cropSettings?: CropSettings;
   selectedDianosticIds: string[];
   createStudyStatusDialogOpen: boolean;
-  selectedModelIds: string[];
-  availableModels: Model[];
-  availableDiagnostics: Diagnostic[];
+  selectedModelIds: Record<string, string[]>;
 };
 
 type Actions = {
@@ -28,7 +21,7 @@ type Actions = {
   updateSelectedDiagnostictIds: (newId: string) => void;
   setCreateStudyStatusDialogOpen: (newOpen: boolean) => void;
   reset: () => void;
-  updateSelectedModelIds: (ids: string[]) => void;
+  updateSelectedModelIds: (diagnosticId: string, modelIds: string[]) => void;
 };
 
 const INITIAL_STATE: State = {
@@ -38,9 +31,7 @@ const INITIAL_STATE: State = {
   cropSettings: undefined,
   selectedDianosticIds: [],
   createStudyStatusDialogOpen: false,
-  selectedModelIds: [],
-  availableModels: MOCK_MODELS,
-  availableDiagnostics: MOCK_DIAGNOSTICS,
+  selectedModelIds: {},
 };
 
 const useNewStudyStore = create<State & Actions>()((set, get) => ({
@@ -64,8 +55,13 @@ const useNewStudyStore = create<State & Actions>()((set, get) => ({
       set({ selectedDianosticIds: Array.from(new Set([...prevIds, newId])) });
     }
   },
-  updateSelectedModelIds: (newIds: string[]) => {
-    set({ selectedModelIds: newIds });
+  updateSelectedModelIds: (diagnosticId: string, modelIds: string[]) => {
+    set({
+      selectedModelIds: {
+        ...get().selectedModelIds,
+        [diagnosticId]: modelIds,
+      },
+    });
   },
   setCreateStudyStatusDialogOpen: (newOpen) => {
     set({ createStudyStatusDialogOpen: newOpen });

@@ -4,7 +4,10 @@ import { Header } from '../header';
 
 const UserLayout = () => {
   return (
-    <Stack sx={{ height: '100vh', width: '100%' }} direction="row">
+    <Stack
+      sx={{ height: '100vh', width: '100%', position: 'relative' }}
+      direction="row"
+    >
       <Stack sx={{ flex: 1, overflow: 'hidden' }}>
         <Box sx={{ height: '60px', flexShrink: 0 }}>
           <Header />
@@ -14,7 +17,6 @@ const UserLayout = () => {
             flex: '1',
             overflowY: 'auto',
             background: ({ palette }) => palette.background.default,
-            position: 'relative',
           }}
         >
           <Outlet />

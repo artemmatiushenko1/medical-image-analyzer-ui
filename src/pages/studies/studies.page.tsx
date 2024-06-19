@@ -7,7 +7,7 @@ import {
 } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { StudiesFilter, StudyCard, StudyDetailsDrawer } from './components';
-import { Study, StudyStatus } from '@/packages/studies';
+import { StudyStatus } from '@/packages/studies';
 import { ValueOf } from '@/libs/types';
 import { useClosable } from '@/libs/hooks';
 import { Trans, useTranslation } from 'react-i18next';
@@ -31,9 +31,6 @@ const Studies = () => {
   } = useClosable(Boolean(selectedStudyId));
 
   const { isLoading, data: studies = [] } = useGetStudies();
-
-  const selectedStudy =
-    studies?.find((study) => study.id === selectedStudyId) ?? ({} as Study);
 
   useEffect(() => {
     if (selectedStudyId) {
@@ -151,12 +148,12 @@ const Studies = () => {
               >
                 <StudyCard
                   id={study.id}
-                  date={study.date}
+                  date={study.createdAt}
                   status={study.status}
-                  imageSrc={study.imageSrc}
-                  diagnostic={study.diagnostic}
+                  imageSrc={study.image.src}
+                  name={study.name}
+                  description={study.description}
                   onViewDetails={handleViewStudyDetails}
-                  model={study.model}
                 />
               </Box>
             ))}
@@ -171,12 +168,14 @@ const Studies = () => {
           />
         ) : null}
       </Stack>
+      {/* {selectedStudyId && ( */}
       <StudyDetailsDrawer
         open={isDetailsDrawerOpen}
         onClose={closeDetailsDrawer}
-        study={selectedStudy}
+        studyId={selectedStudyId}
         onCloseFinished={handleDetailsDrawerCloseFinised}
       />
+      {/* )} */}
     </Box>
   );
 };

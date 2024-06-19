@@ -22,11 +22,14 @@ import { useId } from 'react';
 import { useNewStudyStore } from '@/pages/new-study/store';
 import { heather } from '@/libs/theme/colors';
 import { useTranslation } from 'react-i18next';
+import { Model } from '@/packages/diagnostics';
 
 type SelectedDiagnosticAccordionProps = {
   id: string;
   title: string;
   deleteDisabled: boolean;
+  diagnosticId: string;
+  models: Model[];
 
   onDelete: (id: string) => void;
 };
@@ -34,14 +37,23 @@ type SelectedDiagnosticAccordionProps = {
 const SelectedDiagnosticAccordion = (
   props: SelectedDiagnosticAccordionProps,
 ) => {
-  const { title, onDelete, id, deleteDisabled = false } = props;
+  const {
+    title,
+    onDelete,
+    id,
+    deleteDisabled = false,
+    models: availableModels,
+    diagnosticId,
+  } = props;
 
   const { t } = useTranslation('NewStudy');
 
   const modelSelectId = useId();
 
-  const availableModels = useNewStudyStore((state) => state.availableModels);
-  const selectedModelIds = useNewStudyStore((state) => state.selectedModelIds);
+  const selectedModelIds = useNewStudyStore(
+    (state) => state.selectedModelIds[diagnosticId] ?? [],
+  );
+
   const updateSelectedModelIds = useNewStudyStore(
     (state) => state.updateSelectedModelIds,
   );
@@ -56,7 +68,7 @@ const SelectedDiagnosticAccordion = (
 
   const handleModelSelectChange: SelectProps<string[]>['onChange'] = (e) => {
     if (Array.isArray(e.target.value)) {
-      updateSelectedModelIds(e.target.value);
+      updateSelectedModelIds(diagnosticId, e.target.value);
     }
   };
 
@@ -118,11 +130,7 @@ const SelectedDiagnosticAccordion = (
               <Select
                 multiple
                 id={modelSelectId}
-                value={
-                  selectedModelIds.length > 0
-                    ? selectedModelIds
-                    : [availableModels[0].id]
-                }
+                value={selectedModelIds}
                 onChange={handleModelSelectChange}
                 MenuProps={{
                   sx: {
