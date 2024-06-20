@@ -24,8 +24,8 @@ const MOCK_USERS: User[] = [
   },
   {
     id: '3',
-    name: 'John Doe',
-    email: 'john.doe@gmail.com',
+    name: 'Alice Smith',
+    email: 'alice.smith@gmail.com',
     role: Role.USER,
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
@@ -34,8 +34,8 @@ const MOCK_USERS: User[] = [
   },
   {
     id: '4',
-    name: 'John Doe',
-    email: 'john.doe@gmail.com',
+    name: 'Sam Johnson',
+    email: 'sam.johnson@icloud.com',
     role: Role.USER,
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
@@ -44,8 +44,8 @@ const MOCK_USERS: User[] = [
   },
   {
     id: '5',
-    name: 'John Doe',
-    email: 'john.doe@gmail.com',
+    name: 'Emily Brown',
+    email: 'emily.brown@mail.com',
     role: Role.USER,
     createdAt: dayjs().format(),
     updatedAt: dayjs().format(),
