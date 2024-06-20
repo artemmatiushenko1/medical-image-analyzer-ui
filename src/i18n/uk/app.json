@@ -9,7 +9,8 @@
   "ProfileMenu": {
     "DarkTheme": "Темна тема",
     "Language": "Мова",
-    "LogOut": "Вийти"
+    "LogOut": "Вийти",
+    "ChangePassword": "Змінити пароль"
   },
   "Header": {
     "NewStudy": "Нове дослідження"

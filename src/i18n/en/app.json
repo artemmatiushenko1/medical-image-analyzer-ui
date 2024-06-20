@@ -9,7 +9,8 @@
   "ProfileMenu": {
     "DarkTheme": "Dark theme",
     "Language": "Language",
-    "LogOut": "Log out"
+    "LogOut": "Log out",
+    "ChangePassword": "Change password"
   },
   "Header": {
     "NewStudy": "New Study"

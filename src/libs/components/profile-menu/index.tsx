@@ -98,7 +98,7 @@ const ProfileMenu = (props: ProfileMenuProps) => {
       onClick: handleChangeLanguageClick,
     },
     {
-      name: 'Change password',
+      name: t('ChangePassword'),
       icon: LockRounded,
       onClick: handleChangePasswordClick,
       injectDividerAfter: true,
