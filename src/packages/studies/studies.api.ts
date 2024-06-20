@@ -1,5 +1,6 @@
 import { HttpApi, HttpRequestOptionsBuilder } from '@/libs/packages/http';
 import { CreateStudyRequest, Study, StudySummary } from './types';
+import { ModelExtended } from '../diagnostics';
 
 class StudiesApi extends HttpApi {
   getAllStudies = (): Promise<StudySummary[]> => {
@@ -30,13 +31,18 @@ class StudiesApi extends HttpApi {
     return this.httpClient.request(options);
   };
 
-  getStudy = (id: string): Promise<Study> => {
+  getStudy = async (id: string): Promise<Study> => {
     const options = new HttpRequestOptionsBuilder()
       .get(`/diagnostics/${id}`)
       .authorized()
       .build();
 
-    return this.httpClient.request(options);
+    const response = await this.httpClient.request<Study>(options);
+
+    return {
+      ...response,
+      model: ModelExtended.fromPlainObject(response.model),
+    };
   };
 }
 

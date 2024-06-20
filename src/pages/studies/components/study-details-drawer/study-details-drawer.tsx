@@ -56,6 +56,8 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
 
   const reportFilename = study ? getReportFilename(study) : '';
 
+  console.log({ study });
+
   const renderDrawerContent = () => {
     if (isStudyLoading) {
       return <LoadingSkeleton />;
@@ -286,7 +288,7 @@ const LoadingSkeleton = () => {
             </Typography>
             <Skeleton variant="rounded">
               <Box sx={styles.imageWrapper}>
-                <Box component="img" width={450} height={450} />
+                <Box component="img" width={450} height={250} />
               </Box>
             </Skeleton>
           </Stack>

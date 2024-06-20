@@ -152,6 +152,11 @@ const StudyReportDocument = (props: StudyReportDocumentProps) => {
         <Text style={styles.studyTitle}>
           {t('StudyReport.Study')} #{study.id}
         </Text>
+        {study.description && (
+          <Text style={{ fontSize: '11px', color: heather[900] }}>
+            {study.description}
+          </Text>
+        )}
         <View style={styles.section}>
           <Text style={styles.subtitle}>{t('StudyReport.Image')}</Text>
           <Image style={styles.image} source={study.image.src}></Image>

@@ -20,6 +20,7 @@ const styles = createStyleSheet({
     borderRadius: ({ shape }) => shape.borderRadius,
     overflow: 'hidden',
     height: 'auto',
+    minHeight: '250px',
     width: '450px',
     objectFit: 'contain',
   },

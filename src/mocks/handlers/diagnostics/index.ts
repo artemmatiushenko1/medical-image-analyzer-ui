@@ -14,7 +14,7 @@ import { CreateModelRequest, Model } from '@/packages/diagnostics';
 import dayjs from 'dayjs';
 
 let diagnostics = [...MOCK_DIAGNOSTICS];
-let models = [...MOCK_MODELS];
+export let models = [...MOCK_MODELS];
 let modelVersions = [...MOCK_MODEL_VERSIONS];
 
 const handlers = [
@@ -100,6 +100,15 @@ const handlers = [
 
     const data = (await request.json()) as CreateModelRequest;
 
+    const version = {
+      version: 1,
+      name: 'Initial release',
+      createdAt: dayjs().format(),
+      updatedAt: dayjs().format(),
+      status: ModelVersionStatus.ENABLED,
+      id: crypto.randomUUID(),
+    };
+
     const newModel: Model = {
       ...data,
       id: crypto.randomUUID(),
@@ -113,33 +122,42 @@ const handlers = [
       createdAt: dayjs().format(),
       updatedAt: dayjs().format(),
       status: ModelStatus.ENABLED,
-      versions: MOCK_MODEL_VERSIONS,
-      currentVersion: MOCK_MODEL_VERSIONS[0],
+      versions: [version],
+      currentVersion: version,
     };
 
-    models.push(newModel);
+    models.unshift(newModel);
 
     return HttpResponse.json(newModel);
   }),
 
-  http.post('/diagnostic-models/:id/versions', async ({ request }) => {
+  http.post('/diagnostic-models/:id/versions', async ({ request, params }) => {
     await delay('real');
 
     const data = await request.formData();
 
-    const newVersion = {
-      name: data.get('name'),
-      description: data.get('description'),
+    const newVersion: ModelVersion = {
+      name: data.get('name') as string,
+      description: data.get('description') as string,
       id: crypto.randomUUID(),
       createdAt: dayjs().toISOString(),
       version: 5,
       status: ModelVersionStatus.ENABLED,
       updatedAt: dayjs().toISOString(),
-    } as ModelVersion;
+    };
 
-    modelVersions.unshift(newVersion);
+    models = models.map((model) => {
+      if (model.id === params.id) {
+        const lastVersion = model.versions[0];
+        lastVersion.status = ModelVersionStatus.DISABLED;
+        model.versions = [newVersion, ...modelVersions];
+        return model;
+      }
 
-    return HttpResponse.json(newVersion);
+      return model;
+    });
+
+    return HttpResponse.json(models);
   }),
 
   http.patch(
