@@ -20,6 +20,7 @@ import { useClosable } from '@/libs/hooks';
 import { ThemeMode } from '@/libs/theme';
 import { Menu, MenuItem, MenuProps } from '../menu';
 import { ChangePasswordDialog } from '../change-password-dialog';
+import { useGetProfile } from '@/app/libs/queries';
 
 type ProfileMenuProps = Omit<MenuProps, 'items'>;
 
@@ -28,10 +29,11 @@ const ProfileMenu = (props: ProfileMenuProps) => {
 
   const { t } = useTranslation('App', { keyPrefix: 'ProfileMenu' });
 
+  const { data: currentUser } = useGetProfile();
+
   const appLanguage = useAppStore((state) => state.language);
   const changeThemeMode = useAppStore((state) => state.changeThemeMode);
   const themeMode = useAppStore((state) => state.themeMode);
-  const currentUser = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
   const {

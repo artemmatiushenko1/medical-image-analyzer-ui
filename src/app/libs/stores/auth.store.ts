@@ -1,20 +1,18 @@
-import { Role, User } from '@/packages/users';
+import { queryClient } from '@/libs/packages/react-query';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { AppQueryKey } from '../enums';
 
 type AuthState = {
   accessToken: string | null;
-  user: User | null;
 };
 
 type AuthActions = {
-  setUser: (user: User) => void;
   setAccessToken: (accessToken: string) => void;
   logout: () => void;
 };
 
 const INITIAL_STATE: AuthState = {
-  user: null,
   accessToken: null,
 };
 
@@ -24,15 +22,10 @@ const useAuthStore = create<AuthState & AuthActions>()(
       ...INITIAL_STATE,
 
       setAccessToken: (accessToken: string) => set({ accessToken }),
-      setUser: (user: User) => {
-        set({
-          user: {
-            ...user,
-            name: user.role === Role.ADMIN ? 'HealthLens Admin' : user.name,
-          },
-        });
+      logout: () => {
+        set({ accessToken: null });
+        queryClient.removeQueries({ queryKey: AppQueryKey.GET_PROFILE });
       },
-      logout: () => set({ user: null, accessToken: null }),
     }),
     {
       name: 'auth-storage',

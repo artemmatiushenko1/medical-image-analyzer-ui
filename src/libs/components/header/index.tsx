@@ -14,12 +14,13 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { styles } from './styles';
 import { ProfileMenu } from '../profile-menu';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
-import { AppRoute, useAuthStore } from '@/app';
+import { AppRoute } from '@/app';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { Logo } from '../logo';
 import { ButtonsNavigation } from '../button-navigation';
 import { useTranslation } from 'react-i18next';
 import { useMenuPopover } from '@/libs/hooks';
+import { useGetProfile } from '@/app/libs/queries';
 
 const Header = () => {
   const { t } = useTranslation('App');
@@ -34,7 +35,7 @@ const Header = () => {
     anchorEl: menuAnchorEl,
   } = useMenuPopover();
 
-  const currentUser = useAuthStore((state) => state.user);
+  const { data: currentUser } = useGetProfile();
 
   const isDownToMediumScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.up('md'),

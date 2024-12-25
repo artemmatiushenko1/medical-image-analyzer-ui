@@ -1,7 +1,8 @@
-import { AppRoute, useAuthStore } from '@/app';
+import { AppRoute } from '@/app';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Role } from '@/packages/users';
 import { ValueOf } from '@/libs/types';
+import { useGetProfile } from '../queries';
 
 type PrivateRouteProps = {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ type PrivateRouteProps = {
 const PrivateRoute = (props: PrivateRouteProps) => {
   const { children, roles } = props;
 
-  const user = useAuthStore((state) => state.user);
+  const { data: user } = useGetProfile();
 
   const isAllowedRole = user && roles?.includes(user.role);
 

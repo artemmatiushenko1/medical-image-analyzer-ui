@@ -1,4 +1,5 @@
-import { AppRoute, useAuthStore } from '@/app';
+import { AppRoute } from '@/app';
+import { useGetProfile } from '../queries';
 import { Navigate, useLocation } from 'react-router-dom';
 
 type PublicRouteProps = {
@@ -8,7 +9,7 @@ type PublicRouteProps = {
 const PublicRoute = (props: PublicRouteProps) => {
   const { children } = props;
 
-  const user = useAuthStore((state) => state.user);
+  const { data: user } = useGetProfile();
 
   const isAuthenticated = Boolean(user);
 
