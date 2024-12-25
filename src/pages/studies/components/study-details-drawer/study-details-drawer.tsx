@@ -56,8 +56,6 @@ const StudyDetailsDrawer = (props: StudyDetailsDrawerProps) => {
 
   const reportFilename = study ? getReportFilename(study) : '';
 
-  console.log({ study });
-
   const renderDrawerContent = () => {
     if (isStudyLoading) {
       return <LoadingSkeleton />;

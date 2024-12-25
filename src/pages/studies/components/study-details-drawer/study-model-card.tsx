@@ -12,8 +12,6 @@ type StudyModelCardProps = {
 const StudyModelCard = (props: StudyModelCardProps) => {
   const { modelName, version } = props;
 
-  console.log({ version });
-
   const { t } = useTranslation('Studies');
 
   return (

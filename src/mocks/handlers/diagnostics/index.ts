@@ -167,8 +167,6 @@ const handlers = [
 
       const data = (await request.json()) as ChangeModelVersionStatusRequest;
 
-      console.log({ data, params });
-
       let prevVersion: number;
 
       modelVersions = modelVersions.map((version) => {
