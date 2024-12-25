@@ -1,30 +1,27 @@
-# React + TypeScript + Vite
+![preview](./public/banner.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# HealthLens 🫀
 
-Currently, two official plugins are available:
+Front-end part of the AI-based early disease diagnosis system.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Domain
 
-## Expanding the ESLint configuration
+The domain of this software is healthcare, in particular, the early diagnosis of human diseases using image analysis powered by AI. The application can be used as a system for remote computer-aided diagnosis (CAD). It aims to enable users to independently conduct preliminary diagnostics of diseases using images of body parts, making medical services more accessible in the remote areas and increasing the chances of timely detection and treatment of diseases.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Requirements
 
-- Configure the top-level `parserOptions` property like this:
+- [NodeJS](https://nodejs.org/en) (20.x.x);
+- [npm](https://www.npmjs.com/) (10.x.x);
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Architecture
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Technologies
+
+1. [React](https://react.dev/) — main frontend library
+2. [Zustand]() —
+3. [TanStack Query]() —
+4. [TypeScript]() -
+5. [Vite]() -
+6. [Material UI]() -
+
+### Folder structure
