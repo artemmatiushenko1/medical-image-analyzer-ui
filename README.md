@@ -15,6 +15,8 @@ The domain of this software is healthcare, in particular, the early diagnosis of
 
 ## Architecture
 
+![preview](./public/architecture.jpg)
+
 ### Technologies
 
 1. [React](https://react.dev/) — library for building web user interfaces
