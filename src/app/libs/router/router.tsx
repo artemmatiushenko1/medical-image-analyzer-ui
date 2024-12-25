@@ -3,9 +3,9 @@ import { Diagnostics, NewStudy, SignIn, Studies, Users } from '@/pages';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AdminLayout, UserLayout } from '../../../libs/components';
 import { Role } from '@/packages/users';
-import { useAuthStore } from '../stores';
 import { PrivateRoute } from './private-route';
 import { PublicRoute } from './public-route';
+import { useGetProfile } from '../queries';
 
 const UserRoutes = (
   <Route path={AppRoute.HOME}>
@@ -26,7 +26,7 @@ const AdminRoutes = (
 );
 
 const Router = () => {
-  const currentUser = useAuthStore((state) => state.user);
+  const { data: currentUser } = useGetProfile();
 
   return (
     <Routes>

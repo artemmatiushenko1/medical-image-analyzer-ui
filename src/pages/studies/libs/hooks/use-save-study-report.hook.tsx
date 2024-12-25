@@ -1,13 +1,13 @@
 import { useSavePdf } from '@/libs/hooks';
 import { useGetStudyMutation } from '../queries';
 import { StudyReportDocument } from '../pdf-templates';
-import { useAuthStore } from '@/app';
 import dayjs from 'dayjs';
 import { DateFormat } from '@/libs/enums';
 import { Study } from '@/packages/studies';
+import { useGetProfile } from '@/app/libs/queries';
 
 const useSaveStudyReport = () => {
-  const currentUser = useAuthStore((state) => state.user);
+  const { data: currentUser } = useGetProfile();
 
   const { isPending, mutateAsync: getStudy } = useGetStudyMutation();
 

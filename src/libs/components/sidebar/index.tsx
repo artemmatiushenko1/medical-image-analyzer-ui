@@ -21,8 +21,8 @@ import { mergeSx } from '@/libs/theme';
 import { ProfileMenu } from '../profile-menu';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { useState } from 'react';
-import { useAuthStore } from '@/app';
 import { MenuPosition } from '../menu/enums';
+import { useGetProfile } from '@/app/libs/queries';
 
 type SidebarProps = {
   navItems: {
@@ -43,7 +43,7 @@ const Sidebar = (props: SidebarProps) => {
   const [profileMenuAnchor, setprofileMenuAnchor] =
     useState<null | HTMLElement>(null);
 
-  const currentUser = useAuthStore((state) => state.user);
+  const { data: currentUser } = useGetProfile();
 
   const profileMenuOpen = Boolean(profileMenuAnchor);
 
