@@ -61,6 +61,20 @@ npm run dev
 
 Open http://localhost:5173/ in your browser. Voilà - the app is ready to test 🎩
 
+## Demo
+
+Patient screen
+
+<p align="center">
+  <img src="./public/patient-screen.png"/>
+</p>
+
+Admin screen
+
+<p align="center">
+  <img src="./public/admin-screen.png"/>
+</p>
+
 ## Deployment
 
 The production deployment is provided by [Netlify](https://www.netlify.com/) and available at: https://healthlens.netlify.app/.
